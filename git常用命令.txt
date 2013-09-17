@@ -26,8 +26,8 @@ $ git pull . new_branch_name
 # 返回历史记录
 $ git log # 查找历史commit 及其ID
 $ git checkout 11b23231d6 #(这个字符串取历史commit的ID的前一部分即可）
-# 修改完成后，若想保存：先新建branch：
-$ git checkout -b new_branch_name
-$ git pull
+# 修改完成后，若想保存：先新建branch(或者返回master branch)：
+$ git checkout -b new_branch_name # 或者git checkout master
+$ git add . 
 $ git commit -m "注释"
 ----------------------------------------------------------------
