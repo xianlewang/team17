@@ -841,17 +841,17 @@
     </dia:object>
     <dia:object type="UML - Message" version="0" id="O29">
       <dia:attribute name="obj_pos">
-        <dia:point val="40.9302,13.36"/>
+        <dia:point val="40.9802,13.71"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="40.88,12.16;48.9814,13.7352"/>
+        <dia:rectangle val="40.93,12.51;49.0314,14.0852"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="conn_endpoints">
-        <dia:point val="40.9302,13.36"/>
-        <dia:point val="48.9302,13.335"/>
+        <dia:point val="40.9802,13.71"/>
+        <dia:point val="48.9802,13.685"/>
       </dia:attribute>
       <dia:attribute name="text_colour">
         <dia:color val="#0000ff"/>
@@ -866,7 +866,7 @@
         <dia:enum val="0"/>
       </dia:attribute>
       <dia:attribute name="text_pos">
-        <dia:point val="44.6802,12.76"/>
+        <dia:point val="44.7302,13.11"/>
       </dia:attribute>
     </dia:object>
     <dia:object type="UML - Message" version="0" id="O30">
@@ -960,7 +960,7 @@
         <dia:point val="54.73,3.41"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="54.73,2.59781;57.7572,3.65938"/>
+        <dia:rectangle val="54.73,2.6225;57.7325,3.61"/>
       </dia:attribute>
       <dia:attribute name="text">
         <dia:composite type="text">
@@ -1014,20 +1014,20 @@
         <dia:point val="56.25,12.2"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="48.7793,11.095;56.3001,12.5851"/>
+        <dia:rectangle val="40.9724,11.0525;56.3003,12.5003"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="conn_endpoints">
         <dia:point val="56.25,12.2"/>
-        <dia:point val="48.8302,12.185"/>
+        <dia:point val="41.025,12.1"/>
       </dia:attribute>
       <dia:attribute name="text_colour">
-        <dia:color val="#0000ff"/>
+        <dia:color val="#000000"/>
       </dia:attribute>
       <dia:attribute name="line_colour">
-        <dia:color val="#0000ff"/>
+        <dia:color val="#000000"/>
       </dia:attribute>
       <dia:attribute name="text">
         <dia:string>#5a. mAtFloor[f,b]=True#</dia:string>
@@ -1036,7 +1036,7 @@
         <dia:enum val="0"/>
       </dia:attribute>
       <dia:attribute name="text_pos">
-        <dia:point val="52.6099,11.695"/>
+        <dia:point val="48.7073,11.6525"/>
       </dia:attribute>
     </dia:object>
   </dia:layer>
