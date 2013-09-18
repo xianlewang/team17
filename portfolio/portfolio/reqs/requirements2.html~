@@ -1357,14 +1357,10 @@ invalid it has a mnemonic value of None. </li>
 None
 <h3> EVENT-TRIGGERED BEHAVIORS: </h3>
 <br>
-<ul>
-    <li>8.1 &nbsp; If HallCall[f,b,d] is received as Pressed, then, </li>
-    <ul>
-        <li> 8.1a &nbsp;HallLight[f,b,d] shall be set to on.</li>
-        <li> 8.1b &nbsp;mHallCall[f,b,d] shall be set to true.</li>
-    </ul>
-    <li>8.2 &nbsp; If mAtFloor[f, b] is received as true, then HallLight[f,b,d] shall be set to off.</li>
-</ul>
+9.1.&nbsp; If CarCall[f,b] is received as True, then CarLight[f,b]
+shall be set to On. <br>
+9.2.&nbsp; If mAtFloor[f,b] is received as True, then CarLight[f,b]
+shall be set to Off. <br>
 <h2><a name="carbuttoncontrol"></a> 9. CarButtonControl[f, b] </h2>
 <h3> Replication: </h3>
 <ul>
@@ -1401,10 +1397,7 @@ invalid it has a mnemonic value of None. </li>
 <h3> CONSTRAINTS: </h3>
 None
 <h3> EVENT-TRIGGERED BEHAVIORS: </h3>
-9.1.&nbsp; If CarCall[f,b] is received as True, then CarLight[f,b]
-shall be set to On. <br>
-9.2.&nbsp; If mAtFloor[f,b] is received as True, then CarLight[f,b]
-shall be set to Off. <br>
+<br>
 <h2><a name="carpositioncontrol"></a> 10. CarPositionControl </h2>
 <h3> Replication: </h3>
 <ul>
