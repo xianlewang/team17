@@ -785,7 +785,7 @@
         <dia:color val="#0000ff"/>
       </dia:attribute>
       <dia:attribute name="text">
-        <dia:string>#1b. CarLight[b,r]=Off#</dia:string>
+        <dia:string>#1b. HallLight[b,r]=Off#</dia:string>
       </dia:attribute>
       <dia:attribute name="type">
         <dia:enum val="0"/>
