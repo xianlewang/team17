@@ -1315,8 +1315,23 @@ descriptions. </li>
 </ul>
 <h3> CONSTRAINTS: </h3>
 7.1&nbsp;&nbsp;&nbsp; Both CarLanterns[d] shall not be On at the same
-time.
+time.<br>
 <h3> EVENT-TRIGGERED BEHAVIORS: </h3>
+7.2&nbsp;&nbsp;&nbsp; If mDoorClosed[<b>*</b>, <b>*</b>] are True, then<br>
+   &nbsp; 7.2.1&nbsp;&nbsp; CarLantern[<b>*</b>] shall be Off.<br>
+   &nbsp; 7.2.2&nbsp;&nbsp; mCarLantern[<b>*</b>] shall be Off.<br>
+7.3&nbsp;&nbsp;&nbsp; If mDoorClosed[<b>b</b>, <b>r</b>] is False and DesiredDirection is Off then<br>
+   &nbsp; 7.3.1&nbsp;&nbsp; CarLantern[<b>*</b>] shall be Off.<br>
+   &nbsp; 7.3.2&nbsp;&nbsp; mCarLantern[<b>*</b>] shall be Off.<br>
+7.4&nbsp;&nbsp;&nbsp; If mDoorClosed[<b>b</b>, <b>r</b>] is False and DesiredDirection is Up, then<br>
+   &nbsp; 7.4.1&nbsp;&nbsp; CarLantern[<b>Up</b>] shall be On.<br>
+   &nbsp; 7.4.2&nbsp;&nbsp; mCarLantern[<b>Up</b>] shall be On.<br>
+7.5&nbsp;&nbsp;&nbsp; If mDoorClosed[<b>b</b>, <b>r</b>] is False and DesiredDirection is Down, then <br>
+   &nbsp; 7.5.1&nbsp;&nbsp;&nbsp; CarLantern[<b>Down</b>] shall be On.<br>
+   &nbsp; 7.5.2&nbsp;&nbsp;&nbsp; mCarLantern[<b>Down</b>] shall be On.<br>
+7.6&nbsp;&nbsp;&nbsp; If mDesiredFloor.direction is Stop, then DesiredDirection shall Stop. <br>
+7.7&nbsp;&nbsp;&nbsp; If mDesiredFloor.direction is Up, then DesiredDirection shall Up. <br>
+7.8&nbsp;&nbsp;&nbsp; If mDesiredFloor.direction is Down, then DesiredDirection shall Down. <br>
 <br>
 <h2><a name="hallbuttoncontrol"></a> 8. HallButtonControl[f, b, d] </h2>
 <h3> Replication: </h3>
