@@ -479,26 +479,12 @@ Requirements/Constraints</b></u></td>
       </td>
     </tr>
     <tr>
-      <td style="vertical-align: top;">11.4 Set mDesiredFloor.f to Target </td>
-      <td style="vertical-align: top;"><br>
+      <td style="vertical-align: top;">11.4 Set mDesiredFloor.f </td>
+      <td style="vertical-align: top;">~<br>
       </td>
-      <td style="vertical-align: top;"><br>
+      <td style="vertical-align: top;">~<br>
       </td>
-      <td style="vertical-align: top;"><br>
-      </td>
-      <td style="vertical-align: top;"><br>
-      </td>
-      <td style="vertical-align: top;"><br>
-      </td>
-    </tr>
-    <tr>
-      <td style="vertical-align: top;">11.5 Set mDesiredFloor.d to Stop <br>
-      </td>
-      <td style="vertical-align: top;"><br>
-      </td>
-      <td style="vertical-align: top;"><br>
-      </td>
-      <td style="vertical-align: top;"><br>
+      <td style="vertical-align: top;">~<br>
       </td>
       <td style="vertical-align: top;"><br>
       </td>
@@ -506,29 +492,13 @@ Requirements/Constraints</b></u></td>
       </td>
     </tr>
     <tr>
-      <td style="vertical-align: top;">11.6.1 Door not close --> set Target 
-                                       to (f mod MaxFloors) + 1<br>
+      <td style="vertical-align: top;">11.5 Set mDesiredFloor.d <br>
       </td>
-      <td style="vertical-align: top;"><br>
+      <td style="vertical-align: top;">~<br>
       </td>
-      <td style="vertical-align: top;"><br>
+      <td style="vertical-align: top;">X<br>
       </td>
-      <td style="vertical-align: top;"><br>
-      </td>
-      <td style="vertical-align: top;"><br>
-      </td>
-      <td style="vertical-align: top;"><br>
-      </td>
-    </tr>
-    <tr>
-      <td style="vertical-align: top;">11.6.2 Door not close --> 
-                                       set mDesiredFloor.b to b<br>
-      </td>
-      <td style="vertical-align: top;"><br>
-      </td>
-      <td style="vertical-align: top;"><br>
-      </td>
-      <td style="vertical-align: top;"><br>
+      <td style="vertical-align: top;">X<br>
       </td>
       <td style="vertical-align: top;"><br>
       </td>
@@ -536,30 +506,14 @@ Requirements/Constraints</b></u></td>
       </td>
     </tr>
     <tr>
-      <td style="vertical-align: top;">11.7.1 Doors not closed between 
-                                       floors --> set Target to 1<br>
+      <td style="vertical-align: top;">11.6.1 mDoorClosed is False
+      --> set Target<br>
       </td>
-      <td style="vertical-align: top;"><br>
+      <td style="vertical-align: top;">X<br>
       </td>
-      <td style="vertical-align: top;"><br>
+      <td style="vertical-align: top;">~<br>
       </td>
-      <td style="vertical-align: top;"><br>
-      </td>
-      <td style="vertical-align: top;"><br>
-      </td>
-      <td style="vertical-align: top;"><br>
-      </td>
-    </tr>
-    <tr>
-      <td style="vertical-align: top;">11.7.2 Doors not closed between 
-floors --> <br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;
-set mDesiredFloor.b to None<br>
-      </td>
-      <td style="vertical-align: top;"><br>
-      </td>
-      <td style="vertical-align: top;"><br>
-      </td>
-      <td style="vertical-align: top;"><br>
+      <td style="vertical-align: top;">~<br>
       </td>
       <td style="vertical-align: top;"><br>
       </td>
@@ -567,14 +521,59 @@ set mDesiredFloor.b to None<br>
       </td>
     </tr>
     <tr>
-      <td style="vertical-align: top;">11.8 mAtFloor[f,*] True --> 
-                                       Set mDesiredFloor.b to Both<br>
+      <td style="vertical-align: top;">11.6.2 "mDoorClosed is False --> 
+      Set mDesiredFloor.b"<br>
+      </td>
+      <td style="vertical-align: top;">~<br>
+      </td>
+      <td style="vertical-align: top;">~<br>
+      </td>
+      <td style="vertical-align: top;">~<br>
       </td>
       <td style="vertical-align: top;"><br>
       </td>
       <td style="vertical-align: top;"><br>
       </td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top;">11.7.1 "mAtFloor False and 
+      mDoorClosed False --> Set Target"<br>
+      </td>
+      <td style="vertical-align: top;">X<br>
+      </td>
+      <td style="vertical-align: top;">~<br>
+      </td>
+      <td style="vertical-align: top;">~<br>
+      </td>
       <td style="vertical-align: top;"><br>
+      </td>
+      <td style="vertical-align: top;"><br>
+      </td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top;">11.7.2 "mAtFloor False and mDoorClosed 
+      False --> Set mDesiredFloor.b"<br>
+      </td>
+      <td style="vertical-align: top;">~<br>
+      </td>
+      <td style="vertical-align: top;">~<br>
+      </td>
+      <td style="vertical-align: top;">~<br>
+      </td>
+      <td style="vertical-align: top;"><br>
+      </td>
+      <td style="vertical-align: top;"><br>
+      </td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top;">11.8 mAtFloor True --> set 
+      mDesiredFloor.b<br>
+      </td>
+      <td style="vertical-align: top;">~<br>
+      </td>
+      <td style="vertical-align: top;">~<br>
+      </td>
+      <td style="vertical-align: top;">~<br>
       </td>
       <td style="vertical-align: top;"><br>
       </td>
@@ -584,11 +583,11 @@ set mDesiredFloor.b to None<br>
     <tr>
       <td style="vertical-align: top;">11.9 Set mDesiredDwell<br>
       </td>
-      <td style="vertical-align: top;"><br>
+      <td style="vertical-align: top;">~<br>
       </td>
-      <td style="vertical-align: top;"><br>
+      <td style="vertical-align: top;">~<br>
       </td>
-      <td style="vertical-align: top;"><br>
+      <td style="vertical-align: top;">~<br>
       </td>
       <td style="vertical-align: top;"><br>
       </td>
