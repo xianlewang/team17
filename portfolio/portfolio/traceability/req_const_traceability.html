@@ -226,7 +226,7 @@ Stop<br>
     </tr>
     <tr>
       <td style="vertical-align: top;"><span style="font-weight: bold;">DriveControl</span><span
- style="font-weight: bold;"> - Completed by (Name, andrewid)</span> </td>
+ style="font-weight: bold;"> - Completed by (Jiang He, jiangh)</span> </td>
       <td style="vertical-align: top;"><br>
       </td>
       <td style="vertical-align: top;"><br>
@@ -239,45 +239,122 @@ Stop<br>
       </td>
     </tr>
     <tr>
-      <td style="vertical-align: top;">6.6 (add requirement summary)<br>
+      <td style="vertical-align: top;">6.6.1 mDesiredFloor is received and Commit Point[f] is Reached 
+		--> set Drive to (SLOW, d)<br>
       </td>
-      <td style="vertical-align: top;"><br>
+      <td style="vertical-align: top;">~<br>
       </td>
-      <td style="vertical-align: top;"><br>
+      <td style="vertical-align: top;">~<br>
       </td>
-      <td style="vertical-align: top;"><br>
+      <td style="vertical-align: top;">~<br>
       </td>
-      <td style="vertical-align: top;"><br>
+      <td style="vertical-align: top;">~<br>
       </td>
-      <td style="vertical-align: top;"><br>
-      </td>
-    </tr>
-    <tr>
-      <td style="vertical-align: top;">...<br>
-      </td>
-      <td style="vertical-align: top;"><br>
-      </td>
-      <td style="vertical-align: top;"><br>
-      </td>
-      <td style="vertical-align: top;"><br>
-      </td>
-      <td style="vertical-align: top;"><br>
-      </td>
-      <td style="vertical-align: top;"><br>
+      <td style="vertical-align: top;">~<br>
       </td>
     </tr>
     <tr>
-      <td style="vertical-align: top;"><br>
+      <td style="vertical-align: top;">6.6.2 mDesiredFloor is received and Commit Point[f] is Reached 
+		--> set mDrive to (SLOW, d)<br>
       </td>
-      <td style="vertical-align: top;"><br>
+      <td style="vertical-align: top;">~<br>
       </td>
-      <td style="vertical-align: top;"><br>
+      <td style="vertical-align: top;">~<br>
       </td>
-      <td style="vertical-align: top;"><br>
+      <td style="vertical-align: top;">~<br>
       </td>
-      <td style="vertical-align: top;"><br>
+      <td style="vertical-align: top;">~<br>
       </td>
-      <td style="vertical-align: top;"><br>
+      <td style="vertical-align: top;">~<br>
+      </td>
+    </tr>
+	 <tr>
+      <td style="vertical-align: top;">6.7.1 mDoorClosed is True and DesiredDirection is not STOP 
+		--> set Drive to (SLOW, d)<br>
+      </td>
+      <td style="vertical-align: top;">~<br>
+      </td>
+      <td style="vertical-align: top;">X<br>
+      </td>
+      <td style="vertical-align: top;">~<br>
+      </td>
+      <td style="vertical-align: top;">~<br>
+      </td>
+      <td style="vertical-align: top;">~<br>
+      </td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top;">6.7.2 mDoorClosed is True and DesiredDirection is not STOP 
+		--> set mDrive to (SLOW, d)<br>
+      </td>
+      <td style="vertical-align: top;">~<br>
+      </td>
+      <td style="vertical-align: top;">X<br>
+      </td>
+      <td style="vertical-align: top;">~<br>
+      </td>
+      <td style="vertical-align: top;">~<br>
+      </td>
+      <td style="vertical-align: top;">~<br>
+      </td>
+    </tr>
+	 <td style="vertical-align: top;">6.8.1 either of mLevel is False and CurrentFloor is not None 
+	 --> set Drive to (LEVEL, d)<br>
+      </td>
+      <td style="vertical-align: top;">~<br>
+      </td>
+      <td style="vertical-align: top;">~<br>
+      </td>
+      <td style="vertical-align: top;">~<br>
+      </td>
+      <td style="vertical-align: top;">~<br>
+      </td>
+      <td style="vertical-align: top;">~<br>
+      </td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top;">6.8.2 either of mLevel is False and CurrentFloor is not None 
+		--> set mDrive to (LEVEL, d)<br>
+      </td>
+      <td style="vertical-align: top;">~<br>
+      </td>
+      <td style="vertical-align: top;">~<br>
+      </td>
+      <td style="vertical-align: top;">~<br>
+      </td>
+      <td style="vertical-align: top;">~<br>
+      </td>
+      <td style="vertical-align: top;">~<br>
+      </td>
+    </tr>
+	 <tr>
+      <td style="vertical-align: top;">6.9.1 both of mLevel are True and CurrentFloor is not None 
+		--> set Drive to (STOP, STOP)<br>
+      </td>
+      <td style="vertical-align: top;">~<br>
+      </td>
+      <td style="vertical-align: top;">~<br>
+      </td>
+      <td style="vertical-align: top;">~<br>
+      </td>
+      <td style="vertical-align: top;">~<br>
+      </td>
+      <td style="vertical-align: top;">~<br>
+      </td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top;">6.9.2 both of mLevel are True and CurrentFloor is not None 
+		--> set mDrive to (STOP, STOP)<br>
+      </td>
+      <td style="vertical-align: top;">~<br>
+      </td>
+      <td style="vertical-align: top;">~<br>
+      </td>
+      <td style="vertical-align: top;">~<br>
+      </td>
+      <td style="vertical-align: top;">~<br>
+      </td>
+      <td style="vertical-align: top;">~<br>
       </td>
     </tr>
     <tr>
@@ -397,7 +474,7 @@ direction<br>
     </tr>
     <tr>
       <td style="vertical-align: top;"><span style="font-weight: bold;">CarPositionControl</span><span
- style="font-weight: bold;"> - Completed by (Name, andrewid)</span> </td>
+ style="font-weight: bold;"> - Completed by (Jiang He, jiangh)</span> </td>
       <td style="vertical-align: top;"><br>
       </td>
       <td style="vertical-align: top;"><br>
@@ -410,40 +487,12 @@ direction<br>
       </td>
     </tr>
     <tr>
-      <td style="vertical-align: top;">10.4 (add requirement summary) </td>
-      <td style="vertical-align: top;"><br>
+      <td style="vertical-align: top;">10.4 At new floor --> CarPositionIndicator display current floor. </td>
+      <td style="vertical-align: top;">X<br>
       </td>
-      <td style="vertical-align: top;"><br>
+      <td style="vertical-align: top;">X<br>
       </td>
-      <td style="vertical-align: top;"><br>
-      </td>
-      <td style="vertical-align: top;"><br>
-      </td>
-      <td style="vertical-align: top;"><br>
-      </td>
-    </tr>
-    <tr>
-      <td style="vertical-align: top;">...<br>
-      </td>
-      <td style="vertical-align: top;"><br>
-      </td>
-      <td style="vertical-align: top;"><br>
-      </td>
-      <td style="vertical-align: top;"><br>
-      </td>
-      <td style="vertical-align: top;"><br>
-      </td>
-      <td style="vertical-align: top;"><br>
-      </td>
-    </tr>
-    <tr>
-      <td style="vertical-align: top;"><br>
-      </td>
-      <td style="vertical-align: top;"><br>
-      </td>
-      <td style="vertical-align: top;"><br>
-      </td>
-      <td style="vertical-align: top;"><br>
+      <td style="vertical-align: top;">X<br>
       </td>
       <td style="vertical-align: top;"><br>
       </td>
