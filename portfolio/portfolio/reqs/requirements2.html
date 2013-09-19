@@ -1282,16 +1282,16 @@
         longer
         overloaded.
         <h3> EVENT-TRIGGERED BEHAVIORS: </h3>
-        6.6&nbsp;&nbsp;&nbsp; CommitPoint is Reached and mDesiredFloor is received, then: <br>
+        6.6&nbsp;&nbsp;&nbsp; mDesiredFloor is received and CommitPoint[<b>f</b>] is Reached, then: <br>
         &nbsp;&nbsp;&nbsp; 6.6.1&nbsp; Drive shall be command to (SLOW, <b>d</b>). <br>
         &nbsp;&nbsp;&nbsp; 6.6.2&nbsp; mDrive shall be commanded to (SLOW, <b>d</b>). <br>
         6.7&nbsp;&nbsp;&nbsp; mDoorClosed is received True and DesiredDirection is not STOP, then: <br>
         &nbsp;&nbsp;&nbsp; 6.7.1&nbsp; Drive shall be commanded to (SLOW, <b>d</b>). <br>
         &nbsp;&nbsp;&nbsp; 6.7.2&nbsp; mDrive shall be commanded to (SLOW, <b>d</b>). <br>
-        6.8&nbsp;&nbsp;&nbsp; CurrentFloor is not NONE, either of mLevel is received False, then: <br>
+        6.8&nbsp;&nbsp;&nbsp; either of mLevel is received False and CurrentFloor is not NONE, then: <br>
         &nbsp;&nbsp;&nbsp; 6.8.1&nbsp; Drive shall be commanded to (LEVEL, <b>d</b>). <br>
         &nbsp;&nbsp;&nbsp; 6.8.2&nbsp; mDrive shall be commanded to (LEVEL, <b>d</b>). <br>
-        6.9&nbsp;&nbsp;&nbsp; CurrentFloor is not NONE, both of mLevel are received True, then: <br>
+        6.9&nbsp;&nbsp;&nbsp; both of mLevel are received True and CurrentFloor is not NONE, then: <br>
         &nbsp;&nbsp;&nbsp; 6.9.1&nbsp; Drive shall be commanded to (STOP, STOP). <br>
         &nbsp;&nbsp;&nbsp; 6.9.2&nbsp; mDrive shall be commanded to (STOP, STOP). <br>
         <h2><a name="lanterncontrol"></a> 7. LanternControl[d] </h2>

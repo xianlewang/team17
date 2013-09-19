@@ -62,7 +62,7 @@ open<br>
       </td>
       <td style="vertical-align: top;">5.4 Identical commands<br>
       </td>
-      <td>5.5 Overweight -&gt; doors open<br>
+      <td style="vertical-align: top;">5.5 Overweight -&gt; doors open<br>
       </td>
     </tr>
     <tr>
@@ -374,7 +374,7 @@ time<br>
     </tr>
     <tr>
       <td style="vertical-align: top;"><span style="font-weight: bold;">LanternControl</span><span
- style="font-weight: bold;"> - Completed by (Name, andrewid)</span> </td>
+ style="font-weight: bold;"> - Completed by (Qiang Zhang, qiangz)</span> </td>
       <td style="vertical-align: top;"><br>
       </td>
       <td style="vertical-align: top;"><br>
@@ -387,8 +387,8 @@ time<br>
       </td>
     </tr>
     <tr>
-      <td style="vertical-align: top;">7.2 (add requirement summary) </td>
-      <td style="vertical-align: top;"><br>
+      <td style="vertical-align: top;">7.2 Door Closed --> Lantern Off</td>
+      <td style="vertical-align: top;">~<br>
       </td>
       <td style="vertical-align: top;"><br>
       </td>
@@ -400,9 +400,9 @@ time<br>
       </td>
     </tr>
     <tr>
-      <td style="vertical-align: top;">...<br>
+      <td style="vertical-align: top;">7.3 Door Open, Direction UP -> Lantern UP On<br>
       </td>
-      <td style="vertical-align: top;"><br>
+      <td style="vertical-align: top;"> X <br>
       </td>
       <td style="vertical-align: top;"><br>
       </td>
@@ -414,9 +414,9 @@ time<br>
       </td>
     </tr>
     <tr>
-      <td style="vertical-align: top;"><br>
+      <td style="vertical-align: top;">7.4 Door Open, Direction Down -> Lantern Down On<br>
       </td>
-      <td style="vertical-align: top;"><br>
+      <td style="vertical-align: top;"> X <br>
       </td>
       <td style="vertical-align: top;"><br>
       </td>
@@ -439,20 +439,6 @@ time<br>
       <td style="vertical-align: top;"><br>
       </td>
       <td style="vertical-align: top;"> <br>
-      </td>
-    </tr>
-    <tr>
-      <td style="vertical-align: top;"><br>
-      </td>
-      <td style="vertical-align: top;"><br>
-      </td>
-      <td style="vertical-align: top;"><br>
-      </td>
-      <td style="vertical-align: top;"><br>
-      </td>
-      <td style="vertical-align: top;"><br>
-      </td>
-      <td style="vertical-align: top;"><br>
       </td>
     </tr>
     <tr>
@@ -515,7 +501,7 @@ Requirements/Constraints</b></u></td>
     </tr>
     <tr>
       <td style="vertical-align: top;"><span style="font-weight: bold;">Dispatcher</span><span
- style="font-weight: bold;"> - Completed by (Name, andrewid)</span> </td>
+ style="font-weight: bold;"> - Completed by (Shen Yu, sheny)</span> </td>
       <td style="vertical-align: top;"><br>
       </td>
       <td style="vertical-align: top;"><br>
@@ -528,12 +514,12 @@ Requirements/Constraints</b></u></td>
       </td>
     </tr>
     <tr>
-      <td style="vertical-align: top;">11.4 (add requirement summary) </td>
-      <td style="vertical-align: top;"><br>
+      <td style="vertical-align: top;">11.4 Set mDesiredFloor.f </td>
+      <td style="vertical-align: top;">~<br>
       </td>
-      <td style="vertical-align: top;"><br>
+      <td style="vertical-align: top;">~<br>
       </td>
-      <td style="vertical-align: top;"><br>
+      <td style="vertical-align: top;">~<br>
       </td>
       <td style="vertical-align: top;"><br>
       </td>
@@ -541,13 +527,102 @@ Requirements/Constraints</b></u></td>
       </td>
     </tr>
     <tr>
-      <td style="vertical-align: top;">...<br>
+      <td style="vertical-align: top;">11.5 Set mDesiredFloor.d <br>
+      </td>
+      <td style="vertical-align: top;">~<br>
+      </td>
+      <td style="vertical-align: top;">X<br>
+      </td>
+      <td style="vertical-align: top;">X<br>
       </td>
       <td style="vertical-align: top;"><br>
       </td>
       <td style="vertical-align: top;"><br>
       </td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top;">11.6.1 mDoorClosed is False
+      --> set Target<br>
+      </td>
+      <td style="vertical-align: top;">X<br>
+      </td>
+      <td style="vertical-align: top;">~<br>
+      </td>
+      <td style="vertical-align: top;">~<br>
+      </td>
       <td style="vertical-align: top;"><br>
+      </td>
+      <td style="vertical-align: top;"><br>
+      </td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top;">11.6.2 "mDoorClosed is False --> 
+      Set mDesiredFloor.b"<br>
+      </td>
+      <td style="vertical-align: top;">~<br>
+      </td>
+      <td style="vertical-align: top;">~<br>
+      </td>
+      <td style="vertical-align: top;">~<br>
+      </td>
+      <td style="vertical-align: top;"><br>
+      </td>
+      <td style="vertical-align: top;"><br>
+      </td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top;">11.7.1 "mAtFloor False and 
+      mDoorClosed False --> Set Target"<br>
+      </td>
+      <td style="vertical-align: top;">X<br>
+      </td>
+      <td style="vertical-align: top;">~<br>
+      </td>
+      <td style="vertical-align: top;">~<br>
+      </td>
+      <td style="vertical-align: top;"><br>
+      </td>
+      <td style="vertical-align: top;"><br>
+      </td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top;">11.7.2 "mAtFloor False and mDoorClosed 
+      False --> Set mDesiredFloor.b"<br>
+      </td>
+      <td style="vertical-align: top;">~<br>
+      </td>
+      <td style="vertical-align: top;">~<br>
+      </td>
+      <td style="vertical-align: top;">~<br>
+      </td>
+      <td style="vertical-align: top;"><br>
+      </td>
+      <td style="vertical-align: top;"><br>
+      </td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top;">11.8 mAtFloor True --> set 
+      mDesiredFloor.b<br>
+      </td>
+      <td style="vertical-align: top;">~<br>
+      </td>
+      <td style="vertical-align: top;">~<br>
+      </td>
+      <td style="vertical-align: top;">~<br>
+      </td>
+      <td style="vertical-align: top;"><br>
+      </td>
+      <td style="vertical-align: top;"><br>
+      </td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top;">11.9 Set mDesiredDwell<br>
+      </td>
+      <td style="vertical-align: top;">~<br>
+      </td>
+      <td style="vertical-align: top;">~<br>
+      </td>
+      <td style="vertical-align: top;">~<br>
       </td>
       <td style="vertical-align: top;"><br>
       </td>
