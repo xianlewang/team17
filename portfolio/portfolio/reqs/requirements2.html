@@ -953,6 +953,7 @@
         4.6&nbsp;&nbsp;&nbsp; D_position shall be kept updated by a physical
         model to indicate current positions of simulated doors.<br>
         <br>
+        <!--DoorControl_Qiang-->
         <h2><a name="doorcontrol"></a> 5. DoorControl[b, r] </h2>
         <h4> Replication: </h4>
         <ul>
@@ -1010,25 +1011,80 @@
         5.5&nbsp;&nbsp;&nbsp; If CarWeight(x) &gt;= MaxCarCapacity, the doors
         shall open completely until the car is no longer overloaded.
         <h3> TIME-TRIGGERED BEHAVIORS: </h3>
-        5.6 &nbsp;&nbsp; If any mAtFloor[f, b] is True and f equals
-        mDesiredFloor.f, and mDriveSpeed = (0, d) or mDriveSpeed = (s, Stop)
-        then: <br>
-        &nbsp;&nbsp;&nbsp; 5.6.1&nbsp; DoorMotor[b, r] shall be commanded to
-        Open; <br>
-        &nbsp;&nbsp;&nbsp; 5.6.2&nbsp; CountDown shall be set to Dwell.<br>
-        5.7 &nbsp;&nbsp; If mDoorOpened[b, r] is True, then<br>
-        &nbsp;&nbsp;&nbsp; 5.7.1&nbsp; DoorMotor[b,r] shall be commanded to
-        Stop.<br>
-        &nbsp;&nbsp;&nbsp; 5.7.2&nbsp; CountDown shall be decremented.<br>
-        5.8&nbsp; If mDoorClosed[b, r] is True, then DoorMotor[b,r] should be
-        commanded to Stop.<br>
-        5.9&nbsp; When CountDown &lt;= 0, DoorMotor[b,r] should be commanded
-        to Nudge.<br>
-        5.10 If mCarWeight(g) &gt;= MaxCarCapacity, and mDoorOpened[b, r] is
-        False, DoorMotor[b, r] shall be commanded to Open.<br>
-        5.11 Dwell shall be set to an appropriate value based on
-        mDesiredDwell[b].<br>
-        5.12 mDoorMotor[b,r] shall be set to the current value of DoorMotor[b,r]<br>
+        5.6 &nbsp;&nbsp; Dwell shall be set to set to the value of mDesiredDwell. <br>
+        5.7 &nbsp;&nbsp; If any mAtFloor[f, b] is True AND f equals to mDesiredFloor.f AND mDriveSpeed = (0, d) or mDriveSpeed = (s, STOP) then: <br>
+        &nbsp;&nbsp;&nbsp; 5.7.1&nbsp; DoorMotor[b, r] shall be commanded to Open. <br>
+        &nbsp;&nbsp;&nbsp; 5.7.2&nbsp; mDoorMotor[b, r] shall be commanded to Open. <br>
+        &nbsp;&nbsp;&nbsp; 5.7.3&nbsp; CountDown shall be set to Dwell. <br>
+        5.8 &nbsp;&nbsp; If mDoorOpened[b, r] is True, then:<br>
+        &nbsp;&nbsp;&nbsp; 5.8.1&nbsp; DoorMotor[b, r] shall be commanded to Stop. <br>
+        &nbsp;&nbsp;&nbsp; 5.8.2&nbsp; mDoorMotor[b, r] shall be commanded to Stop. <br>
+        &nbsp;&nbsp;&nbsp; 5.8.3&nbsp; CountDown shall be decremented. <br>
+        5.9 &nbsp;&nbsp; If CountDown &lt; 0, then: <br>
+        &nbsp;&nbsp;&nbsp; 5.9.1&nbsp; DoorMotor[b, r] shall be commanded to Nudge. <br>
+        &nbsp;&nbsp;&nbsp; 5.9.2&nbsp; mDoorMotor[b, r] shall be commanded to Nudge. <br>
+        &nbsp;&nbsp;&nbsp; 5.9.3&nbsp; CountDown shall be set to zero and stop decreasing. <br>
+        5.10 &nbsp;&nbsp; If mDoorClosed[b, r] is True, then: <br>
+        &nbsp;&nbsp;&nbsp; 5.10.1&nbsp; DoorMotor[b, r] shall be commanded to Stop. <br>
+        &nbsp;&nbsp;&nbsp; 5.10.2&nbsp; mDoorMotor[b, r] shall be commanded to Stop. <br>
+        5.11 &nbsp;&nbsp; If mCarWeight >= MaxCarCapacity, AND mDoorOpened[b, r] is False, then: <br>
+        &nbsp;&nbsp;&nbsp; 5.11.1&nbsp; DoorMotor[b, r] shall be commanded to Open. <br>
+        &nbsp;&nbsp;&nbsp; 5.11.2&nbsp; mDoorMotor[b, r] shall be commanded to Open. <br>
+        &nbsp;&nbsp;&nbsp; 5.11.3&nbsp; CountDown shall be set to Dwell. <br>
+        <h3>State Chart:</h3>
+        State Chart for Door Control<br> <!-- State Chart for Door Control -->
+        <br>
+        <div style="text-align: left; width: 300"><a href="5_door_control.jpg"><img
+            alt="5_door_control.jpg" src="5_door_control.jpg"
+            style="border: 0px solid ; width: 818px; height: 470px;"></a><br>
+        </div>
+        <!--Insert table for Door Control -->
+        <table style="text-align: left; width: 850;" border="1"
+            cellpadding="2" cellspacing="2">
+            <tbody>
+                <tr>
+                    <td style="vertical-align: top;"><b>Transition #</b><br>
+                    </td>
+                    <td style="vertical-align: top;"><b>Guard&nbsp;Conditions</b><br>
+                    </td>
+                </tr>
+                <tr>
+                    <td style="vertical-align: top;">T5.1<br>
+                    </td>
+                    <td style="vertical-align: top;">
+                        mAtFloor[f, b]&nbsp;&larr;&nbsp;True&nbsp;
+                        AND&nbsp;f&nbsp;==&nbsp;mDesiredFloor.f&nbsp;
+                        AND&nbsp;mDriveSpeed&nbsp;==&nbsp;(0, d) OR mDriveSpeed&nbsp;==&nbsp;(s, Stop) <br>
+                    </td>
+                </tr>
+                <tr>
+                    <td style="vertical-align: top;">T5.2<br>
+                    </td>
+                    <td style="vertical-align: top;">mDoorOpened[b,r]&nbsp;&larr;&nbsp;True <br>
+                    </td>
+                </tr>
+                <tr>
+                    <td style="vertical-align: top;">T5.3<br>
+                    </td>
+                    <td style="vertical-align: top;">CountDown&nbsp;&lt;&nbsp;0 <br>
+                    </td>
+                </tr>
+                <tr>
+                    <td style="vertical-align: top;">T5.4<br>
+                    </td>
+                    <td style="vertical-align: top;">mDoorClosed[b,r]&nbsp;&larr;&nbsp;True <br>
+                    </td>
+                </tr>
+                <tr>
+                    <td style="vertical-align: top;">T5.5<br>
+                    </td>
+                    <td style="vertical-align: top;">mCarWeight&nbsp;&gt;=&nbsp;MaxCarCapacity <br>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+        <!--Door Cotrol table End-->
         <h2><a name="drivecontrol"></a> 6. DriveControl </h2>
         <h3> Replication: </h3>
         <ul>
@@ -1294,6 +1350,7 @@
         6.9&nbsp;&nbsp;&nbsp; both of mLevel are received True and CurrentFloor is not NONE, then: <br>
         &nbsp;&nbsp;&nbsp; 6.9.1&nbsp; Drive shall be commanded to (STOP, STOP). <br>
         &nbsp;&nbsp;&nbsp; 6.9.2&nbsp; mDrive shall be commanded to (STOP, STOP). <br>
+        <!--CarLantern_Qiang-->
         <h2><a name="lanterncontrol"></a> 7. LanternControl[d] </h2>
         <h3> Replication: </h3>
         <ul>
@@ -1331,10 +1388,70 @@
         <h3> CONSTRAINTS: </h3>
         7.1&nbsp;&nbsp;&nbsp; Both CarLanterns[d] shall not be On at the same
         time.<br>
-        <h3> EVENT-TRIGGERED BEHAVIORS: </h3>
-        7.2&nbsp;&nbsp;&nbsp; If mDoorClosed[<b>*</b>, <b>*</b>] are received True, then CarLantern[<b>*</b>] shall be Off.<br>
-        7.3&nbsp;&nbsp;&nbsp; If mDoorClosed[<b>b</b>, <b>r</b>] is False and DesiredDirection is Up, then CarLantern[<b>Up</b>] shall be On.<br>
-        7.4&nbsp;&nbsp;&nbsp; If mDoorClosed[<b>b</b>, <b>r</b>] is False and DesiredDirection is Down, then CarLantern[<b>Down</b>] shall be On.<br>
+        <h3> TIME-TRIGGERED BEHAVIORS: </h3>
+        7.2&nbsp;&nbsp;&nbsp; DesiredDirection shall be set to the value of mDesiredFloor.d. <br>
+        7.3&nbsp;&nbsp;&nbsp; If mDoorClosed[*, *] are True, then: <br>
+        &nbsp;&nbsp;&nbsp; 7.3.1&nbsp; CarLantern[*] shall be commanded to Off.<br>
+        &nbsp;&nbsp;&nbsp; 7.3.2&nbsp; mCarLantern[*] shall be commanded to Off.<br>
+        7.4&nbsp;&nbsp;&nbsp; If mDoorClosed[b, r] is False AND DesiredDirection is Stop, then: <br>
+        &nbsp;&nbsp;&nbsp; 7.4.1&nbsp; CarLantern[*] shall be commanded to Off. <br>
+        &nbsp;&nbsp;&nbsp; 7.4.2&nbsp; mCarLantern[*] shall be commanded to Off. <br>
+        7.5&nbsp;&nbsp;&nbsp; If mDoorClosed[b, r] is False AND Desired Direction is Up, then: <br>
+        &nbsp;&nbsp;&nbsp; 7.5.1&nbsp; CarLantern[Up] shall be commanded to On. <br>
+        &nbsp;&nbsp;&nbsp; 7.5.2&nbsp; mCarLantern[Up] shall be commanded to On. <br>
+        7.6&nbsp;&nbsp;&nbsp; If mDoorClosed[b, r] is False AND Desired Direction is Down, then: <br>
+        &nbsp;&nbsp;&nbsp; 7.6.1&nbsp; CarLantern[Down] shall be commanded to On. <br>
+        &nbsp;&nbsp;&nbsp; 7.6.2&nbsp; mCarLantern[Down] shall be commanded to On. <br>
+        <h3>State Chart:</h3>
+        State Chart for Door Control<br> <!-- State Chart for CarLantern Control -->
+        <br>
+        <div style="text-align: Left; width: 300"><a href="7_lantern_control.jpg"><img
+            alt="7_lantern_control.jpg" src="7_lantern_control.jpg"
+            style="border: 0px solid ; width: 890px; height: 560px;"></a><br>
+        </div>
+        <!--Insert table for CarLantern Control -->
+        <table style="text-align: left; width: 850;" border="1"
+            cellpadding="2" cellspacing="2">
+            <tbody>
+                <tr>
+                    <td style="vertical-align: top;"><b>Transition #</b><br>
+                    </td>
+                    <td style="vertical-align: top;"><b>Guard&nbsp;Conditions</b><br>
+                    </td>
+                </tr>
+                <tr>
+                    <td style="vertical-align: top;">T7.1<br>
+                    </td>
+                    <td style="vertical-align: top;">
+                        mDoorClosed[b,r]&nbsp;&larr;&nbsp;False&nbsp;
+                        AND DesiredDirection&nbsp;&larr;&nbsp;Stop <br>
+                    </td>
+                </tr>
+                <tr>
+                    <td style="vertical-align: top;">T7.2<br>
+                    </td>
+                    <td style="vertical-align: top;">
+                        mDoorClosed[b,r]&nbsp;&larr;&nbsp;False&nbsp;
+                        AND DesiredDirection&nbsp;&larr;&nbsp;Up <br>
+                    </td>
+                </tr>
+                <tr>
+                    <td style="vertical-align: top;">T7.3<br>
+                    </td>
+                    <td style="vertical-align: top;">
+                        mDoorClosed[b,r]&nbsp;&larr;&nbsp;False&nbsp;
+                        AND DesiredDirection&nbsp;&larr;&nbsp;Down <br>
+                    </td>
+                </tr>
+                <tr>
+                    <td style="vertical-align: top;">T7.4<br>
+                    </td>
+                    <td style="vertical-align: top;">mDoorClosed[b,r]&nbsp;&larr;&nbsp;True <br>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <!--CarLantern Cotrol table End-->
         <h2><a name="hallbuttoncontrol"></a> 8. HallButtonControl[f, b, d] </h2>
         <h3> Replication: </h3>
         <ul>
