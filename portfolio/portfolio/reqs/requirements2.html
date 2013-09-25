@@ -1367,16 +1367,156 @@
         <h3> State: </h3>
         <ul>
             <li>CurrentFloor, is a shorthand notation for the value f of
-                whichever mAtFloor[f, b] is True, if any.&nbsp; If CurrentFloor is
-                invalid it has a mnemonic value of None. </li>
+                whichever mAtFloor[f, b] is True, if any.&nbsp; If CurrentFloor is invalid it has a mnemonic value of None. </li>
+            <li>CurrentDirection, is a shorthand notation d. d is UP when CurrentFloor is lower than mDesiredFloor; d is DOWN when CurrentFloor is higher than mDesiredFloor;d is STOP when CurrentFloor equals mDesiredFloor; </li>
         </ul>
         <h3> CONSTRAINTS: </h3>
         None
+        <!--
         <h3> EVENT-TRIGGERED BEHAVIORS: </h3>
         8.1&nbsp;&nbsp;&nbsp; If HallCall[f,b,d] is received as Pressed, then, <br>
         &nbsp;&nbsp;&nbsp; 8.1.1&nbsp; HallLight[f,b,d] shall be set to on. <br>
         &nbsp;&nbsp;&nbsp; 8.1.2&nbsp; mHallCall[f,b,d] shall be set to true.<br>
         8.2&nbsp;&nbsp;&nbsp; If mAtFloor[f, b] is received as true, then HallLight[f,b,d] shall be set to off. <br>
+        -->
+        <h3> TIME-TRIGGERED BEHAVIORS: </h3>
+        R8.1&nbsp;&nbsp;&nbsp; If HallCall[f,b,d] is Pressed, then <br>
+        &nbsp;&nbsp;&nbsp; R8.1.1&nbsp; HallLight[f,b,d] shall be set to on. <br>
+        &nbsp;&nbsp;&nbsp; R8.1.2&nbsp; mHallCall[f,b,d] shall be set to True.
+        <br>
+        R8.2&nbsp;&nbsp;&nbsp; If f is CurrentFloor, and HallCall[f,b,d] is Idle, and mDesiredFloor is not CurrentFloor, and mDoorClosed[b,*] is False, then,<br>
+        &nbsp;&nbsp;&nbsp; R8.2.1&nbsp; HallLight[f,b,CurrentDirection] shall be set to off.<br>
+        &nbsp;&nbsp;&nbsp; R8.2.2&nbsp;  mHallCall[f,b,CurrentDirection] shall be set to False.<br>
+        R8.3&nbsp;&nbsp;&nbsp; mHallLight[f,b,d] always has the same value as HallLights[f,b,d].
+        <h3>Statechart</h3>
+        <div style="text-align: center;"><a href="hallbuttomcontrol_state_diagram.png"><img
+            alt="hallbuttomcontrol_state_diagram.png" src="hallbuttomcontrol_state_diagram.png"
+            style="border: 0px solid ; width: 613px; height: 200px;"></a><br>
+        </div>
+        <table style="text-align: left; width: 800px;" border="1"
+            cellpadding="2" cellspacing="2">
+            <tbody>
+                <tr>
+                    <td style="vertical-align: top;">Transition #<br>
+                    </td>
+                    <td style="vertical-align: top;">Conditions<br>
+                    </td>
+                </tr>
+                <tr>
+                    <td style="vertical-align: top;">T8.1<br>
+                    </td>
+                    <td style="vertical-align: top;">HallCall[f,b,d]==Pressed <br>
+                    </td>
+                </tr>
+                <tr>
+                    <td style="vertical-align: top;">T8.2<br>
+                    </td>
+                    <td style="vertical-align: top;">f == CurrentFloor && HallCall[f,b,d] == Idle && mDesiredFloor != CurrentFloor && mDoorClosed[b,*] == False <br>
+                    </td>
+                </tr>
+            </tbody >
+        </table>
+        completed by Xianle Wang(xianlew)
+        <h3>Requirements to Statechart Traceability</h3>
+        <table style="text-align: left; width: 800px;" border="1"
+            cellpadding="2" cellspacing="2">
+            <tbody>
+                <tr>
+                    <td style="vertical-align: top;"><br>
+                    </td>
+                    <td style="vertical-align: top;" colspan="5">Requirements<br>
+                    </td>
+                </tr>
+                <tr>
+                    <td style="vertical-align: top;">States<br>
+                    </td>
+                    <td style="vertical-align: top;">R8.1.1<br>
+                    </td>
+                    <td style="vertical-align: top;">R8.1.2<br>
+                    </td>
+                    <td style="vertical-align: top;">R8.2.1<br>
+                    </td>
+                    <td style="vertical-align: top;">R8.2.2<br>
+                    </td>
+                    <td style="vertical-align: top;">R8.3<br>
+                
+                </tr>
+                <tr>
+                    <td style="vertical-align: top;">S8.1 LIGHT_OFF<br>
+                    </td>
+                    <td style="vertical-align: top;"><br>
+                    </td>
+                    <td style="vertical-align: top;"><br>
+                    </td>
+                    <td style="vertical-align: top;">X<br>
+                    </td>
+                    <td style="vertical-align: top;">X<br>
+                    </td>
+                    <td style="vertical-align: top;">X<br>
+                    </td>
+                </tr>
+                <tr>
+                    <td style="vertical-align: top;">S8.2 LIGHT_ON<br>
+                    </td>
+                    
+                    <td style="vertical-align: top;">X<br>
+                    </td>
+                    <td style="vertical-align: top;">X<br>
+                    </td>
+                    <td style="vertical-align: top;"><br>
+                    </td>
+                    <td style="vertical-align: top;"><br>
+                    </td>
+                    <td style="vertical-align: top;">X<br>
+                    </td>
+                    </td>
+                </tr>
+                <tr>
+                    <td style="vertical-align: top;">Transitions<br>
+                    </td>
+                    <td style="vertical-align: top;">R8.1.1<br>
+                    </td>
+                    <td style="vertical-align: top;">R8.1.2<br>
+                    </td>
+                    <td style="vertical-align: top;">R8.2.1<br>
+                    </td>
+                    <td style="vertical-align: top;">R8.2.2<br>
+                    </td>
+                    <td style="vertical-align: top;">R8.3<br>
+                
+                </tr>
+                <tr>
+                    <td style="vertical-align: top;">T8.1 <br>
+                    </td>
+                    <td style="vertical-align: top;">X<br>
+                    </td>
+                    <td style="vertical-align: top;">X<br>
+                    </td>
+                    <td style="vertical-align: top;"><br>
+                    </td>
+                    <td style="vertical-align: top;"><br>
+                    </td>
+                    <td style="vertical-align: top;">X<br>
+                    </td>
+                </tr>
+                <tr>
+                    <td style="vertical-align: top;">T8.2 <br>
+                    </td>
+                    
+                    <td style="vertical-align: top;"><br>
+                    </td>
+                    <td style="vertical-align: top;"><br>
+                    </td>
+                    <td style="vertical-align: top;">X<br>
+                    </td>
+                    <td style="vertical-align: top;">X<br>
+                    </td>
+                    <td style="vertical-align: top;">X<br>
+                    </td>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
         <h2><a name="carbuttoncontrol"></a> 9. CarButtonControl[f, b] </h2>
         <h3> Replication: </h3>
         <ul>
