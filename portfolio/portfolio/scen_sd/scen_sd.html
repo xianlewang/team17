@@ -472,12 +472,13 @@ doors close on a hallway. </h3>
   <li>Door[<b>b</b>,<b>r</b>] starts closing. </li>
   <li>Doors complete closing. </li>
   <li>Car is ready to move to desired floor. </li>
+  <li>Car reaches hoistway limit and stops. </li>
 </ol>
 <h3> Post-Conditions: </h3>
 <ul type="disc">
   <li>Elevator is stopped. </li>
   <li>All doors are closed. </li>
-  <li>Car starts moving to desired floor. </li>
+  <li>Car stops. </li>
 </ul>
 <h3> Sequence Diagram: </h3>
 <p> <a href="sd7C.png"><img src="sd7C.png" alt="1A" name="_x0000_i1027"
@@ -510,7 +511,7 @@ open.
   <li>Doors complete closing. </li>
   <li>Car starts moving to desired direction. </li>
   <li>Car arrives at next floor. </li>
-  <li>Car stops. </li>
+  <li>Emergency brake is triggerd and car stops. </li>
 </ol>
 <h3> Post-Conditions: </h3>
 <ul type="disc">
