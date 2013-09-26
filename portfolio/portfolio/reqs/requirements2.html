@@ -1506,29 +1506,30 @@
         &nbsp;&nbsp;&nbsp; R8.2.2&nbsp;  mHallCall[f,b,CurrentDirection] shall be set to False.<br>
         R8.3&nbsp;&nbsp;&nbsp; mHallLight[f,b,d] always has the same value as HallLights[f,b,d].
         <h3>Statechart</h3>
+        Statechart for HallButtomControl
         <div style="text-align: center;"><a href="hallbuttomcontrol_state_diagram.png"><img
             alt="hallbuttomcontrol_state_diagram.png" src="hallbuttomcontrol_state_diagram.png"
-            style="border: 0px solid ; width: 613px; height: 200px;"></a><br>
+            style="border: 0px solid ; width: 513px; height: 100px;"></a><br>
         </div>
         <table style="text-align: left; width: 800px;" border="1"
             cellpadding="2" cellspacing="2">
             <tbody>
                 <tr>
-                    <td style="vertical-align: top;">Transition #<br>
+                    <td style="vertical-align: top;"><b>Transition #</b><br>
                     </td>
-                    <td style="vertical-align: top;">Conditions<br>
+                    <td style="vertical-align: top;"><b>Guard Conditions</b><br>
                     </td>
                 </tr>
                 <tr>
                     <td style="vertical-align: top;">T8.1<br>
                     </td>
-                    <td style="vertical-align: top;">HallCall[f,b,d]==Pressed <br>
+                    <td style="vertical-align: top;">HallCall[f,b,d]&larr;Pressed <br>
                     </td>
                 </tr>
                 <tr>
                     <td style="vertical-align: top;">T8.2<br>
                     </td>
-                    <td style="vertical-align: top;">f == CurrentFloor && HallCall[f,b,d] == Idle && mDesiredFloor != CurrentFloor && mDoorClosed[b,*] == False <br>
+                    <td style="vertical-align: top;">f &larr; CurrentFloor && HallCall[f,b,d] &larr; Idle && mDesiredFloor != CurrentFloor && mDoorClosed[b,*] &larr; False <br>
                     </td>
                 </tr>
             </tbody >
@@ -1986,29 +1987,30 @@
         R11.9 &nbsp;&nbsp; mDesiredDwell shall always be set to a constant
         appropriate value for door open dwell. &nbsp; &nbsp;
         <h3>Statechart</h3>
+        Statechart for Dispatcher
         <div style="text-align: center;"><a href="dispatcher_state_diagram.png"><img
             alt="dispatcher_state_diagram.png" src="dispatcher_state_diagram.png"
-            style="border: 0px solid ; width: 613px; height: 200px;"></a><br>
+            style="border: 0px solid ; width: 513px; height: 150px;"></a><br>
         </div>
         <table style="text-align: left; width: 800px;" border="1"
             cellpadding="2" cellspacing="2">
             <tbody>
                 <tr>
-                    <td style="vertical-align: top;">Transition #<br>
+                    <td style="vertical-align: top;"><b>Transition #</b><br>
                     </td>
-                    <td style="vertical-align: top;">Conditions<br>
+                    <td style="vertical-align: top;"><b>Guard Conditions</b><br>
                     </td>
                 </tr>
                 <tr>
                     <td style="vertical-align: top;">T11.1<br>
                     </td>
-                    <td style="vertical-align: top;">all mAtFloor[f, b] == False && any mDoorClosed [b, r] == False <br>
+                    <td style="vertical-align: top;">all mAtFloor[f, b]&larr; False && any mDoorClosed [b, r] &larr; False <br>
                     </td>
                 </tr>
                 <tr>
                     <td style="vertical-align: top;">T11.2<br>
                     </td>
-                    <td style="vertical-align: top;">mDoorClosed [b, r] == False && mAtFloor.f == mDesiredFloor<br>
+                    <td style="vertical-align: top;">mDoorClosed [b, r]&larr; False && mAtFloor.f &larr;mDesiredFloor<br>
                     </td>
                 </tr>
             </tbody >
