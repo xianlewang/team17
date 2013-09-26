@@ -1675,6 +1675,137 @@
         shall be set to On. <br>
         9.2.&nbsp; If mAtFloor[f,b] is received as True, then CarLight[f,b]
         shall be set to Off. <br>
+        <h3> TIME-TRIGGERED BEHAVIORS: </h3>
+        9.3.&nbsp; If CarCall[f,b] is True, then CarLight[f,b]
+        shall be set to On. <br>
+        9.4.&nbsp; If mAtFloor[f,b] is True AND mDesiredFloor.f is CurrentFloor 
+        AND CarCall[f,b] is False, 
+        then CarLight[f,b] shall be set to Off. <br>
+        9.5.&nbsp; mCarCall[f,b] shall always be set to CarCall[f,b]. <br>
+        9.6.&nbsp; mCarLight[f,b] shall always be set to CarLight[f,b]. <br>
+        <h3> Statechart: </h3>
+        Here is the CarButtonControl Statechart. <br>
+        <div style="text-align: center;"><a href="carbuttoncontrol_statechart.png"><img
+            alt="carbuttoncontrol_statechart.png" src="carbuttoncontrol_statechart.png"
+            style="border: 0px solid ; width: 740px; height: 367px;"></a><br>
+        </div>
+        
+        <table style="text-align: left; width: 850;" border="1"
+            cellpadding="2" cellspacing="2">
+            <tbody>
+                <tr>
+                    <td style="vertical-align: top;"><b>Transition #</b><br>
+                    </td>
+                    <td style="vertical-align: top;"><b>Condition</b><br>
+                    </td>
+                </tr>
+                <tr>
+                    <td style="vertical-align: top;">T9.1<br>
+                    </td>
+                    <td style="vertical-align: top;">
+                        CarCall[f,b]&nbsp;==&nbsp;true <br>
+                    </td>
+                </tr>
+                <tr>
+                    <td style="vertical-align: top;">T9.2<br>
+                    </td>
+                    <td style="vertical-align: top;">
+                        mAtFloor[f,b]&nbsp;==&nbsp;true&nbsp;&&&nbsp;
+                        mDesiredFloor.f&nbsp;==&nbsp;CurrentFloor&nbsp;&&
+                        &nbsp;CarCall[f,b]&nbsp;==&nbsp;false<br>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        
+        <h3>Requirements to Statechart Traceability</h3>
+        <table style="text-align: left; width: 800px;" border="1"
+            cellpadding="2" cellspacing="2">
+            <tbody>
+                <tr>
+                    <td style="vertical-align: top;"><br>
+                    </td>
+                    <td style="vertical-align: top;" colspan="5"><b>Requirements</b><br>
+                    </td>
+                </tr>
+                <tr>
+                    <td style="vertical-align: top;"><b>States</b><br>
+                    </td>
+                    <td style="vertical-align: top;">9.3<br>
+                    </td>
+                    <td style="vertical-align: top;">9.4<br>
+                    </td>
+                    <td style="vertical-align: top;">9.5<br>
+                    </td>
+                    <td style="vertical-align: top;">9.6<br>
+                
+                </tr>
+                <tr>
+                    <td style="vertical-align: top;">State 9.1: Light Off<br>
+                    </td>
+                    <td style="vertical-align: top;"><br>
+                    </td>
+                    <td style="vertical-align: top;"><br>
+                    </td>
+                    <td style="vertical-align: top;">X<br>
+                    </td>
+                    <td style="vertical-align: top;">X<br>
+                    </td>
+                </tr>
+                <tr>
+                    <td style="vertical-align: top;">State 9.2: Light On<br>
+                    </td>
+                    
+                    <td style="vertical-align: top;"><br>
+                    </td>
+                    <td style="vertical-align: top;"><br>
+                    </td>
+                    <td style="vertical-align: top;">X<br>
+                    </td>
+                    <td style="vertical-align: top;">X<br>
+                    </td>
+                    </td>
+                </tr>
+                <tr>
+                    <td style="vertical-align: top;"><b>Transitions</b><br>
+                    </td>
+                    <td style="vertical-align: top;"><br>
+                    </td>
+                    <td style="vertical-align: top;"><br>
+                    </td>
+                    <td style="vertical-align: top;"><br>
+                    </td>
+                    <td style="vertical-align: top;"><br>
+                
+                </tr>
+                <tr>
+                    <td style="vertical-align: top;">T9.1 <br>
+                    </td>
+                    <td style="vertical-align: top;">X<br>
+                    </td>
+                    <td style="vertical-align: top;"><br>
+                    </td>
+                    <td style="vertical-align: top;"><br>
+                    </td>
+                    <td style="vertical-align: top;"><br>
+                    </td>
+                </tr>
+                <tr>
+                    <td style="vertical-align: top;">T9.2 <br>
+                    </td>
+                    <td style="vertical-align: top;"><br>
+                    </td>
+                    <td style="vertical-align: top;">X<br>
+                    </td>
+                    <td style="vertical-align: top;"><br>
+                    </td>
+                    <td style="vertical-align: top;"><br>
+                    </td>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <h3> State Chart: </h3>
         <h2><a name="carpositioncontrol"></a> 10. CarPositionControl </h2>
         <h3> Replication: </h3>
         <ul>
@@ -1721,7 +1852,79 @@
         distance in the direction of motion.
         <h3> TIME-TRIGGERED BEHAVIORS: </h3>
         10.4 &nbsp;&nbsp;&nbsp; Whenever any mAtFloor[f, b] is True,
-        CarPositionIndicator shall be commanded to display CurrentFloor.&nbsp;
+        CarPositionIndicator shall be commanded to display CurrentFloor.&nbsp;<br>
+        10.5 &nbsp;&nbsp;&nbsp; mCarPositionIndicator shall always be set to CarPositionIndicator.<br>
+        <h3> Statechart: </h3>
+        Here is the CarPositionControl Statechart. <br>
+        <div style="text-align: center;"><a href="carpositioncontrol_statechart.png"><img
+            alt="carpositioncontrol_statechart.png" src="carpositioncontrol_statechart.png"
+            style="border: 0px solid ; width: 630px; height: 319px;"></a><br>
+        </div>
+        
+        <table style="text-align: left; width: 850;" border="1"
+            cellpadding="2" cellspacing="2">
+            <tbody>
+                <tr>
+                    <td style="vertical-align: top;"><b>Transition #</b><br>
+                    </td>
+                    <td style="vertical-align: top;"><b>Condition</b><br>
+                    </td>
+                </tr>
+                <tr>
+                    <td style="vertical-align: top;">T10.1<br>
+                    </td>
+                    <td style="vertical-align: top;">
+                        mAtFloor[*,*]&nbsp;==&nbsp;true <br>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        
+        <h3>Requirements to Statechart Traceability</h3>
+        <table style="text-align: left; width: 800px;" border="1"
+            cellpadding="2" cellspacing="2">
+            <tbody>
+                <tr>
+                    <td style="vertical-align: top;"><br>
+                    </td>
+                    <td style="vertical-align: top;" colspan="5"><b>Requirements</b><br>
+                    </td>
+                </tr>
+                <tr>
+                    <td style="vertical-align: top;"><b>States</b><br>
+                    </td>
+                    <td style="vertical-align: top;">10.4<br>
+                    </td>
+                    <td style="vertical-align: top;">10.5<br>
+                    </td>
+                </tr>
+                <tr>
+                    <td style="vertical-align: top;">State 10.1: Display<br>
+                    </td>
+                    <td style="vertical-align: top;"><br>
+                    </td>
+                    <td style="vertical-align: top;">X<br>
+                    </td>
+                </tr>
+                <tr>
+                    <td style="vertical-align: top;"><b>Transitions</b><br>
+                    </td>
+                    <td style="vertical-align: top;"><br>
+                    </td>
+                    <td style="vertical-align: top;"><br>
+                    </td>
+                </tr>
+                <tr>
+                    <td style="vertical-align: top;">T10.1 <br>
+                    </td>
+                    <td style="vertical-align: top;">X<br>
+                    </td>
+                    <td style="vertical-align: top;"><br>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        
         <h2><a name="dispatcher"></a> 11. Dispatcher </h2>
         <h3> Replication: </h3>
         <ul>
