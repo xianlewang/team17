@@ -1337,7 +1337,8 @@
         shall not be commanded to {Slow, d} or {Fast, d}until the car is no
         longer
         overloaded.
-        <h3> EVENT-TRIGGERED BEHAVIORS: </h3>
+        <!--
+		  <h3> EVENT-TRIGGERED BEHAVIORS: </h3>
         6.6&nbsp;&nbsp;&nbsp; mDesiredFloor is received and CommitPoint[<b>f</b>] is Reached, then: <br>
         &nbsp;&nbsp;&nbsp; 6.6.1&nbsp; Drive shall be command to (SLOW, <b>d</b>). <br>
         &nbsp;&nbsp;&nbsp; 6.6.2&nbsp; mDrive shall be commanded to (SLOW, <b>d</b>). <br>
@@ -1350,7 +1351,222 @@
         6.9&nbsp;&nbsp;&nbsp; both of mLevel are received True and CurrentFloor is not NONE, then: <br>
         &nbsp;&nbsp;&nbsp; 6.9.1&nbsp; Drive shall be commanded to (STOP, STOP). <br>
         &nbsp;&nbsp;&nbsp; 6.9.2&nbsp; mDrive shall be commanded to (STOP, STOP). <br>
-        <!--CarLantern_Qiang-->
+		  -->
+		  <h3> TIME-TRIGGERED BEHAVIORS: </h3>
+		  6.6&nbsp;&nbsp;&nbsp; If mEmergencyBrake is True, then: <br>
+        &nbsp;&nbsp;&nbsp; 6.6.1&nbsp; Drive.s is set to Stop and Drive.d is set to Stop. <br>
+        &nbsp;&nbsp;&nbsp; 6.6.2&nbsp; mDrive.s is set to Stop and mDrive.d is set to Stop. <br>
+        &nbsp;&nbsp;&nbsp; 6.6.3&nbsp; mDriveSpeed.s is set to Stop and mDriveSpeed.d is set to Stop. <br>
+		  6.7&nbsp;&nbsp;&nbsp; If mHoistwayLimit[d] is True, then: <br>
+        &nbsp;&nbsp;&nbsp; 6.7.1&nbsp; Drive.s is set to Stop and Drive.d is set to Stop. <br>
+        &nbsp;&nbsp;&nbsp; 6.7.2&nbsp; mDrive.s is set to Stop and mDrive.d is set to Stop. <br>
+        &nbsp;&nbsp;&nbsp; 6.7.3&nbsp; mDriveSpeed.s is set to Stop and mDriveSpeed.d is set to Stop. <br>
+		  6.8&nbsp;&nbsp;&nbsp; If mAtFloor[f, b] is Ture AND mLevel[d] is False, then: <br>
+        &nbsp;&nbsp;&nbsp; 6.8.1&nbsp; Drive.s is set to Slow and Drive.d is set to d. <br>
+        &nbsp;&nbsp;&nbsp; 6.8.2&nbsp; mDrive.s is set to Slow and mDrive.d is set to d. <br>
+        &nbsp;&nbsp;&nbsp; 6.8.3&nbsp; mDriveSpeed.s is set to Slow and mDriveSpeed.d is set to d. <br>
+		  6.9&nbsp;&nbsp;&nbsp; If mAtFloor[f, b] is True AND mLevel[d] is True AND mAtFloor.f equals to mDesiredFloor, then: <br>
+        &nbsp;&nbsp;&nbsp; 6.9.1&nbsp; Drive.s is set to Stop and Drive.d is set to Stop. <br>
+        &nbsp;&nbsp;&nbsp; 6.9.2&nbsp; mDrive.s is set to Stop and mDrive.d is set to Stop. <br>
+        &nbsp;&nbsp;&nbsp; 6.9.3&nbsp; mDriveSpeed.s is set to Stop and mDriveSpeed.d is set to Stop. <br>
+		  6.10&nbsp;&nbsp;&nbsp; If CurrentFloor is not equal to mDesiredFloor AND mDoorClosed is True, then: <br>
+        &nbsp;&nbsp;&nbsp; 6.10.1&nbsp; Drive.s is set to Slow and Drive.d is set to DesiredDirection. <br>
+        &nbsp;&nbsp;&nbsp; 6.10.2&nbsp; mDrive.s is set to Slow and mDrive.d is set to DesiredDirection. <br>
+        &nbsp;&nbsp;&nbsp; 6.10.3&nbsp; mDriveSpeed.s is set to Slow and mDriveSpeed.d is set to DesiredDirection. <br>
+		  6.11&nbsp;&nbsp;&nbsp; If mDoorClosed is False, then: <br>
+        &nbsp;&nbsp;&nbsp; 6.11.1&nbsp; Drive.s is set to Stop and Drive.d is set to Stop. <br>
+        &nbsp;&nbsp;&nbsp; 6.11.2&nbsp; mDrive.s is set to Stop and mDrive.d is set to Stop. <br>
+        &nbsp;&nbsp;&nbsp; 6.11.3&nbsp; mDriveSpeed.s is set to Stop and mDriveSpeed.d is set to Stop. <br>
+		  6.12&nbsp;&nbsp;&nbsp; If CurrentFloor is None, then: <br>
+        &nbsp;&nbsp;&nbsp; 6.12.1&nbsp; Drive.s is set to Slow and Drive.d is set to DesiredDirection. <br>
+        &nbsp;&nbsp;&nbsp; 6.12.2&nbsp; mDrive.s is set to Slow and mDrive.d is set to DesiredDirection. <br>
+        &nbsp;&nbsp;&nbsp; 6.12.3&nbsp; mDriveSpeed.s is set to Slow and mDriveSpeed.d is set to DesiredDirection. <br>
+		  <h3>State Chart:</h3>
+        State Chart for Drive Control<br> <!-- State Chart for Drive Control -->
+		  <br>
+        <div style="text-align: Left; width: 300"><a href="6_drive_control.jpg"><img
+            alt="6_drive_control.jpg" src="6_drive_control.jpg"
+            style="border: 0px solid ; width: 890px; height: 560px;"></a><br>
+        </div>
+		  <br>
+        <!--Drive Control Jiang-->
+		  <!--Insert table for CarLantern Control -->
+        <table style="text-align: left; width: 850;" border="1"
+            cellpadding="2" cellspacing="2">
+            <tbody>
+                <tr>
+                    <td style="vertical-align: top;"><b>Transition #</b><br>
+                    </td>
+                    <td style="vertical-align: top;"><b>Guard&nbsp;Conditions</b><br>
+                    </td>
+                </tr>
+                <tr>
+                    <td style="vertical-align: top;">T6.1<br>
+                    </td>
+                    <td style="vertical-align: top;">
+                        mAtFloor[f,b]&nbsp;&larr;&nbsp;True&nbsp;
+                        AND mLevel[d]&nbsp;&larr;&nbsp;True&nbsp;
+								AND mAtFloor.f == mDesiredFloor<br>
+                    </td>
+                </tr>
+                <tr>
+                    <td style="vertical-align: top;">T6.2<br>
+                    </td>
+                    <td style="vertical-align: top;">
+                        CurrentFloor != mDesiredFloor&nbsp;
+                        AND mDoorClosed&nbsp;&larr;&nbsp;True <br>
+                    </td>
+                </tr>
+                <tr>
+                    <td style="vertical-align: top;">T6.3<br>
+                    </td>
+                    <td style="vertical-align: top;">
+                        CurrentFloor&nbsp;&larr;&nbsp;None&nbsp;
+                        <br>
+                    </td>
+                </tr>
+                <tr>
+                    <td style="vertical-align: top;">T6.4<br>
+                    </td>
+                    <td style="vertical-align: top;">
+						  CurrentFloor&nbsp;&larr;&nbsp;Valid <br>
+                    </td>
+                </tr>
+					 <tr>
+                    <td style="vertical-align: top;">T6.5<br>
+                    </td>
+                    <td style="vertical-align: top;">
+                        mEmergencyBrake&nbsp;&larr;&nbsp;True&nbsp;
+                        <br>
+                    </td>
+                </tr>
+                <tr>
+                    <td style="vertical-align: top;">T6.6<br>
+                    </td>
+                    <td style="vertical-align: top;">
+						  mHoistwayLimit[d]&nbsp;&larr;&nbsp;True <br>
+                    </td>
+                </tr>
+					 <tr>
+                    <td style="vertical-align: top;">T6.7<br>
+                    </td>
+                    <td style="vertical-align: top;">
+                        mEmergencyBrake&nbsp;&larr;&nbsp;True&nbsp;
+                        <br>
+                    </td>
+                </tr>
+                <tr>
+                    <td style="vertical-align: top;">T6.8<br>
+                    </td>
+                    <td style="vertical-align: top;">
+						  mEmergencyBrake&nbsp;&larr;&nbsp;True <br>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <!--Drive Cotrol table End-->
+        <!--Req to statechart traceablity table begin-->
+		  <h3>Requirements to Statechart Traceability</h3>
+        <table style="text-align: left; width: 800px;" border="1"
+            cellpadding="2" cellspacing="2">
+            <tbody>
+                <tr>
+                    <td style="vertical-align: top;"><br>
+                    </td>
+                    <td style="vertical-align: top;" colspan="5">Requirements<br>
+                    </td>
+                </tr>
+                <tr>
+                    <td style="vertical-align: top;">States<br>
+                    </td>
+                    <td style="vertical-align: top;">R8.1.1<br>
+                    </td>
+                    <td style="vertical-align: top;">R8.1.2<br>
+                    </td>
+                    <td style="vertical-align: top;">R8.2.1<br>
+                    </td>
+                    <td style="vertical-align: top;">R8.2.2<br>
+                    </td>
+                    <td style="vertical-align: top;">R8.3<br>
+                
+                </tr>
+                <tr>
+                    <td style="vertical-align: top;">S8.1 LIGHT_OFF<br>
+                    </td>
+                    <td style="vertical-align: top;"><br>
+                    </td>
+                    <td style="vertical-align: top;"><br>
+                    </td>
+                    <td style="vertical-align: top;">X<br>
+                    </td>
+                    <td style="vertical-align: top;">X<br>
+                    </td>
+                    <td style="vertical-align: top;">X<br>
+                    </td>
+                </tr>
+                <tr>
+                    <td style="vertical-align: top;">S8.2 LIGHT_ON<br>
+                    </td>
+                    
+                    <td style="vertical-align: top;">X<br>
+                    </td>
+                    <td style="vertical-align: top;">X<br>
+                    </td>
+                    <td style="vertical-align: top;"><br>
+                    </td>
+                    <td style="vertical-align: top;"><br>
+                    </td>
+                    <td style="vertical-align: top;">X<br>
+                    </td>
+                    </td>
+                </tr>
+                <tr>
+                    <td style="vertical-align: top;">Transitions<br>
+                    </td>
+                    <td style="vertical-align: top;">R8.1.1<br>
+                    </td>
+                    <td style="vertical-align: top;">R8.1.2<br>
+                    </td>
+                    <td style="vertical-align: top;">R8.2.1<br>
+                    </td>
+                    <td style="vertical-align: top;">R8.2.2<br>
+                    </td>
+                    <td style="vertical-align: top;">R8.3<br>
+                
+                </tr>
+                <tr>
+                    <td style="vertical-align: top;">T8.1 <br>
+                    </td>
+                    <td style="vertical-align: top;">X<br>
+                    </td>
+                    <td style="vertical-align: top;">X<br>
+                    </td>
+                    <td style="vertical-align: top;"><br>
+                    </td>
+                    <td style="vertical-align: top;"><br>
+                    </td>
+                    <td style="vertical-align: top;">X<br>
+                    </td>
+                </tr>
+                <tr>
+                    <td style="vertical-align: top;">T8.2 <br>
+                    </td>
+                    
+                    <td style="vertical-align: top;"><br>
+                    </td>
+                    <td style="vertical-align: top;"><br>
+                    </td>
+                    <td style="vertical-align: top;">X<br>
+                    </td>
+                    <td style="vertical-align: top;">X<br>
+                    </td>
+                    <td style="vertical-align: top;">X<br>
+                    </td>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+		  <!--Req to statechart traceablity table end-->
         <h2><a name="lanterncontrol"></a> 7. LanternControl[d] </h2>
         <h3> Replication: </h3>
         <ul>
