@@ -2306,7 +2306,7 @@
                 <tr>
                     <td style="vertical-align: top;">T8.2<br>
                     </td>
-                    <td style="vertical-align: top;">f &larr; CurrentFloor && HallCall[f,b,d] &larr; Idle && mDesiredFloor != CurrentFloor && mDoorClosed[b,*] &larr; False <br>
+                    <td style="vertical-align: top;">f &larr; CurrentFloor AND HallCall[f,b,d] &larr; Idle AND mDesiredFloor != CurrentFloor AND mDoorClosed[b,*] &larr; False <br>
                     </td>
                 </tr>
             </tbody >
@@ -2779,13 +2779,13 @@
                 <tr>
                     <td style="vertical-align: top;">T11.1<br>
                     </td>
-                    <td style="vertical-align: top;">all mAtFloor[f, b]&larr; False && any mDoorClosed [b, r] &larr; False <br>
+                    <td style="vertical-align: top;">all mAtFloor[f, b]&larr; False AND any mDoorClosed [b, r] &larr; False <br>
                     </td>
                 </tr>
                 <tr>
                     <td style="vertical-align: top;">T11.2<br>
                     </td>
-                    <td style="vertical-align: top;">mDoorClosed [b, r]&larr; False && mAtFloor.f &larr;mDesiredFloor<br>
+                    <td style="vertical-align: top;">mDoorClosed [b, r]&larr; False AND mAtFloor.f &larr;mDesiredFloor<br>
                     </td>
                 </tr>
             </tbody >
