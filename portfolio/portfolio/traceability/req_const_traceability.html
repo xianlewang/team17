@@ -324,8 +324,121 @@
                     </td>
                 </tr>
                 <tr>
-                    <td style="vertical-align: top;">6.6.1 mDesiredFloor is received and Commit Point[f] is Reached
-                        --> set Drive to (SLOW, d)<br>
+                    <td style="vertical-align: top;">6.6.1 mEmergencyBrake --> Drive Stop<br>
+                    </td>
+                    <td style="vertical-align: top;">~<br>
+                    </td>
+                    <td style="vertical-align: top;">~<br>
+                    </td>
+                    <td style="vertical-align: top;">~<br>
+                    </td>
+                    <td style="vertical-align: top;">X<br>
+                    </td>
+                    <td style="vertical-align: top;">~<br>
+                    </td>
+                </tr>
+                <tr>
+                    <td style="vertical-align: top;">6.6.2 mEmergencyBrake --> mDrive Stop<br>
+                    </td>
+                    <td style="vertical-align: top;">~<br>
+                    </td>
+                    <td style="vertical-align: top;">~<br>
+                    </td>
+                    <td style="vertical-align: top;">~<br>
+                    </td>
+                    <td style="vertical-align: top;">X<br>
+                    </td>
+                    <td style="vertical-align: top;">~<br>
+                    </td>
+                </tr>
+                <tr>
+                    <td style="vertical-align: top;">6.6.3 mEmergencyBrake --> mDriveSpeed Stop<br>
+                    </td>
+                    <td style="vertical-align: top;">~<br>
+                    </td>
+                    <td style="vertical-align: top;">~<br>
+                    </td>
+                    <td style="vertical-align: top;">~<br>
+                    </td>
+                    <td style="vertical-align: top;">X<br>
+                    </td>
+                    <td style="vertical-align: top;">~<br>
+                    </td>
+                </tr>
+                <tr>
+                    <td style="vertical-align: top;">6.7.1 mHoistwayLimit --> Drive Stop<br>
+                    </td>
+                    <td style="vertical-align: top;">~<br>
+                    </td>
+                    <td style="vertical-align: top;">~<br>
+                    </td>
+                    <td style="vertical-align: top;">~<br>
+                    </td>
+                    <td style="vertical-align: top;">~<br>
+                    </td>
+                    <td style="vertical-align: top;">~<br>
+                    </td>
+                </tr>
+					 <tr>
+                    <td style="vertical-align: top;">6.7.2 mHoistwayLimit --> mDrive Stop<br>
+                    </td>
+                    <td style="vertical-align: top;">~<br>
+                    </td>
+                    <td style="vertical-align: top;">~<br>
+                    </td>
+                    <td style="vertical-align: top;">~<br>
+                    </td>
+                    <td style="vertical-align: top;">~<br>
+                    </td>
+                    <td style="vertical-align: top;">~<br>
+                    </td>
+                </tr>
+					 <tr>
+                    <td style="vertical-align: top;">6.7.3 mHoistwayLimit --> mDriveSpeed Stop<br>
+                    </td>
+                    <td style="vertical-align: top;">~<br>
+                    </td>
+                    <td style="vertical-align: top;">~<br>
+                    </td>
+                    <td style="vertical-align: top;">~<br>
+                    </td>
+                    <td style="vertical-align: top;">~<br>
+                    </td>
+                    <td style="vertical-align: top;">~<br>
+                    </td>
+                </tr>
+                <td style="vertical-align: top;">6.8.1 mAtFloor[f,b]=True AND mLevel[d]=False -->
+					 Drive.s=Slow, Drive.d=d<br>
+                </td>
+                <td style="vertical-align: top;">~<br>
+                </td>
+                <td style="vertical-align: top;">~<br>
+                </td>
+                <td style="vertical-align: top;">~<br>
+                </td>
+                <td style="vertical-align: top;">~<br>
+                </td>
+                <td style="vertical-align: top;">~<br>
+                </td>
+                </tr>
+                <tr>
+                    <td style="vertical-align: top;">6.8.2 mAtFloor[f,b]=True AND mLevel[d]=False --> 
+						  mDrive.s=Slow, mDrive.d=d<br>
+                    </td>
+                    <td style="vertical-align: top;">~<br>
+                    </td>
+                    <td style="vertical-align: top;">~<br>
+                    </td>
+                    <td style="vertical-align: top;">~<br>
+                    </td>
+                    <td style="vertical-align: top;">~<br>
+                    </td>
+                    <td style="vertical-align: top;">~<br>
+                    </td>
+                </tr>
+					 <tr>
+                    <td style="vertical-align: top;">6.8.3 mAtFloor[f,b]=True AND mLevel[d]=False --> 
+						  mDriveSpeed.s=Slow, mDriveSpeed.d=d<br>
                     </td>
                     <td style="vertical-align: top;">~<br>
                     </td>
@@ -339,8 +452,8 @@
                     </td>
                 </tr>
                 <tr>
-                    <td style="vertical-align: top;">6.6.2 mDesiredFloor is received and Commit Point[f] is Reached
-                        --> set mDrive to (SLOW, d)<br>
+                    <td style="vertical-align: top;">6.9.1 mAtFloor[f, b] is True AND mLevel[d] is True AND mAtFloor.f equals to mDesiredFloor --> 
+						  Drive Stop<br>
                     </td>
                     <td style="vertical-align: top;">~<br>
                     </td>
@@ -354,10 +467,84 @@
                     </td>
                 </tr>
                 <tr>
-                    <td style="vertical-align: top;">6.7.1 mDoorClosed is True and DesiredDirection is not STOP
-                        --> set Drive to (SLOW, d)<br>
+                    <td style="vertical-align: top;">6.9.2 mAtFloor[f, b] is True AND mLevel[d] is True AND mAtFloor.f equals to mDesiredFloor 
+						  --> mDrive Stop<br>
                     </td>
                     <td style="vertical-align: top;">~<br>
+                    </td>
+                    <td style="vertical-align: top;">~<br>
+                    </td>
+                    <td style="vertical-align: top;">~<br>
+                    </td>
+                    <td style="vertical-align: top;">~<br>
+                    </td>
+                    <td style="vertical-align: top;">~<br>
+                    </td>
+                </tr>
+					 <tr>
+                    <td style="vertical-align: top;">6.9.3 mAtFloor[f, b] is True AND mLevel[d] is True AND mAtFloor.f equals to mDesiredFloor --> 
+						  mDriveSpeed Stop<br>
+                    </td>
+                    <td style="vertical-align: top;">~<br>
+                    </td>
+                    <td style="vertical-align: top;">~<br>
+                    </td>
+                    <td style="vertical-align: top;">~<br>
+                    </td>
+                    <td style="vertical-align: top;">~<br>
+                    </td>
+                    <td style="vertical-align: top;">~<br>
+                    </td>
+                </tr>
+					 <tr>
+                    <td style="vertical-align: top;">6.10.1 CurrentFloor is not equal to mDesiredFloor AND mDoorClosed is True --> 
+						  Drive.s=Slow, Drive.d=DesiredDirection<br>
+                    </td>
+                    <td style="vertical-align: top;">~<br>
+                    </td>
+                    <td style="vertical-align: top;">~<br>
+                    </td>
+                    <td style="vertical-align: top;">~<br>
+                    </td>
+                    <td style="vertical-align: top;">~<br>
+                    </td>
+                    <td style="vertical-align: top;">~<br>
+                    </td>
+                </tr>
+                <tr>
+                    <td style="vertical-align: top;">6.10.2 CurrentFloor is not equal to mDesiredFloor AND mDoorClosed is True --> 
+						  mDrive.s=Slow, mDrive.d=DesiredDirection<br>
+                    </td>
+                    <td style="vertical-align: top;">~<br>
+                    </td>
+                    <td style="vertical-align: top;">~<br>
+                    </td>
+                    <td style="vertical-align: top;">~<br>
+                    </td>
+                    <td style="vertical-align: top;">~<br>
+                    </td>
+                    <td style="vertical-align: top;">~<br>
+                    </td>
+                </tr>
+					 <tr>
+                    <td style="vertical-align: top;">6.10.3 CurrentFloor is not equal to mDesiredFloor AND mDoorClosed is True --> 
+						  mDriveSpeed.s=Slow, mDriveSpeed.d=DesiredDirection<br>
+                    </td>
+                    <td style="vertical-align: top;">~<br>
+                    </td>
+                    <td style="vertical-align: top;">~<br>
+                    </td>
+                    <td style="vertical-align: top;">~<br>
+                    </td>
+                    <td style="vertical-align: top;">~<br>
+                    </td>
+                    <td style="vertical-align: top;">~<br>
+                    </td>
+                </tr>
+					  <tr>
+                    <td style="vertical-align: top;">6.11.1 mDoorClosed is False --> Drive=Stop<br>
+                    </td>
+                    <td style="vertical-align: top;">X<br>
                     </td>
                     <td style="vertical-align: top;">X<br>
                     </td>
@@ -369,10 +556,9 @@
                     </td>
                 </tr>
                 <tr>
-                    <td style="vertical-align: top;">6.7.2 mDoorClosed is True and DesiredDirection is not STOP
-                        --> set mDrive to (SLOW, d)<br>
+                    <td style="vertical-align: top;">6.11.2 mDoorClosed is False --> mDrive=Stop<br>
                     </td>
-                    <td style="vertical-align: top;">~<br>
+                    <td style="vertical-align: top;">X<br>
                     </td>
                     <td style="vertical-align: top;">X<br>
                     </td>
@@ -383,27 +569,12 @@
                     <td style="vertical-align: top;">~<br>
                     </td>
                 </tr>
-                <td style="vertical-align: top;">6.8.1 either of mLevel is False and CurrentFloor is not None
-                    --> set Drive to (LEVEL, d)<br>
-                </td>
-                <td style="vertical-align: top;">~<br>
-                </td>
-                <td style="vertical-align: top;">~<br>
-                </td>
-                <td style="vertical-align: top;">~<br>
-                </td>
-                <td style="vertical-align: top;">~<br>
-                </td>
-                <td style="vertical-align: top;">~<br>
-                </td>
-                </tr>
-                <tr>
-                    <td style="vertical-align: top;">6.8.2 either of mLevel is False and CurrentFloor is not None
-                        --> set mDrive to (LEVEL, d)<br>
+					 <tr>
+                    <td style="vertical-align: top;">6.11.3 mDoorClosed is False --> mDriveSpeed=Stop<br>
                     </td>
-                    <td style="vertical-align: top;">~<br>
+                    <td style="vertical-align: top;">X<br>
                     </td>
-                    <td style="vertical-align: top;">~<br>
+                    <td style="vertical-align: top;">X<br>
                     </td>
                     <td style="vertical-align: top;">~<br>
                     </td>
@@ -412,9 +583,8 @@
                     <td style="vertical-align: top;">~<br>
                     </td>
                 </tr>
-                <tr>
-                    <td style="vertical-align: top;">6.9.1 both of mLevel are True and CurrentFloor is not None
-                        --> set Drive to (STOP, STOP)<br>
+					  <tr>
+                    <td style="vertical-align: top;">6.12.1 CurrentFloor is None --> Drive.s=Slow, Drive.d=DesiredDirection<br>
                     </td>
                     <td style="vertical-align: top;">~<br>
                     </td>
@@ -428,8 +598,21 @@
                     </td>
                 </tr>
                 <tr>
-                    <td style="vertical-align: top;">6.9.2 both of mLevel are True and CurrentFloor is not None
-                        --> set mDrive to (STOP, STOP)<br>
+                    <td style="vertical-align: top;">6.12.2 CurrentFloor is None --> mDrive.s=Slow, mDrive.d=DesiredDirection<br>
+                    </td>
+                    <td style="vertical-align: top;">~<br>
+                    </td>
+                    <td style="vertical-align: top;">~<br>
+                    </td>
+                    <td style="vertical-align: top;">~<br>
+                    </td>
+                    <td style="vertical-align: top;">~<br>
+                    </td>
+                    <td style="vertical-align: top;">~<br>
+                    </td>
+                </tr>
+					 <tr>
+                    <td style="vertical-align: top;">6.12.3 CurrentFloor is None --> mDriveSpeed.s=Slow, mDriveSpeed.d=DesiredDirection<br>
                     </td>
                     <td style="vertical-align: top;">~<br>
                     </td>
