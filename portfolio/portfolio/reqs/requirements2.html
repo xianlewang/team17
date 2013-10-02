@@ -1742,33 +1742,33 @@
 		  -->
 		  <h3> TIME-TRIGGERED BEHAVIORS: </h3>
 		  6.6&nbsp;&nbsp;&nbsp; If mEmergencyBrake is True, then: <br>
-        &nbsp;&nbsp;&nbsp; 6.6.1&nbsp; Drive.s is set to Stop and Drive.d is set to Stop. <br>
-        &nbsp;&nbsp;&nbsp; 6.6.2&nbsp; mDrive.s is set to Stop and mDrive.d is set to Stop. <br>
-        &nbsp;&nbsp;&nbsp; 6.6.3&nbsp; mDriveSpeed.s is set to Stop and mDriveSpeed.d is set to Stop. <br>
+        &nbsp;&nbsp;&nbsp; 6.6.1&nbsp; Drive[s,d] shall be set to [STOP, STOP]. <br>
+        &nbsp;&nbsp;&nbsp; 6.6.2&nbsp; mDrive[s,d] shall be set to [STOP, STOP]. <br>
+        &nbsp;&nbsp;&nbsp; 6.6.3&nbsp; mDriveSpeed[s,d] shall be set to [STOP, STOP]. <br>
 		  6.7&nbsp;&nbsp;&nbsp; If mHoistwayLimit[d] is True, then: <br>
-        &nbsp;&nbsp;&nbsp; 6.7.1&nbsp; Drive.s is set to Stop and Drive.d is set to Stop. <br>
-        &nbsp;&nbsp;&nbsp; 6.7.2&nbsp; mDrive.s is set to Stop and mDrive.d is set to Stop. <br>
-        &nbsp;&nbsp;&nbsp; 6.7.3&nbsp; mDriveSpeed.s is set to Stop and mDriveSpeed.d is set to Stop. <br>
+        &nbsp;&nbsp;&nbsp; 6.7.1&nbsp; Drive[s,d] shall be set to [STOP, STOP]. <br>
+        &nbsp;&nbsp;&nbsp; 6.7.2&nbsp; mDrive[s,d] shall be set to [STOP, STOP]. <br>
+        &nbsp;&nbsp;&nbsp; 6.7.3&nbsp; mDriveSpeed[s,d] shall be set to [STOP, STOP]. <br>
 		  6.8&nbsp;&nbsp;&nbsp; If mAtFloor[f, b] is Ture AND mLevel[d] is False, then: <br>
-        &nbsp;&nbsp;&nbsp; 6.8.1&nbsp; Drive.s is set to Slow and Drive.d is set to d. <br>
-        &nbsp;&nbsp;&nbsp; 6.8.2&nbsp; mDrive.s is set to Slow and mDrive.d is set to d. <br>
-        &nbsp;&nbsp;&nbsp; 6.8.3&nbsp; mDriveSpeed.s is set to Slow and mDriveSpeed.d is set to d. <br>
+        &nbsp;&nbsp;&nbsp; 6.8.1&nbsp; Drive[s,d] shall be set to [SLOW, d]. <br>
+        &nbsp;&nbsp;&nbsp; 6.8.2&nbsp; mDrive[s,d] shall be set to [SLOW, d]. <br>
+        &nbsp;&nbsp;&nbsp; 6.8.3&nbsp; mDriveSpeed[s,d] shall be set to [SLOW, d]. <br>
 		  6.9&nbsp;&nbsp;&nbsp; If mAtFloor[f, b] is True AND mLevel[d] is True AND mAtFloor.f equals to mDesiredFloor, then: <br>
-        &nbsp;&nbsp;&nbsp; 6.9.1&nbsp; Drive.s is set to Stop and Drive.d is set to Stop. <br>
-        &nbsp;&nbsp;&nbsp; 6.9.2&nbsp; mDrive.s is set to Stop and mDrive.d is set to Stop. <br>
-        &nbsp;&nbsp;&nbsp; 6.9.3&nbsp; mDriveSpeed.s is set to Stop and mDriveSpeed.d is set to Stop. <br>
+        &nbsp;&nbsp;&nbsp; 6.9.1&nbsp; Drive[s,d] shall be set to [STOP, STOP]. <br>
+        &nbsp;&nbsp;&nbsp; 6.9.2&nbsp; mDrive[s,d] shall be set to [STOP, STOP]. <br>
+        &nbsp;&nbsp;&nbsp; 6.9.3&nbsp; mDriveSpeed[s,d] shall be set to [STOP, STOP]. <br>
 		  6.10&nbsp;&nbsp;&nbsp; If CurrentFloor is not equal to mDesiredFloor AND mDoorClosed is True, then: <br>
-        &nbsp;&nbsp;&nbsp; 6.10.1&nbsp; Drive.s is set to Slow and Drive.d is set to DesiredDirection. <br>
-        &nbsp;&nbsp;&nbsp; 6.10.2&nbsp; mDrive.s is set to Slow and mDrive.d is set to DesiredDirection. <br>
-        &nbsp;&nbsp;&nbsp; 6.10.3&nbsp; mDriveSpeed.s is set to Slow and mDriveSpeed.d is set to DesiredDirection. <br>
+        &nbsp;&nbsp;&nbsp; 6.10.1&nbsp; Drive[s,d] shall be set to [SLOW, DesiredDirection]. <br>
+        &nbsp;&nbsp;&nbsp; 6.10.2&nbsp; mDrive[s,d] shall be set to [SLOW, DesiredDirection]. <br>
+        &nbsp;&nbsp;&nbsp; 6.10.3&nbsp; mDriveSpeed[s,d] shall be set to [SLOW, DesiredDirection]. <br>
 		  6.11&nbsp;&nbsp;&nbsp; If mDoorClosed is False, then: <br>
-        &nbsp;&nbsp;&nbsp; 6.11.1&nbsp; Drive.s is set to Stop and Drive.d is set to Stop. <br>
-        &nbsp;&nbsp;&nbsp; 6.11.2&nbsp; mDrive.s is set to Stop and mDrive.d is set to Stop. <br>
-        &nbsp;&nbsp;&nbsp; 6.11.3&nbsp; mDriveSpeed.s is set to Stop and mDriveSpeed.d is set to Stop. <br>
+        &nbsp;&nbsp;&nbsp; 6.11.1&nbsp; Drive[s,d] shall be set to [STOP, STOP]. <br>
+        &nbsp;&nbsp;&nbsp; 6.11.2&nbsp; mDrive[s,d] shall be set to [STOP, STOP]. <br>
+        &nbsp;&nbsp;&nbsp; 6.11.3&nbsp; mDriveSpeed[s,d] shall be set to [STOP, STOP]. <br>
 		  6.12&nbsp;&nbsp;&nbsp; If CurrentFloor is None, then: <br>
-        &nbsp;&nbsp;&nbsp; 6.12.1&nbsp; Drive.s is set to Slow and Drive.d is set to DesiredDirection. <br>
-        &nbsp;&nbsp;&nbsp; 6.12.2&nbsp; mDrive.s is set to Slow and mDrive.d is set to DesiredDirection. <br>
-        &nbsp;&nbsp;&nbsp; 6.12.3&nbsp; mDriveSpeed.s is set to Slow and mDriveSpeed.d is set to DesiredDirection. <br>
+        &nbsp;&nbsp;&nbsp; 6.12.1&nbsp; Drive[s,d] shall be set to [SLOW, DesiredDirection]. <br>
+        &nbsp;&nbsp;&nbsp; 6.12.2&nbsp; mDrive[s,d] shall be set to [SLOW, DesiredDirection]. <br>
+        &nbsp;&nbsp;&nbsp; 6.12.3&nbsp; mDriveSpeed[s,d] shall be set to [SLOW, DesiredDirection]. <br>
 		  <h3>State Chart:</h3>
         State Chart for Drive Control<br> <!-- State Chart for Drive Control -->
 		  <br>
