@@ -1,6 +1,5 @@
-; 18649 <semester>
-; group #
-; student names and andrewID's
-; doorcontrol_test.cf
-
-DoorControl ;TODO complete this line
+;18649-Fall-2013
+;Group #17
+;Zhang Qiang (qiangz)
+;doorcontrol.cf
+DoorControl 10ms FRONT RIGHT TRUE

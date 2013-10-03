@@ -1012,7 +1012,7 @@
         shall open completely until the car is no longer overloaded.
         <h3> TIME-TRIGGERED BEHAVIORS: </h3>
         5.6 &nbsp;&nbsp; Dwell shall be set to set to the value of mDesiredDwell. <br>
-        5.7 &nbsp;&nbsp; If any mAtFloor[f, b] is True AND f equals to mDesiredFloor.f AND mDriveSpeed = (0, d) or mDriveSpeed = (s, STOP) then: <br>
+        5.7 &nbsp;&nbsp; If any mAtFloor[f, b] is True AND f equals to mDesiredFloor.f AND mDriveSpeed = (0, STOP) then: <br>
         &nbsp;&nbsp;&nbsp; 5.7.1&nbsp; DoorMotor[b, r] shall be commanded to Open. <br>
         &nbsp;&nbsp;&nbsp; 5.7.2&nbsp; mDoorMotor[b, r] shall be commanded to Open. <br>
         &nbsp;&nbsp;&nbsp; 5.7.3&nbsp; CountDown shall be set to Dwell. <br>
@@ -1054,7 +1054,7 @@
                     <td style="vertical-align: top;">
                         mAtFloor[f, b]&nbsp;&larr;&nbsp;True&nbsp;
                         AND&nbsp;f&nbsp;==&nbsp;mDesiredFloor.f&nbsp;
-                        AND&nbsp;mDriveSpeed&nbsp;==&nbsp;(0, d) OR mDriveSpeed&nbsp;==&nbsp;(s, Stop) <br>
+                        AND&nbsp;mDriveSpeed&nbsp;==&nbsp;(0, STOP) <br>
                     </td>
                 </tr>
                 <tr>
@@ -1077,6 +1077,12 @@
                 </tr>
                 <tr>
                     <td style="vertical-align: top;">T5.5<br>
+                    </td>
+                    <td style="vertical-align: top;">mCarWeight&nbsp;&gt;=&nbsp;MaxCarCapacity <br>
+                    </td>
+                </tr>
+                <tr>
+                    <td style="vertical-align: top;">T5.6<br>
                     </td>
                     <td style="vertical-align: top;">mCarWeight&nbsp;&gt;=&nbsp;MaxCarCapacity <br>
                     </td>
@@ -1438,6 +1444,40 @@
                 </tr>
                 <tr>
                     <td style="vertical-align: top;">T5.5<br>
+                    </td>
+                    <td style="vertical-align: top;"><br>
+                    </td>
+                    <td style="vertical-align: top;"><br>
+                    </td>
+                    <td style="vertical-align: top;"><br>
+                    </td>
+                    <td style="vertical-align: top;"><br>
+                    </td>
+                    <td style="vertical-align: top;"><br>
+                    </td>
+                    <td style="vertical-align: top;"><br>
+                    </td>
+                    <td style="vertical-align: top;"><br>
+                    </td>
+                    <td style="vertical-align: top;"><br>
+                    </td>
+                    <td style="vertical-align: top;"><br>
+                    </td>
+                    <td style="vertical-align: top;"><br>
+                    </td>
+                    <td style="vertical-align: top;"><br>
+                    </td>
+                    <td style="vertical-align: top;"><br>
+                    </td>
+                    <td style="vertical-align: top;">X<br>
+                    </td>
+                    <td style="vertical-align: top;">X<br>
+                    </td>
+                    <td style="vertical-align: top;">X<br>
+                    </td>
+                </tr>
+                <tr>
+                    <td style="vertical-align: top;">T5.6<br>
                     </td>
                     <td style="vertical-align: top;"><br>
                     </td>
