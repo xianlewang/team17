@@ -69,8 +69,8 @@ Traceability peformed by:&nbsp; &lt;Shen Yu (sheny)&gt;<br>
 </table>
 <!--DoorControl End-->
 <h2>HallButtonControl</h2>
-Author Name:&nbsp; &lt;Xianle Wang (xianlew)&gt;<br>
-Traceability peformed by:&nbsp; &lt;Jiang He (jiangh)&gt;<br>
+Author Name:&nbsp; &lt;Xianle Wang(xianlew)&gt;<br>
+Traceability peformed by:&nbsp; &lt;Jiang He(jiangh)&gt;<br>
 <!--Table for HallButtonControl -->
 <table style="width: 400px; height: 100px;" border="1" cellpadding="3" frame="border">
     <tbody>
@@ -98,7 +98,7 @@ Traceability peformed by:&nbsp; &lt;Jiang He (jiangh)&gt;<br>
 
 <h2>DriveControl</h2>
 Author Name:&nbsp; &lt;He Jiang (jiangh)&gt;<br>
-Traceability peformed by:&nbsp; &lt;Xianle Wang (xianlew)&gt;<br>
+Traceability peformed by:&nbsp; &lt;Xianle Wang(xianlew)&gt;<br>
 <!--Table for DriveControl Qiang-->
 <table style="width: 400px; height: 100px;" border="1" cellpadding="3" frame="border">
     <tbody>
@@ -123,33 +123,6 @@ Traceability peformed by:&nbsp; &lt;Xianle Wang (xianlew)&gt;<br>
     </tbody>
 </table>
 <!--DriveControl End-->
-<h2>CarButtonControl</h2>
-Author Name:&nbsp; &lt;Shen Yu (sheny)&gt;<br>
-Traceability peformed by:&nbsp; &lt;Qiang Zhang (qiangz)&gt;<br>
-<!--Table for HallButtonControl -->
-<table style="width: 400px; height: 100px;" border="1" cellpadding="3" frame="border">
-    <tbody>
-        <tr>
-            <td style="vertical-align: top;">Line Number<br>
-            </td>
-            <td style="vertical-aligh: top;">Transition Number<br>
-            </td>
-        </tr>
-        <tr>
-            <td style="vertical-align: top;">130<br>
-            </td>
-            <td style="vertical-aligh: top;">T 9.1<br>
-            </td>
-        </tr>
-        <tr>
-            <td style="vertical-align: top;">142<br>
-            </td>
-            <td style="vertical-aligh: top;">T 9.2<br>
-            </td>
-        </tr>
-    </tbody>
-</table>
-<!-- HallButtonControl End -->
 <span style="font-weight: bold;"><br>
 </span>&lt;Fill in the rest of the controllers&gt;<br>
 <br>
