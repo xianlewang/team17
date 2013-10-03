@@ -3101,19 +3101,14 @@
         </ul>
         <h3> CONSTRAINTS: </h3>
         None
-        <h3> EVENT-TRIGGERED BEHAVIORS: </h3>
-        9.1.&nbsp; If CarCall[f,b] is received as True, then CarLight[f,b]
-        shall be set to On. <br>
-        9.2.&nbsp; If mAtFloor[f,b] is received as True, then CarLight[f,b]
-        shall be set to Off. <br>
         <h3> TIME-TRIGGERED BEHAVIORS: </h3>
-        9.3.&nbsp; If CarCall[f,b] is True, then CarLight[f,b]
+        9.1.&nbsp; If CarCall[f,b] is True, then CarLight[f,b]
         shall be set to On. <br>
-        9.4.&nbsp; If mAtFloor[f,b] is True AND mDesiredFloor.f is CurrentFloor 
+        9.2.&nbsp; If mAtFloor[f,b] is True AND mDesiredFloor.f is CurrentFloor 
         AND CarCall[f,b] is False, 
         then CarLight[f,b] shall be set to Off. <br>
-        9.5.&nbsp; mCarCall[f,b] shall always be set to CarCall[f,b]. <br>
-        9.6.&nbsp; mCarLight[f,b] shall always be set to CarLight[f,b]. <br>
+        9.3.&nbsp; mCarCall[f,b] shall always be set to CarCall[f,b]. <br>
+        9.4.&nbsp; mCarLight[f,b] shall always be set to CarLight[f,b]. <br>
         <h3> Statechart: </h3>
         Here is the CarButtonControl Statechart. <br>
         <div style="text-align: center;"><a href="carbuttoncontrol_statechart.png"><img
@@ -3162,13 +3157,13 @@
                 <tr>
                     <td style="vertical-align: top;"><b>States</b><br>
                     </td>
+                    <td style="vertical-align: top;">9.1<br>
+                    </td>
+                    <td style="vertical-align: top;">9.2<br>
+                    </td>
                     <td style="vertical-align: top;">9.3<br>
                     </td>
                     <td style="vertical-align: top;">9.4<br>
-                    </td>
-                    <td style="vertical-align: top;">9.5<br>
-                    </td>
-                    <td style="vertical-align: top;">9.6<br>
                 
                 </tr>
                 <tr>
@@ -3200,13 +3195,13 @@
                 <tr>
                     <td style="vertical-align: top;"><b>Transitions</b><br>
                     </td>
+                    <td style="vertical-align: top;">9.1<br>
+                    </td>
+                    <td style="vertical-align: top;">9.2<br>
+                    </td>
                     <td style="vertical-align: top;">9.3<br>
                     </td>
                     <td style="vertical-align: top;">9.4<br>
-                    </td>
-                    <td style="vertical-align: top;">9.5<br>
-                    </td>
-                    <td style="vertical-align: top;">9.6<br>
                 
                 </tr>
                 <tr>
