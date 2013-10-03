@@ -2937,7 +2937,7 @@
         &nbsp;&nbsp;&nbsp; 8.1.1&nbsp; HallLight[f,b,d] shall be set to on. <br>
         &nbsp;&nbsp;&nbsp; 8.1.2&nbsp; mHallCall[f,b,d] shall be set to True.
         <br>
-        8.2&nbsp;&nbsp;&nbsp; If f is CurrentFloor, and HallCall[f,b,d] is Idle, and mDesiredFloor is not CurrentFloor, and mDoorClosed[b,*] is False, then,<br>
+        8.2&nbsp;&nbsp;&nbsp; If f is CurrentFloor, and HallCall[f,b,d] is Idle, and mDesiredFloor is CurrentFloor<!--, and mDoorClosed[b,*] is False-->, then,<br>
         &nbsp;&nbsp;&nbsp; 8.2.1&nbsp; HallLight[f,b,CurrentDirection] shall be set to off.<br>
         &nbsp;&nbsp;&nbsp; 8.2.2&nbsp;  mHallCall[f,b,CurrentDirection] shall be set to False.<br>
         8.3&nbsp;&nbsp;&nbsp; mHallLight[f,b,d] always has the same value as HallLights[f,b,d].
@@ -2965,7 +2965,7 @@
                 <tr>
                     <td style="vertical-align: top;">T8.2<br>
                     </td>
-                    <td style="vertical-align: top;">f &larr; CurrentFloor AND HallCall[f,b,d] &larr; Idle AND mDesiredFloor != CurrentFloor AND mDoorClosed[b,*] &larr; False <br>
+                    <td style="vertical-align: top;">f &larr; CurrentFloor AND HallCall[f,b,d] &larr; Idle AND mDesiredFloor == CurrentFloor <br>
                     </td>
                 </tr>
             </tbody >

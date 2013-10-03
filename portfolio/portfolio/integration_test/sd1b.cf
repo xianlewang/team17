@@ -1,0 +1,7 @@
+; 18649 Fall 2013
+; group 17
+; Xianle Wang(xianlew) Jiang He(jianghe)
+; 1B.cf
+
+HallButtonControl 100ms 4 FRONT UP true
+DoorControl 10ms FRONT LEFT TRUE

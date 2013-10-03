@@ -1,0 +1,47 @@
+; 18649 Fall 2013
+; group 17
+; Xianle Wang(xianlew)
+; hallbuttoncontrol_test.mf
+
+
+;this test file demonstrates network and framework message injections
+;and network, framework, and controller state assertions.
+
+#INCLUDE hall_defines.mf
+
+
+;intialize (at 1 floor)
+0s I MESSAGE_PERIOD F HallCall 4 FRONT UP  = false
+0s I MESSAGE_PERIOD N DESIRED_FLOOR_CAN_ID DesiredFloor = 4 FRONT STOP
+0s I MESSAGE_PERIOD N DOOR_CLOSED_FL_CAN_ID DoorClosed FRONT LEFT = true
+;0s I MESSAGE_PERIOD N AT_FLOOR_1F_CAN_ID AtFloor 1 FRONT = true
+
+;check that hall light is off
+0.21s A F HallLight 4 FRONT UP : lighted == false
+0.21s A N HALL_LIGHT_4FU_CAN_ID Boolean : getValue == false
+0.21s A N HALL_CALL_4FU_CAN_ID Boolean : getValue == false
+0.21s A S HallButtonControl[4][FRONT][UP] : STATE == LIGHT_OFF
+
+
+;set conditins for T8.1
+0.5s I MESSAGE_PERIOD F HallCall 4 FRONT UP  = true
+
+;check that hall light is on
+1s A F HallLight 4 FRONT UP : lighted == true
+1s A N HALL_LIGHT_4FU_CAN_ID Boolean : getValue == true
+1s A N HALL_CALL_4FU_CAN_ID Boolean : getValue == true
+1s A S HallButtonControl[4][FRONT][UP] : STATE == LIGHT_ON
+
+
+;set conditins for T8.2
+
+1.5s I MESSAGE_PERIOD F HallCall 4 FRONT UP  = false
+1.5s I MESSAGE_PERIOD N DESIRED_FLOOR_CAN_ID DesiredFloor = 4 FRONT STOP
+1.5s I MESSAGE_PERIOD N DOOR_CLOSED_FL_CAN_ID DoorClosed FRONT LEFT = false
+1.5s I MESSAGE_PERIOD N AT_FLOOR_4F_CAN_ID AtFloor 4 FRONT = true
+
+;check that hall light is off
+2.0s A F HallLight 4 FRONT UP : lighted == false
+2.0s A N HALL_LIGHT_4FU_CAN_ID Boolean : getValue == false
+2.0s A N HALL_CALL_4FU_CAN_ID Boolean : getValue == false
+2.0s A S HallButtonControl[4][FRONT][UP] : STATE == LIGHT_OFF
