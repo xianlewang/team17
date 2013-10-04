@@ -1,3 +1,7 @@
+;Testing DriveControl
+;Group 17 
+;Member Name: Jiang He  Andrew ID: jiangh
+
 #INCLUDE drive_defines.mf ;include CAN ID and Period Definations
 ;initialize
 0s I MESSAGE_PERIOD N ATFLOOR_1F_FRONT_CAN_ID AtFloor 1 FRONT = true

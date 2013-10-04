@@ -1,3 +1,7 @@
+;Testing DriveControl
+;Group 17 
+;Member Name: Jiang He  Andrew ID: jiangh
+
 ;can ID's used:
 
 ;AtFloor[1][Front] = 0x0C4C2800 + 0 + 0 = 0x0C4C2800
