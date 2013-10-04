@@ -1,6 +1,6 @@
 ; 18649 Fall 2013
 ; group 17
-; Xianle Wang(xianlew) Jiang He(jiangh)
+; Xianle Wang(xianlew)
 ; sd1b.mf
 
 
@@ -61,8 +61,8 @@
 ;****verify precondition
 4s A N AT_FLOOR_4F_CAN_ID AtFloor 4 FRONT : getValue == true
 4s A F HallLight 4 FRONT UP : lighted == false
-4s A N HALL_LIGHT_4FU_CAN_ID Boolean : getValue == false
-4s A N HALL_CALL_4FU_CAN_ID Boolean : getValue == false
+4s A N HALL_LIGHT_4FU_CAN_ID Boolean : getValue == false ;mHallLight
+4s A N HALL_CALL_4FU_CAN_ID Boolean : getValue == false ;mHallCall
 4s A S HallButtonControl[4][FRONT][UP] : STATE == LIGHT_OFF
 4s A F DoorMotor FRONT LEFT : command == STOP
 
@@ -78,8 +78,8 @@
 
 ;#arc '1B/4'
 10s A F HallLight 4 FRONT UP : lighted == true
-10s A N HALL_LIGHT_4FU_CAN_ID Boolean : getValue == true
-10s A N HALL_CALL_4FU_CAN_ID Boolean : getValue == true
+10s A N HALL_LIGHT_4FU_CAN_ID Boolean : getValue == true ;mHallLight
+10s A N HALL_CALL_4FU_CAN_ID Boolean : getValue == true ;mHallCall
 
 ;#arc '1B/5a'
 12s I MESSAGE_PERIOD N DOOR_CLOSED_FL_CAN_ID DoorClosed FRONT LEFT = true
@@ -92,4 +92,4 @@
 15s A N AT_FLOOR_4F_CAN_ID AtFloor 4 FRONT : getValue == true
 15s A N DOOR_CLOSED_FL_CAN_ID DoorClosed FRONT LEFT : getValue == true
 15s A F HallLight 4 FRONT UP : lighted == true
-15s A N HALL_LIGHT_4FU_CAN_ID Boolean : getValue == true
+15s A N HALL_LIGHT_4FU_CAN_ID Boolean : getValue == true ;mHallLight
