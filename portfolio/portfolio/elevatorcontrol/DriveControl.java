@@ -283,7 +283,7 @@ public class DriveControl extends Controller {
 				 // mDrive.set(Speed.STOP, Direction.STOP);
 				 // mDriveSpeed.set(Speed.STOP, Direction.STOP);
 				 tempCurrFloor = getCurrentFloor();
-				 //#transition 'T6.1'
+//#transition 'T6.1'
 				 if ((tempCurrFloor != mDesiredFloor.getFloor()) && (mDoorClosed.getValue() == true)) {
 					  newState = State.MOVING;
 				 } 
@@ -309,7 +309,7 @@ public class DriveControl extends Controller {
 					 }					 
 				 }
 				 
-				//#transition 'T6.2'
+//#transition 'T6.2'
 				 if ((atFLoorFlag == true) && (tempCurrFloor == mDesiredFloor.getFloor())) {
 					  newState = State.STOP;				 
 				 } 
