@@ -1,3 +1,9 @@
+/*
+18649 Fall 2013
+Group 17
+Jiang He (jiangh)
+*/
+
 package simulator.elevatorcontrol;
 
 import jSimPack.SimTime;
