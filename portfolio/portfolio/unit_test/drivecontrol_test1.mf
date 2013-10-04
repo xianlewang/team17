@@ -1,0 +1,68 @@
+#INCLUDE drive_defines.mf ;include CAN ID and Period Definations
+;initialize
+0s I MESSAGE_PERIOD N ATFLOOR_1F_FRONT_CAN_ID AtFloor 1 FRONT = true
+0s I MESSAGE_PERIOD N ATFLOOR_2F_FRONT_CAN_ID AtFloor 2 FRONT = false
+0s I MESSAGE_PERIOD N ATFLOOR_3F_FRONT_CAN_ID AtFloor 3 FRONT = false
+0s I MESSAGE_PERIOD N ATFLOOR_4F_FRONT_CAN_ID AtFloor 4 FRONT = false
+0s I MESSAGE_PERIOD N ATFLOOR_5F_FRONT_CAN_ID AtFloor 5 FRONT = false
+0s I MESSAGE_PERIOD N ATFLOOR_6F_FRONT_CAN_ID AtFloor 6 FRONT = false
+0s I MESSAGE_PERIOD N ATFLOOR_7F_FRONT_CAN_ID AtFloor 7 FRONT = false
+0s I MESSAGE_PERIOD N ATFLOOR_8F_FRONT_CAN_ID AtFloor 8 FRONT = false
+0s I MESSAGE_PERIOD N DESIRED_FLOOR_CAN_ID DesiredFloor = 2 FRONT UP
+0s I MESSAGE_PERIOD N DOOR_CLOSED_CAN_ID DoorClosed FRONT RIGHT = false
+
+; check the Drive is STOP and check STATE is STOP
+0.11s A F Drive : speed == STOP
+0.11s A F Drive : direction == STOP
+0.11s A S DriveControl : STATE == STOP
+
+;set conditins for T6.1
+0.15s I MESSAGE_PERIOD N DESIRED_FLOOR_CAN_ID DesiredFloor = 2 FRONT UP
+0.15s I MESSAGE_PERIOD N ATFLOOR_1F_FRONT_CAN_ID AtFloor 1 FRONT = true
+0.15s I MESSAGE_PERIOD N DOOR_CLOSED_CAN_ID DoorClosed FRONT RIGHT = true
+
+;check Drive is SLOW UP
+1.5s A F Drive : speed == SLOW
+1.5s A F Drive : direction == UP
+1.5s A S DriveControl : STATE == MOVING
+
+;set conditins for T6.2
+2.70s I MESSAGE_PERIOD N ATFLOOR_1F_FRONT_CAN_ID AtFloor 1 FRONT = false
+2.70s I MESSAGE_PERIOD N ATFLOOR_2F_FRONT_CAN_ID AtFloor 2 FRONT = true
+2.70s I MESSAGE_PERIOD N DOOR_CLOSED_CAN_ID DoorClosed FRONT RIGHT = true
+2.70s I MESSAGE_PERIOD N DESIRED_FLOOR_CAN_ID DesiredFloor = 2 FRONT UP
+
+; check the Drive is STOP and check STATE is STOP
+4.0s A F Drive : speed == STOP
+4.0s A F Drive : direction == STOP
+4.0s A S DriveControl : STATE == STOP
+
+;open the door
+5.2s I MESSAGE_PERIOD N DOOR_CLOSED_CAN_ID DoorClosed FRONT RIGHT = false
+5.3s I MESSAGE_PERIOD N DESIRED_FLOOR_CAN_ID DesiredFloor = 1 FRONT DOWN
+
+;set conditins for T6.1 (moving down)
+5.5s I MESSAGE_PERIOD N DOOR_CLOSED_CAN_ID DoorClosed FRONT RIGHT = true
+
+;check Drive is SLOW DOWN
+6.8s A F Drive : speed == SLOW
+6.8s A F Drive : direction == DOWN
+6.8s A S DriveControl : STATE == MOVING
+
+;set conditins for T6.2 (moving down)
+7.70s I MESSAGE_PERIOD N ATFLOOR_1F_FRONT_CAN_ID AtFloor 1 FRONT = true
+7.70s I MESSAGE_PERIOD N ATFLOOR_2F_FRONT_CAN_ID AtFloor 2 FRONT = false
+7.70s I MESSAGE_PERIOD N DOOR_CLOSED_CAN_ID DoorClosed FRONT RIGHT = true
+7.70s I MESSAGE_PERIOD N DESIRED_FLOOR_CAN_ID DesiredFloor = 1 FRONT DOWN
+
+; check the Drive is STOP and check STATE is STOP
+9.0s A F Drive : speed == STOP
+9.0s A F Drive : direction == STOP
+9.0s A S DriveControl : STATE == STOP
+
+
+
+
+
+
+

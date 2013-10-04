@@ -1,0 +1,34 @@
+
+Simulator Parameters:
+Command line = -cf drivecontrol.cf -mf drivecontrol_test1.mf
+RandomSeed = 1380847265914
+CanNetworkBitTime = 0 ns
+Effective Can Bitrate = Infinity
+Run Time = null
+Real time rate = null
+Message File = drivecontrol_test1.mf
+Controller File = drivecontrol.cf
+
+Assertion Results:
+@0.11s:  PASSED simulator.payloads.DrivePayload$ReadableDrivePayload@b1afdf4 :: speed ?== STOP PASSED
+@0.11s:  PASSED simulator.payloads.DrivePayload$ReadableDrivePayload@1d6050b0 :: direction ?== STOP PASSED
+@0.11s:  PASSED DriveControl::checkState(STATE) ?== STOP PASSED
+@1.5s:  PASSED simulator.payloads.DrivePayload$ReadableDrivePayload@60dd0912 :: speed ?== SLOW PASSED
+@1.5s:  PASSED simulator.payloads.DrivePayload$ReadableDrivePayload@5ed5d3a :: direction ?== UP PASSED
+@1.5s:  PASSED DriveControl::checkState(STATE) ?== MOVING PASSED
+@4.0s:  PASSED simulator.payloads.DrivePayload$ReadableDrivePayload@69c78571 :: speed ?== STOP PASSED
+@4.0s:  PASSED simulator.payloads.DrivePayload$ReadableDrivePayload@73703457 :: direction ?== STOP PASSED
+@4.0s:  PASSED DriveControl::checkState(STATE) ?== STOP PASSED
+@6.8s:  PASSED simulator.payloads.DrivePayload$ReadableDrivePayload@1f51c9a0 :: speed ?== SLOW PASSED
+@6.8s:  PASSED simulator.payloads.DrivePayload$ReadableDrivePayload@138bb3fd :: direction ?== DOWN PASSED
+@6.8s:  PASSED DriveControl::checkState(STATE) ?== MOVING PASSED
+@9.0s:  PASSED simulator.payloads.DrivePayload$ReadableDrivePayload@6f96093 :: speed ?== STOP PASSED
+@9.0s:  PASSED simulator.payloads.DrivePayload$ReadableDrivePayload@7c721098 :: direction ?== STOP PASSED
+@9.0s:  PASSED DriveControl::checkState(STATE) ?== STOP PASSED
+
+
+******************Summary******************
+Passed:  15
+Failed:  0
+Total :  15
+
