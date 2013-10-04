@@ -1839,16 +1839,18 @@
                     <td style="vertical-align: top;">T6.1<br>
                     </td>
                     <td style="vertical-align: top;">
-                        mAtFloor[f,b]&nbsp;&larr;&nbsp;True&nbsp;
-                        AND mAtFloor.f == mDesiredFloor<br>
+								CurrentFloor != mDesiredFloor&nbsp;
+                        AND mDoorClosed&nbsp;&larr;&nbsp;True
+                        <br>
                     </td>
                 </tr>
                 <tr>
                     <td style="vertical-align: top;">T6.2<br>
                     </td>
                     <td style="vertical-align: top;">
-                        CurrentFloor != mDesiredFloor&nbsp;
-                        AND mDoorClosed&nbsp;&larr;&nbsp;True <br>
+								mAtFloor[f,b]&nbsp;&larr;&nbsp;True&nbsp;
+                        AND mAtFloor.f == mDesiredFloor
+                         <br>
                     </td>
                 </tr>
 					 <!--
