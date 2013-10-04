@@ -1,5 +1,7 @@
-; Definitions include file for HallButtonControl
-; Xianle Wang
+;18649 Fall 2013
+;Group #17
+;Xianle Wang (xianlew)
+;hall_defines.mf
 
 ;network message period
 #DEFINE MESSAGE_PERIOD 10ms

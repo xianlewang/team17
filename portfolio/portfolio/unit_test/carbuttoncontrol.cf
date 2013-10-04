@@ -1,4 +1,5 @@
-;Testing CarButtonControl
+;18649 Fall 2013
 ;Group 17 
 ;Member Name: Shen Yu  Andrew ID: sheny
+;carbuttoncontrol.cf
 CarButtonControl 100ms 4 FRONT TRUE

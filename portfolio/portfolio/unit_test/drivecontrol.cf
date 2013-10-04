@@ -1,5 +1,5 @@
-;Testing DriveControl
+;18649 Fall 2013
 ;Group 17 
 ;Member Name: Jiang He  Andrew ID: jiangh
-
+;drivecontrol.cf
 DriveControl 10ms TRUE
