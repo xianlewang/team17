@@ -1,13 +1,13 @@
 
 Simulator Parameters:
-Command line = -cf CarButtonControl.cf -mf CarButtonControl_01.mf
+Command line = -cf carbuttoncontrol.cf -mf carbuttoncontrol_test1.mf
 RandomSeed = 1380826782698
 CanNetworkBitTime = 0 ns
 Effective Can Bitrate = Infinity
 Run Time = null
 Real time rate = null
-Message File = CarButtonControl_01.mf
-Controller File = CarButtonControl.cf
+Message File = carbuttoncontrol_test1.mf
+Controller File = carbuttoncontrol.cf
 
 Assertion Results:
 @0.21s:  PASSED simulator.payloads.CarLightPayload$ReadableCarLightPayload@3cd0a12d :: isLighted ?== false PASSED

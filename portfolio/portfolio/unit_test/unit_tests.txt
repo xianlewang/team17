@@ -1,3 +1,7 @@
-;there is only one test in the sample file.  Your file shall contain all tests.
+; 18649 Fall 2013
+; group 17
+; Qiang Zhang(qiangz)/Shen Yu(sheny)/Jiang He(jiangh)/Xianle Wang(xianlew)
 DoorControl doorcontrol.cf doorcontrol_test1.mf
 CarButtonControl carbuttoncontrol.cf carbuttoncontrol_test1.mf
+HallButtonControl hallbuttoncontrol.cf hallbuttoncontrol_test1.mf
+DriveControl drivecontrol.cf drivecontrol_test1.mf
