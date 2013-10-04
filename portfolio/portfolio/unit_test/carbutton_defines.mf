@@ -1,0 +1,12 @@
+;Testing CarButtonControl
+;Group 17 
+;Member Name: Shen Yu  Andrew ID: sheny
+
+;can id used
+#DEFINE AT_FLOOR_4F_CAN_ID                     0xC4C2806
+#DEFINE DESIRED_FLOOR_CAN_ID                   0xF0CB600
+#DEFINE DOOR_CLOSED_SENSOR_FL_CAN_ID           0xD145000
+#DEFINE CAR_LIGHT_4F_CAN_ID                    0xF12BA06
+#DEFINE CAR_CALL_4F_CAN_ID                     0xF11BA06
+;message period
+#DEFINE MESSAGE_PERIOD 100ms

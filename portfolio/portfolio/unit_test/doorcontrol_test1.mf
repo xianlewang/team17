@@ -1,6 +1,71 @@
-; 18649 <semester>
-; group #
-; student names and andrewID's
-; doorcontrol_test1.mf
+;18649 Fall 2013
+;Group #17
+;Qiang Zhang (qiangz)
+;doorcontrol_test1.mf
+#INCLUDE door_defines.mf ;include CAN ID and Period Definations
+;initialize
+0s I MESSAGE_PERIOD N ATFLOOR_1F_FRONT_CAN_ID AtFloor 1 FRONT = true
+0s I MESSAGE_PERIOD N ATFLOOR_2F_FRONT_CAN_ID AtFloor 2 FRONT = false
+0s I MESSAGE_PERIOD N ATFLOOR_3F_FRONT_CAN_ID AtFloor 3 FRONT = false
+0s I MESSAGE_PERIOD N ATFLOOR_4F_FRONT_CAN_ID AtFloor 4 FRONT = false
+0s I MESSAGE_PERIOD N ATFLOOR_5F_FRONT_CAN_ID AtFloor 5 FRONT = false
+0s I MESSAGE_PERIOD N ATFLOOR_6F_FRONT_CAN_ID AtFloor 6 FRONT = false
+0s I MESSAGE_PERIOD N ATFLOOR_7F_FRONT_CAN_ID AtFloor 7 FRONT = false
+0s I MESSAGE_PERIOD N ATFLOOR_8F_FRONT_CAN_ID AtFloor 8 FRONT = false
+0s I MESSAGE_PERIOD N DESIRED_FLOOR_CAN_ID DesiredFloor = 2 FRONT UP
+0s I MESSAGE_PERIOD N DRIVE_SPEED_CAN_ID DriveCommand = SLOW UP
+0s I MESSAGE_PERIOD N DOOR_OPENED_CAN_ID DoorOpened FRONT RIGHT = false
+0s I MESSAGE_PERIOD N DOOR_CLOSED_CAN_ID DoorClosed FRONT RIGHT = true
+0s I MESSAGE_PERIOD N CAR_WEIGHT_CAN_ID CarWeight = 0
 
-;TODO  add test statements
+; check the door motor is stop initially
+0.11s A F DoorMotor FRONT RIGHT : command == STOP
+
+;set contidions to T 5.1
+0.20s I MESSAGE_PERIOD N ATFLOOR_2F_FRONT_CAN_ID AtFloor 2 FRONT = true
+0.20s I MESSAGE_PERIOD N DRIVE_SPEED_CAN_ID DriveCommand = STOP STOP
+0.20s I MESSAGE_PERIOD N ATFLOOR_1F_FRONT_CAN_ID AtFloor 1 FRONT = false
+
+;T 5.1
+; check the door motor is open && check current state
+0.32s A F DoorMotor FRONT RIGHT : command == OPEN
+0.32s A S DoorControl[FRONT][RIGHT] : STATE == BEFORE_OPEN
+
+0.34s I MESSAGE_PERIOD N DOOR_CLOSED_CAN_ID DoorClosed FRONT RIGHT = false
+
+;T 5.2
+0.40s I MESSAGE_PERIOD N DOOR_OPENED_CAN_ID DoorOpened FRONT RIGHT = true
+
+; check the door motor is stop && check current state
+0.52s A F DoorMotor FRONT RIGHT : command == STOP
+0.52s A S DoorControl[FRONT][RIGHT] : STATE == OPENED
+1.40s I MESSAGE_PERIOD N DOOR_OPENED_CAN_ID DoorOpened FRONT RIGHT = false
+1.40s I MESSAGE_PERIOD N DESIRED_FLOOR_CAN_ID DesiredFloor = 3 FRONT UP
+
+;T 5.3
+; check the door motor is nudge && check current state
+1.51s A F DoorMotor FRONT RIGHT : command == NUDGE
+1.51s A S DoorControl[FRONT][RIGHT] : STATE == CLOSING
+
+;T 5.5
+1.55s I MESSAGE_PERIOD N CAR_WEIGHT_CAN_ID CarWeight = 15000
+; check the door motor is open && check current state
+1.60s A F DoorMotor FRONT RIGHT : command == OPEN
+1.60s A S DoorControl[FRONT][RIGHT] : STATE == BEFORE_OPEN
+1.64s I MESSAGE_PERIOD N CAR_WEIGHT_CAN_ID CarWeight = 100
+
+;T 5.2 -> T 5.3
+1.70s I MESSAGE_PERIOD N DOOR_OPENED_CAN_ID DoorOpened FRONT RIGHT = true
+2.70s I MESSAGE_PERIOD N DOOR_OPENED_CAN_ID DoorOpened FRONT RIGHT = false
+
+;T 5.4
+4.80s I MESSAGE_PERIOD N DOOR_CLOSED_CAN_ID DoorClosed FRONT RIGHT = true
+; check the door motor is closed && check current state
+4.90s A F DoorMotor FRONT RIGHT : command == STOP
+4.90s A S DoorControl[FRONT][RIGHT] : STATE == CLOSED
+
+;T 5.6
+5.00s I MESSAGE_PERIOD N CAR_WEIGHT_CAN_ID CarWeight = 15000
+; check the door motor is open && check current state
+5.10s A F DoorMotor FRONT RIGHT : command == OPEN
+5.10s A S DoorControl[FRONT][RIGHT] : STATE == BEFORE_OPEN

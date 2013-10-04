@@ -1,0 +1,38 @@
+;Testing CarButtonControl
+;Group 17 
+;Member Name: Shen Yu  Andrew ID: sheny
+
+;include CAN id and period definitions
+#INCLUDE carbutton_defines.mf
+
+;initialize
+0s I MESSAGE_PERIOD F CarCall 4 FRONT = false
+0s I MESSAGE_PERIOD N AT_FLOOR_4F_CAN_ID AtFloor 4 FRONT = false
+0s I MESSAGE_PERIOD N DESIRED_FLOOR_CAN_ID DesiredFloor = 1 FRONT STOP
+0s I MESSAGE_PERIOD N DOOR_CLOSED_SENSOR_FL_CAN_ID DoorClosed FRONT LEFT = true
+
+;#state 'State 9.1: Light Off'
+0.21s A F CarLight 4 FRONT : isLighted == false
+0.21s A N CAR_LIGHT_4F_CAN_ID Boolean : getValue == false
+0.21s A N CAR_CALL_4F_CAN_ID Boolean : getValue == false
+0.21s A S CarButtonControl[4][FRONT] : STATE == STATE_LIGHT_OFF
+
+;#transition 'T9.1'
+1s I MESSAGE_PERIOD F CarCall 4 FRONT = true
+
+;#state 'State 9.2: Light On'
+2s A F CarLight 4 FRONT : isLighted == true
+2s A N CAR_LIGHT_4F_CAN_ID Boolean : getValue == true
+2s A N CAR_CALL_4F_CAN_ID Boolean : getValue == true
+2s A S CarButtonControl[4][FRONT] : STATE == STATE_LIGHT_ON
+
+;#transition 'T9.2'
+3s I MESSAGE_PERIOD F CarCall 4 FRONT = false
+3s I MESSAGE_PERIOD N AT_FLOOR_4F_CAN_ID AtFloor 4 FRONT = true
+3s I MESSAGE_PERIOD N DESIRED_FLOOR_CAN_ID DesiredFloor = 4 FRONT STOP
+
+;#state 'State 9.1: Light Off'
+4s A F CarLight 4 FRONT : isLighted == false
+4s A N CAR_LIGHT_4F_CAN_ID Boolean : getValue == false
+4s A N CAR_CALL_4F_CAN_ID Boolean : getValue == false
+4s A S CarButtonControl[4][FRONT] : STATE == STATE_LIGHT_OFF

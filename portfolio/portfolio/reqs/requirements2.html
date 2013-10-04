@@ -1012,7 +1012,7 @@
         shall open completely until the car is no longer overloaded.
         <h3> TIME-TRIGGERED BEHAVIORS: </h3>
         5.6 &nbsp;&nbsp; Dwell shall be set to set to the value of mDesiredDwell. <br>
-        5.7 &nbsp;&nbsp; If any mAtFloor[f, b] is True AND f equals to mDesiredFloor.f AND mDriveSpeed = (0, d) or mDriveSpeed = (s, STOP) then: <br>
+        5.7 &nbsp;&nbsp; If any mAtFloor[f, b] is True AND f equals to mDesiredFloor.f AND mDriveSpeed = (0, STOP) then: <br>
         &nbsp;&nbsp;&nbsp; 5.7.1&nbsp; DoorMotor[b, r] shall be commanded to Open. <br>
         &nbsp;&nbsp;&nbsp; 5.7.2&nbsp; mDoorMotor[b, r] shall be commanded to Open. <br>
         &nbsp;&nbsp;&nbsp; 5.7.3&nbsp; CountDown shall be set to Dwell. <br>
@@ -1054,7 +1054,7 @@
                     <td style="vertical-align: top;">
                         mAtFloor[f, b]&nbsp;&larr;&nbsp;True&nbsp;
                         AND&nbsp;f&nbsp;==&nbsp;mDesiredFloor.f&nbsp;
-                        AND&nbsp;mDriveSpeed&nbsp;==&nbsp;(0, d) OR mDriveSpeed&nbsp;==&nbsp;(s, Stop) <br>
+                        AND&nbsp;mDriveSpeed&nbsp;==&nbsp;(0, STOP) <br>
                     </td>
                 </tr>
                 <tr>
@@ -1077,6 +1077,12 @@
                 </tr>
                 <tr>
                     <td style="vertical-align: top;">T5.5<br>
+                    </td>
+                    <td style="vertical-align: top;">mCarWeight&nbsp;&gt;=&nbsp;MaxCarCapacity <br>
+                    </td>
+                </tr>
+                <tr>
+                    <td style="vertical-align: top;">T5.6<br>
                     </td>
                     <td style="vertical-align: top;">mCarWeight&nbsp;&gt;=&nbsp;MaxCarCapacity <br>
                     </td>
@@ -1438,6 +1444,40 @@
                 </tr>
                 <tr>
                     <td style="vertical-align: top;">T5.5<br>
+                    </td>
+                    <td style="vertical-align: top;"><br>
+                    </td>
+                    <td style="vertical-align: top;"><br>
+                    </td>
+                    <td style="vertical-align: top;"><br>
+                    </td>
+                    <td style="vertical-align: top;"><br>
+                    </td>
+                    <td style="vertical-align: top;"><br>
+                    </td>
+                    <td style="vertical-align: top;"><br>
+                    </td>
+                    <td style="vertical-align: top;"><br>
+                    </td>
+                    <td style="vertical-align: top;"><br>
+                    </td>
+                    <td style="vertical-align: top;"><br>
+                    </td>
+                    <td style="vertical-align: top;"><br>
+                    </td>
+                    <td style="vertical-align: top;"><br>
+                    </td>
+                    <td style="vertical-align: top;"><br>
+                    </td>
+                    <td style="vertical-align: top;">X<br>
+                    </td>
+                    <td style="vertical-align: top;">X<br>
+                    </td>
+                    <td style="vertical-align: top;">X<br>
+                    </td>
+                </tr>
+                <tr>
+                    <td style="vertical-align: top;">T5.6<br>
                     </td>
                     <td style="vertical-align: top;"><br>
                     </td>
@@ -2306,7 +2346,7 @@
         &nbsp;&nbsp;&nbsp; 8.1.1&nbsp; HallLight[f,b,d] shall be set to on. <br>
         &nbsp;&nbsp;&nbsp; 8.1.2&nbsp; mHallCall[f,b,d] shall be set to True.
         <br>
-        8.2&nbsp;&nbsp;&nbsp; If f is CurrentFloor, and HallCall[f,b,d] is Idle, and mDesiredFloor is not CurrentFloor, and mDoorClosed[b,*] is False, then,<br>
+        8.2&nbsp;&nbsp;&nbsp; If f is CurrentFloor, and HallCall[f,b,d] is Idle, and mDesiredFloor is CurrentFloor<!--, and mDoorClosed[b,*] is False-->, then,<br>
         &nbsp;&nbsp;&nbsp; 8.2.1&nbsp; HallLight[f,b,CurrentDirection] shall be set to off.<br>
         &nbsp;&nbsp;&nbsp; 8.2.2&nbsp;  mHallCall[f,b,CurrentDirection] shall be set to False.<br>
         8.3&nbsp;&nbsp;&nbsp; mHallLight[f,b,d] always has the same value as HallLights[f,b,d].
@@ -2334,7 +2374,7 @@
                 <tr>
                     <td style="vertical-align: top;">T8.2<br>
                     </td>
-                    <td style="vertical-align: top;">f &larr; CurrentFloor AND HallCall[f,b,d] &larr; Idle AND mDesiredFloor != CurrentFloor AND mDoorClosed[b,*] &larr; False <br>
+                    <td style="vertical-align: top;">f &larr; CurrentFloor AND HallCall[f,b,d] &larr; Idle AND mDesiredFloor == CurrentFloor <br>
                     </td>
                 </tr>
             </tbody >
@@ -2566,19 +2606,14 @@
         </ul>
         <h3> CONSTRAINTS: </h3>
         None
-        <h3> EVENT-TRIGGERED BEHAVIORS: </h3>
-        9.1.&nbsp; If CarCall[f,b] is received as True, then CarLight[f,b]
-        shall be set to On. <br>
-        9.2.&nbsp; If mAtFloor[f,b] is received as True, then CarLight[f,b]
-        shall be set to Off. <br>
         <h3> TIME-TRIGGERED BEHAVIORS: </h3>
-        9.3.&nbsp; If CarCall[f,b] is True, then CarLight[f,b]
+        9.1.&nbsp; If CarCall[f,b] is True, then CarLight[f,b]
         shall be set to On. <br>
-        9.4.&nbsp; If mAtFloor[f,b] is True AND mDesiredFloor.f is CurrentFloor 
+        9.2.&nbsp; If mAtFloor[f,b] is True AND mDesiredFloor.f is CurrentFloor 
         AND CarCall[f,b] is False, 
         then CarLight[f,b] shall be set to Off. <br>
-        9.5.&nbsp; mCarCall[f,b] shall always be set to CarCall[f,b]. <br>
-        9.6.&nbsp; mCarLight[f,b] shall always be set to CarLight[f,b]. <br>
+        9.3.&nbsp; mCarCall[f,b] shall always be set to CarCall[f,b]. <br>
+        9.4.&nbsp; mCarLight[f,b] shall always be set to CarLight[f,b]. <br>
         <h3> Statechart: </h3>
         Here is the CarButtonControl Statechart. <br>
         <div style="text-align: center;"><a href="carbuttoncontrol_statechart.png"><img
@@ -2627,13 +2662,13 @@
                 <tr>
                     <td style="vertical-align: top;"><b>States</b><br>
                     </td>
+                    <td style="vertical-align: top;">9.1<br>
+                    </td>
+                    <td style="vertical-align: top;">9.2<br>
+                    </td>
                     <td style="vertical-align: top;">9.3<br>
                     </td>
                     <td style="vertical-align: top;">9.4<br>
-                    </td>
-                    <td style="vertical-align: top;">9.5<br>
-                    </td>
-                    <td style="vertical-align: top;">9.6<br>
                 
                 </tr>
                 <tr>
@@ -2665,13 +2700,13 @@
                 <tr>
                     <td style="vertical-align: top;"><b>Transitions</b><br>
                     </td>
+                    <td style="vertical-align: top;">9.1<br>
+                    </td>
+                    <td style="vertical-align: top;">9.2<br>
+                    </td>
                     <td style="vertical-align: top;">9.3<br>
                     </td>
                     <td style="vertical-align: top;">9.4<br>
-                    </td>
-                    <td style="vertical-align: top;">9.5<br>
-                    </td>
-                    <td style="vertical-align: top;">9.6<br>
                 
                 </tr>
                 <tr>
