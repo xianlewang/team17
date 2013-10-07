@@ -1839,16 +1839,18 @@
                     <td style="vertical-align: top;">T6.1<br>
                     </td>
                     <td style="vertical-align: top;">
-                        mAtFloor[f,b]&nbsp;&larr;&nbsp;True&nbsp;
-                        AND mAtFloor.f == mDesiredFloor<br>
+								CurrentFloor != mDesiredFloor&nbsp;
+                        AND mDoorClosed&nbsp;&larr;&nbsp;True
+                        <br>
                     </td>
                 </tr>
                 <tr>
                     <td style="vertical-align: top;">T6.2<br>
                     </td>
                     <td style="vertical-align: top;">
-                        CurrentFloor != mDesiredFloor&nbsp;
-                        AND mDoorClosed&nbsp;&larr;&nbsp;True <br>
+								mAtFloor[f,b]&nbsp;&larr;&nbsp;True&nbsp;
+                        AND mAtFloor.f == mDesiredFloor
+                         <br>
                     </td>
                 </tr>
 					 <!--
@@ -1914,9 +1916,9 @@
                 <tr>
                     <td style="vertical-align: top;">States<br>
                     </td>
-                    <td style="vertical-align: top;">R6.6<br>
+                    <td style="vertical-align: top;">6.6<br>
                     </td>
-                    <td style="vertical-align: top;">R6.7<br>
+                    <td style="vertical-align: top;">6.7<br>
                     </td>
                 </tr>
                 <tr>
@@ -1928,7 +1930,7 @@
                     </td>
                 </tr>
                 <tr>
-                    <td style="vertical-align: top;">S6.2 APPROACHING FLOOR<br>
+                    <td style="vertical-align: top;">S6.2 MOVING<br>
                     </td>
                     <td style="vertical-align: top;"><br>
                     </td>
@@ -1938,9 +1940,9 @@
                 <tr>
                     <td style="vertical-align: top;">Transitions<br>
                     </td>
-						  <td style="vertical-align: top;">R6.6<br>
+						  <td style="vertical-align: top;">6.6<br>
                     </td>
-                    <td style="vertical-align: top;">R6.7<br>
+                    <td style="vertical-align: top;">6.7<br>
                     </td>
                 </tr>
                 <tr>
