@@ -2893,6 +2893,10 @@
             <li>Target: an integer Floor number for desired Floor, initialized to
                 Lobby = 1. </li>
             <li>DesiredHallway: {FRONT, BACK, BOTH} base on the value of mAtFloor.b where mAtFloor.f equals Target. </li>
+            <li>CurrentFloor, is a shorthand notation for the value of whichever
+                mAtFloor[f, b] is True, if any.&nbsp; If CurrentFloor is invalid it has
+                a mnemonic value of None. 
+            </li>
         </ul>
         <h3> CONSTRAINTS: </h3>
         11.1&nbsp;&nbsp;&nbsp; Target shall be a valid Floor number from 1 ..
@@ -2923,7 +2927,7 @@
         Statechart for Dispatcher
         <div style="text-align: center;"><a href="dispatcher_state_diagram.png"><img
             alt="dispatcher_state_diagram.png" src="dispatcher_state_diagram.png"
-            style="border: 0px solid ; width: 513px; height: 200px;"></a><br>
+            style="border: 0px solid ; width: 513px; height: 400px;"></a><br>
         </div>
         <table style="text-align: left; width: 800px;" border="1"
             cellpadding="2" cellspacing="2">
@@ -2943,13 +2947,13 @@
                 <tr>
                     <td style="vertical-align: top;">T11.2<br>
                     </td>
-                    <td style="vertical-align: top;">mDoorClosed [b, r]&larr; False AND mAtFloor.f &larr;mDesiredFloor<br>
+                    <td style="vertical-align: top;">target != currentFloor<br>
                     </td>
                 </tr>
                 <tr>
                     <td style="vertical-align: top;">T11.3<br>
                     </td>
-                    <td style="vertical-align: top;">mDoorClosed [b, r]&larr; true AND mAtFloor.f &larr;1<br>
+                    <td style="vertical-align: top;">mDoorClosed [b, r]&larr; False AND currentFloor &larr;mDesiredFloor<br>
                     </td>
                 </tr>
             </tbody >
