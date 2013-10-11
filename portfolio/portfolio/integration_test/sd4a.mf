@@ -1,0 +1,77 @@
+; 18649 Fall 2013
+; group 17
+; Qiang Zhang (qiangz)
+; sd4a.mf
+
+;network message period
+#DEFINE MESSAGE_PERIOD 10ms
+
+;definitions for inputs' id
+
+;mAtFloor
+;mAtFloor 4 FRONT ID = 0x0C4C2800 + (4 - 1) * 2 + 0 = 0x0C4C2806
+#DEFINE AT_FLOOR_4F_FRONT_CAN_ID 0x0C4C2806
+
+;mDesiredFloor
+;ID = 0x0F0CB600
+#DEFINE DESIRED_FLOOR_CAN_ID 0x0F0CB600
+
+;mDoorReversal
+;mDoorReversal Front Left ID = 0x0D786400 + 0 + 0 = 0x0D786400
+#DEFINE DOOR_REVERSAL_FRONT_LEFT_CAN_ID 0x0D786400
+
+;mDoorOpened
+;mDoorOpened Front Left ID = 0x0EA4A000 + 0 + 0 = 0x0EA4A000
+#DEFINE DOOR_OPENED_FRONT_LEFT_CAN_ID 0x0EA4A000
+
+;mDoorClosed
+;mDoorClosed Front Left ID = 0x0D145000 + 0 + 0 = 0x0D145000
+#DEFINE DOOR_CLOSED_FRONT_LEFT_CAN_ID 0x0D145000
+
+;mCarWeight
+;ID = 0x0DDC7800
+#DEFINE CAR_WEIGHT_CAN_ID 0x0DDC7800
+
+;mDriveSpeed = 0x0F0AB500
+#DEFINE DRIVE_SPEED_CAN_ID 0x0F0AB500
+;------------------------------------------------------------------
+
+;initialize
+0s I MESSAGE_PERIOD N AT_FLOOR_4F_FRONT_CAN_ID AtFloor 4 FRONT = false
+0s I MESSAGE_PERIOD N DESIRED_FLOOR_CAN_ID DesiredFloor = 4 FRONT STOP
+0s I MESSAGE_PERIOD N DRIVE_SPEED_CAN_ID DriveCommand = STOP STOP
+0s I MESSAGE_PERIOD N DOOR_OPENED_FRONT_LEFT_CAN_ID DoorOpened FRONT LEFT = false
+0s I MESSAGE_PERIOD N DOOR_CLOSED_FRONT_LEFT_CAN_ID DoorClosed FRONT LEFT = true
+0s I MESSAGE_PERIOD N CAR_WEIGHT_CAN_ID CarWeight = 0
+
+;#arc '4A/1a'
+1.0s I MESSAGE_PERIOD N AT_FLOOR_4F_FRONT_CAN_ID AtFloor 4 FRONT = true
+1.1s I MESSAGE_PERIOD N DOOR_CLOSED_FRONT_LEFT_CAN_ID DoorClosed FRONT LEFT = false
+
+;#arc '4A/1b'
+1.5s A F DoorMotor FRONT LEFT : command == OPEN
+1.5s A S DoorControl[FRONT][LEFT] : STATE == BEFORE_OPEN
+
+;#arc '4A/2a'
+2.0s I MESSAGE_PERIOD N DOOR_OPENED_FRONT_LEFT_CAN_ID DoorOpened FRONT LEFT = true
+
+;#arc '4A/2b'
+2.2s A F DoorMotor FRONT LEFT : command == STOP
+2.2s A S DoorControl[FRONT][LEFT] : STATE == OPENED
+
+;#arc '4A/3'
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
