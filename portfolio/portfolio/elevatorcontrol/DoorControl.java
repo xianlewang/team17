@@ -1,7 +1,7 @@
 /*
 18649 Fall 2013
 Group 17
-Qiang Zhao(qiangz)
+Qiang Zhang(qiangz)
 (other names would go here)
  */
 package simulator.elevatorcontrol;
@@ -48,6 +48,8 @@ public class DoorControl extends Controller {
     private DoorClosedCanPayloadTranslator mDoorClosed;
     private ReadableCanMailbox networkCarWeight;
     private CarWeightCanPayloadTranslator mCarWeight;
+    private ReadableCanMailbox networkDoorReversal;                // reversal
+    private DoorReversalCanPayloadTranslator mDoorReversal;        // reversal
     private int mDesiredDwell = 100;
     private int MAX_Weight = 14000;
     // State variables
@@ -76,16 +78,20 @@ public class DoorControl extends Controller {
         networkCarWeight = CanMailbox.getReadableCanMailbox(MessageDictionary.CAR_WEIGHT_CAN_ID);
         networkDoorClosed = CanMailbox.getReadableCanMailbox(MessageDictionary.DOOR_CLOSED_SENSOR_BASE_CAN_ID + 
         		ReplicationComputer.computeReplicationId(hallway, side));
+        networkDoorReversal = CanMailbox.getReadableCanMailbox(MessageDictionary.DOOR_REVERSAL_SENSOR_BASE_CAN_ID + 
+        		ReplicationComputer.computeReplicationId(hallway, side));
         mDesiredFloor = new DesiredFloorCanPayloadTranslator(networkDesiredFloor);
         mDriveSpeed = new DriveCommandCanPayloadTranslator(networkDriveSpeed);
         mDoorOpened = new DoorOpenedCanPayloadTranslator(networkDoorOpened, hallway, side);
         mDoorClosed = new DoorClosedCanPayloadTranslator(networkDoorClosed, hallway, side);
         mCarWeight = new CarWeightCanPayloadTranslator(networkCarWeight);
+        mDoorReversal = new DoorReversalCanPayloadTranslator(networkDoorReversal, hallway, side);
         canInterface.registerTimeTriggered(networkDesiredFloor);
         canInterface.registerTimeTriggered(networkDriveSpeed);
         canInterface.registerTimeTriggered(networkDoorOpened);
         canInterface.registerTimeTriggered(networkDoorClosed);
         canInterface.registerTimeTriggered(networkCarWeight);
+        canInterface.registerTimeTriggered(networkDoorReversal);
         // instantiate an array of AtFloor class 
         networkAtFloor = new ReadableCanMailbox[8];
         mAtFloor = new AtFloorCanPayloadTranslator[8];
@@ -151,6 +157,10 @@ public class DoorControl extends Controller {
 				}
 //#transition 'T 5.5'
 				else if (mCarWeight.getWeight() >= MAX_Weight) {
+					nextState = State.BEFORE_OPEN;
+				}
+//#transition 'T 5.7'
+				else if (mDoorReversal.getValue()) {
 					nextState = State.BEFORE_OPEN;
 				}
 				else {

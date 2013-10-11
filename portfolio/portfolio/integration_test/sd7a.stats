@@ -1,0 +1,119 @@
+Simulator Parameters:
+Command line = -cf sd7a.cf -mf sd7a.mf -rt 0s
+RandomSeed = 1381457503096
+CanNetworkBitTime = 0 ns
+Effective Can Bitrate = Infinity
+Run Time = 0.0s
+Real time rate = null
+Message File = sd7a.mf
+Controller File = sd7a.cf
+
+
+[LanternControl[UP]] @0.000000000: Create CarLantern Control with tim period = 0.2s
+[Elevator] @0.000000000: Starting Simulation ***
+[LanternControl[UP]] @0.200000000: remains in state: Lantern_Off
+[LanternControl[UP]] @0.200000000: State stored: STATE<-Lantern_Off
+[LanternControl[UP]] @0.400000000: Transition: Lantern_Off -> Lantern_On
+[LanternControl[UP]] @0.400000000: State stored: STATE<-Lantern_On
+[LanternControl[UP]] @0.600000000: remains in state: Lantern_On
+[LanternControl[UP]] @0.600000000: State stored: STATE<-Lantern_On
+[LanternControl[UP]] @0.800000000: remains in state: Lantern_On
+[LanternControl[UP]] @0.800000000: State stored: STATE<-Lantern_On
+[AssertionMonitor] @1.000000000: ******************************************************************
+[AssertionMonitor] @1.000000000: PASSED LanternControl[UP]::checkState(STATE) ?== Lantern_On PASSED
+[AssertionMonitor] @1.000000000: ******************************************************************
+[AssertionMonitor] @1.000000000: *********************************************************************************************************
+[AssertionMonitor] @1.000000000: PASSED simulator.payloads.CarLanternPayload$ReadableCarLanternPayload@375212bc :: lighted ?== true PASSED
+[AssertionMonitor] @1.000000000: *********************************************************************************************************
+[AssertionMonitor] @1.000000000: *************************************************************************
+[AssertionMonitor] @1.000000000: PASSED DoorControl[FRONT][LEFT]::checkState(STATE) ?== BEFORE_OPEN PASSED
+[AssertionMonitor] @1.000000000: *************************************************************************
+[AssertionMonitor] @1.000000000: *******************************************************************************************************
+[AssertionMonitor] @1.000000000: PASSED simulator.payloads.DoorMotorPayload$ReadableDoorMotorPayload@17592174 :: command ?== OPEN PASSED
+[AssertionMonitor] @1.000000000: *******************************************************************************************************
+[LanternControl[UP]] @1.000000000: remains in state: Lantern_On
+[LanternControl[UP]] @1.000000000: State stored: STATE<-Lantern_On
+[LanternControl[UP]] @1.200000000: remains in state: Lantern_On
+[LanternControl[UP]] @1.200000000: State stored: STATE<-Lantern_On
+[LanternControl[UP]] @1.400000000: remains in state: Lantern_On
+[LanternControl[UP]] @1.400000000: State stored: STATE<-Lantern_On
+[LanternControl[UP]] @1.600000000: remains in state: Lantern_On
+[LanternControl[UP]] @1.600000000: State stored: STATE<-Lantern_On
+[LanternControl[UP]] @1.800000000: remains in state: Lantern_On
+[LanternControl[UP]] @1.800000000: State stored: STATE<-Lantern_On
+[LanternControl[UP]] @2.000000000: remains in state: Lantern_On
+[LanternControl[UP]] @2.000000000: State stored: STATE<-Lantern_On
+[AssertionMonitor] @2.200000000: *******************************************************************************************************
+[AssertionMonitor] @2.200000000: PASSED simulator.payloads.DoorMotorPayload$ReadableDoorMotorPayload@7bea5671 :: command ?== STOP PASSED
+[AssertionMonitor] @2.200000000: *******************************************************************************************************
+[AssertionMonitor] @2.200000000: ********************************************************************
+[AssertionMonitor] @2.200000000: PASSED DoorControl[FRONT][LEFT]::checkState(STATE) ?== OPENED PASSED
+[AssertionMonitor] @2.200000000: ********************************************************************
+[LanternControl[UP]] @2.200000000: remains in state: Lantern_On
+[LanternControl[UP]] @2.200000000: State stored: STATE<-Lantern_On
+[LanternControl[UP]] @2.400000000: remains in state: Lantern_On
+[LanternControl[UP]] @2.400000000: State stored: STATE<-Lantern_On
+[LanternControl[UP]] @2.600000000: remains in state: Lantern_On
+[LanternControl[UP]] @2.600000000: State stored: STATE<-Lantern_On
+[LanternControl[UP]] @2.800000000: remains in state: Lantern_On
+[LanternControl[UP]] @2.800000000: State stored: STATE<-Lantern_On
+[LanternControl[UP]] @3.000000000: remains in state: Lantern_On
+[LanternControl[UP]] @3.000000000: State stored: STATE<-Lantern_On
+[LanternControl[UP]] @3.200000000: remains in state: Lantern_On
+[LanternControl[UP]] @3.200000000: State stored: STATE<-Lantern_On
+[LanternControl[UP]] @3.400000000: remains in state: Lantern_On
+[LanternControl[UP]] @3.400000000: State stored: STATE<-Lantern_On
+[LanternControl[UP]] @3.600000000: remains in state: Lantern_On
+[LanternControl[UP]] @3.600000000: State stored: STATE<-Lantern_On
+[LanternControl[UP]] @3.800000000: remains in state: Lantern_On
+[LanternControl[UP]] @3.800000000: State stored: STATE<-Lantern_On
+[AssertionMonitor] @4.000000000: ********************************************************************************************************
+[AssertionMonitor] @4.000000000: PASSED simulator.payloads.DoorMotorPayload$ReadableDoorMotorPayload@151a64ed :: command ?== NUDGE PASSED
+[AssertionMonitor] @4.000000000: ********************************************************************************************************
+[AssertionMonitor] @4.000000000: *********************************************************************
+[AssertionMonitor] @4.000000000: PASSED DoorControl[FRONT][LEFT]::checkState(STATE) ?== CLOSING PASSED
+[AssertionMonitor] @4.000000000: *********************************************************************
+[LanternControl[UP]] @4.000000000: remains in state: Lantern_On
+[LanternControl[UP]] @4.000000000: State stored: STATE<-Lantern_On
+[LanternControl[UP]] @4.200000000: remains in state: Lantern_On
+[LanternControl[UP]] @4.200000000: State stored: STATE<-Lantern_On
+[LanternControl[UP]] @4.400000000: remains in state: Lantern_On
+[LanternControl[UP]] @4.400000000: State stored: STATE<-Lantern_On
+[LanternControl[UP]] @4.600000000: remains in state: Lantern_On
+[LanternControl[UP]] @4.600000000: State stored: STATE<-Lantern_On
+[LanternControl[UP]] @4.800000000: remains in state: Lantern_On
+[LanternControl[UP]] @4.800000000: State stored: STATE<-Lantern_On
+[LanternControl[UP]] @5.000000000: remains in state: Lantern_On
+[LanternControl[UP]] @5.000000000: State stored: STATE<-Lantern_On
+[AssertionMonitor] @5.200000000: ********************************************************************
+[AssertionMonitor] @5.200000000: PASSED DoorControl[FRONT][LEFT]::checkState(STATE) ?== CLOSED PASSED
+[AssertionMonitor] @5.200000000: ********************************************************************
+[AssertionMonitor] @5.200000000: *******************************************************************************************************
+[AssertionMonitor] @5.200000000: PASSED simulator.payloads.DoorMotorPayload$ReadableDoorMotorPayload@4a4e79f1 :: command ?== STOP PASSED
+[AssertionMonitor] @5.200000000: *******************************************************************************************************
+[LanternControl[UP]] @5.200000000: Transition: Lantern_On -> Lantern_Off
+[LanternControl[UP]] @5.200000000: State stored: STATE<-Lantern_Off
+[LanternControl[UP]] @5.400000000: remains in state: Lantern_Off
+[LanternControl[UP]] @5.400000000: State stored: STATE<-Lantern_Off
+[LanternControl[UP]] @5.600000000: remains in state: Lantern_Off
+[LanternControl[UP]] @5.600000000: State stored: STATE<-Lantern_Off
+[LanternControl[UP]] @5.800000000: remains in state: Lantern_Off
+[LanternControl[UP]] @5.800000000: State stored: STATE<-Lantern_Off
+[LanternControl[UP]] @6.000000000: remains in state: Lantern_Off
+[LanternControl[UP]] @6.000000000: State stored: STATE<-Lantern_Off
+[LanternControl[UP]] @6.200000000: remains in state: Lantern_Off
+[LanternControl[UP]] @6.200000000: State stored: STATE<-Lantern_Off
+[AssertionMonitor] @6.400000000: *******************************************************************
+[AssertionMonitor] @6.400000000: PASSED LanternControl[UP]::checkState(STATE) ?== Lantern_Off PASSED
+[AssertionMonitor] @6.400000000: *******************************************************************
+[AssertionMonitor] @6.400000000: **********************************************************************************************************
+[AssertionMonitor] @6.400000000: PASSED simulator.payloads.CarLanternPayload$ReadableCarLanternPayload@79dfc547 :: lighted ?== false PASSED
+[AssertionMonitor] @6.400000000: **********************************************************************************************************
+[LanternControl[UP]] @6.400000000: remains in state: Lantern_Off
+[LanternControl[UP]] @6.400000000: State stored: STATE<-Lantern_Off
+[Elevator] @6.400000000: Simulation Finished ***
+******************Summary******************
+Passed:  12
+Failed:  0
+Total :  12
+

@@ -1031,6 +1031,10 @@
         &nbsp;&nbsp;&nbsp; 5.11.1&nbsp; DoorMotor[b, r] shall be commanded to Open. <br>
         &nbsp;&nbsp;&nbsp; 5.11.2&nbsp; mDoorMotor[b, r] shall be commanded to Open. <br>
         &nbsp;&nbsp;&nbsp; 5.11.3&nbsp; CountDown shall be set to Dwell. <br>
+        5.12 &nbsp;&nbsp; If mDoorReversal[b, r] is True, then: <br>
+        &nbsp;&nbsp;&nbsp; 5.12.1&nbsp; DoorMotor[b, r] shall be commanded to Open. <br>
+        &nbsp;&nbsp;&nbsp; 5.12.2&nbsp; mDoorMotor[b, r] shall be commanded to Open. <br>
+        &nbsp;&nbsp;&nbsp; 5.12.3&nbsp; CountDown shall be set to Dwell. <br>
         <h3>State Chart:</h3>
         State Chart for Door Control<br> <!-- State Chart for Door Control -->
         <br>
@@ -1087,6 +1091,12 @@
                     <td style="vertical-align: top;">mCarWeight&nbsp;&gt;=&nbsp;MaxCarCapacity <br>
                     </td>
                 </tr>
+                <tr>
+                    <td style="vertical-align: top;">T5.7<br>
+                    </td>
+                    <td style="vertical-align: top;">mDoorReversal[b,r]&nbsp;&larr;&nbsp;True <br>
+                    </td>
+                </tr>
             </tbody>
         </table>
         <!--Door Cotrol table End-->
@@ -1134,6 +1144,12 @@
                     </td>
                     <td style="vertical-align: top;">R5.11.3<br>
                     </td>
+                    <td style="vertical-align: top;">R5.12.1<br>
+                    </td>
+                    <td style="vertical-align: top;">R5.12.2<br>
+                    </td>
+                    <td style="vertical-align: top;">R5.12.3<br>
+                    </td>
                 </tr>
                 <tr>
                     <td style="vertical-align: top;">S5.1 Closed<br>
@@ -1161,6 +1177,12 @@
                     <td style="vertical-align: top;">X<br>
                     </td>
                     <td style="vertical-align: top;">X<br>
+                    </td>
+                    <td style="vertical-align: top;"><br>
+                    </td>
+                    <td style="vertical-align: top;"><br>
+                    </td>
+                    <td style="vertical-align: top;"><br>
                     </td>
                     <td style="vertical-align: top;"><br>
                     </td>
@@ -1202,6 +1224,12 @@
                     </td>
                     <td style="vertical-align: top;">X<br>
                     </td>
+                    <td style="vertical-align: top;">X<br>
+                    </td>
+                    <td style="vertical-align: top;">X<br>
+                    </td>
+                    <td style="vertical-align: top;">X<br>
+                    </td>
                 </tr>
                 <tr>
                     <td style="vertical-align: top;">S5.3 Opened<br>
@@ -1219,6 +1247,12 @@
                     <td style="vertical-align: top;">X<br>
                     </td>
                     <td style="vertical-align: top;">X<br>
+                    </td>
+                    <td style="vertical-align: top;"><br>
+                    </td>
+                    <td style="vertical-align: top;"><br>
+                    </td>
+                    <td style="vertical-align: top;"><br>
                     </td>
                     <td style="vertical-align: top;"><br>
                     </td>
@@ -1270,6 +1304,12 @@
                     </td>
                     <td style="vertical-align: top;"><br>
                     </td>
+                    <td style="vertical-align: top;"><br>
+                    </td>
+                    <td style="vertical-align: top;"><br>
+                    </td>
+                    <td style="vertical-align: top;"><br>
+                    </td>
                 </tr>
                 
                 <tr>
@@ -1305,6 +1345,12 @@
                     </td>
                     <td style="vertical-align: top;">R5.11.3<br>
                     </td>
+                    <td style="vertical-align: top;">R5.12.1<br>
+                    </td>
+                    <td style="vertical-align: top;">R5.12.2<br>
+                    </td>
+                    <td style="vertical-align: top;">R5.12.3<br>
+                    </td>
                 </tr>
                 <tr>
                     <td style="vertical-align: top;">T5.1<br>
@@ -1339,6 +1385,12 @@
                     </td>
                     <td style="vertical-align: top;"><br>
                     </td>
+                    <td style="vertical-align: top;"><br>
+                    </td>
+                    <td style="vertical-align: top;"><br>
+                    </td>
+                    <td style="vertical-align: top;"><br>
+                    </td>
                 </tr>
                 <tr>
                     <td style="vertical-align: top;">T5.2<br>
@@ -1356,6 +1408,12 @@
                     <td style="vertical-align: top;">X<br>
                     </td>
                     <td style="vertical-align: top;">X<br>
+                    </td>
+                    <td style="vertical-align: top;"><br>
+                    </td>
+                    <td style="vertical-align: top;"><br>
+                    </td>
+                    <td style="vertical-align: top;"><br>
                     </td>
                     <td style="vertical-align: top;"><br>
                     </td>
@@ -1407,6 +1465,12 @@
                     </td>
                     <td style="vertical-align: top;"><br>
                     </td>
+                    <td style="vertical-align: top;"><br>
+                    </td>
+                    <td style="vertical-align: top;"><br>
+                    </td>
+                    <td style="vertical-align: top;"><br>
+                    </td>
                 </tr>
                 <tr>
                     <td style="vertical-align: top;">T5.4<br>
@@ -1434,6 +1498,12 @@
                     <td style="vertical-align: top;">X<br>
                     </td>
                     <td style="vertical-align: top;">X<br>
+                    </td>
+                    <td style="vertical-align: top;"><br>
+                    </td>
+                    <td style="vertical-align: top;"><br>
+                    </td>
+                    <td style="vertical-align: top;"><br>
                     </td>
                     <td style="vertical-align: top;"><br>
                     </td>
@@ -1475,6 +1545,12 @@
                     </td>
                     <td style="vertical-align: top;">X<br>
                     </td>
+                    <td style="vertical-align: top;">X<br>
+                    </td>
+                    <td style="vertical-align: top;">X<br>
+                    </td>
+                    <td style="vertical-align: top;">X<br>
+                    </td>
                 </tr>
                 <tr>
                     <td style="vertical-align: top;">T5.6<br>
@@ -1502,6 +1578,12 @@
                     <td style="vertical-align: top;"><br>
                     </td>
                     <td style="vertical-align: top;"><br>
+                    </td>
+                    <td style="vertical-align: top;">X<br>
+                    </td>
+                    <td style="vertical-align: top;">X<br>
+                    </td>
+                    <td style="vertical-align: top;">X<br>
                     </td>
                     <td style="vertical-align: top;">X<br>
                     </td>
@@ -2004,23 +2086,20 @@
         <h3> TIME-TRIGGERED BEHAVIORS: </h3>
         7.2&nbsp;&nbsp;&nbsp; DesiredDirection shall be set to the value of mDesiredFloor.d. <br>
         7.3&nbsp;&nbsp;&nbsp; If mDoorClosed[*, *] are True, then: <br>
-        &nbsp;&nbsp;&nbsp; 7.3.1&nbsp; CarLantern[*] shall be commanded to Off.<br>
-        &nbsp;&nbsp;&nbsp; 7.3.2&nbsp; mCarLantern[*] shall be commanded to Off.<br>
+        &nbsp;&nbsp;&nbsp; 7.3.1&nbsp; CarLantern[d] shall be commanded to Off.<br>
+        &nbsp;&nbsp;&nbsp; 7.3.2&nbsp; mCarLantern[d] shall be commanded to Off.<br>
         7.4&nbsp;&nbsp;&nbsp; If mDoorClosed[b, r] is False AND DesiredDirection is Stop, then: <br>
-        &nbsp;&nbsp;&nbsp; 7.4.1&nbsp; CarLantern[*] shall be commanded to Off. <br>
-        &nbsp;&nbsp;&nbsp; 7.4.2&nbsp; mCarLantern[*] shall be commanded to Off. <br>
-        7.5&nbsp;&nbsp;&nbsp; If mDoorClosed[b, r] is False AND Desired Direction is Up, then: <br>
-        &nbsp;&nbsp;&nbsp; 7.5.1&nbsp; CarLantern[Up] shall be commanded to On. <br>
-        &nbsp;&nbsp;&nbsp; 7.5.2&nbsp; mCarLantern[Up] shall be commanded to On. <br>
-        7.6&nbsp;&nbsp;&nbsp; If mDoorClosed[b, r] is False AND Desired Direction is Down, then: <br>
-        &nbsp;&nbsp;&nbsp; 7.6.1&nbsp; CarLantern[Down] shall be commanded to On. <br>
-        &nbsp;&nbsp;&nbsp; 7.6.2&nbsp; mCarLantern[Down] shall be commanded to On. <br>
+        &nbsp;&nbsp;&nbsp; 7.4.1&nbsp; CarLantern[d] shall be commanded to Off. <br>
+        &nbsp;&nbsp;&nbsp; 7.4.2&nbsp; mCarLantern[d] shall be commanded to Off. <br>
+        7.5&nbsp;&nbsp;&nbsp; If mDoorClosed[b, r] is False AND Desired Direction is not Stop, then: <br>
+        &nbsp;&nbsp;&nbsp; 7.5.1&nbsp; CarLantern[d] shall be commanded to On. <br>
+        &nbsp;&nbsp;&nbsp; 7.5.2&nbsp; mCarLantern[d] shall be commanded to On. <br>
         <h3>State Chart:</h3>
         State Chart for Door Control<br> <!-- State Chart for CarLantern Control -->
         <br>
         <div style="text-align: Left; width: 300"><a href="7_lantern_control.jpg"><img
             alt="7_lantern_control.jpg" src="7_lantern_control.jpg"
-            style="border: 0px solid ; width: 890px; height: 560px;"></a><br>
+            style="border: 0px solid ; width: 890px; height: 370px;"></a><br>
         </div>
         <!--Insert table for CarLantern Control -->
         <table style="text-align: left; width: 850;" border="1"
@@ -2045,16 +2124,13 @@
                     </td>
                     <td style="vertical-align: top;">
                         mDoorClosed[b,r]&nbsp;&larr;&nbsp;False&nbsp;
-                        AND DesiredDirection&nbsp;&larr;&nbsp;Up <br>
+                        AND DesiredDirection != Up <br>
                     </td>
                 </tr>
                 <tr>
                     <td style="vertical-align: top;">T7.3<br>
                     </td>
-                    <td style="vertical-align: top;">
-                        mDoorClosed[b,r]&nbsp;&larr;&nbsp;False&nbsp;
-                        AND DesiredDirection&nbsp;&larr;&nbsp;Down <br>
-                    </td>
+                    <td style="vertical-align: top;">mDoorClosed[b,r]&nbsp;&larr;&nbsp;True <br>
                 </tr>
                 <tr>
                     <td style="vertical-align: top;">T7.4<br>
@@ -2093,10 +2169,6 @@
                     </td>
                     <td style="vertical-align: top;">R7.5.2<br>
                     </td>
-                    <td style="vertical-align: top;">R7.6.1<br>
-                    </td>
-                    <td style="vertical-align: top;">R7.6.2<br>
-                    </td>
                 </tr>
                 <tr>
                     <td style="vertical-align: top;">S7.1 Lantern Off<br>
@@ -2114,10 +2186,6 @@
                     <td style="vertical-align: top;"><br><!--7.5.1-->
                     </td>
                     <td style="vertical-align: top;"><br><!--7.5.2-->
-                    </td>
-                    <td style="vertical-align: top;"><br><!--7.6.1-->
-                    </td>
-                    <td style="vertical-align: top;"><br><!--7.6.2-->
                     </td>
                 </tr>
                 <tr>
@@ -2137,13 +2205,9 @@
                     </td>
                     <td style="vertical-align: top;"><br><!--7.5.2-->
                     </td>
-                    <td style="vertical-align: top;"><br><!--7.6.1-->
-                    </td>
-                    <td style="vertical-align: top;"><br><!--7.6.2-->
-                    </td>
                 </tr>
                 <tr>
-                    <td style="vertical-align: top;">S7.3 Turn Up On<br>
+                    <td style="vertical-align: top;">S7.3 Lantern On<br>
                     </td>
                     <td style="vertical-align: top;"><br><!--7.2-->
                     </td>
@@ -2158,32 +2222,6 @@
                     <td style="vertical-align: top;">X<br><!--7.5.1-->
                     </td>
                     <td style="vertical-align: top;">X<br><!--7.5.2-->
-                    </td>
-                    <td style="vertical-align: top;"><br><!--7.6.1-->
-                    </td>
-                    <td style="vertical-align: top;"><br><!--7.6.2-->
-                    </td>
-                </tr>
-                <tr>
-                    <td style="vertical-align: top;">S7.4 Turn Down On<br>
-                    </td>
-                    <td style="vertical-align: top;"><br><!--7.2-->
-                    </td>
-                    <td style="vertical-align: top;"><br><!--7.3.1-->
-                    </td>
-                    <td style="vertical-align: top;"><br><!--7.3.2-->
-                    </td>
-                    <td style="vertical-align: top;"><br><!--7.4.1-->
-                    </td>
-                    <td style="vertical-align: top;"><br><!--7.4.2-->
-                    </td>
-                    <td style="vertical-align: top;"><br><!--7.5.1-->
-                    </td>
-                    <td style="vertical-align: top;"><br><!--7.5.2-->
-                    </td>
-                    <td style="vertical-align: top;">X<br><!--7.6.1-->
-                    </td>
-                    <td style="vertical-align: top;">X<br><!--7.6.2-->
                     </td>
                 </tr>
                 <tr>
@@ -2203,10 +2241,6 @@
                     </td>
                     <td style="vertical-align: top;">R7.5.2<br>
                     </td>
-                    <td style="vertical-align: top;">R7.6.1<br>
-                    </td>
-                    <td style="vertical-align: top;">R7.6.2<br>
-                    </td>
                 </tr>
                 <tr>
                     <td style="vertical-align: top;">T7.1<br>
@@ -2224,10 +2258,6 @@
                     <td style="vertical-align: top;"><br><!--7.5.1-->
                     </td>
                     <td style="vertical-align: top;"><br><!--7.5.2-->
-                    </td>
-                    <td style="vertical-align: top;"><br><!--7.6.1-->
-                    </td>
-                    <td style="vertical-align: top;"><br><!--7.6.2-->
                     </td>
                 </tr>
                 <tr>
@@ -2247,10 +2277,6 @@
                     </td>
                     <td style="vertical-align: top;">X<br><!--7.5.2-->
                     </td>
-                    <td style="vertical-align: top;"><br><!--7.6.1-->
-                    </td>
-                    <td style="vertical-align: top;"><br><!--7.6.2-->
-                    </td>
                 </tr>
                 <tr>
                     <td style="vertical-align: top;">T7.3<br>
@@ -2261,17 +2287,13 @@
                     </td>
                     <td style="vertical-align: top;">X<br><!--7.3.2-->
                     </td>
-                    <td style="vertical-align: top;"><br><!--7.4.1-->
+                    <td style="vertical-align: top;">X<br><!--7.4.1-->
                     </td>
-                    <td style="vertical-align: top;"><br><!--7.4.2-->
+                    <td style="vertical-align: top;">X<br><!--7.4.2-->
                     </td>
-                    <td style="vertical-align: top;"><br><!--7.5.1-->
+                    <td style="vertical-align: top;">X<br><!--7.5.1-->
                     </td>
-                    <td style="vertical-align: top;"><br><!--7.5.2-->
-                    </td>
-                    <td style="vertical-align: top;">X<br><!--7.6.1-->
-                    </td>
-                    <td style="vertical-align: top;">X<br><!--7.6.2-->
+                    <td style="vertical-align: top;">X<br><!--7.5.2-->
                     </td>
                 </tr>
                 <tr>
@@ -2290,10 +2312,6 @@
                     <td style="vertical-align: top;">X<br><!--7.5.1-->
                     </td>
                     <td style="vertical-align: top;">X<br><!--7.5.2-->
-                    </td>
-                    <td style="vertical-align: top;">X<br><!--7.6.1-->
-                    </td>
-                    <td style="vertical-align: top;">X<br><!--7.6.2-->
                     </td>
                 </tr>
             </tbody>
