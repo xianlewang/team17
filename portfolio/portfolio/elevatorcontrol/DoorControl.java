@@ -14,6 +14,7 @@ import simulator.payloads.CanMailbox.ReadableCanMailbox;
 import simulator.payloads.DoorMotorPayload.WriteableDoorMotorPayload;
 import simulator.elevatorcontrol.DesiredFloorCanPayloadTranslator;
 import simulator.elevatorcontrol.DriveCommandCanPayloadTranslator;
+import simulator.elevatorcontrol.Utility.AtFloorArray;
 
 /*
  * This doorControl uses 
@@ -36,8 +37,7 @@ public class DoorControl extends Controller {
     // physical interface
     private WriteableDoorMotorPayload door_motor;
     // input network
-    private ReadableCanMailbox[] networkAtFloor;
-    private AtFloorCanPayloadTranslator[] mAtFloor;
+    private AtFloorArray mAtFloor_array;
     private ReadableCanMailbox networkDesiredFloor;
     private DesiredFloorCanPayloadTranslator mDesiredFloor;
     private ReadableCanMailbox networkDriveSpeed;
@@ -93,15 +93,7 @@ public class DoorControl extends Controller {
         canInterface.registerTimeTriggered(networkCarWeight);
         canInterface.registerTimeTriggered(networkDoorReversal);
         // instantiate an array of AtFloor class 
-        networkAtFloor = new ReadableCanMailbox[8];
-        mAtFloor = new AtFloorCanPayloadTranslator[8];
-        for (int i = 0; i < 8; i++) {
-        	networkAtFloor[i] = CanMailbox.getReadableCanMailbox(
-        			MessageDictionary.AT_FLOOR_BASE_CAN_ID + 
-        			ReplicationComputer.computeReplicationId(i + 1, hallway));
-        	canInterface.registerTimeTriggered(networkAtFloor[i]);
-        	mAtFloor[i] = new AtFloorCanPayloadTranslator(networkAtFloor[i], i + 1, hallway);
-        }
+        mAtFloor_array = new AtFloorArray(canInterface);
         // ready now
         timer.start(period);
     }
@@ -113,8 +105,9 @@ public class DoorControl extends Controller {
 				Dwell = mDesiredDwell;
 				door_motor.set(DoorCommand.STOP);
 				int desFloor = mDesiredFloor.getFloor();
+				int curFloor = mAtFloor_array.getCurrentFloor();
 //#transition 'T 5.1'
-				if (mAtFloor[desFloor - 1].getValue()) {
+				if (curFloor == desFloor) {
 					if (mDriveSpeed.getSpeed() == Speed.STOP ||
 							mDriveSpeed.getDirection() == Direction.STOP) {
 						nextState = State.BEFORE_OPEN;
