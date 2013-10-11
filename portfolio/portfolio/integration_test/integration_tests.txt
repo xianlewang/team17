@@ -2,14 +2,11 @@
 ; group 17
 ; Qiang Zhang(qiangz)/Shen Yu(sheny)/Jiang He(jiangh)/Xianle Wang(xianlew)
 
-<<<<<<< HEAD
-SD1B sd1b.cf sd1b.mf
-SD7A sd7a.cf sd7a.mf
-SD7B sd7b.cf sd7b.mf
-=======
 SD1A sd1a.cd sd1a.mf
 SD1B sd1b.cf sd1b.mf
 SD1C sd1c.cf sd1c.mf
+SD5B sd5b.cf sd5b.mf
+SD7A sd7a.cf sd7a.mf
 SD7B sd7b.cf sd7b.mf
->>>>>>> f03569f8089cd8d62999e42780e5ef0773dc23d0
+
 
