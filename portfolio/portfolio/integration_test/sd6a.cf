@@ -1,0 +1,10 @@
+; 18649 Fall 2013
+; group 17
+; Jiang He (jiangh)
+; sd6a.cf
+
+DriveControl 10ms TRUE
+CarButtonControl 100ms 4 FRONT TRUE
+HallButtonControl 100ms 4 FRONT UP TRUE
+
+
