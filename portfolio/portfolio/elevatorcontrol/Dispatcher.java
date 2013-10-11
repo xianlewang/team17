@@ -1,23 +1,20 @@
 /*
- 18649 Fall 2013
- Group 17
- Xianle Wang(xianlew)
- (other names would go here)
+18649 Fall 2013
+Group 17
+Xianle Wang(xianlew)
+(other names would go here)
  */
 package simulator.elevatorcontrol;
 import jSimPack.SimTime;
 import simulator.elevatorcontrol.Utility.AtFloorArray;
-import simulator.elevatormodules.AtFloorCanPayloadTranslator;
-import simulator.elevatormodules.DoorClosedCanPayloadTranslator;
+import simulator.elevatorcontrol.Utility.DoorClosedArray;
 import simulator.framework.Controller;
 import simulator.framework.Direction;
+import simulator.framework.Elevator;
 import simulator.framework.Hallway;
 import simulator.framework.ReplicationComputer;
-import simulator.framework.Side;
 import simulator.payloads.CanMailbox;
-import simulator.payloads.CanMailbox.ReadableCanMailbox;
 import simulator.payloads.CanMailbox.WriteableCanMailbox;
-import simulator.payloads.translators.BooleanCanPayloadTranslator;
 import simulator.payloads.translators.IntegerCanPayloadTranslator;
 
 public class Dispatcher extends Controller {
@@ -28,23 +25,10 @@ public class Dispatcher extends Controller {
 	// note that inputs are Readable objects, while outputs are Writeable
 	// objects
 
-	// received door closed message
-	private ReadableCanMailbox networkDoorClosed_f;
-	// translator for the doorClosed message -- this translator is specific
-	// to this messages, and is provided the elevatormodules package
-	private DoorClosedCanPayloadTranslator mDoorClosed_f;
-
-	// received door closed message
-	private ReadableCanMailbox networkDoorClosed_b;
-	// translator for the doorClosed message -- this translator is specific
-	// to this messages, and is provided the elevatormodules package
-	private DoorClosedCanPayloadTranslator mDoorClosed_b;
-
-	// received at floor message
-	// private ReadableCanMailbox networkAtFloor;
-	// translator for the at floor message
-	// private AtFloorCanPayloadTranslator mAtFloor;
-
+	//mDoorClosed
+	private DoorClosedArray doorClosedFront = new DoorClosedArray(Hallway.FRONT, canInterface);
+	private DoorClosedArray doorClosedBack = new DoorClosedArray(Hallway.BACK, canInterface);
+	
 	// send mDesiredFloor message
 	private WriteableCanMailbox networkDesiredFloor;
 	// translator for the at floor message
@@ -72,7 +56,7 @@ public class Dispatcher extends Controller {
 	private AtFloorArray atFloorArray = null;
 
 	private int dwell = 1000;
-
+    private Direction lastDir = Direction.STOP;
 	// enumerate states
 	private enum State {
 		MOVE, EMERGENCY_MOVE, HOLD
@@ -103,34 +87,6 @@ public class Dispatcher extends Controller {
 		 * log("object=" + object);
 		 */
 		log("Created DispatcherControl with period = ", period);
-
-		/*
-		 * mDoorClosed_f
-		 */
-		networkDoorClosed_f = CanMailbox
-				.getReadableCanMailbox(MessageDictionary.DOOR_CLOSED_SENSOR_BASE_CAN_ID
-						+ ReplicationComputer.computeReplicationId(
-								Hallway.FRONT, Side.LEFT));
-		mDoorClosed_f = new DoorClosedCanPayloadTranslator(networkDoorClosed_f,
-				Hallway.FRONT, Side.LEFT);
-		// register to receive periodic updates to the mailbox via the CAN
-		// network
-		// the period of updates will be determined by the sender of the message
-		canInterface.registerTimeTriggered(networkDoorClosed_f);
-
-		/*
-		 * mDoorClosed_b
-		 */
-		networkDoorClosed_b = CanMailbox
-				.getReadableCanMailbox(MessageDictionary.DOOR_CLOSED_SENSOR_BASE_CAN_ID
-						+ ReplicationComputer.computeReplicationId(
-								Hallway.BACK, Side.LEFT));
-		mDoorClosed_b = new DoorClosedCanPayloadTranslator(networkDoorClosed_b,
-				Hallway.BACK, Side.LEFT);
-		// register to receive periodic updates to the mailbox via the CAN
-		// network
-		// the period of updates will be determined by the sender of the message
-		canInterface.registerTimeTriggered(networkDoorClosed_b);
 
 		/*
 		 * mDesiredFloor
@@ -203,17 +159,17 @@ public class Dispatcher extends Controller {
 			setDesiredHallway();
 
 			// state actions for 'HOLD'
-			mDesiredFloor.set(target, Direction.STOP, desiredHallway);
+			mDesiredFloor.set(target, lastDir, desiredHallway);
 			mDesiredDwell_b.set(dwell);
 			mDesiredDwell_f.set(dwell);
 			// #transition 'T11.1'
 			if (atFloorArray.getCurrentFloor() == MessageDictionary.NONE
-					&& !(mDoorClosed_b.getValue() && mDoorClosed_f.getValue())) {
+					&& !(doorClosedBack.getBothClosed() && doorClosedFront.getBothClosed())) {
 				newState = State.EMERGENCY_MOVE;
 				// #transition 'T11.3'
 			} else if (atFloorArray.getCurrentFloor() == mDesiredFloor
 					.getFloor()
-					&& !(mDoorClosed_b.getValue() && mDoorClosed_f.getValue())) {
+					&& !(doorClosedBack.getBothClosed() && doorClosedFront.getBothClosed())) {
 				newState = State.MOVE;
 			}
 			break;
@@ -223,8 +179,8 @@ public class Dispatcher extends Controller {
 			setDesiredHallway();
 			// state actions for 'HOLD'
 			target = currentFloor % numFloors + 1;
-			mDesiredFloor.set(target, Direction.STOP, desiredHallway);
-			
+            lastDir = getDesiredDirectoin();
+			mDesiredFloor.set(target, getDesiredDirectoin(), desiredHallway);
 
 			// #transition 'T11.2'
 			if (currentFloor != target) {
@@ -242,9 +198,9 @@ public class Dispatcher extends Controller {
 
 		// log the results of this iteration
 		if (state == newState) {
-			log("remains in state: ", state);
+			log("remains in state: ", state, ", disiredFloor:d,f,b:  ",mDesiredFloor.getDirection(),mDesiredFloor.getFloor(),mDesiredFloor.getHallway());
 		} else {
-			log("Transition:", state, "->", newState);
+			log("Transition:", state, "->", newState, "disiredFloor:d,f,b:  ",mDesiredFloor.getDirection(),mDesiredFloor.getFloor(),mDesiredFloor.getHallway());
 		}
 
 		// update the state variable
@@ -275,6 +231,13 @@ public class Dispatcher extends Controller {
 			desiredHallway = Hallway.BACK;
 		} else {
 			desiredHallway = Hallway.NONE;
+		}
+	}
+	private Direction getDesiredDirectoin(){
+		if(atFloorArray.getCurrentFloor()<Elevator.numFloors){
+			return Direction.UP;
+		}else{
+			return Direction.DOWN;
 		}
 	}
 }

@@ -1,0 +1,34 @@
+
+Simulator Parameters:
+Command line = -cf sd9a.cf -mf sd9a.mf
+RandomSeed = 1381516291956
+CanNetworkBitTime = 0 ns
+Effective Can Bitrate = Infinity
+Run Time = null
+Real time rate = null
+Message File = sd9a.mf
+Controller File = sd9a.cf
+
+Assertion Results:
+@1.0s:  PASSED simulator.payloads.CanMailbox$ReadableCanMailbox@2ff51d36 :: getValue ?== false PASSED
+@1.0s:  PASSED simulator.payloads.DoorMotorPayload$ReadableDoorMotorPayload@7fd1a35e :: command ?== OPEN PASSED
+@1.0s:  PASSED simulator.payloads.CanMailbox$ReadableCanMailbox@54c23942 :: getValue ?== true PASSED
+@1.2s:  PASSED simulator.payloads.DoorMotorPayload$ReadableDoorMotorPayload@5422fe09 :: command ?== OPEN PASSED
+@1.5s:  PASSED simulator.payloads.CanMailbox$ReadableCanMailbox@19166179 :: getFloor ?== 2 PASSED
+@1.5s:  PASSED simulator.payloads.CanMailbox$ReadableCanMailbox@3e99f610 :: getDirection ?== UP PASSED
+@2.0s:  PASSED simulator.payloads.DoorMotorPayload$ReadableDoorMotorPayload@a4c4a0d :: command ?== STOP PASSED
+@7.0s:  PASSED simulator.payloads.DoorMotorPayload$ReadableDoorMotorPayload@537e7f88 :: command ?== STOP PASSED
+@8.199999999s:  PASSED simulator.payloads.DoorMotorPayload$ReadableDoorMotorPayload@69a66ce8 :: command ?== STOP PASSED
+@8.5s:  PASSED simulator.payloads.CanMailbox$ReadableCanMailbox@422eb6e9 :: getFloor ?== 2 PASSED
+@8.5s:  PASSED simulator.payloads.CanMailbox$ReadableCanMailbox@62e596c9 :: getDirection ?== UP PASSED
+@9.0s:  PASSED simulator.payloads.DrivePayload$ReadableDrivePayload@4754b574 :: speed ?== SLOW PASSED
+@10.0s:  PASSED simulator.payloads.CanMailbox$ReadableCanMailbox@5035135a :: getValue ?== true PASSED
+@10.0s:  PASSED simulator.payloads.DoorMotorPayload$ReadableDoorMotorPayload@60227bd0 :: command ?== STOP PASSED
+@10.0s:  PASSED simulator.payloads.DrivePayload$ReadableDrivePayload@5d08e435 :: direction ?== UP PASSED
+
+
+******************Summary******************
+Passed:  15
+Failed:  0
+Total :  15
+
