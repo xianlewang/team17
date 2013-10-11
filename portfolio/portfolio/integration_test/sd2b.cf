@@ -1,0 +1,7 @@
+; 18649 Fall 2013
+; group 17
+; Shen Yu (sheny)
+; 2B.cf
+
+DoorControl 10ms FRONT LEFT TRUE
+CarButtonControl 100ms 4 FRONT TRUE 
