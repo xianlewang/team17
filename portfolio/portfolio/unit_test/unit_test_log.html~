@@ -54,7 +54,8 @@ include all information listed in the project handouts.<br>
       </td>
       <td style="vertical-align: top;">0<br>
       </td>
-      <td style="vertical-align: top;"><a href="doorcontrol_test1.stats">doorcontrol_test1.stats</a><br>
+      <td style="vertical-align: top;">
+          <a href="doorcontrol_test1.stats">doorcontrol_test1.stats</a><br>
       </td>
       <td style="vertical-align: top;">All passed. </td>
     </tr>
@@ -63,7 +64,8 @@ include all information listed in the project handouts.<br>
       </td>
       <td style="vertical-align: top;"><a href="hallbuttoncontrol.cf">hallbuttoncontrol.cf</a></td>
       <td style="vertical-align: top;"><a href="hallbuttoncontrol_test1.mf">hallbuttoncontrol_test1.mf</a></td>
-      <td style="vertical-align: top;">State numbers 2/Transition numbers 2<br>
+      <td style="vertical-align: top;">State numbers 2/
+transition numbers 2<br>
       </td>
       <td style="vertical-align: top;">12<br>
       </td>
@@ -78,7 +80,8 @@ include all information listed in the project handouts.<br>
       </td>
       <td style="vertical-align: top;"><a href="drivecontrol.cf">drivecontrol.cf</a></td>
       <td style="vertical-align: top;"><a href="drivecontrol_test1.mf">drivecontrol_test1.mf</a></td>
-      <td style="vertical-align: top;">State numbers 2/Transition numbers 2<br>
+      <td style="vertical-align: top;">State numbers 2/
+transition numbers 2<br>
       </td>
       <td style="vertical-align: top;">15<br>
       </td>
@@ -93,7 +96,8 @@ include all information listed in the project handouts.<br>
       </td>
       <td style="vertical-align: top;"><a href="carbuttoncontrol.cf">carbuttoncontrol.cf</a></td>
       <td style="vertical-align: top;"><a href="carbuttoncontrol_test1.mf">carbuttoncontrol_test1.mf</a></td>
-      <td style="vertical-align: top;">State numbers 2 /Transition numbers 2<br>
+      <td style="vertical-align: top;">State numbers 2 /
+transition numbers 2<br>
       </td>
       <td style="vertical-align: top;">12<br>
       </td>
@@ -104,6 +108,7 @@ include all information listed in the project handouts.<br>
       <td style="vertical-align: top;">All passed. </td>
     </tr>
     <tr>
+<<<<<<< HEAD
         <td style="vertical-align: top;">LanternControl<br>
         </td>
         <td style="vertical-align: top;"><a href="lanterncontrol.cf">lanterncontrol.cf</a></td>
@@ -118,12 +123,13 @@ include all information listed in the project handouts.<br>
             <a href="lanterncontrol_test1.stats">lanterncontrol_test1.stats</a><br>
         </td>
         <td style="vertical-align: top;">All passed. </td>
-    <tr>
+=======
       <td style="vertical-align: top;">Dispatcher<br>
       </td>
       <td style="vertical-align: top;"><a href="dispatcher.cf">dispatcher.cf</a></td>
       <td style="vertical-align: top;"><a href="dispatcher_test1.mf">dispatcher_test1.mf</a></td>
-      <td style="vertical-align: top;">State numbers 3 /Transition numbers 3<br>
+      <td style="vertical-align: top;">State numbers 3 /
+transition numbers 3<br>
       </td>
       <td style="vertical-align: top;">14<br>
       </td>
@@ -134,6 +140,56 @@ include all information listed in the project handouts.<br>
       <td style="vertical-align: top;">All passed. </td>
     </tr>
     <tr>
+      <td style="vertical-align: top;">aaaaaaa<br>
+      </td>
+      <td style="vertical-align: top;"><a href="aaaaaaa.cf">aaaaaaa.cf</a></td>
+      <td style="vertical-align: top;"><a href="aaaaaaa_test1.mf">aaaaaaa_test1.mf</a></td>
+      <td style="vertical-align: top;">State numbers 2 /
+transition numbers 2<br>
+      </td>
+      <td style="vertical-align: top;">12<br>
+      </td>
+      <td style="vertical-align: top;">0<br>
+      </td>
+      <td style="vertical-align: top;"><a href="aaaaaaa_test1.stats">aaaaaaa_test1.stats</a><br>
+      </td>
+      <td style="vertical-align: top;">All passed. </td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top;">aaaaaaa<br>
+      </td>
+      <td style="vertical-align: top;"><a href="aaaaaaa.cf">aaaaaaa.cf</a></td>
+      <td style="vertical-align: top;"><a href="aaaaaaa_test1.mf">aaaaaaa_test1.mf</a></td>
+      <td style="vertical-align: top;">State numbers 2 /
+transition numbers 2<br>
+      </td>
+      <td style="vertical-align: top;">12<br>
+      </td>
+      <td style="vertical-align: top;">0<br>
+      </td>
+      <td style="vertical-align: top;"><a href="aaaaaaa_test1.stats">aaaaaaa_test1.stats</a><br>
+      </td>
+      <td style="vertical-align: top;">All passed. </td>
+>>>>>>> f03569f8089cd8d62999e42780e5ef0773dc23d0
+    </tr>
+    <tr>
+      <td style="vertical-align: top;"><br>
+      </td>
+      <td style="vertical-align: top;"><br>
+      </td>
+      <td style="vertical-align: top;"><br>
+      </td>
+      <td style="vertical-align: top;"><br>
+      </td>
+      <td style="vertical-align: top;"><br>
+      </td>
+      <td style="vertical-align: top;"><br>
+      </td>
+      <td style="vertical-align: top;"><br>
+      </td>
+      <td style="vertical-align: top;"><br>
+      </td>
+    </tr>
   </tbody>
 </table>
 <br>
