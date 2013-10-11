@@ -1,9 +1,9 @@
 Simulator Parameters:
-Command line = -cf doorcontrol.cf -mf doorcontrol_test1.mf -rt 0.5s
-RandomSeed = 1380825046168
+Command line = -cf doorcontrol.cf -mf doorcontrol_test1.mf -rt 0s
+RandomSeed = 1381452091468
 CanNetworkBitTime = 0 ns
 Effective Can Bitrate = Infinity
-Run Time = 0.5s
+Run Time = 0.0s
 Real time rate = null
 Message File = doorcontrol_test1.mf
 Controller File = doorcontrol.cf
@@ -32,7 +32,7 @@ Controller File = doorcontrol.cf
 [DoorControl[FRONT][RIGHT]] @0.100000000: remains in state: CLOSED
 [DoorControl[FRONT][RIGHT]] @0.100000000: State stored: STATE<-CLOSED
 [AssertionMonitor] @0.110000000: *******************************************************************************************************
-[AssertionMonitor] @0.110000000: PASSED simulator.payloads.DoorMotorPayload$ReadableDoorMotorPayload@43b09468 :: command ?== STOP PASSED
+[AssertionMonitor] @0.110000000: PASSED simulator.payloads.DoorMotorPayload$ReadableDoorMotorPayload@1f292d26 :: command ?== STOP PASSED
 [AssertionMonitor] @0.110000000: *******************************************************************************************************
 [DoorControl[FRONT][RIGHT]] @0.110000000: remains in state: CLOSED
 [DoorControl[FRONT][RIGHT]] @0.110000000: State stored: STATE<-CLOSED
@@ -77,7 +77,7 @@ Controller File = doorcontrol.cf
 [DoorControl[FRONT][RIGHT]] @0.310000000: remains in state: BEFORE_OPEN
 [DoorControl[FRONT][RIGHT]] @0.310000000: State stored: STATE<-BEFORE_OPEN
 [AssertionMonitor] @0.320000000: *******************************************************************************************************
-[AssertionMonitor] @0.320000000: PASSED simulator.payloads.DoorMotorPayload$ReadableDoorMotorPayload@45b9ce4b :: command ?== OPEN PASSED
+[AssertionMonitor] @0.320000000: PASSED simulator.payloads.DoorMotorPayload$ReadableDoorMotorPayload@19968e23 :: command ?== OPEN PASSED
 [AssertionMonitor] @0.320000000: *******************************************************************************************************
 [AssertionMonitor] @0.320000000: **************************************************************************
 [AssertionMonitor] @0.320000000: PASSED DoorControl[FRONT][RIGHT]::checkState(STATE) ?== BEFORE_OPEN PASSED
@@ -123,7 +123,7 @@ Controller File = doorcontrol.cf
 [DoorControl[FRONT][RIGHT]] @0.510000000: remains in state: OPENED
 [DoorControl[FRONT][RIGHT]] @0.510000000: State stored: STATE<-OPENED
 [AssertionMonitor] @0.520000000: *******************************************************************************************************
-[AssertionMonitor] @0.520000000: PASSED simulator.payloads.DoorMotorPayload$ReadableDoorMotorPayload@485329c5 :: command ?== STOP PASSED
+[AssertionMonitor] @0.520000000: PASSED simulator.payloads.DoorMotorPayload$ReadableDoorMotorPayload@348bdcd2 :: command ?== STOP PASSED
 [AssertionMonitor] @0.520000000: *******************************************************************************************************
 [AssertionMonitor] @0.520000000: *********************************************************************
 [AssertionMonitor] @0.520000000: PASSED DoorControl[FRONT][RIGHT]::checkState(STATE) ?== OPENED PASSED
@@ -327,7 +327,7 @@ Controller File = doorcontrol.cf
 [DoorControl[FRONT][RIGHT]] @1.500000000: remains in state: CLOSING
 [DoorControl[FRONT][RIGHT]] @1.500000000: State stored: STATE<-CLOSING
 [AssertionMonitor] @1.510000000: ********************************************************************************************************
-[AssertionMonitor] @1.510000000: PASSED simulator.payloads.DoorMotorPayload$ReadableDoorMotorPayload@151a64ed :: command ?== NUDGE PASSED
+[AssertionMonitor] @1.510000000: PASSED simulator.payloads.DoorMotorPayload$ReadableDoorMotorPayload@5210f6d3 :: command ?== NUDGE PASSED
 [AssertionMonitor] @1.510000000: ********************************************************************************************************
 [AssertionMonitor] @1.510000000: **********************************************************************
 [AssertionMonitor] @1.510000000: PASSED DoorControl[FRONT][RIGHT]::checkState(STATE) ?== CLOSING PASSED
@@ -351,7 +351,7 @@ Controller File = doorcontrol.cf
 [DoorControl[FRONT][RIGHT]] @1.590000000: remains in state: BEFORE_OPEN
 [DoorControl[FRONT][RIGHT]] @1.590000000: State stored: STATE<-BEFORE_OPEN
 [AssertionMonitor] @1.600000000: *******************************************************************************************************
-[AssertionMonitor] @1.600000000: PASSED simulator.payloads.DoorMotorPayload$ReadableDoorMotorPayload@4a4e79f1 :: command ?== OPEN PASSED
+[AssertionMonitor] @1.600000000: PASSED simulator.payloads.DoorMotorPayload$ReadableDoorMotorPayload@392d263f :: command ?== OPEN PASSED
 [AssertionMonitor] @1.600000000: *******************************************************************************************************
 [AssertionMonitor] @1.600000000: **************************************************************************
 [AssertionMonitor] @1.600000000: PASSED DoorControl[FRONT][RIGHT]::checkState(STATE) ?== BEFORE_OPEN PASSED
@@ -1017,7 +1017,7 @@ Controller File = doorcontrol.cf
 [DoorControl[FRONT][RIGHT]] @4.890000000: remains in state: CLOSED
 [DoorControl[FRONT][RIGHT]] @4.890000000: State stored: STATE<-CLOSED
 [AssertionMonitor] @4.900000000: *******************************************************************************************************
-[AssertionMonitor] @4.900000000: PASSED simulator.payloads.DoorMotorPayload$ReadableDoorMotorPayload@377653ae :: command ?== STOP PASSED
+[AssertionMonitor] @4.900000000: PASSED simulator.payloads.DoorMotorPayload$ReadableDoorMotorPayload@24a4e2e3 :: command ?== STOP PASSED
 [AssertionMonitor] @4.900000000: *******************************************************************************************************
 [AssertionMonitor] @4.900000000: *********************************************************************
 [AssertionMonitor] @4.900000000: PASSED DoorControl[FRONT][RIGHT]::checkState(STATE) ?== CLOSED PASSED
@@ -1063,7 +1063,7 @@ Controller File = doorcontrol.cf
 [DoorControl[FRONT][RIGHT]] @5.090000000: remains in state: BEFORE_OPEN
 [DoorControl[FRONT][RIGHT]] @5.090000000: State stored: STATE<-BEFORE_OPEN
 [AssertionMonitor] @5.100000000: *******************************************************************************************************
-[AssertionMonitor] @5.100000000: PASSED simulator.payloads.DoorMotorPayload$ReadableDoorMotorPayload@3ed02b51 :: command ?== OPEN PASSED
+[AssertionMonitor] @5.100000000: PASSED simulator.payloads.DoorMotorPayload$ReadableDoorMotorPayload@442a15cd :: command ?== OPEN PASSED
 [AssertionMonitor] @5.100000000: *******************************************************************************************************
 [AssertionMonitor] @5.100000000: **************************************************************************
 [AssertionMonitor] @5.100000000: PASSED DoorControl[FRONT][RIGHT]::checkState(STATE) ?== BEFORE_OPEN PASSED
@@ -1130,49 +1130,375 @@ Controller File = doorcontrol.cf
 [DoorControl[FRONT][RIGHT]] @5.390000000: State stored: STATE<-BEFORE_OPEN
 [DoorControl[FRONT][RIGHT]] @5.400000000: remains in state: BEFORE_OPEN
 [DoorControl[FRONT][RIGHT]] @5.400000000: State stored: STATE<-BEFORE_OPEN
-[DoorControl[FRONT][RIGHT]] @5.410000000: remains in state: BEFORE_OPEN
-[DoorControl[FRONT][RIGHT]] @5.410000000: State stored: STATE<-BEFORE_OPEN
-[DoorControl[FRONT][RIGHT]] @5.420000000: remains in state: BEFORE_OPEN
-[DoorControl[FRONT][RIGHT]] @5.420000000: State stored: STATE<-BEFORE_OPEN
-[DoorControl[FRONT][RIGHT]] @5.430000000: remains in state: BEFORE_OPEN
-[DoorControl[FRONT][RIGHT]] @5.430000000: State stored: STATE<-BEFORE_OPEN
-[DoorControl[FRONT][RIGHT]] @5.440000000: remains in state: BEFORE_OPEN
-[DoorControl[FRONT][RIGHT]] @5.440000000: State stored: STATE<-BEFORE_OPEN
-[DoorControl[FRONT][RIGHT]] @5.450000000: remains in state: BEFORE_OPEN
-[DoorControl[FRONT][RIGHT]] @5.450000000: State stored: STATE<-BEFORE_OPEN
-[DoorControl[FRONT][RIGHT]] @5.460000000: remains in state: BEFORE_OPEN
-[DoorControl[FRONT][RIGHT]] @5.460000000: State stored: STATE<-BEFORE_OPEN
-[DoorControl[FRONT][RIGHT]] @5.470000000: remains in state: BEFORE_OPEN
-[DoorControl[FRONT][RIGHT]] @5.470000000: State stored: STATE<-BEFORE_OPEN
-[DoorControl[FRONT][RIGHT]] @5.480000000: remains in state: BEFORE_OPEN
-[DoorControl[FRONT][RIGHT]] @5.480000000: State stored: STATE<-BEFORE_OPEN
-[DoorControl[FRONT][RIGHT]] @5.490000000: remains in state: BEFORE_OPEN
-[DoorControl[FRONT][RIGHT]] @5.490000000: State stored: STATE<-BEFORE_OPEN
-[DoorControl[FRONT][RIGHT]] @5.500000000: remains in state: BEFORE_OPEN
-[DoorControl[FRONT][RIGHT]] @5.500000000: State stored: STATE<-BEFORE_OPEN
-[DoorControl[FRONT][RIGHT]] @5.510000000: remains in state: BEFORE_OPEN
-[DoorControl[FRONT][RIGHT]] @5.510000000: State stored: STATE<-BEFORE_OPEN
-[DoorControl[FRONT][RIGHT]] @5.520000000: remains in state: BEFORE_OPEN
-[DoorControl[FRONT][RIGHT]] @5.520000000: State stored: STATE<-BEFORE_OPEN
-[DoorControl[FRONT][RIGHT]] @5.530000000: remains in state: BEFORE_OPEN
-[DoorControl[FRONT][RIGHT]] @5.530000000: State stored: STATE<-BEFORE_OPEN
-[DoorControl[FRONT][RIGHT]] @5.540000000: remains in state: BEFORE_OPEN
-[DoorControl[FRONT][RIGHT]] @5.540000000: State stored: STATE<-BEFORE_OPEN
-[DoorControl[FRONT][RIGHT]] @5.550000000: remains in state: BEFORE_OPEN
-[DoorControl[FRONT][RIGHT]] @5.550000000: State stored: STATE<-BEFORE_OPEN
-[DoorControl[FRONT][RIGHT]] @5.560000000: remains in state: BEFORE_OPEN
-[DoorControl[FRONT][RIGHT]] @5.560000000: State stored: STATE<-BEFORE_OPEN
-[DoorControl[FRONT][RIGHT]] @5.570000000: remains in state: BEFORE_OPEN
-[DoorControl[FRONT][RIGHT]] @5.570000000: State stored: STATE<-BEFORE_OPEN
-[DoorControl[FRONT][RIGHT]] @5.580000000: remains in state: BEFORE_OPEN
-[DoorControl[FRONT][RIGHT]] @5.580000000: State stored: STATE<-BEFORE_OPEN
-[DoorControl[FRONT][RIGHT]] @5.590000000: remains in state: BEFORE_OPEN
-[DoorControl[FRONT][RIGHT]] @5.590000000: State stored: STATE<-BEFORE_OPEN
-[DoorControl[FRONT][RIGHT]] @5.600000000: remains in state: BEFORE_OPEN
-[DoorControl[FRONT][RIGHT]] @5.600000000: State stored: STATE<-BEFORE_OPEN
-[Elevator] @5.600000000: Simulation Finished ***
+[DoorControl[FRONT][RIGHT]] @5.410000000: Transition: BEFORE_OPEN -> OPENED
+[DoorControl[FRONT][RIGHT]] @5.410000000: State stored: STATE<-OPENED
+[DoorControl[FRONT][RIGHT]] @5.420000000: remains in state: OPENED
+[DoorControl[FRONT][RIGHT]] @5.420000000: State stored: STATE<-OPENED
+[DoorControl[FRONT][RIGHT]] @5.430000000: remains in state: OPENED
+[DoorControl[FRONT][RIGHT]] @5.430000000: State stored: STATE<-OPENED
+[DoorControl[FRONT][RIGHT]] @5.440000000: remains in state: OPENED
+[DoorControl[FRONT][RIGHT]] @5.440000000: State stored: STATE<-OPENED
+[DoorControl[FRONT][RIGHT]] @5.450000000: remains in state: OPENED
+[DoorControl[FRONT][RIGHT]] @5.450000000: State stored: STATE<-OPENED
+[DoorControl[FRONT][RIGHT]] @5.460000000: remains in state: OPENED
+[DoorControl[FRONT][RIGHT]] @5.460000000: State stored: STATE<-OPENED
+[DoorControl[FRONT][RIGHT]] @5.470000000: remains in state: OPENED
+[DoorControl[FRONT][RIGHT]] @5.470000000: State stored: STATE<-OPENED
+[DoorControl[FRONT][RIGHT]] @5.480000000: remains in state: OPENED
+[DoorControl[FRONT][RIGHT]] @5.480000000: State stored: STATE<-OPENED
+[DoorControl[FRONT][RIGHT]] @5.490000000: remains in state: OPENED
+[DoorControl[FRONT][RIGHT]] @5.490000000: State stored: STATE<-OPENED
+[DoorControl[FRONT][RIGHT]] @5.500000000: remains in state: OPENED
+[DoorControl[FRONT][RIGHT]] @5.500000000: State stored: STATE<-OPENED
+[DoorControl[FRONT][RIGHT]] @5.510000000: remains in state: OPENED
+[DoorControl[FRONT][RIGHT]] @5.510000000: State stored: STATE<-OPENED
+[DoorControl[FRONT][RIGHT]] @5.520000000: remains in state: OPENED
+[DoorControl[FRONT][RIGHT]] @5.520000000: State stored: STATE<-OPENED
+[DoorControl[FRONT][RIGHT]] @5.530000000: remains in state: OPENED
+[DoorControl[FRONT][RIGHT]] @5.530000000: State stored: STATE<-OPENED
+[DoorControl[FRONT][RIGHT]] @5.540000000: remains in state: OPENED
+[DoorControl[FRONT][RIGHT]] @5.540000000: State stored: STATE<-OPENED
+[DoorControl[FRONT][RIGHT]] @5.550000000: remains in state: OPENED
+[DoorControl[FRONT][RIGHT]] @5.550000000: State stored: STATE<-OPENED
+[DoorControl[FRONT][RIGHT]] @5.560000000: remains in state: OPENED
+[DoorControl[FRONT][RIGHT]] @5.560000000: State stored: STATE<-OPENED
+[DoorControl[FRONT][RIGHT]] @5.570000000: remains in state: OPENED
+[DoorControl[FRONT][RIGHT]] @5.570000000: State stored: STATE<-OPENED
+[DoorControl[FRONT][RIGHT]] @5.580000000: remains in state: OPENED
+[DoorControl[FRONT][RIGHT]] @5.580000000: State stored: STATE<-OPENED
+[DoorControl[FRONT][RIGHT]] @5.590000000: remains in state: OPENED
+[DoorControl[FRONT][RIGHT]] @5.590000000: State stored: STATE<-OPENED
+[DoorControl[FRONT][RIGHT]] @5.600000000: remains in state: OPENED
+[DoorControl[FRONT][RIGHT]] @5.600000000: State stored: STATE<-OPENED
+[DoorControl[FRONT][RIGHT]] @5.610000000: remains in state: OPENED
+[DoorControl[FRONT][RIGHT]] @5.610000000: State stored: STATE<-OPENED
+[DoorControl[FRONT][RIGHT]] @5.620000000: remains in state: OPENED
+[DoorControl[FRONT][RIGHT]] @5.620000000: State stored: STATE<-OPENED
+[DoorControl[FRONT][RIGHT]] @5.630000000: remains in state: OPENED
+[DoorControl[FRONT][RIGHT]] @5.630000000: State stored: STATE<-OPENED
+[DoorControl[FRONT][RIGHT]] @5.640000000: remains in state: OPENED
+[DoorControl[FRONT][RIGHT]] @5.640000000: State stored: STATE<-OPENED
+[DoorControl[FRONT][RIGHT]] @5.650000000: remains in state: OPENED
+[DoorControl[FRONT][RIGHT]] @5.650000000: State stored: STATE<-OPENED
+[DoorControl[FRONT][RIGHT]] @5.660000000: remains in state: OPENED
+[DoorControl[FRONT][RIGHT]] @5.660000000: State stored: STATE<-OPENED
+[DoorControl[FRONT][RIGHT]] @5.670000000: remains in state: OPENED
+[DoorControl[FRONT][RIGHT]] @5.670000000: State stored: STATE<-OPENED
+[DoorControl[FRONT][RIGHT]] @5.680000000: remains in state: OPENED
+[DoorControl[FRONT][RIGHT]] @5.680000000: State stored: STATE<-OPENED
+[DoorControl[FRONT][RIGHT]] @5.690000000: remains in state: OPENED
+[DoorControl[FRONT][RIGHT]] @5.690000000: State stored: STATE<-OPENED
+[DoorControl[FRONT][RIGHT]] @5.700000000: remains in state: OPENED
+[DoorControl[FRONT][RIGHT]] @5.700000000: State stored: STATE<-OPENED
+[DoorControl[FRONT][RIGHT]] @5.710000000: remains in state: OPENED
+[DoorControl[FRONT][RIGHT]] @5.710000000: State stored: STATE<-OPENED
+[DoorControl[FRONT][RIGHT]] @5.720000000: remains in state: OPENED
+[DoorControl[FRONT][RIGHT]] @5.720000000: State stored: STATE<-OPENED
+[DoorControl[FRONT][RIGHT]] @5.730000000: remains in state: OPENED
+[DoorControl[FRONT][RIGHT]] @5.730000000: State stored: STATE<-OPENED
+[DoorControl[FRONT][RIGHT]] @5.740000000: remains in state: OPENED
+[DoorControl[FRONT][RIGHT]] @5.740000000: State stored: STATE<-OPENED
+[DoorControl[FRONT][RIGHT]] @5.750000000: remains in state: OPENED
+[DoorControl[FRONT][RIGHT]] @5.750000000: State stored: STATE<-OPENED
+[DoorControl[FRONT][RIGHT]] @5.760000000: remains in state: OPENED
+[DoorControl[FRONT][RIGHT]] @5.760000000: State stored: STATE<-OPENED
+[DoorControl[FRONT][RIGHT]] @5.770000000: remains in state: OPENED
+[DoorControl[FRONT][RIGHT]] @5.770000000: State stored: STATE<-OPENED
+[DoorControl[FRONT][RIGHT]] @5.780000000: remains in state: OPENED
+[DoorControl[FRONT][RIGHT]] @5.780000000: State stored: STATE<-OPENED
+[DoorControl[FRONT][RIGHT]] @5.790000000: remains in state: OPENED
+[DoorControl[FRONT][RIGHT]] @5.790000000: State stored: STATE<-OPENED
+[DoorControl[FRONT][RIGHT]] @5.800000000: remains in state: OPENED
+[DoorControl[FRONT][RIGHT]] @5.800000000: State stored: STATE<-OPENED
+[DoorControl[FRONT][RIGHT]] @5.810000000: remains in state: OPENED
+[DoorControl[FRONT][RIGHT]] @5.810000000: State stored: STATE<-OPENED
+[DoorControl[FRONT][RIGHT]] @5.820000000: remains in state: OPENED
+[DoorControl[FRONT][RIGHT]] @5.820000000: State stored: STATE<-OPENED
+[DoorControl[FRONT][RIGHT]] @5.830000000: remains in state: OPENED
+[DoorControl[FRONT][RIGHT]] @5.830000000: State stored: STATE<-OPENED
+[DoorControl[FRONT][RIGHT]] @5.840000000: remains in state: OPENED
+[DoorControl[FRONT][RIGHT]] @5.840000000: State stored: STATE<-OPENED
+[DoorControl[FRONT][RIGHT]] @5.850000000: remains in state: OPENED
+[DoorControl[FRONT][RIGHT]] @5.850000000: State stored: STATE<-OPENED
+[DoorControl[FRONT][RIGHT]] @5.860000000: remains in state: OPENED
+[DoorControl[FRONT][RIGHT]] @5.860000000: State stored: STATE<-OPENED
+[DoorControl[FRONT][RIGHT]] @5.870000000: remains in state: OPENED
+[DoorControl[FRONT][RIGHT]] @5.870000000: State stored: STATE<-OPENED
+[DoorControl[FRONT][RIGHT]] @5.880000000: remains in state: OPENED
+[DoorControl[FRONT][RIGHT]] @5.880000000: State stored: STATE<-OPENED
+[DoorControl[FRONT][RIGHT]] @5.890000000: remains in state: OPENED
+[DoorControl[FRONT][RIGHT]] @5.890000000: State stored: STATE<-OPENED
+[DoorControl[FRONT][RIGHT]] @5.900000000: remains in state: OPENED
+[DoorControl[FRONT][RIGHT]] @5.900000000: State stored: STATE<-OPENED
+[DoorControl[FRONT][RIGHT]] @5.910000000: remains in state: OPENED
+[DoorControl[FRONT][RIGHT]] @5.910000000: State stored: STATE<-OPENED
+[DoorControl[FRONT][RIGHT]] @5.920000000: remains in state: OPENED
+[DoorControl[FRONT][RIGHT]] @5.920000000: State stored: STATE<-OPENED
+[DoorControl[FRONT][RIGHT]] @5.930000000: remains in state: OPENED
+[DoorControl[FRONT][RIGHT]] @5.930000000: State stored: STATE<-OPENED
+[DoorControl[FRONT][RIGHT]] @5.940000000: remains in state: OPENED
+[DoorControl[FRONT][RIGHT]] @5.940000000: State stored: STATE<-OPENED
+[DoorControl[FRONT][RIGHT]] @5.950000000: remains in state: OPENED
+[DoorControl[FRONT][RIGHT]] @5.950000000: State stored: STATE<-OPENED
+[DoorControl[FRONT][RIGHT]] @5.960000000: remains in state: OPENED
+[DoorControl[FRONT][RIGHT]] @5.960000000: State stored: STATE<-OPENED
+[DoorControl[FRONT][RIGHT]] @5.970000000: remains in state: OPENED
+[DoorControl[FRONT][RIGHT]] @5.970000000: State stored: STATE<-OPENED
+[DoorControl[FRONT][RIGHT]] @5.980000000: remains in state: OPENED
+[DoorControl[FRONT][RIGHT]] @5.980000000: State stored: STATE<-OPENED
+[DoorControl[FRONT][RIGHT]] @5.990000000: remains in state: OPENED
+[DoorControl[FRONT][RIGHT]] @5.990000000: State stored: STATE<-OPENED
+[DoorControl[FRONT][RIGHT]] @6.000000000: remains in state: OPENED
+[DoorControl[FRONT][RIGHT]] @6.000000000: State stored: STATE<-OPENED
+[DoorControl[FRONT][RIGHT]] @6.010000000: remains in state: OPENED
+[DoorControl[FRONT][RIGHT]] @6.010000000: State stored: STATE<-OPENED
+[DoorControl[FRONT][RIGHT]] @6.020000000: remains in state: OPENED
+[DoorControl[FRONT][RIGHT]] @6.020000000: State stored: STATE<-OPENED
+[DoorControl[FRONT][RIGHT]] @6.030000000: remains in state: OPENED
+[DoorControl[FRONT][RIGHT]] @6.030000000: State stored: STATE<-OPENED
+[DoorControl[FRONT][RIGHT]] @6.040000000: remains in state: OPENED
+[DoorControl[FRONT][RIGHT]] @6.040000000: State stored: STATE<-OPENED
+[DoorControl[FRONT][RIGHT]] @6.050000000: remains in state: OPENED
+[DoorControl[FRONT][RIGHT]] @6.050000000: State stored: STATE<-OPENED
+[DoorControl[FRONT][RIGHT]] @6.060000000: remains in state: OPENED
+[DoorControl[FRONT][RIGHT]] @6.060000000: State stored: STATE<-OPENED
+[DoorControl[FRONT][RIGHT]] @6.070000000: remains in state: OPENED
+[DoorControl[FRONT][RIGHT]] @6.070000000: State stored: STATE<-OPENED
+[DoorControl[FRONT][RIGHT]] @6.080000000: remains in state: OPENED
+[DoorControl[FRONT][RIGHT]] @6.080000000: State stored: STATE<-OPENED
+[DoorControl[FRONT][RIGHT]] @6.090000000: remains in state: OPENED
+[DoorControl[FRONT][RIGHT]] @6.090000000: State stored: STATE<-OPENED
+[DoorControl[FRONT][RIGHT]] @6.100000000: remains in state: OPENED
+[DoorControl[FRONT][RIGHT]] @6.100000000: State stored: STATE<-OPENED
+[DoorControl[FRONT][RIGHT]] @6.110000000: remains in state: OPENED
+[DoorControl[FRONT][RIGHT]] @6.110000000: State stored: STATE<-OPENED
+[DoorControl[FRONT][RIGHT]] @6.120000000: remains in state: OPENED
+[DoorControl[FRONT][RIGHT]] @6.120000000: State stored: STATE<-OPENED
+[DoorControl[FRONT][RIGHT]] @6.130000000: remains in state: OPENED
+[DoorControl[FRONT][RIGHT]] @6.130000000: State stored: STATE<-OPENED
+[DoorControl[FRONT][RIGHT]] @6.140000000: remains in state: OPENED
+[DoorControl[FRONT][RIGHT]] @6.140000000: State stored: STATE<-OPENED
+[DoorControl[FRONT][RIGHT]] @6.150000000: remains in state: OPENED
+[DoorControl[FRONT][RIGHT]] @6.150000000: State stored: STATE<-OPENED
+[DoorControl[FRONT][RIGHT]] @6.160000000: remains in state: OPENED
+[DoorControl[FRONT][RIGHT]] @6.160000000: State stored: STATE<-OPENED
+[DoorControl[FRONT][RIGHT]] @6.170000000: remains in state: OPENED
+[DoorControl[FRONT][RIGHT]] @6.170000000: State stored: STATE<-OPENED
+[DoorControl[FRONT][RIGHT]] @6.180000000: remains in state: OPENED
+[DoorControl[FRONT][RIGHT]] @6.180000000: State stored: STATE<-OPENED
+[DoorControl[FRONT][RIGHT]] @6.190000000: remains in state: OPENED
+[DoorControl[FRONT][RIGHT]] @6.190000000: State stored: STATE<-OPENED
+[DoorControl[FRONT][RIGHT]] @6.200000000: remains in state: OPENED
+[DoorControl[FRONT][RIGHT]] @6.200000000: State stored: STATE<-OPENED
+[DoorControl[FRONT][RIGHT]] @6.210000000: remains in state: OPENED
+[DoorControl[FRONT][RIGHT]] @6.210000000: State stored: STATE<-OPENED
+[DoorControl[FRONT][RIGHT]] @6.220000000: remains in state: OPENED
+[DoorControl[FRONT][RIGHT]] @6.220000000: State stored: STATE<-OPENED
+[DoorControl[FRONT][RIGHT]] @6.230000000: remains in state: OPENED
+[DoorControl[FRONT][RIGHT]] @6.230000000: State stored: STATE<-OPENED
+[DoorControl[FRONT][RIGHT]] @6.240000000: remains in state: OPENED
+[DoorControl[FRONT][RIGHT]] @6.240000000: State stored: STATE<-OPENED
+[DoorControl[FRONT][RIGHT]] @6.250000000: remains in state: OPENED
+[DoorControl[FRONT][RIGHT]] @6.250000000: State stored: STATE<-OPENED
+[DoorControl[FRONT][RIGHT]] @6.260000000: remains in state: OPENED
+[DoorControl[FRONT][RIGHT]] @6.260000000: State stored: STATE<-OPENED
+[DoorControl[FRONT][RIGHT]] @6.270000000: remains in state: OPENED
+[DoorControl[FRONT][RIGHT]] @6.270000000: State stored: STATE<-OPENED
+[DoorControl[FRONT][RIGHT]] @6.280000000: remains in state: OPENED
+[DoorControl[FRONT][RIGHT]] @6.280000000: State stored: STATE<-OPENED
+[DoorControl[FRONT][RIGHT]] @6.290000000: remains in state: OPENED
+[DoorControl[FRONT][RIGHT]] @6.290000000: State stored: STATE<-OPENED
+[DoorControl[FRONT][RIGHT]] @6.300000000: remains in state: OPENED
+[DoorControl[FRONT][RIGHT]] @6.300000000: State stored: STATE<-OPENED
+[DoorControl[FRONT][RIGHT]] @6.310000000: remains in state: OPENED
+[DoorControl[FRONT][RIGHT]] @6.310000000: State stored: STATE<-OPENED
+[DoorControl[FRONT][RIGHT]] @6.320000000: remains in state: OPENED
+[DoorControl[FRONT][RIGHT]] @6.320000000: State stored: STATE<-OPENED
+[DoorControl[FRONT][RIGHT]] @6.330000000: remains in state: OPENED
+[DoorControl[FRONT][RIGHT]] @6.330000000: State stored: STATE<-OPENED
+[DoorControl[FRONT][RIGHT]] @6.340000000: remains in state: OPENED
+[DoorControl[FRONT][RIGHT]] @6.340000000: State stored: STATE<-OPENED
+[DoorControl[FRONT][RIGHT]] @6.350000000: remains in state: OPENED
+[DoorControl[FRONT][RIGHT]] @6.350000000: State stored: STATE<-OPENED
+[DoorControl[FRONT][RIGHT]] @6.360000000: remains in state: OPENED
+[DoorControl[FRONT][RIGHT]] @6.360000000: State stored: STATE<-OPENED
+[DoorControl[FRONT][RIGHT]] @6.370000000: remains in state: OPENED
+[DoorControl[FRONT][RIGHT]] @6.370000000: State stored: STATE<-OPENED
+[DoorControl[FRONT][RIGHT]] @6.380000000: remains in state: OPENED
+[DoorControl[FRONT][RIGHT]] @6.380000000: State stored: STATE<-OPENED
+[DoorControl[FRONT][RIGHT]] @6.390000000: remains in state: OPENED
+[DoorControl[FRONT][RIGHT]] @6.390000000: State stored: STATE<-OPENED
+[DoorControl[FRONT][RIGHT]] @6.400000000: remains in state: OPENED
+[DoorControl[FRONT][RIGHT]] @6.400000000: State stored: STATE<-OPENED
+[DoorControl[FRONT][RIGHT]] @6.410000000: remains in state: OPENED
+[DoorControl[FRONT][RIGHT]] @6.410000000: State stored: STATE<-OPENED
+[DoorControl[FRONT][RIGHT]] @6.420000000: Transition: OPENED -> CLOSING
+[DoorControl[FRONT][RIGHT]] @6.420000000: State stored: STATE<-CLOSING
+[DoorControl[FRONT][RIGHT]] @6.430000000: remains in state: CLOSING
+[DoorControl[FRONT][RIGHT]] @6.430000000: State stored: STATE<-CLOSING
+[DoorControl[FRONT][RIGHT]] @6.440000000: remains in state: CLOSING
+[DoorControl[FRONT][RIGHT]] @6.440000000: State stored: STATE<-CLOSING
+[DoorControl[FRONT][RIGHT]] @6.450000000: remains in state: CLOSING
+[DoorControl[FRONT][RIGHT]] @6.450000000: State stored: STATE<-CLOSING
+[DoorControl[FRONT][RIGHT]] @6.460000000: remains in state: CLOSING
+[DoorControl[FRONT][RIGHT]] @6.460000000: State stored: STATE<-CLOSING
+[DoorControl[FRONT][RIGHT]] @6.470000000: remains in state: CLOSING
+[DoorControl[FRONT][RIGHT]] @6.470000000: State stored: STATE<-CLOSING
+[DoorControl[FRONT][RIGHT]] @6.480000000: remains in state: CLOSING
+[DoorControl[FRONT][RIGHT]] @6.480000000: State stored: STATE<-CLOSING
+[DoorControl[FRONT][RIGHT]] @6.490000000: remains in state: CLOSING
+[DoorControl[FRONT][RIGHT]] @6.490000000: State stored: STATE<-CLOSING
+[DoorControl[FRONT][RIGHT]] @6.500000000: remains in state: CLOSING
+[DoorControl[FRONT][RIGHT]] @6.500000000: State stored: STATE<-CLOSING
+[DoorControl[FRONT][RIGHT]] @6.510000000: remains in state: CLOSING
+[DoorControl[FRONT][RIGHT]] @6.510000000: State stored: STATE<-CLOSING
+[DoorControl[FRONT][RIGHT]] @6.520000000: remains in state: CLOSING
+[DoorControl[FRONT][RIGHT]] @6.520000000: State stored: STATE<-CLOSING
+[DoorControl[FRONT][RIGHT]] @6.530000000: remains in state: CLOSING
+[DoorControl[FRONT][RIGHT]] @6.530000000: State stored: STATE<-CLOSING
+[DoorControl[FRONT][RIGHT]] @6.540000000: remains in state: CLOSING
+[DoorControl[FRONT][RIGHT]] @6.540000000: State stored: STATE<-CLOSING
+[DoorControl[FRONT][RIGHT]] @6.550000000: remains in state: CLOSING
+[DoorControl[FRONT][RIGHT]] @6.550000000: State stored: STATE<-CLOSING
+[DoorControl[FRONT][RIGHT]] @6.560000000: remains in state: CLOSING
+[DoorControl[FRONT][RIGHT]] @6.560000000: State stored: STATE<-CLOSING
+[DoorControl[FRONT][RIGHT]] @6.570000000: remains in state: CLOSING
+[DoorControl[FRONT][RIGHT]] @6.570000000: State stored: STATE<-CLOSING
+[DoorControl[FRONT][RIGHT]] @6.580000000: remains in state: CLOSING
+[DoorControl[FRONT][RIGHT]] @6.580000000: State stored: STATE<-CLOSING
+[DoorControl[FRONT][RIGHT]] @6.590000000: remains in state: CLOSING
+[DoorControl[FRONT][RIGHT]] @6.590000000: State stored: STATE<-CLOSING
+[DoorControl[FRONT][RIGHT]] @6.600000000: remains in state: CLOSING
+[DoorControl[FRONT][RIGHT]] @6.600000000: State stored: STATE<-CLOSING
+[DoorControl[FRONT][RIGHT]] @6.610000000: remains in state: CLOSING
+[DoorControl[FRONT][RIGHT]] @6.610000000: State stored: STATE<-CLOSING
+[DoorControl[FRONT][RIGHT]] @6.620000000: remains in state: CLOSING
+[DoorControl[FRONT][RIGHT]] @6.620000000: State stored: STATE<-CLOSING
+[DoorControl[FRONT][RIGHT]] @6.630000000: remains in state: CLOSING
+[DoorControl[FRONT][RIGHT]] @6.630000000: State stored: STATE<-CLOSING
+[DoorControl[FRONT][RIGHT]] @6.640000000: remains in state: CLOSING
+[DoorControl[FRONT][RIGHT]] @6.640000000: State stored: STATE<-CLOSING
+[DoorControl[FRONT][RIGHT]] @6.650000000: remains in state: CLOSING
+[DoorControl[FRONT][RIGHT]] @6.650000000: State stored: STATE<-CLOSING
+[DoorControl[FRONT][RIGHT]] @6.660000000: remains in state: CLOSING
+[DoorControl[FRONT][RIGHT]] @6.660000000: State stored: STATE<-CLOSING
+[DoorControl[FRONT][RIGHT]] @6.670000000: remains in state: CLOSING
+[DoorControl[FRONT][RIGHT]] @6.670000000: State stored: STATE<-CLOSING
+[DoorControl[FRONT][RIGHT]] @6.680000000: remains in state: CLOSING
+[DoorControl[FRONT][RIGHT]] @6.680000000: State stored: STATE<-CLOSING
+[DoorControl[FRONT][RIGHT]] @6.690000000: remains in state: CLOSING
+[DoorControl[FRONT][RIGHT]] @6.690000000: State stored: STATE<-CLOSING
+[DoorControl[FRONT][RIGHT]] @6.700000000: remains in state: CLOSING
+[DoorControl[FRONT][RIGHT]] @6.700000000: State stored: STATE<-CLOSING
+[DoorControl[FRONT][RIGHT]] @6.710000000: remains in state: CLOSING
+[DoorControl[FRONT][RIGHT]] @6.710000000: State stored: STATE<-CLOSING
+[DoorControl[FRONT][RIGHT]] @6.720000000: remains in state: CLOSING
+[DoorControl[FRONT][RIGHT]] @6.720000000: State stored: STATE<-CLOSING
+[DoorControl[FRONT][RIGHT]] @6.730000000: remains in state: CLOSING
+[DoorControl[FRONT][RIGHT]] @6.730000000: State stored: STATE<-CLOSING
+[DoorControl[FRONT][RIGHT]] @6.740000000: remains in state: CLOSING
+[DoorControl[FRONT][RIGHT]] @6.740000000: State stored: STATE<-CLOSING
+[DoorControl[FRONT][RIGHT]] @6.750000000: remains in state: CLOSING
+[DoorControl[FRONT][RIGHT]] @6.750000000: State stored: STATE<-CLOSING
+[DoorControl[FRONT][RIGHT]] @6.760000000: remains in state: CLOSING
+[DoorControl[FRONT][RIGHT]] @6.760000000: State stored: STATE<-CLOSING
+[DoorControl[FRONT][RIGHT]] @6.770000000: remains in state: CLOSING
+[DoorControl[FRONT][RIGHT]] @6.770000000: State stored: STATE<-CLOSING
+[DoorControl[FRONT][RIGHT]] @6.780000000: remains in state: CLOSING
+[DoorControl[FRONT][RIGHT]] @6.780000000: State stored: STATE<-CLOSING
+[DoorControl[FRONT][RIGHT]] @6.790000000: remains in state: CLOSING
+[DoorControl[FRONT][RIGHT]] @6.790000000: State stored: STATE<-CLOSING
+[DoorControl[FRONT][RIGHT]] @6.800000000: remains in state: CLOSING
+[DoorControl[FRONT][RIGHT]] @6.800000000: State stored: STATE<-CLOSING
+[DoorControl[FRONT][RIGHT]] @6.810000000: remains in state: CLOSING
+[DoorControl[FRONT][RIGHT]] @6.810000000: State stored: STATE<-CLOSING
+[DoorControl[FRONT][RIGHT]] @6.820000000: remains in state: CLOSING
+[DoorControl[FRONT][RIGHT]] @6.820000000: State stored: STATE<-CLOSING
+[DoorControl[FRONT][RIGHT]] @6.830000000: remains in state: CLOSING
+[DoorControl[FRONT][RIGHT]] @6.830000000: State stored: STATE<-CLOSING
+[DoorControl[FRONT][RIGHT]] @6.840000000: remains in state: CLOSING
+[DoorControl[FRONT][RIGHT]] @6.840000000: State stored: STATE<-CLOSING
+[DoorControl[FRONT][RIGHT]] @6.850000000: remains in state: CLOSING
+[DoorControl[FRONT][RIGHT]] @6.850000000: State stored: STATE<-CLOSING
+[DoorControl[FRONT][RIGHT]] @6.860000000: remains in state: CLOSING
+[DoorControl[FRONT][RIGHT]] @6.860000000: State stored: STATE<-CLOSING
+[DoorControl[FRONT][RIGHT]] @6.870000000: remains in state: CLOSING
+[DoorControl[FRONT][RIGHT]] @6.870000000: State stored: STATE<-CLOSING
+[DoorControl[FRONT][RIGHT]] @6.880000000: remains in state: CLOSING
+[DoorControl[FRONT][RIGHT]] @6.880000000: State stored: STATE<-CLOSING
+[DoorControl[FRONT][RIGHT]] @6.890000000: remains in state: CLOSING
+[DoorControl[FRONT][RIGHT]] @6.890000000: State stored: STATE<-CLOSING
+[DoorControl[FRONT][RIGHT]] @6.900000000: remains in state: CLOSING
+[DoorControl[FRONT][RIGHT]] @6.900000000: State stored: STATE<-CLOSING
+[DoorControl[FRONT][RIGHT]] @6.910000000: remains in state: CLOSING
+[DoorControl[FRONT][RIGHT]] @6.910000000: State stored: STATE<-CLOSING
+[DoorControl[FRONT][RIGHT]] @6.920000000: remains in state: CLOSING
+[DoorControl[FRONT][RIGHT]] @6.920000000: State stored: STATE<-CLOSING
+[DoorControl[FRONT][RIGHT]] @6.930000000: remains in state: CLOSING
+[DoorControl[FRONT][RIGHT]] @6.930000000: State stored: STATE<-CLOSING
+[DoorControl[FRONT][RIGHT]] @6.940000000: remains in state: CLOSING
+[DoorControl[FRONT][RIGHT]] @6.940000000: State stored: STATE<-CLOSING
+[DoorControl[FRONT][RIGHT]] @6.950000000: remains in state: CLOSING
+[DoorControl[FRONT][RIGHT]] @6.950000000: State stored: STATE<-CLOSING
+[DoorControl[FRONT][RIGHT]] @6.960000000: remains in state: CLOSING
+[DoorControl[FRONT][RIGHT]] @6.960000000: State stored: STATE<-CLOSING
+[DoorControl[FRONT][RIGHT]] @6.970000000: remains in state: CLOSING
+[DoorControl[FRONT][RIGHT]] @6.970000000: State stored: STATE<-CLOSING
+[DoorControl[FRONT][RIGHT]] @6.980000000: remains in state: CLOSING
+[DoorControl[FRONT][RIGHT]] @6.980000000: State stored: STATE<-CLOSING
+[DoorControl[FRONT][RIGHT]] @6.990000000: remains in state: CLOSING
+[DoorControl[FRONT][RIGHT]] @6.990000000: State stored: STATE<-CLOSING
+[DoorControl[FRONT][RIGHT]] @7.000000000: remains in state: CLOSING
+[DoorControl[FRONT][RIGHT]] @7.000000000: State stored: STATE<-CLOSING
+[DoorControl[FRONT][RIGHT]] @7.010000000: Transition: CLOSING -> BEFORE_OPEN
+[DoorControl[FRONT][RIGHT]] @7.010000000: State stored: STATE<-BEFORE_OPEN
+[DoorControl[FRONT][RIGHT]] @7.020000000: remains in state: BEFORE_OPEN
+[DoorControl[FRONT][RIGHT]] @7.020000000: State stored: STATE<-BEFORE_OPEN
+[DoorControl[FRONT][RIGHT]] @7.030000000: remains in state: BEFORE_OPEN
+[DoorControl[FRONT][RIGHT]] @7.030000000: State stored: STATE<-BEFORE_OPEN
+[DoorControl[FRONT][RIGHT]] @7.040000000: remains in state: BEFORE_OPEN
+[DoorControl[FRONT][RIGHT]] @7.040000000: State stored: STATE<-BEFORE_OPEN
+[DoorControl[FRONT][RIGHT]] @7.050000000: remains in state: BEFORE_OPEN
+[DoorControl[FRONT][RIGHT]] @7.050000000: State stored: STATE<-BEFORE_OPEN
+[DoorControl[FRONT][RIGHT]] @7.060000000: remains in state: BEFORE_OPEN
+[DoorControl[FRONT][RIGHT]] @7.060000000: State stored: STATE<-BEFORE_OPEN
+[DoorControl[FRONT][RIGHT]] @7.070000000: remains in state: BEFORE_OPEN
+[DoorControl[FRONT][RIGHT]] @7.070000000: State stored: STATE<-BEFORE_OPEN
+[DoorControl[FRONT][RIGHT]] @7.080000000: remains in state: BEFORE_OPEN
+[DoorControl[FRONT][RIGHT]] @7.080000000: State stored: STATE<-BEFORE_OPEN
+[DoorControl[FRONT][RIGHT]] @7.090000000: remains in state: BEFORE_OPEN
+[DoorControl[FRONT][RIGHT]] @7.090000000: State stored: STATE<-BEFORE_OPEN
+[DoorControl[FRONT][RIGHT]] @7.100000000: remains in state: BEFORE_OPEN
+[DoorControl[FRONT][RIGHT]] @7.100000000: State stored: STATE<-BEFORE_OPEN
+[DoorControl[FRONT][RIGHT]] @7.110000000: remains in state: BEFORE_OPEN
+[DoorControl[FRONT][RIGHT]] @7.110000000: State stored: STATE<-BEFORE_OPEN
+[DoorControl[FRONT][RIGHT]] @7.120000000: remains in state: BEFORE_OPEN
+[DoorControl[FRONT][RIGHT]] @7.120000000: State stored: STATE<-BEFORE_OPEN
+[DoorControl[FRONT][RIGHT]] @7.130000000: remains in state: BEFORE_OPEN
+[DoorControl[FRONT][RIGHT]] @7.130000000: State stored: STATE<-BEFORE_OPEN
+[DoorControl[FRONT][RIGHT]] @7.140000000: remains in state: BEFORE_OPEN
+[DoorControl[FRONT][RIGHT]] @7.140000000: State stored: STATE<-BEFORE_OPEN
+[DoorControl[FRONT][RIGHT]] @7.150000000: remains in state: BEFORE_OPEN
+[DoorControl[FRONT][RIGHT]] @7.150000000: State stored: STATE<-BEFORE_OPEN
+[DoorControl[FRONT][RIGHT]] @7.160000000: remains in state: BEFORE_OPEN
+[DoorControl[FRONT][RIGHT]] @7.160000000: State stored: STATE<-BEFORE_OPEN
+[DoorControl[FRONT][RIGHT]] @7.170000000: remains in state: BEFORE_OPEN
+[DoorControl[FRONT][RIGHT]] @7.170000000: State stored: STATE<-BEFORE_OPEN
+[DoorControl[FRONT][RIGHT]] @7.180000000: remains in state: BEFORE_OPEN
+[DoorControl[FRONT][RIGHT]] @7.180000000: State stored: STATE<-BEFORE_OPEN
+[DoorControl[FRONT][RIGHT]] @7.190000000: remains in state: BEFORE_OPEN
+[DoorControl[FRONT][RIGHT]] @7.190000000: State stored: STATE<-BEFORE_OPEN
+[AssertionMonitor] @7.200000000: *******************************************************************************************************
+[AssertionMonitor] @7.200000000: PASSED simulator.payloads.DoorMotorPayload$ReadableDoorMotorPayload@63238bd2 :: command ?== OPEN PASSED
+[AssertionMonitor] @7.200000000: *******************************************************************************************************
+[AssertionMonitor] @7.200000000: **************************************************************************
+[AssertionMonitor] @7.200000000: PASSED DoorControl[FRONT][RIGHT]::checkState(STATE) ?== BEFORE_OPEN PASSED
+[AssertionMonitor] @7.200000000: **************************************************************************
+[DoorControl[FRONT][RIGHT]] @7.200000000: remains in state: BEFORE_OPEN
+[DoorControl[FRONT][RIGHT]] @7.200000000: State stored: STATE<-BEFORE_OPEN
+[Elevator] @7.200000000: Simulation Finished ***
 ******************Summary******************
-Passed:  13
+Passed:  15
 Failed:  0
-Total :  13
+Total :  15
 

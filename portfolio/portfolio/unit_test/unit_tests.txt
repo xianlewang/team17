@@ -5,3 +5,4 @@ DoorControl doorcontrol.cf doorcontrol_test1.mf
 CarButtonControl carbuttoncontrol.cf carbuttoncontrol_test1.mf
 HallButtonControl hallbuttoncontrol.cf hallbuttoncontrol_test1.mf
 DriveControl drivecontrol.cf drivecontrol_test1.mf
+LanternControl lanterncontrol.cf lanterncontrol_test1.mf
