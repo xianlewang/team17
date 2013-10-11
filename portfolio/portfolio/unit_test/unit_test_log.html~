@@ -108,6 +108,7 @@ transition numbers 2<br>
       <td style="vertical-align: top;">All passed. </td>
     </tr>
     <tr>
+<<<<<<< HEAD
         <td style="vertical-align: top;">LanternControl<br>
         </td>
         <td style="vertical-align: top;"><a href="lanterncontrol.cf">lanterncontrol.cf</a></td>
@@ -122,9 +123,8 @@ transition numbers 2<br>
             <a href="lanterncontrol_test1.stats">lanterncontrol_test1.stats</a><br>
         </td>
         <td style="vertical-align: top;">All passed. </td>
-      </tr>
-      <tr>
-        <td style="vertical-align: top;">Dispatcher<br>
+=======
+      <td style="vertical-align: top;">Dispatcher<br>
       </td>
       <td style="vertical-align: top;"><a href="dispatcher.cf">dispatcher.cf</a></td>
       <td style="vertical-align: top;"><a href="dispatcher_test1.mf">dispatcher_test1.mf</a></td>
