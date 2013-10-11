@@ -1,3 +1,9 @@
+/*
+ 18649 Fall 2013
+ Group 17
+ Shen Yu(sheny)
+ (other names would go here)
+ */
 package simulator.elevatorcontrol;
 
 import jSimPack.SimTime;
@@ -81,7 +87,7 @@ public class CarPositionControl extends Controller{
     		//state actions for 'STATE_FIRST'
     		CarPositionIndicator.set(1);
 //#transition 'T10.1'
-    		if (AtFloorArray.isAtFloor(2, back) == true) {
+    		if (AtFloorArray.isAtFloor(2, back) == true || AtFloorArray.isAtFloor(2, front) == true) {
     			nextstate = State.STATE_SECOND;
     		}
     		else {
@@ -111,7 +117,7 @@ public class CarPositionControl extends Controller{
     			nextstate = State.STATE_FOURTH;
     		}
 //#transition 'T10.5'
-		    else if (AtFloorArray.isAtFloor(2, back) == true) {
+		    else if (AtFloorArray.isAtFloor(2, back) == true || AtFloorArray.isAtFloor(2, front) == true) {
 			    nextstate = State.STATE_SECOND;
 		    }
 		    else {

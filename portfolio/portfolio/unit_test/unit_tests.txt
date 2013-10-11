@@ -6,6 +6,5 @@ CarButtonControl carbuttoncontrol.cf carbuttoncontrol_test1.mf
 HallButtonControl hallbuttoncontrol.cf hallbuttoncontrol_test1.mf
 DriveControl drivecontrol.cf drivecontrol_test1.mf
 LanternControl lanterncontrol.cf lanterncontrol_test1.mf
-DriveControl drivecontrol.cf drivecontrol_test1.mf
 Dispatcher dispatcher.cf dispatcher_test1.mf
 CarPositionControl carpositioncontrol.cf carpositioncontrol_test1.mf

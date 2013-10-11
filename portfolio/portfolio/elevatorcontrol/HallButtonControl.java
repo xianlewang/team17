@@ -4,10 +4,6 @@ Group 17
 Xianle Wang(xianlew)
 (other names would go here)
  */
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package simulator.elevatorcontrol;
 
 import jSimPack.SimTime;
@@ -30,16 +26,6 @@ import simulator.payloads.HallLightPayload;
 import simulator.payloads.HallLightPayload.WriteableHallLightPayload;
 import simulator.payloads.translators.BooleanCanPayloadTranslator;
 
-/**
- * This testlight uses hall calls and hall lights, so it can be instantiated for
- * any [floor,hallway,direction] combination.
- * 
- * The design of this object does not have any real world usefulness. It is just
- * meant to help you understand how to implement a controller using the
- * simulation framework.
- * 
- * @author Justin Ray
- */
 public class HallButtonControl extends Controller {
 
 	/***************************************************************************
@@ -104,8 +90,8 @@ public class HallButtonControl extends Controller {
 	 * For your elevator controllers, you should make sure that the constructor
 	 * matches the method signatures in ControllerBuilder.makeAll().
 	 */
-	public HallButtonControl(SimTime period, int floor, Hallway hallway,
-			Direction direction, boolean verbose) {
+	public HallButtonControl(int floor, Hallway hallway,
+			Direction direction, SimTime period, boolean verbose) {
 		// call to the Controller superclass constructor is required
 		super("HallButtonControl"
 				+ ReplicationComputer.makeReplicationString(floor, hallway,
@@ -257,7 +243,9 @@ public class HallButtonControl extends Controller {
 			// state var
 			currentFloor = atFloorArray.getCurrentFloor();
 			currentDirection = getCurrentDirection();
-//#transition 'T8.1'
+			// transitions -- note that transition conditions are mutually
+			// exclusive
+			// #transition 'T8.1'
 			if (localHallCall.pressed()) {
 				newState = State.LIGHT_ON;
 			}
@@ -270,11 +258,13 @@ public class HallButtonControl extends Controller {
 			// state var
 			currentFloor = atFloorArray.getCurrentFloor();
 			currentDirection = getCurrentDirection();
-// #transition 'T8.2'
-			if (currentFloor == mDesiredFloor.getFloor()
-					//&& !mDoorClosed.getValue()
+			// transitions -- note that transition conditions are mutually
+			// exclusive
+			// #transition 'T8.2'
+			if (currentFloor != mDesiredFloor.getFloor()
+					&& !mDoorClosed.getValue()
 					&& this.floor == currentFloor
-					//&& (currentDirection == this.direction || currentDirection == Direction.STOP)
+					&& (currentDirection == this.direction || currentDirection == Direction.STOP)
 					&& !localHallCall.pressed()) {
 				newState = State.LIGHT_OFF;
 			}

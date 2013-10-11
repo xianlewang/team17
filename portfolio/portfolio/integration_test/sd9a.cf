@@ -1,0 +1,11 @@
+; 18649 Fall 2013
+; group 17
+; Xianle Wang(xianlew)
+; 9a.cf
+
+Dispatcher 8 100ms true
+DoorControl 100ms FRONT LEFT true
+DoorControl 100ms BACK LEFT true
+DoorControl 100ms FRONT RIGHT true
+DoorControl 100ms BACK RIGHT true
+DriveControl 100ms true

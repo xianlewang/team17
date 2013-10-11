@@ -7,6 +7,7 @@ Qiang Zhang(qiangz)
 package simulator.elevatorcontrol;
 
 import jSimPack.SimTime;
+import simulator.elevatorcontrol.Utility.AtFloorArray;
 import simulator.elevatormodules.AtFloorCanPayloadTranslator;
 import simulator.elevatormodules.DoorClosedCanPayloadTranslator;
 import simulator.framework.Controller;
@@ -32,8 +33,7 @@ public class LanternControl extends Controller{
 	// physical interface
 	private WriteableCarLanternPayload car_lantern;
 	// input network
-	private ReadableCanMailbox[][] networkAtFloor;
-	private AtFloorCanPayloadTranslator[][] mAtFloor;
+	private AtFloorArray mAtFloor_array;
 	private ReadableCanMailbox networkDesiredFloor;
 	private DesiredFloorCanPayloadTranslator mDesiredFloor;
 	private ReadableCanMailbox[] networkDoorClosed;
@@ -75,17 +75,7 @@ public class LanternControl extends Controller{
 		canInterface.registerTimeTriggered(networkDoorClosed[2]);
 		canInterface.registerTimeTriggered(networkDoorClosed[3]);
 		// instantiate an array of AtFloor class
-		networkAtFloor = new ReadableCanMailbox[8][2];
-		mAtFloor = new AtFloorCanPayloadTranslator[8][2];
-		for (int i = 0; i < 8; i++) {
-			// front 0 and back 1
-			networkAtFloor[i][0] = CanMailbox.getReadableCanMailbox(MessageDictionary.AT_FLOOR_BASE_CAN_ID + ReplicationComputer.computeReplicationId(i + 1, Hallway.FRONT));
-			networkAtFloor[i][1] = CanMailbox.getReadableCanMailbox(MessageDictionary.AT_FLOOR_BASE_CAN_ID + ReplicationComputer.computeReplicationId(i + 1, Hallway.BACK));
-			mAtFloor[i][0] = new AtFloorCanPayloadTranslator(networkAtFloor[i][0], i + 1, Hallway.FRONT);
-			mAtFloor[i][1] = new AtFloorCanPayloadTranslator(networkAtFloor[i][1], i + 1, Hallway.BACK);
-			canInterface.registerTimeTriggered(networkAtFloor[i][0]);
-			canInterface.registerTimeTriggered(networkAtFloor[i][1]);
-		}
+		mAtFloor_array = new AtFloorArray(canInterface);
 		// ready now
 		timer.start(period);
 	}
