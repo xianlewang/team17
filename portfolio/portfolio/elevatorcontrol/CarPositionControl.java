@@ -1,3 +1,9 @@
+/*
+ 18649 Fall 2013
+ Group 17
+ Shen Yu(sheny)
+ (other names would go here)
+ */
 package simulator.elevatorcontrol;
 
 import jSimPack.SimTime;
