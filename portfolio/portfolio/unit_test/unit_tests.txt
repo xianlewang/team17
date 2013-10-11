@@ -4,10 +4,8 @@
 DoorControl doorcontrol.cf doorcontrol_test1.mf
 CarButtonControl carbuttoncontrol.cf carbuttoncontrol_test1.mf
 HallButtonControl hallbuttoncontrol.cf hallbuttoncontrol_test1.mf
-<<<<<<< HEAD
 DriveControl drivecontrol.cf drivecontrol_test1.mf
 LanternControl lanterncontrol.cf lanterncontrol_test1.mf
-=======
 DriveControl drivecontrol.cf drivecontrol_test1.mf
 Dispatcher dispatcher.cf dispatcher_test1.mf
->>>>>>> f03569f8089cd8d62999e42780e5ef0773dc23d0
+CarPositionControl carpositioncontrol.cf carpositioncontrol_test1.mf
