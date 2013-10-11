@@ -5,6 +5,7 @@
 SD1A sd1a.cd sd1a.mf
 SD1B sd1b.cf sd1b.mf
 SD1C sd1c.cf sd1c.mf
+SD4A sd4a.cf sd4a.mf
 SD5B sd5b.cf sd5b.mf
 SD7A sd7a.cf sd7a.mf
 SD7B sd7b.cf sd7b.mf
