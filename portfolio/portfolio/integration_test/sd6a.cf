@@ -1,0 +1,7 @@
+; 18649 Fall 2013
+; group 17
+; Qiang Zhang Shen Yu(qiangz sheny)
+; 6a.cf
+
+DriveControl 100ms TRUE
+CarPositionControl 50ms TRUE
