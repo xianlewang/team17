@@ -1,18 +1,7 @@
 ; 18649 Fall 2013
 ; group 17
-<<<<<<< HEAD
-; Qiang Zhang Shen Yu(qiangz sheny)
+; Jiang He (jiangh)
 ; 6a.cf
 
 DriveControl 100ms TRUE
 CarPositionControl 50ms TRUE
-=======
-; Jiang He (jiangh)
-; sd6a.cf
-
-DriveControl 10ms TRUE
-CarButtonControl 100ms 4 FRONT TRUE
-HallButtonControl 100ms 4 FRONT UP TRUE
-
-
->>>>>>> d672b7e8b76edba8abacee1aa71edd47de260e6a

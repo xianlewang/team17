@@ -1,28 +1,13 @@
-<<<<<<< HEAD
 Simulator Parameters:
 Command line = -cf sd6a.cf -mf sd6a.mf -rt 0s
 RandomSeed = 1381534685651
 CanNetworkBitTime = 0 ns
 Effective Can Bitrate = Infinity
 Run Time = 0.0s
-=======
-; 18649 Fall 2013
-; group 17
-; Jiang He (jiangh)
-; sd6a.stats
-
-Simulator Parameters:
-Command line = -cf sd6a.cf -mf sd6a.mf
-RandomSeed = 1381468768652
-CanNetworkBitTime = 0 ns
-Effective Can Bitrate = Infinity
-Run Time = null
->>>>>>> d672b7e8b76edba8abacee1aa71edd47de260e6a
 Real time rate = null
 Message File = sd6a.mf
 Controller File = sd6a.cf
 
-<<<<<<< HEAD
 
 [DriveControl] @0.000000000: Created DriveControl with period = 0.1s
 [CarPositionControl] @0.000000000: Created CarPositionControl with period = 0.05s
@@ -173,27 +158,4 @@ Controller File = sd6a.cf
 Passed:  7
 Failed:  0
 Total :  7
-=======
-Assertion Results:
-@0.5s:  PASSED simulator.payloads.DrivePayload$ReadableDrivePayload@5f095c81 :: speed ?== SLOW PASSED
-@0.5s:  PASSED simulator.payloads.DrivePayload$ReadableDrivePayload@71b8a6b :: direction ?== UP PASSED
-@0.5s:  PASSED DriveControl::checkState(STATE) ?== MOVING PASSED
-@0.5s:  PASSED simulator.payloads.CarLightPayload$ReadableCarLightPayload@1f34137c :: isLighted ?== true PASSED
-@0.5s:  PASSED simulator.payloads.CanMailbox$ReadableCanMailbox@3a332b9a :: getValue ?== true PASSED
-@0.5s:  PASSED CarButtonControl[4][FRONT]::checkState(STATE) ?== STATE_LIGHT_ON PASSED
-@3.5s:  PASSED simulator.payloads.DrivePayload$ReadableDrivePayload@1a30465 :: speed ?== STOP PASSED
-@3.5s:  PASSED simulator.payloads.DrivePayload$ReadableDrivePayload@761b22ed :: direction ?== STOP PASSED
-@3.5s:  PASSED DriveControl::checkState(STATE) ?== STOP PASSED
-@5.5s:  PASSED CarButtonControl[4][FRONT]::checkState(STATE) ?== STATE_LIGHT_OFF PASSED
-@7.0s:  PASSED simulator.payloads.CarLightPayload$ReadableCarLightPayload@3fd3304e :: isLighted ?== false PASSED
-@7.0s:  PASSED simulator.payloads.CanMailbox$ReadableCanMailbox@385b5df0 :: getValue ?== false PASSED
-@8.5s:  PASSED CarButtonControl[4][FRONT]::checkState(STATE) ?== STATE_LIGHT_OFF PASSED
-@9.5s:  PASSED simulator.payloads.HallLightPayload$ReadableHallLightPayload@79b5459e :: lighted ?== false PASSED
-
-
-******************Summary******************
-Passed:  14
-Failed:  0
-Total :  14
->>>>>>> d672b7e8b76edba8abacee1aa71edd47de260e6a
 

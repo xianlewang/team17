@@ -1,7 +1,6 @@
 ; 18649 Fall 2013
 ; group 17
-<<<<<<< HEAD
-; Qiang Zhang(qiangz), Shen Yu(sheny)
+; Jiang He (jiangh)
 ; sd6a.mf
 
 ;network message period
@@ -49,100 +48,6 @@
 
 
 
-=======
-; Jiang He (jiangh)
-; sd6a.mf
-
-;network message period
-#DEFINE MESSAGE_PERIOD 10ms
-
-;AtFloor[1][Front] = 0x0C4C2800 + 0 + 0 = 0x0C4C2800
-#DEFINE ATFLOOR_1F_FRONT_CAN_ID 0x0C4C2800
-;AtFloor[2][Front] = 0x0C4C2800 + 1*2 + 0 = 0x0C4C2802
-#DEFINE ATFLOOR_2F_FRONT_CAN_ID 0x0C4C2802
-;AtFloor[3][Front] = 0x0C4C2800 + 2*2 + 0 = 0x0C4C2804
-#DEFINE ATFLOOR_3F_FRONT_CAN_ID 0x0C4C2804
-;AtFloor[4][Front] = 0x0C4C2800 + 3*2 + 0 = 0x0C4C2806
-#DEFINE ATFLOOR_4F_FRONT_CAN_ID 0x0C4C2806
-;AtFloor[5][Front] = 0x0C4C2800 + 4*2 + 0 = 0x0C4C2808
-#DEFINE ATFLOOR_5F_FRONT_CAN_ID 0x0C4C2808
-;AtFloor[6][Front] = 0x0C4C2800 + 5*2 + 0 = 0x0C4C280A
-#DEFINE ATFLOOR_6F_FRONT_CAN_ID 0x0C4C280A
-;AtFloor[7][Front] = 0x0C4C2800 + 6*2 + 0 = 0x0C4C280C
-#DEFINE ATFLOOR_7F_FRONT_CAN_ID 0x0C4C280C
-;AtFloor[8][Front] = 0x0C4C2800 + 7*2 + 0 = 0x0C4C280E
-#DEFINE ATFLOOR_8F_FRONT_CAN_ID 0x0C4C280E
-
-;mDesiredFloor = 0x0F0CB600
-#DEFINE DESIRED_FLOOR_CAN_ID  0x0F0CB600
-
-;mDrive
-#DEFINE DRIVE_COMMAND_CAN_ID	0xF0AB500
-
-;mDoorClosed = 0x0D145000 + 0 + 1 = 0x0D145001
-#DEFINE DOOR_CLOSED_CAN_ID  0x0D145001
-
-#DEFINE CAR_LIGHT_4F_CAN_ID                    0xF12BA06
-#DEFINE CAR_CALL_4F_CAN_ID                     0xF11BA06
-
-;mHallCall
-;mHallCall 4 FRONT UP ID = 0x0F0FB900 + (4-1)*4 + 0*2 + 0
-#DEFINE HALL_CALL_4FU_CAN_ID 0xF0FB90C
-
-;mHallLight
-;mHallLight 4 FRONT UP ID = 0x0F10B900 + (4-1)*4 + 0*2 + 0
-#DEFINE HALL_LIGHT_4FU_CAN_ID 0xF10B90C
-
-;initialize
-0s I MESSAGE_PERIOD N ATFLOOR_1F_FRONT_CAN_ID AtFloor 1 FRONT = false
-0s I MESSAGE_PERIOD N ATFLOOR_2F_FRONT_CAN_ID AtFloor 2 FRONT = false
-0s I MESSAGE_PERIOD N ATFLOOR_3F_FRONT_CAN_ID AtFloor 3 FRONT = true
-0s I MESSAGE_PERIOD N ATFLOOR_4F_FRONT_CAN_ID AtFloor 4 FRONT = false
-0s I MESSAGE_PERIOD N ATFLOOR_5F_FRONT_CAN_ID AtFloor 5 FRONT = false
-0s I MESSAGE_PERIOD N ATFLOOR_6F_FRONT_CAN_ID AtFloor 6 FRONT = false
-0s I MESSAGE_PERIOD N DESIRED_FLOOR_CAN_ID DesiredFloor = 4 FRONT UP
-0s I MESSAGE_PERIOD N DOOR_CLOSED_CAN_ID DoorClosed FRONT RIGHT = true
-0s I MESSAGE_PERIOD F CarCall 4 FRONT = true
-
-;****verify precondition
-;#arc '6A/1'
-;check Drive is SLOW UP
-0.5s A F Drive : speed == SLOW
-0.5s A F Drive : direction == UP
-0.5s A S DriveControl : STATE == MOVING
-
-;#check 'State 9.2: Light On'
-0.5s A F CarLight 4 FRONT : isLighted == true
-0.5s A N CAR_LIGHT_4F_CAN_ID Boolean : getValue == true
-0.5s A S CarButtonControl[4][FRONT] : STATE == STATE_LIGHT_ON
-
-;#arc '6A/2a'
-1.70s I MESSAGE_PERIOD N ATFLOOR_3F_FRONT_CAN_ID AtFloor 3 FRONT = false
-1.70s I MESSAGE_PERIOD N ATFLOOR_4F_FRONT_CAN_ID AtFloor 4 FRONT = true
-
-;#arc '6A/2b'
-3.5s A F Drive : speed == STOP
-3.5s A F Drive : direction == STOP
-3.5s A S DriveControl : STATE == STOP
-	
-;#arc '6A/3a'
-4s I MESSAGE_PERIOD N ATFLOOR_4F_FRONT_CAN_ID AtFloor 4 FRONT = true
-4s I MESSAGE_PERIOD N DESIRED_FLOOR_CAN_ID DesiredFloor = 4 FRONT UP
-
-;#arc '6A/3b'
-5.5s A S CarButtonControl[4][FRONT] : STATE == STATE_LIGHT_OFF
-7s A F CarLight 4 FRONT : isLighted == false
-7s A N CAR_LIGHT_4F_CAN_ID Boolean : getValue == false
-
-
-;#arc '6A/4a'
-8.5s I MESSAGE_PERIOD F HallCall 4 FRONT UP  = false
-8.5s I MESSAGE_PERIOD N ATFLOOR_4F_FRONT_CAN_ID AtFloor 4 FRONT = true
-8.5s A S CarButtonControl[4][FRONT] : STATE == STATE_LIGHT_OFF
-
-;#arc '6A/4b'
-9.5s A F HallLight 4 FRONT UP : lighted == false
->>>>>>> d672b7e8b76edba8abacee1aa71edd47de260e6a
 
 
 
