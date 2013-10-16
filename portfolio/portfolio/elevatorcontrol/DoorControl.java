@@ -11,10 +11,12 @@ import simulator.framework.*;
 import simulator.elevatormodules.*;
 import simulator.payloads.*;
 import simulator.payloads.CanMailbox.ReadableCanMailbox;
+import simulator.payloads.CanMailbox.WriteableCanMailbox;
 import simulator.payloads.DoorMotorPayload.WriteableDoorMotorPayload;
 import simulator.elevatorcontrol.DesiredFloorCanPayloadTranslator;
 import simulator.elevatorcontrol.DriveCommandCanPayloadTranslator;
 import simulator.elevatorcontrol.Utility.AtFloorArray;
+import simulator.elevatorcontrol.DoorMotorCanPayloadTranslator;
 
 /*
  * This doorControl uses 
@@ -52,6 +54,9 @@ public class DoorControl extends Controller {
     private DoorReversalCanPayloadTranslator mDoorReversal;        // reversal
     private int mDesiredDwell = 100;
     private int MAX_Weight = 14000;
+    // output network
+    private WriteableCanMailbox networkDoorMotor;
+    private DoorMotorCanPayloadTranslator mDoorMotor;
     // State variables
     private State currentState;
     private int countdown = 0;
@@ -92,6 +97,11 @@ public class DoorControl extends Controller {
         canInterface.registerTimeTriggered(networkDoorClosed);
         canInterface.registerTimeTriggered(networkCarWeight);
         canInterface.registerTimeTriggered(networkDoorReversal);
+        // output
+        networkDoorMotor = CanMailbox.getWriteableCanMailbox(MessageDictionary.DOOR_MOTOR_COMMAND_BASE_CAN_ID + 
+        		ReplicationComputer.computeReplicationId(hallway, side));
+        mDoorMotor = new DoorMotorCanPayloadTranslator(networkDoorMotor, hallway, side);
+        canInterface.sendTimeTriggered(networkDoorMotor, period);
         // instantiate an array of AtFloor class 
         mAtFloor_array = new AtFloorArray(canInterface);
         // ready now
@@ -104,6 +114,7 @@ public class DoorControl extends Controller {
 			case CLOSED:
 				Dwell = mDesiredDwell;
 				door_motor.set(DoorCommand.STOP);
+				mDoorMotor.setDoorCommand(DoorCommand.STOP);
 				int desFloor = mDesiredFloor.getFloor();
 				int curFloor = mAtFloor_array.getCurrentFloor();
 //#transition 'T 5.1'
@@ -122,6 +133,7 @@ public class DoorControl extends Controller {
 				break;
 			case BEFORE_OPEN:
 				door_motor.set(DoorCommand.OPEN);
+				mDoorMotor.setDoorCommand(DoorCommand.OPEN);
 				countdown = Dwell;
 //#transition 'T 5.2'
 				if (mDoorOpened.getValue()) {
@@ -132,6 +144,7 @@ public class DoorControl extends Controller {
 				break;
 			case OPENED:
 				door_motor.set(DoorCommand.STOP);
+				mDoorMotor.setDoorCommand(DoorCommand.STOP);
 				if (countdown > 0) {
 					nextState = currentState;
 					countdown -= 1;
@@ -143,6 +156,7 @@ public class DoorControl extends Controller {
 				break;
 			case CLOSING:
 				door_motor.set(DoorCommand.NUDGE);
+				mDoorMotor.setDoorCommand(DoorCommand.NUDGE);
 				countdown = 0;
 //#transition 'T 5.4'
 				if (mDoorClosed.getValue()) {
