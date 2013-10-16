@@ -32,14 +32,6 @@ import simulator.payloads.translators.BooleanCanPayloadTranslator;
  */
 
 public class DriveControl extends Controller {
-	// private Direction desiredDirection;
-	// private Direction movingDirection;
-	// private int currentFloor;
-	
-	//private boolean frontDoorClosed;
-	//private boolean BackDoorClosed;
-	
-	
 	//local physical state
 	private WriteableDrivePayload localDrive;
 	private ReadableDriveSpeedPayload localDriveSpeed; 
@@ -298,87 +290,7 @@ public class DriveControl extends Controller {
 		boolean allDoorClosed;
 		boolean allDoorMotorStop;
 		boolean levelFlag;
-		// boolean atFloorFlag;
 		
-		// int tempCurrFloor;
-		// currentFloor = getCurrentFloor();
-		// desiredDirection = getDesiredDirection(mDesiredFloor, currentFloor);
-		// movingDirection = getMovingDirection(mLevelUp, mLevelDown);
-		
-		/**********************************
-		switch (state) {
-			case STOP:
-				 //state actions for 'STOP'
-				 localDrive.set(Speed.STOP, Direction.STOP);
-				 mDrive.set(Speed.STOP, Direction.STOP);
-				 // mDriveSpeed.set(Speed.STOP, Direction.STOP);
-				 
-				 //#transition 'T6.2'
-				 if ((currentFloor != mDesiredFloor.getFloor()) && (mDoorClosed.getValue() == true)) {
-					  newState = State.LEAVING_FLOOR;
-				 } 
-				 else {
-					  newState = state;
-				 }
-				 break;
-			case APPROACHING_FLOOR:
-				 //state actions for 'APPROACHING FLOOR'
-				 localDrive.set(Speed.SLOW, movingDirection);
-				 mDrive.set(Speed.SLOW, movingDirection);
-				 // mDriveSpeed.set(Speed.SLOW, movingDirection);
-				 				 
-				 //#transition 'T6.1'
-				 if ((mAtFloorFront.getValue() == true || mAtFloorBack.getValue() == true) && 
-						(mLevelUp.getValue() == true || mLevelDown.getValue() == true) && 
-						(currentFloor != mDesiredFloor.getFloor())) {
-					  newState = State.STOP;
-				 //#transition 'T6.7
-				 } else if (mEmergencyBrake.getValue() == true) {
-					  newState = State.STOP;
-				 } else {
-					  newState = state;
-				 }
-				 break;
-			case LEAVING_FLOOR:
-				 //state actions for 'LEAVING FLOOR'
-				 localDrive.set(Speed.SLOW, desiredDirection);
-				 mDrive.set(Speed.SLOW, desiredDirection);
-				 // mDriveSpeed.set(Speed.SLOW, desiredDirection);
-				 
-				 //#transition 'T6.3'
-				 if (mAtFloorFront.getValue() == false || mAtFloorBack.getValue() == false) {
-					  newState = State.IN_THE_MIDDLE_OF_FLOOR;
-				 //#transition 'T6.8 
-				 } else if (mEmergencyBrake.getValue() == true) {
-					  newState = State.STOP;
-				 } else {
-					  newState = state;
-				 }
-				 break;
-			case IN_THE_MIDDLE_OF_FLOOR:
-				 //state actions for 'IN THE MIDDLE OF FLOOR'
-				 localDrive.set(Speed.SLOW, desiredDirection);
-				 mDrive.set(Speed.SLOW, desiredDirection);
-				 // mDriveSpeed.set(Speed.SLOW, desiredDirection);
-				 
-				 //#transition 'T6.4'
-				 if (mAtFloorFront.getValue() == true || mAtFloorBack.getValue() == true) {
-					  newState = State.APPROACHING_FLOOR;
-				 //#transition 'T6.5'
-				 } else if (mEmergencyBrake.getValue() == true) {
-					  newState = State.STOP;
-			    //#transition 'T6.6'
-				 } else if (mHoistwayLimitUp.getValue() == true || mHoistwayLimitDown.getValue() == true) {
-					  newState = State.STOP;
-				 } else {
-					  newState = state;
-				 }
-				 break;
-			default:
-				 throw new RuntimeException("State " + state + " was not recognized.");
-		}
-		*****************************/
-		// (2)
 		/*******************************
 		switch (state) {
 			case STOP:
@@ -447,14 +359,12 @@ public class DriveControl extends Controller {
 			    System.out.println("allDoorClosed is " + allDoorClosed);
 			    System.out.println("allMotorStop is " + allDoorMotorStop);
 				 
-				 
 //#transition 'T6.1' STOP -> LEVEL UP
 				 if ((allDoorClosed == false) && (mLevelDown.getValue() == false)) {
 					  newState = State.LEVEL_UP;
 				 }
 //#transition 'T6.3' STOP -> SLOW UP			 
 				 else if (allDoorClosed == true && allDoorMotorStop == true && (currentFloor != desiredFloor) && desiredDirection == Direction.UP) {
-						
 						newState = State.SLOW_UP;
 				 }
 //#transition 'T6.5' STOP -> LEVEL DOWN		 
@@ -478,7 +388,7 @@ public class DriveControl extends Controller {
 				 mDriveSpeed.set(localDriveSpeed.speed(), localDriveSpeed.direction());
 				 				 
 //#transition 'T6.2'
-				 if (mLevelDown.getValue() == true && mLevelUp.getValue()==true) {
+				 if ((mLevelDown.getValue() == true && mLevelUp.getValue()==true) || (mEmergencyBrake.getValue()==true) || (mHoistwayLimitDown.getValue()==true) || (mHoistwayLimitUp.getValue()==true)) {
 					  newState = State.STOP;				 
 				 } else {
 					  newState = state;
@@ -493,7 +403,7 @@ public class DriveControl extends Controller {
 				 mDriveSpeed.set(localDriveSpeed.speed(), localDriveSpeed.direction());
 				 
 //#transition 'T6.6'
-				 if (mLevelDown.getValue() == true && mLevelUp.getValue()==true) {
+				 if ((mLevelDown.getValue() == true && mLevelUp.getValue()==true) || (mEmergencyBrake.getValue()==true) || (mHoistwayLimitDown.getValue()==true) || (mHoistwayLimitUp.getValue()==true)) {
 					  newState = State.STOP;
 				 } else {
 					  newState = state;
@@ -514,9 +424,13 @@ public class DriveControl extends Controller {
 				 mDriveSpeed.set(localDriveSpeed.speed(), localDriveSpeed.direction());
 				 
 //#transition 'T6.4'
-				 if (mHoistwayLimitDown.getValue()==true || mHoistwayLimitUp.getValue()==true || mEmergencyBrake.getValue()==true || (currentFloor == desiredFloor && levelFlag == false)) {
+				 if (currentFloor == desiredFloor && levelFlag == false) {
 					  newState = State.LEVEL_UP;
-				 } 
+				 }
+//#transition 'T6.9'
+				 else if(mHoistwayLimitDown.getValue()==true || mHoistwayLimitUp.getValue()==true || mEmergencyBrake.getValue()==true) {
+					  newState = State.STOP;
+				 }
 				 else {
 					  newState = state;
 				 }
@@ -538,7 +452,11 @@ public class DriveControl extends Controller {
 //#transition 'T6.8'
 				 if (mHoistwayLimitDown.getValue()==true || mHoistwayLimitUp.getValue()==true || mEmergencyBrake.getValue()==true || (currentFloor == desiredFloor && levelFlag == false)) {
 					  newState = State.LEVEL_DOWN;
-				 } 
+				 }
+//#transition 'T6.10'
+				 else if(mHoistwayLimitDown.getValue()==true || mHoistwayLimitUp.getValue()==true || mEmergencyBrake.getValue()==true) {
+					  newState = State.STOP;
+				 }				 
 				 else {
 					  newState = state;
 				 }
@@ -613,17 +531,6 @@ public class DriveControl extends Controller {
 		return df;
 	}
 	
-	// private Direction getMovingDirection(LevelingCanPayloadTranslator mLevelUp, LevelingCanPayloadTranslator mLevelDown) {
-		// Direction movingDirection = Direction.STOP;
-		
-		// if(mLevelUp.getValue() == true) {
-			// movingDirection = Direction.UP;			
-		// }
-		// else if(mLevelDown.getValue() == true) {
-			// movingDirection = Direction.DOWN;				
-		// }
-		// return movingDirection;
-	// }
 	
 	private boolean checkAllDoorMotorStop() {
 		return (mDoorMotorFrontLeft.getDoorCommand() == DoorCommand.STOP) && (mDoorMotorFrontRight.getDoorCommand()==DoorCommand.STOP) && (mDoorMotorBackLeft.getDoorCommand()==DoorCommand.STOP) && (mDoorMotorBackRight.getDoorCommand()==DoorCommand.STOP);
