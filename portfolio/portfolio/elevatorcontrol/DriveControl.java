@@ -124,6 +124,8 @@ public class DriveControl extends Controller {
 	private Direction desiredDirection = Direction.STOP; 
 	private int currentFloor;
 	
+	private int desiredFloor;
+	
 	//store the period for the controller
 	private SimTime period;
 	
@@ -432,13 +434,15 @@ public class DriveControl extends Controller {
 				 
 				 //state actions for 'STOP'
 				 desiredDirection = getDesiredDirection(mDesiredFloor, currentFloor);
+				 desiredFloor = getDesiredFloor();
+				 
 				 commandSpeed = Speed.STOP;
 				 localDrive.set(commandSpeed, desiredDirection);
 				 mDrive.set(commandSpeed, desiredDirection);
 				 mDriveSpeed.set(localDriveSpeed.speed(), localDriveSpeed.direction());
 				 
 				 System.out.println("currentFloor is " + currentFloor);
-				 System.out.println("mDesiredFloor is " + mDesiredFloor.getFloor());
+				 System.out.println("mDesiredFloor is " + desiredFloor);
 			    System.out.println("desiredDirection is " + desiredDirection);
 			    System.out.println("allDoorClosed is " + allDoorClosed);
 			    System.out.println("allMotorStop is " + allDoorMotorStop);
@@ -449,7 +453,7 @@ public class DriveControl extends Controller {
 					  newState = State.LEVEL_UP;
 				 }
 //#transition 'T6.3' STOP -> SLOW UP			 
-				 else if (allDoorClosed == true && allDoorMotorStop == true && (currentFloor != mDesiredFloor.getFloor()) && desiredDirection == Direction.UP) {
+				 else if (allDoorClosed == true && allDoorMotorStop == true && (currentFloor != desiredFloor) && desiredDirection == Direction.UP) {
 						
 						newState = State.SLOW_UP;
 				 }
@@ -458,7 +462,7 @@ public class DriveControl extends Controller {
 						newState = State.LEVEL_DOWN;
 				 }
 //#transition 'T6.7' STOP -> SLOW DOWN		 
-				 else if (allDoorClosed && allDoorMotorStop  == true && (currentFloor != mDesiredFloor.getFloor()) && desiredDirection == Direction.DOWN) {
+				 else if (allDoorClosed && allDoorMotorStop  == true && (currentFloor != desiredFloor) && desiredDirection == Direction.DOWN) {
 						newState = State.SLOW_DOWN;
 				 } 
 				 else {
@@ -503,13 +507,14 @@ public class DriveControl extends Controller {
 				
 				 //state actions for 'SLOW_UP'
 				 desiredDirection = Direction.UP;
+				 desiredFloor = getDesiredFloor();
 				 commandSpeed = Speed.SLOW;
 				 localDrive.set(commandSpeed, desiredDirection);
 				 mDrive.set(commandSpeed, desiredDirection);
 				 mDriveSpeed.set(localDriveSpeed.speed(), localDriveSpeed.direction());
 				 
 //#transition 'T6.4'
-				 if (mHoistwayLimitDown.getValue()==true || mHoistwayLimitUp.getValue()==true || mEmergencyBrake.getValue()==true || (currentFloor == mDesiredFloor.getFloor() && levelFlag == false)) {
+				 if (mHoistwayLimitDown.getValue()==true || mHoistwayLimitUp.getValue()==true || mEmergencyBrake.getValue()==true || (currentFloor == desiredFloor && levelFlag == false)) {
 					  newState = State.LEVEL_UP;
 				 } 
 				 else {
@@ -524,13 +529,14 @@ public class DriveControl extends Controller {
 				
 				 //state actions for 'SLOW_DOWN'
 				 desiredDirection = Direction.DOWN;
+				 desiredFloor = getDesiredFloor();
 				 commandSpeed = Speed.SLOW;
 				 localDrive.set(commandSpeed, desiredDirection);
 				 mDrive.set(commandSpeed, desiredDirection);
 				 mDriveSpeed.set(localDriveSpeed.speed(), localDriveSpeed.direction());
 				 
 //#transition 'T6.8'
-				 if (mHoistwayLimitDown.getValue()==true || mHoistwayLimitUp.getValue()==true || mEmergencyBrake.getValue()==true || (currentFloor == mDesiredFloor.getFloor() && levelFlag == false)) {
+				 if (mHoistwayLimitDown.getValue()==true || mHoistwayLimitUp.getValue()==true || mEmergencyBrake.getValue()==true || (currentFloor == desiredFloor && levelFlag == false)) {
 					  newState = State.LEVEL_DOWN;
 				 } 
 				 else {
@@ -594,6 +600,19 @@ public class DriveControl extends Controller {
 		return d;
 	}
 	
+	private int getDesiredFloor() {
+		int df;
+		
+		if(mDesiredFloor.getFloor() == 0) {
+			df = 1;			
+		}
+		else {
+			df = mDesiredFloor.getFloor();		
+		}			
+		
+		return df;
+	}
+	
 	// private Direction getMovingDirection(LevelingCanPayloadTranslator mLevelUp, LevelingCanPayloadTranslator mLevelDown) {
 		// Direction movingDirection = Direction.STOP;
 		
@@ -607,7 +626,7 @@ public class DriveControl extends Controller {
 	// }
 	
 	private boolean checkAllDoorMotorStop() {
-		return (mDoorMotorFrontLeft.get() == DoorCommand.STOP) && (mDoorMotorFrontRight.get()==DoorCommand.STOP) && (mDoorMotorBackLeft.get()==DoorCommand.STOP) && (mDoorMotorBackRight.get()==DoorCommand.STOP);
+		return (mDoorMotorFrontLeft.getDoorCommand() == DoorCommand.STOP) && (mDoorMotorFrontRight.getDoorCommand()==DoorCommand.STOP) && (mDoorMotorBackLeft.getDoorCommand()==DoorCommand.STOP) && (mDoorMotorBackRight.getDoorCommand()==DoorCommand.STOP);
 	}
 	
 	private boolean checkAllDoorClosed() {
