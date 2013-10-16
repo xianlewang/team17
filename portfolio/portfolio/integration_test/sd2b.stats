@@ -1,0 +1,30 @@
+
+Simulator Parameters:
+Command line = -cf sd2b.cf -mf sd2b.mf
+RandomSeed = 1381537880533
+CanNetworkBitTime = 0 ns
+Effective Can Bitrate = Infinity
+Run Time = null
+Real time rate = null
+Message File = sd2b.mf
+Controller File = sd2b.cf
+
+Assertion Results:
+@1.6s:  PASSED simulator.payloads.DoorMotorPayload$ReadableDoorMotorPayload@3a332b9a :: command ?== NUDGE PASSED
+@1.6s:  PASSED DoorControl[FRONT][LEFT]::checkState(STATE) ?== CLOSING PASSED
+@2.4s:  PASSED simulator.payloads.CarLightPayload$ReadableCarLightPayload@4dbb51fd :: isLighted ?== true PASSED
+@2.4s:  PASSED simulator.payloads.CanMailbox$ReadableCanMailbox@1a30465 :: getValue ?== true PASSED
+@2.4s:  PASSED CarButtonControl[4][FRONT]::checkState(STATE) ?== STATE_LIGHT_ON PASSED
+@3.0s:  PASSED simulator.payloads.DoorMotorPayload$ReadableDoorMotorPayload@671ca33b :: command ?== OPEN PASSED
+@3.0s:  PASSED DoorControl[FRONT][LEFT]::checkState(STATE) ?== BEFORE_OPEN PASSED
+@3.4s:  PASSED simulator.payloads.CarLightPayload$ReadableCarLightPayload@4208719e :: isLighted ?== false PASSED
+@3.4s:  PASSED CarButtonControl[4][FRONT]::checkState(STATE) ?== STATE_LIGHT_OFF PASSED
+@3.4s:  PASSED simulator.payloads.DoorMotorPayload$ReadableDoorMotorPayload@4f558d62 :: command ?== STOP PASSED
+@3.4s:  PASSED DoorControl[FRONT][LEFT]::checkState(STATE) ?== OPENED PASSED
+
+
+******************Summary******************
+Passed:  11
+Failed:  0
+Total :  11
+
