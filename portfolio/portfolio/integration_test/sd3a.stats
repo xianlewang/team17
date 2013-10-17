@@ -1,0 +1,34 @@
+
+Simulator Parameters:
+Command line = -cf sd3a.cf -mf sd3a.mf
+RandomSeed = 1381978831856
+CanNetworkBitTime = 0 ns
+Effective Can Bitrate = Infinity
+Run Time = null
+Real time rate = null
+Message File = sd3a.mf
+Controller File = sd3a.cf
+
+Assertion Results:
+@1.0s:  PASSED simulator.payloads.CanMailbox$ReadableCanMailbox@69a66ce8 :: getValue ?== true PASSED
+@1.0s:  PASSED simulator.payloads.CanMailbox$ReadableCanMailbox@422eb6e9 :: getDirection ?== UP PASSED
+@1.0s:  PASSED simulator.payloads.HallLightPayload$ReadableHallLightPayload@62e596c9 :: lighted ?== true PASSED
+@3.0s:  PASSED simulator.payloads.CanMailbox$ReadableCanMailbox@5035135a :: getValue ?== true PASSED
+@3.0s:  PASSED simulator.payloads.DoorMotorPayload$ReadableDoorMotorPayload@60227bd0 :: command ?== OPEN PASSED
+@4.0s:  PASSED simulator.payloads.HallLightPayload$ReadableHallLightPayload@5d08e435 :: lighted ?== false PASSED
+@5.1s:  PASSED simulator.payloads.DoorMotorPayload$ReadableDoorMotorPayload@399daa20 :: command ?== STOP PASSED
+@5.2s:  PASSED simulator.payloads.DoorMotorPayload$ReadableDoorMotorPayload@344c8b84 :: command ?== NUDGE PASSED
+@6.5s:  PASSED simulator.payloads.DoorMotorPayload$ReadableDoorMotorPayload@55afbf49 :: command ?== STOP PASSED
+@7.0s:  PASSED simulator.payloads.CanMailbox$ReadableCanMailbox@7e14feea :: getValue ?== true PASSED
+@7.0s:  PASSED simulator.payloads.CanMailbox$ReadableCanMailbox@3bb6a350 :: getValue ?== true PASSED
+@7.0s:  PASSED simulator.payloads.CanMailbox$ReadableCanMailbox@24aaa392 :: getValue ?== true PASSED
+@7.0s:  PASSED simulator.payloads.CanMailbox$ReadableCanMailbox@e91c310 :: getValue ?== true PASSED
+@7.0s:  PASSED simulator.payloads.CanMailbox$ReadableCanMailbox@4eb4dcd9 :: getValue ?== true PASSED
+@7.0s:  PASSED simulator.payloads.HallLightPayload$ReadableHallLightPayload@4a0d6883 :: lighted ?== false PASSED
+
+
+******************Summary******************
+Passed:  15
+Failed:  0
+Total :  15
+
