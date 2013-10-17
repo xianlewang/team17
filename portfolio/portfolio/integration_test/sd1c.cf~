@@ -1,7 +1,0 @@
-; 18649 Fall 2013
-; group 17
-; Xianle Wang(xianlew)
-; 1C.cf
-
-HallButtonControl 4 FRONT UP 100ms true
-DoorControl FRONT LEFT 100ms TRUE
