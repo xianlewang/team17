@@ -61,7 +61,7 @@ public class DoorControl extends Controller {
     private State currentState;
     private int countdown = 0;
     private int Dwell = mDesiredDwell;
-    public DoorControl(SimTime period, Hallway hallway, Side side, boolean verbose) {
+    public DoorControl(Hallway hallway, Side side, SimTime period, boolean verbose) {
         super ("DoorControl" + ReplicationComputer.makeReplicationString(hallway, side), verbose);
         
         // set local variables to match constructor parameters
@@ -115,17 +115,17 @@ public class DoorControl extends Controller {
 				Dwell = mDesiredDwell;
 				door_motor.set(DoorCommand.STOP);
 				mDoorMotor.setDoorCommand(DoorCommand.STOP);
-				int desFloor = mDesiredFloor.getFloor();
+				int desFloor = mDesiredFloor.getFloor(); 
 				int curFloor = mAtFloor_array.getCurrentFloor();
 //#transition 'T 5.1'
-				if (curFloor == desFloor) {
+				if (curFloor == desFloor && mAtFloor_array.isAtFloor(curFloor, hallway)) {
 					if (mDriveSpeed.getSpeed() == Speed.STOP ||
 							mDriveSpeed.getDirection() == Direction.STOP) {
 						nextState = State.BEFORE_OPEN;
 					}
 				}
 //#transition 'T 5.6'
-				else if (mCarWeight.getWeight() >= MAX_Weight) {
+				else if (mCarWeight.getWeight() >= MAX_Weight && mAtFloor_array.isAtFloor(curFloor, hallway)) {
 					nextState = State.BEFORE_OPEN;
 				} else {
 					nextState = currentState;
@@ -163,11 +163,11 @@ public class DoorControl extends Controller {
 					nextState = State.CLOSED;
 				}
 //#transition 'T 5.5'
-				else if (mCarWeight.getWeight() >= MAX_Weight) {
+				else if (mCarWeight.getWeight() >= MAX_Weight && mAtFloor_array.isAtFloor(mAtFloor_array.getCurrentFloor(), hallway)) {
 					nextState = State.BEFORE_OPEN;
 				}
 //#transition 'T 5.7'
-				else if (mDoorReversal.getValue()) {
+				else if (mDoorReversal.getValue() && mAtFloor_array.isAtFloor(mAtFloor_array.getCurrentFloor(), hallway)) {
 					nextState = State.BEFORE_OPEN;
 				}
 				else {
