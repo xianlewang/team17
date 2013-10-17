@@ -13,7 +13,9 @@
 ;intialize 
 0s I MESSAGE_PERIOD N DOOR_CLOSED_FL_CAN_ID DoorClosed FRONT LEFT = true
 0s I MESSAGE_PERIOD N DOOR_CLOSED_BL_CAN_ID DoorClosed BACK LEFT = true
-0s I MESSAGE_PERIOD N AT_FLOOR_1F_CAN_ID AtFloor 1 FRONT = true
+0s I MESSAGE_PERIOD N DOOR_CLOSED_FR_CAN_ID DoorClosed FRONT RIGHT = true
+0s I MESSAGE_PERIOD N DOOR_CLOSED_BR_CAN_ID DoorClosed BACK RIGHT = true
+0s I MESSAGE_PERIOD N AT_FLOOR_1F_CAN_ID AtFloor 1 FRONT = false
 
 ;check
 ;#state S11.3 HOLD
@@ -36,7 +38,7 @@
 ;check 
 ;#state S11.3 HOLD
 0.71s A N DESIRED_FLOOR_CAN_ID DesiredFloor : getFloor == 2
-0.71s A N DESIRED_FLOOR_CAN_ID DesiredFloor : getDirection == STOP
+0.71s A N DESIRED_FLOOR_CAN_ID DesiredFloor : getDirection == UP
 0.71s A N DESIRED_FLOOR_CAN_ID DesiredFloor : getHallway == FRONT
 0.71s A N DESIRED_DWELL_F_CAN_ID Integer : getValue == 1000
 
