@@ -3,5 +3,5 @@
 ; Shen Yu (sheny)
 ; 2A.cf
 
-DoorControl 10ms FRONT LEFT TRUE
-CarButtonControl 100ms 4 FRONT TRUE 
+DoorControl FRONT LEFT 10ms TRUE
+CarButtonControl 4 FRONT 100ms TRUE 

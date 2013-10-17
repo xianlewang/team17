@@ -19,6 +19,11 @@ public class DoorMotorCanPayloadTranslator extends CanPayloadTranslator{
 	public DoorMotorCanPayloadTranslator(WriteableCanMailbox payload, Hallway hallway, Side side) {
 		super(payload, 8, MessageDictionary.DOOR_MOTOR_COMMAND_BASE_CAN_ID + ReplicationComputer.computeReplicationId(hallway, side));
 	}
+	public void set(DoorCommand doorC) {
+        BitSet b = getMessagePayload();
+        addIntToBitset(b, doorC.ordinal(), 0, 32);
+        setMessagePayload(b, getByteSize());
+	}
 	public void setDoorCommand(DoorCommand doorC) {
         BitSet b = getMessagePayload();
         addIntToBitset(b, doorC.ordinal(), 0, 32);

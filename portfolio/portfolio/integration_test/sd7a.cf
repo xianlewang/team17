@@ -3,5 +3,5 @@
 ; Qiang Zhang (qiangz)
 ; 7A.cf
 
-DoorControl 10ms FRONT LEFT FALSE
-LanternControl 200ms UP TRUE
+DoorControl FRONT LEFT 10ms FALSE
+LanternControl UP 200ms FALSE

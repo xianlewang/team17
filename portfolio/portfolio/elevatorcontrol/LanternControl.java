@@ -8,6 +8,7 @@ package simulator.elevatorcontrol;
 
 import jSimPack.SimTime;
 import simulator.elevatorcontrol.Utility.AtFloorArray;
+import simulator.elevatorcontrol.Utility.DoorClosedArray;
 import simulator.elevatormodules.AtFloorCanPayloadTranslator;
 import simulator.elevatormodules.DoorClosedCanPayloadTranslator;
 import simulator.framework.Controller;
@@ -36,12 +37,12 @@ public class LanternControl extends Controller{
 	private AtFloorArray mAtFloor_array;
 	private ReadableCanMailbox networkDesiredFloor;
 	private DesiredFloorCanPayloadTranslator mDesiredFloor;
-	private ReadableCanMailbox[] networkDoorClosed;
-	private DoorClosedCanPayloadTranslator[] mDoorClosed;
+	private DoorClosedArray mDoorClosed_front_array;
+	private DoorClosedArray mDoorClosed_back_array;
 	// state variable
 	private State currentState;
 	Direction DesiredDirection;
-	public LanternControl(SimTime period, Direction direction, boolean verbose) {
+	public LanternControl(Direction direction, SimTime period, boolean verbose) {
 		super("LanternControl" + ReplicationComputer.makeReplicationString(direction), verbose);
 		this.period = period;
 		this.direction = direction;
@@ -56,25 +57,9 @@ public class LanternControl extends Controller{
 		networkDesiredFloor = CanMailbox.getReadableCanMailbox(MessageDictionary.DESIRED_FLOOR_CAN_ID);
 		mDesiredFloor = new DesiredFloorCanPayloadTranslator(networkDesiredFloor);
 		canInterface.registerTimeTriggered(networkDesiredFloor);
-		// instantiate the 4 doors
-		networkDoorClosed = new ReadableCanMailbox[4];
-		mDoorClosed = new DoorClosedCanPayloadTranslator[4];
-		// front left 0; front right 1; back left 2; back right 3
-		networkDoorClosed[0] = CanMailbox.getReadableCanMailbox(MessageDictionary.DOOR_CLOSED_SENSOR_BASE_CAN_ID + ReplicationComputer.computeReplicationId(Hallway.FRONT, Side.LEFT));
-		networkDoorClosed[1] = CanMailbox.getReadableCanMailbox(MessageDictionary.DOOR_CLOSED_SENSOR_BASE_CAN_ID + ReplicationComputer.computeReplicationId(Hallway.FRONT, Side.RIGHT));
-		networkDoorClosed[2] = CanMailbox.getReadableCanMailbox(MessageDictionary.DOOR_CLOSED_SENSOR_BASE_CAN_ID + ReplicationComputer.computeReplicationId(Hallway.BACK, Side.LEFT));
-		networkDoorClosed[3] = CanMailbox.getReadableCanMailbox(MessageDictionary.DOOR_CLOSED_SENSOR_BASE_CAN_ID + ReplicationComputer.computeReplicationId(Hallway.BACK, Side.RIGHT));
-		// instantiate mDoorClosed
-		mDoorClosed[0] = new DoorClosedCanPayloadTranslator(networkDoorClosed[0], Hallway.FRONT, Side.LEFT);
-		mDoorClosed[1] = new DoorClosedCanPayloadTranslator(networkDoorClosed[1], Hallway.FRONT, Side.RIGHT);
-		mDoorClosed[2] = new DoorClosedCanPayloadTranslator(networkDoorClosed[2], Hallway.BACK, Side.LEFT);
-		mDoorClosed[3] = new DoorClosedCanPayloadTranslator(networkDoorClosed[3], Hallway.BACK, Side.RIGHT);
-		// register door closed
-		canInterface.registerTimeTriggered(networkDoorClosed[0]);
-		canInterface.registerTimeTriggered(networkDoorClosed[1]);
-		canInterface.registerTimeTriggered(networkDoorClosed[2]);
-		canInterface.registerTimeTriggered(networkDoorClosed[3]);
-		// instantiate an array of AtFloor class
+		// instantiate the door closed array
+		mDoorClosed_front_array = new DoorClosedArray(Hallway.FRONT, canInterface);
+		mDoorClosed_back_array = new DoorClosedArray(Hallway.BACK, canInterface);
 		mAtFloor_array = new AtFloorArray(canInterface);
 		// ready now
 		timer.start(period);
@@ -82,7 +67,6 @@ public class LanternControl extends Controller{
 	
 	@Override
 	public void timerExpired(Object callbackData) {
-		// TODO Auto-generated method stub
 		// cases Lantern_Off, No_On, Turn_Up_On, Turn_Down_On
 		State nextState = currentState;
 		boolean allClose;
@@ -90,36 +74,26 @@ public class LanternControl extends Controller{
 			case Lantern_Off:
 				car_lantern.set(false);
 				// code for desired direction for this simple design
-				if (mDesiredFloor.getFloor() == 8) {
-					DesiredDirection = Direction.STOP;
-				} else if (mDesiredFloor.getFloor() < 8 && mDesiredFloor.getFloor() > 1) {
-					DesiredDirection = Direction.UP;
-				} else {
-					DesiredDirection = Direction.DOWN;
-				}
+				DesiredDirection = mDesiredFloor.getDirection();
 				// should be DesiredDirection = mDesiredFloor.getDirection();
-				for (int i = 0; i < 4; i++) {
+				allClose = mDoorClosed_front_array.getBothClosed() && mDoorClosed_back_array.getBothClosed();
 //#transition 'T 7.1'
-					if (mDoorClosed[i].getValue() == false && DesiredDirection == Direction.STOP) {
+					if (allClose == false && DesiredDirection == Direction.STOP) {
 						nextState = State.No_On;
 						break;
 					}
 //#transition 'T 7.2'
-					else if (mDoorClosed[i].getValue() == false) {
+					else if (allClose == false && DesiredDirection == direction && mDesiredFloor.getFloor() != mAtFloor_array.getCurrentFloor()) {
 						nextState = State.Lantern_On;
 						break;
 					}
 					else {
 						nextState = State.Lantern_Off;
 					}
-				}
 				break;
 			case No_On:
 				car_lantern.set(false);
-				allClose = true;
-				for (int i = 0; i < 4; i++) {
-					allClose &= mDoorClosed[i].getValue();
-				}
+				allClose = mDoorClosed_front_array.getBothClosed() && mDoorClosed_back_array.getBothClosed();
 //#transition 'T 7.3'
 				if (allClose) {
 					nextState = State.Lantern_Off;
@@ -129,11 +103,8 @@ public class LanternControl extends Controller{
 				}
 				break;
 			case Lantern_On:
-				car_lantern.set(true);
-				allClose = true;
-				for (int i = 0; i < 4; i++) {
-					allClose &= mDoorClosed[i].getValue();
-				}
+				car_lantern.set(false);
+				allClose = mDoorClosed_front_array.getBothClosed() && mDoorClosed_back_array.getBothClosed();
 //#transition 'T 7.4'
 				if (allClose) {
 					nextState = State.Lantern_Off;
@@ -154,31 +125,6 @@ public class LanternControl extends Controller{
 		currentState = nextState;
 		// report the current state
 		setState(STATE_KEY, nextState.toString());
-		
 		timer.start(period);
 	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 }

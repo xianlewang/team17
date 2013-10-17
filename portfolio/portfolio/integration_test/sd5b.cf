@@ -3,4 +3,4 @@
 ; Qiang Zhang (qiangz)
 ; 5B.cf
 
-DoorControl 10ms FRONT LEFT FALSE
+DoorControl FRONT LEFT 10ms FALSE

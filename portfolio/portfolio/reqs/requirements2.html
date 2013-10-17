@@ -2453,7 +2453,7 @@
                 <tr>
                     <td style="vertical-align: top;">T8.2<br>
                     </td>
-                    <td style="vertical-align: top;">f &larr; CurrentFloor AND HallCall[f,b,d] &larr; Idle AND mDesiredFloor == CurrentFloor <br>
+                    <td style="vertical-align: top;">f &larr; CurrentFloor AND HallCall[f,b,d] &larr; Idle AND mDesiredFloor != CurrentFloor AND mDoorClosed &larr; false<br>
                     </td>
                 </tr>
             </tbody >
@@ -2721,7 +2721,7 @@
                     </td>
                     <td style="vertical-align: top;">
                         mAtFloor[f,b]&nbsp;==&nbsp;true&nbsp;&&&nbsp;
-                        mDesiredFloor.f&nbsp;==&nbsp;CurrentFloor&nbsp;&&
+                        mDoorClosed[b,*]&nbsp;==&nbsp;false&nbsp;&&
                         &nbsp;CarCall[f,b]&nbsp;==&nbsp;false<br>
                     </td>
                 </tr>
