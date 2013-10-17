@@ -2,4 +2,4 @@
 ;Group 17 
 ;Member Name: Shen Yu  Andrew ID: sheny
 ;carbuttoncontrol.cf
-CarButtonControl 100ms 4 FRONT TRUE
+CarButtonControl 4 FRONT 100ms TRUE
