@@ -39,7 +39,7 @@
 ; set condition to T 7.3
 3.4s I MESSAGE_PERIOD N DOOR_CLOSED_FRONT_LEFT_CAN_ID DoorClosed FRONT LEFT = true
 3.4s I MESSAGE_PERIOD N DOOR_CLOSED_FRONT_RIGHT_CAN_ID DoorClosed FRONT RIGHT = true
-3.4s I MESSAGE_PERIOD N DESIRED_FLOOR_CAN_ID DesiredFloor = 2 FRONT UP
+3.4s I MESSAGE_PERIOD N DESIRED_FLOOR_CAN_ID DesiredFloor = 3 FRONT UP
 
 ; T 7.3
 4.4s A F CarLantern UP : lighted == false
@@ -47,13 +47,13 @@
 
 ; set condition to T 7.2
 5.0s I MESSAGE_PERIOD N ATFLOOR_8F_FRONT_CAN_ID AtFloor 8 FRONT = false
-5.0s I MESSAGE_PERIOD N ATFLOOR_2F_FRONT_CAN_ID AtFloor 2 FRONT = true
+5.0s I MESSAGE_PERIOD N ATFLOOR_3F_FRONT_CAN_ID AtFloor 3 FRONT = true
 5.0s I MESSAGE_PERIOD N DOOR_CLOSED_FRONT_LEFT_CAN_ID DoorClosed FRONT LEFT = false
 5.0s I MESSAGE_PERIOD N DOOR_CLOSED_FRONT_RIGHT_CAN_ID DoorClosed FRONT RIGHT = false
-
+5.1s I MESSAGE_PERIOD N DESIRED_FLOOR_CAN_ID DesiredFloor = 4 FRONT UP
 
 ; T 7.2
-5.8s A F CarLantern UP : lighted == true
+5.8s A F CarLantern UP : lighted == false
 5.8s A S LanternControl[UP] : STATE == Lantern_On
 
 ; set condition to T 7.4

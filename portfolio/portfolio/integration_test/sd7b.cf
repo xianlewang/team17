@@ -2,4 +2,4 @@
 ;Group: #17
 ;Qiang Zhang (qiangz) Shen Yu (sheny)
 ;sd7b.cf
-DoorControl 10ms FRONT RIGHT TRUE
+DoorControl FRONT RIGHT 10ms FALSE

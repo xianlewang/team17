@@ -9,8 +9,8 @@
 ;definitions for inputs' id
 
 ;mAtFloor
-;mAtFloor 2 FRONT ID = 0x0C4C2800 + (2 - 1) * 2 + 0 = 0x0C4C2802
-#DEFINE AT_FLOOR_2F_FRONT_CAN_ID 0x0C4C2802
+;mAtFloor 3 FRONT ID = 0x0C4C2800 + (3 - 1) * 2 + 0 = 0x0C4C2804
+#DEFINE AT_FLOOR_3F_FRONT_CAN_ID 0x0C4C2804
 
 ;mDesiredFloor
 ;ID = 0x0F0CB600
@@ -40,8 +40,8 @@
 ;---------------------------------------------
 
 ;initialize
-0s I MESSAGE_PERIOD N AT_FLOOR_2F_FRONT_CAN_ID AtFloor 2 FRONT = true
-0s I MESSAGE_PERIOD N DESIRED_FLOOR_CAN_ID DesiredFloor = 2 FRONT UP
+0s I MESSAGE_PERIOD N AT_FLOOR_3F_FRONT_CAN_ID AtFloor 3 FRONT = true
+0s I MESSAGE_PERIOD N DESIRED_FLOOR_CAN_ID DesiredFloor = 3 FRONT UP
 0s I MESSAGE_PERIOD N DRIVE_SPEED_CAN_ID DriveCommand = STOP STOP
 0s I MESSAGE_PERIOD N DOOR_OPENED_FRONT_LEFT_CAN_ID  DoorOpened  FRONT LEFT  = false
 0s I MESSAGE_PERIOD N DOOR_CLOSED_FRONT_LEFT_CAN_ID  DoorClosed  FRONT LEFT  = true
@@ -53,14 +53,15 @@
 ;#arc '7A/1a'
 0.2s I MESSAGE_PERIOD N DOOR_CLOSED_FRONT_LEFT_CAN_ID DoorClosed FRONT LEFT = false;
 
-;#arc '7A/1b'
-1.0s A S LanternControl[UP] : STATE == Lantern_On
-1.0s A F CarLantern UP : lighted == true
-
 ;#arc '7A/2a'
 1.0s A S DoorControl[FRONT][LEFT] : STATE == BEFORE_OPEN
 1.0s A F DoorMotor FRONT LEFT : command == OPEN
-1.2s I MESSAGE_PERIOD N DESIRED_FLOOR_CAN_ID DesiredFloor = 3 FRONT UP
+1.0s I MESSAGE_PERIOD N DESIRED_FLOOR_CAN_ID DesiredFloor = 4 FRONT UP
+
+;#arc '7A/1b'
+1.8s A S LanternControl[UP] : STATE == Lantern_On
+1.8s A F CarLantern UP : lighted == false
+
 
 ;#arc '7A/3a'
 2.0s I MESSAGE_PERIOD N DOOR_OPENED_FRONT_LEFT_CAN_ID DoorOpened FRONT LEFT = true
