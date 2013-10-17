@@ -264,7 +264,7 @@ public class HallButtonControl extends Controller {
 			if (currentFloor != mDesiredFloor.getFloor()
 					&& !mDoorClosed.getValue()
 					&& this.floor == currentFloor
-					&& (currentDirection == this.direction || currentDirection == Direction.STOP)
+					//&& (currentDirection == this.direction || currentDirection == Direction.STOP)
 					&& !localHallCall.pressed()) {
 				newState = State.LIGHT_OFF;
 			}
