@@ -8,10 +8,8 @@ package simulator.elevatorcontrol;
 
 import jSimPack.SimTime;
 import simulator.elevatormodules.AtFloorCanPayloadTranslator;
-import simulator.elevatormodules.DoorClosedCanPayloadTranslator;
 import simulator.framework.Hallway;
 import simulator.framework.ReplicationComputer;
-import simulator.framework.Side;
 import simulator.payloads.CanMailbox;
 import simulator.payloads.CanMailbox.ReadableCanMailbox;
 import simulator.payloads.CanMailbox.WriteableCanMailbox;
@@ -21,6 +19,7 @@ import simulator.payloads.CarLightPayload;
 import simulator.payloads.CarLightPayload.WriteableCarLightPayload;
 import simulator.payloads.translators.BooleanCanPayloadTranslator;
 import simulator.framework.Controller;
+import simulator.elevatorcontrol.Utility.DoorClosedArray;
 
 public class CarButtonControl extends Controller{
 	/***************************************************************************
@@ -29,6 +28,7 @@ public class CarButtonControl extends Controller{
     //note that inputs are Readable objects, while outputs are Writeable objects
 	//inputs
 	//network interface
+    private DoorClosedArray DoorClosedArray;
 	//received AtFloor message
     private ReadableCanMailbox networkAtFloor;
     //translator for the AtFloor message
@@ -37,11 +37,6 @@ public class CarButtonControl extends Controller{
     private ReadableCanMailbox networkDesiredFloor;
     //translator for the desired floor message
     private DesiredFloorCanPayloadTranslator mDesiredFloor;
-    //received door closed message
-    private ReadableCanMailbox networkDoorClosed;
-    //translator for the doorClosed message -- this translator is specific
-    //to this messages, and is provided the elevatormodules package
-    private DoorClosedCanPayloadTranslator mDoorClosed;
     //local physical state
     private ReadableCarCallPayload CarCall;
     // output
@@ -73,7 +68,7 @@ public class CarButtonControl extends Controller{
      * type given here.
      *
      */
-    public CarButtonControl(SimTime period, int floor, Hallway hallway, boolean verbose){
+    public CarButtonControl(int floor, Hallway hallway, SimTime period, boolean verbose){
     	//call to the Controller superclass constructor is required
     	super("CarButtonControl" + ReplicationComputer.makeReplicationString(floor, hallway), verbose);
     	//stored the constructor arguments in internal state
@@ -103,10 +98,7 @@ public class CarButtonControl extends Controller{
     	mDesiredFloor = new DesiredFloorCanPayloadTranslator(networkDesiredFloor);
     	canInterface.registerTimeTriggered(networkDesiredFloor);
     	
-    	networkDoorClosed = CanMailbox.getReadableCanMailbox(MessageDictionary.DOOR_CLOSED_SENSOR_BASE_CAN_ID + 
-    			ReplicationComputer.computeReplicationId(hallway, Side.LEFT));
-    	mDoorClosed = new DoorClosedCanPayloadTranslator(networkDoorClosed, hallway, Side.LEFT);
-    	canInterface.registerTimeTriggered(networkDoorClosed);
+    	DoorClosedArray = new DoorClosedArray(hallway, canInterface);
     	
     	// initialize output
     	CarLight = CarLightPayload.getWriteablePayload(floor, hallway);
@@ -146,7 +138,7 @@ public class CarButtonControl extends Controller{
     		mCarLight.set(true);
     		mCarCall.set(true);
 //#transition 'T9.2'
-    		if (mAtFloor.getValue() == true && mDesiredFloor.getFloor() == floor && CarCall.pressed() == false) {
+    		if (mAtFloor.getValue() == true && DoorClosedArray.getBothClosed() == false && CarCall.pressed() == false) {
     			nextstate = State.STATE_LIGHT_OFF;
     		} else {
     			nextstate = state;
