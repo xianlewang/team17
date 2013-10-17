@@ -1873,21 +1873,16 @@
 		  6.8&nbsp;&nbsp;&nbsp; If mAtFloor[f, b] is Ture AND mLevel[d] is False AND mDoorClosed is False, then: <br>
         &nbsp;&nbsp;&nbsp; 6.8.1&nbsp; Drive[s,d] shall be set to [Level, d]. <br>
         &nbsp;&nbsp;&nbsp; 6.8.2&nbsp; mDriveSpeed[s,d] shall be set to [v, d]. <br>
-		  6.9&nbsp;&nbsp;&nbsp; If mAtFloor[f, b] is True AND mLevel[*] is True, then: <br>
+		  6.9&nbsp;&nbsp;&nbsp; If mAtFloor[f, b] is True AND mLevel[*] are True, then: <br>
         &nbsp;&nbsp;&nbsp; 6.9.1&nbsp; Drive[s,d] shall be set to [STOP, STOP]. <br>
         &nbsp;&nbsp;&nbsp; 6.9.2&nbsp; mDriveSpeed[s,d] shall be set to [0, STOP]. <br>
-		  6.10&nbsp;&nbsp;&nbsp; If CurrentFloor is not equal to mDesiredFloor AND mDoorClosed is True AND mDoorMotor is Stop, then: <br>
+		  6.10&nbsp;&nbsp;&nbsp; If currentFloor is not equal to mDesiredFloor AND mDoorClosed is True AND mDoorMotor is Stop, then: <br>
         &nbsp;&nbsp;&nbsp; 6.10.1&nbsp; Drive[s,d] shall be set to [SLOW, desiredDirection]. <br>
         &nbsp;&nbsp;&nbsp; 6.10.2&nbsp; mDriveSpeed[s,d] shall be set to [v, desiredDirection]. <br>
-		  
-		  6.11&nbsp;&nbsp;&nbsp; If mDoorClosed is False, then: <br>
-        &nbsp;&nbsp;&nbsp; 6.11.1&nbsp; Drive[s,d] shall be set to [STOP, STOP]. <br>
-        &nbsp;&nbsp;&nbsp; 6.11.2&nbsp; mDrive[s,d] shall be set to [STOP, STOP]. <br>
-        &nbsp;&nbsp;&nbsp; 6.11.3&nbsp; mDriveSpeed[s,d] shall be set to [STOP, STOP]. <br>
-		  6.12&nbsp;&nbsp;&nbsp; If CurrentFloor is None, then: <br>
-        &nbsp;&nbsp;&nbsp; 6.12.1&nbsp; Drive[s,d] shall be set to [SLOW, DesiredDirection]. <br>
-        &nbsp;&nbsp;&nbsp; 6.12.2&nbsp; mDrive[s,d] shall be set to [SLOW, DesiredDirection]. <br>
-        &nbsp;&nbsp;&nbsp; 6.12.3&nbsp; mDriveSpeed[s,d] shall be set to [SLOW, DesiredDirection]. <br>
+		  6.11&nbsp;&nbsp;&nbsp; If currentFloor == mDesiredFloor AND mLevel[*] is False, then: <br>
+        &nbsp;&nbsp;&nbsp; 6.11.1&nbsp; Drive[s,d] shall be set to [Level, d]. <br>
+        &nbsp;&nbsp;&nbsp; 6.11.2&nbsp; mDriveSpeed[s,d] shall be set to [v, d]. <br>
+		  6.12&nbsp;&nbsp;&nbsp; mDrive[s,d] shall be set to Drive[s,d].<br>
 		  <!--
 		  6.6&nbsp;&nbsp;&nbsp; If mEmergencyBrake is True, then: <br>
         &nbsp;&nbsp;&nbsp; 6.6.1&nbsp; Drive[s,d] shall be set to [STOP, STOP]. <br>
@@ -2052,52 +2047,526 @@
                 <tr>
                     <td style="vertical-align: top;"><br>
                     </td>
-                    <td style="vertical-align: top;" colspan="2">Requirements<br>
+                    <td style="vertical-align: top;" colspan="13">Requirements<br>
                 </tr>
                 <tr>
                     <td style="vertical-align: top;">States<br>
                     </td>
-                    <td style="vertical-align: top;">6.6<br>
+                    <td style="vertical-align: top;">6.6.1<br>
                     </td>
-                    <td style="vertical-align: top;">6.7<br>
+                    <td style="vertical-align: top;">6.6.2<br>
                     </td>
+						  
+                    <td style="vertical-align: top;">6.7.1<br>
+                    </td>
+                    <td style="vertical-align: top;">6.7.2<br>
+						  </td>
+						  
+                    <td style="vertical-align: top;">6.8.1<br>
+						  </td>
+						  <td style="vertical-align: top;">6.8.2<br>
+                    </td>
+                    
+                    <td style="vertical-align: top;">6.9.1<br>
+                    </td>
+                    <td style="vertical-align: top;">6.9.2<br>
+                    </td>
+                    
+                    <td style="vertical-align: top;">6.10.1<br>
+						  </td>
+						  <td style="vertical-align: top;">6.10.2<br>
+                    </td>
+                    
+						  <td style="vertical-align: top;">6.11.1<br>
+                    </td>
+                    <td style="vertical-align: top;">6.11.2<br>
+                    </td>
+                    
+                    <td style="vertical-align: top;">6.12<br>
+						  </td>
                 </tr>
                 <tr>
                     <td style="vertical-align: top;">S6.1 STOP<br>
                     </td>
                     <td style="vertical-align: top;">X<br>
                     </td>
+                    <td style="vertical-align: top;">X<br>
+                    </td>
+						  <td style="vertical-align: top;">X<br>
+                    </td>
+                    <td style="vertical-align: top;">X<br>
+                    </td>
+						  <td style="vertical-align: top;"><br>
+                    </td>
                     <td style="vertical-align: top;"><br>
+                    </td>
+						  <td style="vertical-align: top;">X<br>
+                    </td>
+                    <td style="vertical-align: top;">X<br>
+                    </td>
+						  <td style="vertical-align: top;"><br>
+                    </td>
+                    <td style="vertical-align: top;"><br>
+                    </td>
+						  <td style="vertical-align: top;"><br>
+                    </td>
+						  <td style="vertical-align: top;"><br>
+                    </td>
+						  <td style="vertical-align: top;">X<br>
                     </td>
                 </tr>
                 <tr>
-                    <td style="vertical-align: top;">S6.2 MOVING<br>
+                    <td style="vertical-align: top;">S6.2 Level Up<br>
                     </td>
                     <td style="vertical-align: top;"><br>
                     </td>
-                    <td style="vertical-align: top;">X<br>
+                    <td style="vertical-align: top;"><br>
+                    </td>
+						  <td style="vertical-align: top;"><br>
+                    </td>
+						  <td style="vertical-align: top;"><br>
+                    </td>
+						  <td style="vertical-align: top;">X<br>
+                    </td>
+						  <td style="vertical-align: top;">X<br>
+                    </td>
+						  <td style="vertical-align: top;"><br>
+                    </td>
+						  <td style="vertical-align: top;"><br>
+                    </td>
+						  <td style="vertical-align: top;"><br>
+                    </td>
+						  <td style="vertical-align: top;"><br>
+                    </td>
+						  <td style="vertical-align: top;">X<br>
+                    </td>
+						  <td style="vertical-align: top;">X<br>
+                    </td>
+						  <td style="vertical-align: top;">X<br>
+                    </td>
+                </tr>
+					 <tr>
+                    <td style="vertical-align: top;">S6.3 Level Down<br>
+                    </td>
+                    <td style="vertical-align: top;"><br>
+                    </td>
+                    <td style="vertical-align: top;"><br>
+                    </td>
+						  <td style="vertical-align: top;"><br>
+                    </td>
+						  <td style="vertical-align: top;"><br>
+                    </td>
+						  <td style="vertical-align: top;">X<br>
+                    </td>
+						  <td style="vertical-align: top;">X<br>
+                    </td>
+						  <td style="vertical-align: top;"><br>
+                    </td>
+						  <td style="vertical-align: top;"><br>
+                    </td>
+						  <td style="vertical-align: top;"><br>
+                    </td>
+						  <td style="vertical-align: top;"><br>
+                    </td>
+						  <td style="vertical-align: top;">X<br>
+                    </td>
+						  <td style="vertical-align: top;">X<br>
+                    </td>
+						  <td style="vertical-align: top;">X<br>
+                    </td>
+                </tr>
+					 <tr>
+                    <td style="vertical-align: top;">S6.4 Slow Up<br>
+                    </td>
+                    <td style="vertical-align: top;"><br>
+                    </td>
+                    <td style="vertical-align: top;"><br>
+                    </td>
+						  <td style="vertical-align: top;"><br>
+                    </td>
+						  <td style="vertical-align: top;"><br>
+                    </td>
+						  <td style="vertical-align: top;"><br>
+                    </td>
+						  <td style="vertical-align: top;"><br>
+                    </td>
+						  <td style="vertical-align: top;"><br>
+                    </td>
+						  <td style="vertical-align: top;"><br>
+                    </td>
+						  <td style="vertical-align: top;">X<br>
+                    </td>
+						  <td style="vertical-align: top;">X<br>
+                    </td>
+						  <td style="vertical-align: top;"><br>
+                    </td>
+						  <td style="vertical-align: top;"><br>
+                    </td>
+						  <td style="vertical-align: top;">X<br>
+                    </td>
+                </tr>
+					 <tr>
+                    <td style="vertical-align: top;">S6.5 Slow Down<br>
+                    </td>
+                    <td style="vertical-align: top;"><br>
+                    </td>
+                    <td style="vertical-align: top;"><br>
+                    </td>
+						  <td style="vertical-align: top;"><br>
+                    </td>
+						  <td style="vertical-align: top;"><br>
+                    </td>
+						  <td style="vertical-align: top;"><br>
+                    </td>
+						  <td style="vertical-align: top;"><br>
+                    </td>
+						  <td style="vertical-align: top;"><br>
+                    </td>
+						  <td style="vertical-align: top;"><br>
+                    </td>
+						  <td style="vertical-align: top;">X<br>
+                    </td>
+						  <td style="vertical-align: top;">X<br>
+                    </td>
+						  <td style="vertical-align: top;"><br>
+                    </td>
+						  <td style="vertical-align: top;"><br>
+                    </td>
+						  <td style="vertical-align: top;">X<br>
                     </td>
                 </tr>
                 <tr>
                     <td style="vertical-align: top;">Transitions<br>
                     </td>
-						  <td style="vertical-align: top;">6.6<br>
+						  <td style="vertical-align: top;">6.6.1<br>
                     </td>
-                    <td style="vertical-align: top;">6.7<br>
+                    <td style="vertical-align: top;">6.6.2<br>
                     </td>
+						  
+                    <td style="vertical-align: top;">6.7.1<br>
+                    </td>
+                    <td style="vertical-align: top;">6.7.2<br>
+						  </td>
+						  
+                    <td style="vertical-align: top;">6.8.1<br>
+						  </td>
+						  <td style="vertical-align: top;">6.8.2<br>
+                    </td>
+                    
+                    <td style="vertical-align: top;">6.9.1<br>
+                    </td>
+                    <td style="vertical-align: top;">6.9.2<br>
+                    </td>
+                    
+                    <td style="vertical-align: top;">6.10.1<br>
+						  </td>
+						  <td style="vertical-align: top;">6.10.2<br>
+                    </td>
+                    
+						  <td style="vertical-align: top;">6.11.1<br>
+                    </td>
+                    <td style="vertical-align: top;">6.11.2<br>
+                    </td>
+                    
+                    <td style="vertical-align: top;">6.12<br>
+						  </td>
                 </tr>
                 <tr>
                     <td style="vertical-align: top;">T6.1<br>
                     </td>
-                    <td style="vertical-align: top;">X<br>
+                    <td style="vertical-align: top;"><br>
                     </td>
                     <td style="vertical-align: top;"><br>
+                    </td>
+						  <td style="vertical-align: top;"><br>
+                    </td>
+                    <td style="vertical-align: top;"><br>
+                    </td>
+						  <td style="vertical-align: top;">X<br>
+                    </td>
+                    <td style="vertical-align: top;">X<br>
+                    </td>
+						  <td style="vertical-align: top;"><br>
+                    </td>
+                    <td style="vertical-align: top;"><br>
+                    </td>
+						  <td style="vertical-align: top;"><br>
+                    </td>
+                    <td style="vertical-align: top;"><br>
+                    </td>
+						  <td style="vertical-align: top;"><br>
+                    </td>
+                    <td style="vertical-align: top;"><br>
+                    </td>
+						  <td style="vertical-align: top;">X<br>
                     </td>
                 </tr>
                 <tr>
                     <td style="vertical-align: top;">T6.2<br>
                     </td>                    
+                    <td style="vertical-align: top;">X<br>
+                    </td>
+                    <td style="vertical-align: top;">X<br>
+                    </td>
+                    <td style="vertical-align: top;">X<br>
+                    </td>
+						  <td style="vertical-align: top;">X<br>
+                    </td>
                     <td style="vertical-align: top;"><br>
+                    </td>
+						  <td style="vertical-align: top;"><br>
+                    </td>
+                    <td style="vertical-align: top;">X<br>
+                    </td>
+						  <td style="vertical-align: top;">X<br>
+                    </td>
+                    <td style="vertical-align: top;"><br>
+                    </td>
+						  <td style="vertical-align: top;"><br>
+                    </td>
+                    <td style="vertical-align: top;"><br>
+                    </td>
+						  <td style="vertical-align: top;"><br>
+                    </td>
+                    <td style="vertical-align: top;">X<br>
+                    </td>
+                </tr>
+					 <tr>
+                    <td style="vertical-align: top;">T6.3<br>
+                    </td>                    
+                    <td style="vertical-align: top;"><br>
+                    </td>
+                    <td style="vertical-align: top;"><br>
+                    </td>
+                    <td style="vertical-align: top;"><br>
+                    </td>
+						  <td style="vertical-align: top;"><br>
+                    </td>
+                    <td style="vertical-align: top;"><br>
+                    </td>
+						  <td style="vertical-align: top;"><br>
+                    </td>
+                    <td style="vertical-align: top;"><br>
+                    </td>
+						  <td style="vertical-align: top;"><br>
+                    </td>
+                    <td style="vertical-align: top;">X<br>
+                    </td>
+						  <td style="vertical-align: top;">X<br>
+                    </td>
+                    <td style="vertical-align: top;"><br>
+                    </td>
+						  <td style="vertical-align: top;"><br>
+                    </td>
+                    <td style="vertical-align: top;">X<br>
+                    </td>
+                </tr>
+					 <tr>
+                    <td style="vertical-align: top;">T6.4<br>
+                    </td>                    
+                    <td style="vertical-align: top;"><br>
+                    </td>
+                    <td style="vertical-align: top;"><br>
+                    </td>
+                    <td style="vertical-align: top;"><br>
+                    </td>
+						  <td style="vertical-align: top;"><br>
+                    </td>
+                    <td style="vertical-align: top;"><br>
+                    </td>
+						  <td style="vertical-align: top;"><br>
+                    </td>
+                    <td style="vertical-align: top;"><br>
+                    </td>
+						  <td style="vertical-align: top;"><br>
+                    </td>
+                    <td style="vertical-align: top;"><br>
+                    </td>
+						  <td style="vertical-align: top;"><br>
+                    </td>
+                    <td style="vertical-align: top;">X<br>
+                    </td>
+						  <td style="vertical-align: top;">X<br>
+                    </td>
+                    <td style="vertical-align: top;">X<br>
+                    </td>
+                </tr>
+					 <tr>
+                    <td style="vertical-align: top;">T6.5<br>
+                    </td>                    
+                    <td style="vertical-align: top;"><br>
+                    </td>
+                    <td style="vertical-align: top;"><br>
+                    </td>
+						  <td style="vertical-align: top;"><br>
+                    </td>
+                    <td style="vertical-align: top;"><br>
+                    </td>
+						  <td style="vertical-align: top;">X<br>
+                    </td>
+                    <td style="vertical-align: top;">X<br>
+                    </td>
+						  <td style="vertical-align: top;"><br>
+                    </td>
+                    <td style="vertical-align: top;"><br>
+                    </td>
+						  <td style="vertical-align: top;"><br>
+                    </td>
+                    <td style="vertical-align: top;"><br>
+                    </td>
+						  <td style="vertical-align: top;"><br>
+                    </td>
+                    <td style="vertical-align: top;"><br>
+                    </td>
+						  <td style="vertical-align: top;">X<br>
+                    </td>
+                </tr>
+					 <tr>
+                    <td style="vertical-align: top;">T6.6<br>
+                    </td>                    
+                    <td style="vertical-align: top;">X<br>
+                    </td>
+                    <td style="vertical-align: top;">X<br>
+                    </td>
+                    <td style="vertical-align: top;">X<br>
+                    </td>
+						  <td style="vertical-align: top;">X<br>
+                    </td>
+                    <td style="vertical-align: top;"><br>
+                    </td>
+						  <td style="vertical-align: top;"><br>
+                    </td>
+                    <td style="vertical-align: top;">X<br>
+                    </td>
+						  <td style="vertical-align: top;">X<br>
+                    </td>
+                    <td style="vertical-align: top;"><br>
+                    </td>
+						  <td style="vertical-align: top;"><br>
+                    </td>
+                    <td style="vertical-align: top;"><br>
+                    </td>
+						  <td style="vertical-align: top;"><br>
+                    </td>
+                    <td style="vertical-align: top;">X<br>
+                    </td>
+                </tr>
+					 <tr>
+                    <td style="vertical-align: top;">T6.7<br>
+                    </td>                    
+                    <td style="vertical-align: top;"><br>
+                    </td>
+                    <td style="vertical-align: top;"><br>
+                    </td>
+                    <td style="vertical-align: top;"><br>
+                    </td>
+						  <td style="vertical-align: top;"><br>
+                    </td>
+                    <td style="vertical-align: top;"><br>
+                    </td>
+						  <td style="vertical-align: top;"><br>
+                    </td>
+                    <td style="vertical-align: top;"><br>
+                    </td>
+						  <td style="vertical-align: top;"><br>
+                    </td>
+                    <td style="vertical-align: top;">X<br>
+                    </td>
+						  <td style="vertical-align: top;">X<br>
+                    </td>
+                    <td style="vertical-align: top;"><br>
+                    </td>
+						  <td style="vertical-align: top;"><br>
+                    </td>
+                    <td style="vertical-align: top;">X<br>
+                    </td>
+                </tr>
+					 <tr>
+                    <td style="vertical-align: top;">T6.8<br>
+                    </td>                    
+                    <td style="vertical-align: top;"><br>
+                    </td>
+                    <td style="vertical-align: top;"><br>
+                    </td>
+                    <td style="vertical-align: top;"><br>
+                    </td>
+						  <td style="vertical-align: top;"><br>
+                    </td>
+                    <td style="vertical-align: top;"><br>
+                    </td>
+						  <td style="vertical-align: top;"><br>
+                    </td>
+                    <td style="vertical-align: top;"><br>
+                    </td>
+						  <td style="vertical-align: top;"><br>
+                    </td>
+                    <td style="vertical-align: top;"><br>
+                    </td>
+						  <td style="vertical-align: top;"><br>
+                    </td>
+                    <td style="vertical-align: top;">X<br>
+                    </td>
+						  <td style="vertical-align: top;">X<br>
+                    </td>
+                    <td style="vertical-align: top;">X<br>
+                    </td>
+                </tr>
+					 <tr>
+                    <td style="vertical-align: top;">T6.9<br>
+                    </td>                    
+                    <td style="vertical-align: top;">X<br>
+                    </td>
+                    <td style="vertical-align: top;">X<br>
+                    </td>
+                    <td style="vertical-align: top;">X<br>
+                    </td>
+						  <td style="vertical-align: top;">X<br>
+                    </td>
+                    <td style="vertical-align: top;"><br>
+                    </td>
+						  <td style="vertical-align: top;"><br>
+                    </td>
+                    <td style="vertical-align: top;"><br>
+                    </td>
+						  <td style="vertical-align: top;"><br>
+                    </td>
+                    <td style="vertical-align: top;"><br>
+                    </td>
+						  <td style="vertical-align: top;"><br>
+                    </td>
+                    <td style="vertical-align: top;"><br>
+                    </td>
+						  <td style="vertical-align: top;"><br>
+                    </td>
+                    <td style="vertical-align: top;">X<br>
+                    </td>
+                </tr>
+					 <tr>
+                    <td style="vertical-align: top;">T6.10<br>
+                    </td>                    
+                    <td style="vertical-align: top;">X<br>
+                    </td>
+                    <td style="vertical-align: top;">X<br>
+                    </td>
+                    <td style="vertical-align: top;">X<br>
+                    </td>
+						  <td style="vertical-align: top;">X<br>
+                    </td>
+                    <td style="vertical-align: top;"><br>
+                    </td>
+						  <td style="vertical-align: top;"><br>
+                    </td>
+                    <td style="vertical-align: top;"><br>
+                    </td>
+						  <td style="vertical-align: top;"><br>
+                    </td>
+                    <td style="vertical-align: top;"><br>
+                    </td>
+						  <td style="vertical-align: top;"><br>
+                    </td>
+                    <td style="vertical-align: top;"><br>
+                    </td>
+						  <td style="vertical-align: top;"><br>
                     </td>
                     <td style="vertical-align: top;">X<br>
                     </td>

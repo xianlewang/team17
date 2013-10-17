@@ -14,5 +14,6 @@ SD6A sd6a.cf sd6a.mf
 SD7A sd7a.cf sd7a.mf
 SD7B sd7b.cf sd7b.mf
 SD7C sd7c.cf sd7c.mf
+SD8A sd8a.cf sd8a.mf
 SD9A sd9a.cf sd9a.mf
 
