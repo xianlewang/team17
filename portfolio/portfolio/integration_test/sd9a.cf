@@ -4,8 +4,8 @@
 ; 9a.cf
 
 Dispatcher 8 100ms true
-DoorControl 100ms FRONT LEFT true
-DoorControl 100ms BACK LEFT true
-DoorControl 100ms FRONT RIGHT true
-DoorControl 100ms BACK RIGHT true
+DoorControl FRONT LEFT 100ms true
+DoorControl BACK LEFT 100ms true
+DoorControl FRONT RIGHT 100ms true
+DoorControl BACK RIGHT 100ms true
 DriveControl 100ms true

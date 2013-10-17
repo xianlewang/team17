@@ -1,0 +1,10 @@
+; 18649 Fall 2013
+; group 17
+; Xianle Wang(xianlew)
+; 3a.cf
+
+DoorControl FRONT LEFT 10ms true
+DoorControl BACK LEFT 10ms true
+DoorControl FRONT RIGHT 10ms true
+DoorControl BACK RIGHT 10ms true
+HallButtonControl 4 FRONT UP 50ms true

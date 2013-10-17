@@ -3,4 +3,4 @@
 ; Xianle Wang(xianlew)
 ; hallbuttoncontrol.cf
 
-HallButtonControl 100ms 4 FRONT UP true
+HallButtonControl 4 FRONT UP 100ms true
