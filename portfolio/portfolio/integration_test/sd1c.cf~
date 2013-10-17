@@ -4,4 +4,4 @@
 ; 1C.cf
 
 HallButtonControl 4 FRONT UP 100ms true
-DoorControl FRONT LEFT 10ms TRUE
+DoorControl FRONT LEFT 100ms TRUE

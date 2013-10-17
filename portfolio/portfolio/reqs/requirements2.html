@@ -2619,7 +2619,7 @@
         7.4&nbsp;&nbsp;&nbsp; If mDoorClosed[b, r] is False AND DesiredDirection is Stop, then: <br>
         &nbsp;&nbsp;&nbsp; 7.4.1&nbsp; CarLantern[d] shall be commanded to Off. <br>
         &nbsp;&nbsp;&nbsp; 7.4.2&nbsp; mCarLantern[d] shall be commanded to Off. <br>
-        7.5&nbsp;&nbsp;&nbsp; If mDoorClosed[b, r] is False AND Desired Direction is not Stop, then: <br>
+        7.5&nbsp;&nbsp;&nbsp; If mDoorClosed[b, r] is False AND Desired Direction is not Stop AND mDesiredFloor.f is not equal to f, then: <br>
         &nbsp;&nbsp;&nbsp; 7.5.1&nbsp; CarLantern[d] shall be commanded to On. <br>
         &nbsp;&nbsp;&nbsp; 7.5.2&nbsp; mCarLantern[d] shall be commanded to On. <br>
         <h3>State Chart:</h3>
@@ -2652,7 +2652,8 @@
                     </td>
                     <td style="vertical-align: top;">
                         mDoorClosed[b,r]&nbsp;&larr;&nbsp;False&nbsp;
-                        AND DesiredDirection != Up <br>
+                        AND DesiredDirection != Stop&nbsp;
+                        AND mDesiredFloor.f != f<br>
                     </td>
                 </tr>
                 <tr>
