@@ -1,3 +1,7 @@
+; 18649 Fall 2013
+; group 17
+; Jiang He (jiangh)
+; sd6a.stats
 
 Simulator Parameters:
 Command line = -cf sd6a.cf -mf sd6a.mf
