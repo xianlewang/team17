@@ -1,3 +1,8 @@
+;18649 Fall 2013
+;Group: #17
+;Qiang Zhang (qiangz) Shen Yu (sheny)
+;sd7b.stats
+
 Simulator Parameters:
 Command line = -cf sd7b.cf -mf sd7b.mf -rt 0s
 RandomSeed = 1380848535403

@@ -1,6 +1,7 @@
-;Testing CarPositionControl
-;Group 17 
-;Member Name: Shen Yu  Andrew ID: sheny
+; 18649 Fall 2013
+; Group 17 
+; Shen Yu (sheny)
+; carposition_defines.mf
 
 ;can id used
 #DEFINE AT_FLOOR_1F_CAN_ID                     0xC4C2800
