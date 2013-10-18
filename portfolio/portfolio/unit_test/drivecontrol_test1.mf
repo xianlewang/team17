@@ -1,7 +1,7 @@
 ;18649 2013
 ;Group 17 
 ;Member Name: Jiang He  Andrew ID: jiangh
-;drivecontrol_unittest_new.mf
+;drivecontrol_test1.mf
 
 #INCLUDE drive_defines.mf ;include CAN ID and Period Definations
 ;initialize
