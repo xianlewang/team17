@@ -1,6 +1,6 @@
 ; 18649 Fall 2013
 ; group 17
 ; Xianle Wang(xianlew)
-; disp.cf
+; disptcher.cf
 
 Dispatcher 4 50ms true
