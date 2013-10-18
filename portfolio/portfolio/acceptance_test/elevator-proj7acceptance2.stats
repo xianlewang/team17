@@ -1,0 +1,124 @@
+; 18649 Fall 2013
+; Group 17
+; Qiang Zhang(qiangz), Shen Yu(sheny), Jiang He(jiangh), Xianle Wang(xianlew)
+
+Simulator Parameters:
+Command line = -pf proj7acceptance2.pass -seed 8675309 -monitor Proj7RuntimeMonitor
+RandomSeed = 8675309
+CanNetworkBitTime = 0 ns
+Effective Can Bitrate = Infinity
+Run Time = null
+Real time rate = null
+Acceptance Test File = proj7acceptance2.pass
+Monitors: Proj7RuntimeMonitor  
+
+
+[Elevator] @0.000000000: Starting Simulation
+[RuntimeMonitor] @43.650000000: No Call At Front
+[RuntimeMonitor] @43.650000000: No Hall Call At Back
+[Elevator] @60.000000000: Progress indicator
+[RuntimeMonitor] @87.540000000: No Hall Call At Back
+[Elevator] @120.000000000: Progress indicator
+[RuntimeMonitor] @131.340000000: No Call At Front
+[RuntimeMonitor] @175.140000000: No Call At Front
+[Elevator] @180.000000000: Progress indicator
+[RuntimeMonitor] @219.100000000: No Call At Front
+[Elevator] @240.000000000: Progress indicator
+[Elevator] @300.000000000: Progress indicator
+[RuntimeMonitor] @306.790000000: No Call At Front
+[RuntimeMonitor] @306.790000000: No Hall Call At Back
+[Elevator] @360.000000000: Progress indicator
+[Elevator] @420.000000000: Progress indicator
+[RuntimeMonitor] @470.760000000: No Call At Front
+[Elevator] @480.000000000: Progress indicator
+[RuntimeMonitor] @503.520000000: Overweight
+[Elevator] @540.000000000: Progress indicator
+[Elevator] @600.000000000: Progress indicator
+[RuntimeMonitor] @611.900000000: No Call At Front
+[Elevator] @660.000000000: Progress indicator
+[Elevator] @720.000000000: Progress indicator
+[Elevator] @780.000000000: Progress indicator
+[Elevator] @840.000000000: Progress indicator
+[Elevator] @900.000000000: Progress indicator
+[RuntimeMonitor] @951.950000000: No Call At Front
+[Elevator] @960.000000000: Progress indicator
+[RuntimeMonitor] @985.620000000: Overweight
+[Elevator] @1020.000000000: Progress indicator
+[Elevator] @1080.000000000: Progress indicator
+[Elevator] @1140.000000000: Progress indicator
+[Elevator] @1200.000000000: Progress indicator
+[Elevator] @1260.000000000: Progress indicator
+[Elevator] @1320.000000000: Progress indicator
+[Elevator] @1380.000000000: Progress indicator
+[RuntimeMonitor] @1433.570000000: No Call At Front
+[Elevator] @1440.000000000: Progress indicator
+[Elevator] @1500.000000000: Progress indicator
+[Elevator] @1560.000000000: Progress indicator
+[Elevator] @1620.000000000: Progress indicator
+[Elevator] @1680.000000000: Progress indicator
+[Elevator] @1740.000000000: Progress indicator
+[Elevator] @1800.000000000: Progress indicator
+[Elevator] @1860.000000000: Progress indicator
+[RuntimeMonitor] @1904.770000000: No Call At Front
+[Elevator] @1920.000000000: Progress indicator
+[RuntimeMonitor] @1939.220000000: Overweight
+[Elevator] @1980.000000000: Progress indicator
+[Elevator] @2040.000000000: Progress indicator
+[Elevator] @2100.000000000: Progress indicator
+[Elevator] @2160.000000000: Progress indicator
+[Elevator] @2220.000000000: Progress indicator
+[Elevator] @2280.000000000: Progress indicator
+[Elevator] @2340.000000000: Progress indicator
+[Elevator] @2400.000000000: Progress indicator
+[Elevator] @2460.000000000: Progress indicator
+[Elevator] @2520.000000000: Progress indicator
+[Elevator] @2580.000000000: Progress indicator
+[Elevator] @2640.000000000: Progress indicator
+[Elevator] @2700.000000000: Progress indicator
+[Elevator] @2760.000000000: Progress indicator
+[Elevator] @2820.000000000: Progress indicator
+[Elevator] @2880.000000000: Progress indicator
+[RuntimeMonitor] @2882.120000000: Overweight
+[Elevator] @2940.000000000: Progress indicator
+[Elevator] @3000.000000000: Progress indicator
+[Elevator] @3060.000000000: Progress indicator
+[Elevator] @3120.000000000: Progress indicator
+[Elevator] @3180.000000000: Progress indicator
+[Elevator] @3240.000000000: Progress indicator
+[Elevator] @3300.000000000: Progress indicator
+[Elevator] @3360.000000000: Progress indicator
+[Elevator] @3420.000000000: Progress indicator
+[Elevator] @3464.790000000: Simulation Finished
+
+Monitors Warning Results: 
+RuntimeMonitor generated 0 warnings.
+
+Monitors Summmary Results: 
+Overweight Count = 4
+NoCall Count = 13
+Reversal Count = 0
+
+STATISTICS FOR ELEVATOR SIMULATION PASSENGER DELIVERY
+-----------------------------------------------------
+
+
+Passenger Delivery Summary
+Delivered: 51
+Stranded: 0
+Total: 51
+
+Deliver Stats (lower is better):
+Average_delivery_time: 1249.772
+Maximum_delivery_time:  3288.690
+Delivery_performance_score:  8287.776
+
+Satisfaction Stats (higher is better):
+Average_satisfaction_score: 92.765
+Min_satisfaction_score:  50.000
+Satisfaction_performance_score:  421.059
+
+
+
+3464.79s simulation seconds
+ 32.082 real seconds
+ effective rate 108.00
