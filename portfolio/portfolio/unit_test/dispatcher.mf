@@ -1,7 +1,7 @@
 ; 18649 Fall 2013
 ; group 17
 ; Xianle Wang(xianlew)
-; hall_button_control_1.mf
+; dispatcher.mf
 
 
 ;this test file demonstrates network and framework message injections
