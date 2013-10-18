@@ -1,8 +1,14 @@
+/*
+ 18649 Fall 2013
+ Group 17
+ Jiang He(jiangh)
+ (other names would go here)
+ */
 package simulator.elevatorcontrol;
 
 import jSimPack.SimTime;
-import simulator.elevatormodules.AtFloorCanPayloadTranslator;
-import simulator.elevatormodules.DoorClosedCanPayloadTranslator;
+import simulator.elevatorcontrol.Utility.AtFloorArray;
+import simulator.elevatorcontrol.Utility.DoorClosedArray;
 import simulator.elevatormodules.HoistwayLimitSensorCanPayloadTranslator;
 import simulator.elevatormodules.LevelingCanPayloadTranslator;
 import simulator.framework.Controller;
@@ -47,43 +53,15 @@ public class DriveControl extends Controller {
 	private ReadableCanMailbox networkHoistwayLimitDown;
 	private HoistwayLimitSensorCanPayloadTranslator mHoistwayLimitDown;
 	
-	//mAtFloor	
-	private ReadableCanMailbox networkAtFloorOneFront;
-	private ReadableCanMailbox networkAtFloorOneBack;
-	private ReadableCanMailbox networkAtFloorTwoBack;
-	private ReadableCanMailbox networkAtFloorThreeFront;
-	private ReadableCanMailbox networkAtFloorFourFront;
-	private ReadableCanMailbox networkAtFloorFiveFront;
-	private ReadableCanMailbox networkAtFloorSixFront;
-	private ReadableCanMailbox networkAtFloorSevenFront;
-	private ReadableCanMailbox networkAtFloorSevenBack;
-	private ReadableCanMailbox networkAtFloorEightFront;
-	private AtFloorCanPayloadTranslator mAtFloorOneFront;
-	private AtFloorCanPayloadTranslator mAtFloorOneBack;
-	private AtFloorCanPayloadTranslator mAtFloorTwoBack;
-	private AtFloorCanPayloadTranslator mAtFloorThreeFront;
-	private AtFloorCanPayloadTranslator mAtFloorFourFront;
-	private AtFloorCanPayloadTranslator mAtFloorFiveFront;
-	private AtFloorCanPayloadTranslator mAtFloorSixFront;
-	private AtFloorCanPayloadTranslator mAtFloorSevenFront;
-	private AtFloorCanPayloadTranslator mAtFloorSevenBack;
-	private AtFloorCanPayloadTranslator mAtFloorEightFront;
-	
+	//mAtFloor array
+	private AtFloorArray AtFloor_array;
+	private DoorClosedArray DoorClosed_front_array;
+	private DoorClosedArray DoorClosed_back_array;
 	//mLevel
 	private ReadableCanMailbox networkLevelUp;
 	private LevelingCanPayloadTranslator mLevelUp;
 	private ReadableCanMailbox networkLevelDown;
 	private LevelingCanPayloadTranslator mLevelDown;
-	
-	//mDoorClosed
-	private ReadableCanMailbox networkDoorClosedFrontLeft;  
-	private DoorClosedCanPayloadTranslator mDoorClosedFrontLeft; 
-	private ReadableCanMailbox networkDoorClosedFrontRight;  
-	private DoorClosedCanPayloadTranslator mDoorClosedFrontRight; 
-	private ReadableCanMailbox networkDoorClosedBackLeft;  
-	private DoorClosedCanPayloadTranslator mDoorClosedBackLeft; 
-	private ReadableCanMailbox networkDoorClosedBackRight;  
-	private DoorClosedCanPayloadTranslator mDoorClosedBackRight; 
 	
 	//mDoorMotor
 	private ReadableCanMailbox networkDoorMotorFrontLeft; 
@@ -170,48 +148,6 @@ public class DriveControl extends Controller {
 		mHoistwayLimitDown = new HoistwayLimitSensorCanPayloadTranslator(networkHoistwayLimitDown, Direction.DOWN);
 		canInterface.registerTimeTriggered(networkHoistwayLimitDown);
 		
-		//mAtFloor
-		//1 front
-		networkAtFloorOneFront = CanMailbox.getReadableCanMailbox(MessageDictionary.AT_FLOOR_BASE_CAN_ID + ReplicationComputer.computeReplicationId(1, Hallway.FRONT));
-		mAtFloorOneFront = new AtFloorCanPayloadTranslator(networkAtFloorOneFront, 1, Hallway.FRONT);
-		canInterface.registerTimeTriggered(networkAtFloorOneFront);
-		//1 back
-		networkAtFloorOneBack = CanMailbox.getReadableCanMailbox(MessageDictionary.AT_FLOOR_BASE_CAN_ID + ReplicationComputer.computeReplicationId(1, Hallway.BACK));
-		mAtFloorOneBack = new AtFloorCanPayloadTranslator(networkAtFloorOneBack, 1, Hallway.BACK);
-		canInterface.registerTimeTriggered(networkAtFloorOneBack);
-		//2 back        
-		networkAtFloorTwoBack = CanMailbox.getReadableCanMailbox(MessageDictionary.AT_FLOOR_BASE_CAN_ID + ReplicationComputer.computeReplicationId(2, Hallway.BACK));
-		mAtFloorTwoBack = new AtFloorCanPayloadTranslator(networkAtFloorTwoBack, 2, Hallway.BACK);
-		canInterface.registerTimeTriggered(networkAtFloorTwoBack);
-		//3 front
-		networkAtFloorThreeFront = CanMailbox.getReadableCanMailbox(MessageDictionary.AT_FLOOR_BASE_CAN_ID + ReplicationComputer.computeReplicationId(3, Hallway.FRONT));
-		mAtFloorThreeFront = new AtFloorCanPayloadTranslator(networkAtFloorThreeFront, 3, Hallway.FRONT);
-		canInterface.registerTimeTriggered(networkAtFloorThreeFront);
-		//4 front
-		networkAtFloorFourFront = CanMailbox.getReadableCanMailbox(MessageDictionary.AT_FLOOR_BASE_CAN_ID + ReplicationComputer.computeReplicationId(4, Hallway.FRONT));
-		mAtFloorFourFront = new AtFloorCanPayloadTranslator(networkAtFloorFourFront, 4, Hallway.FRONT);
-		canInterface.registerTimeTriggered(networkAtFloorFourFront);
-		//5 front        
-		networkAtFloorFiveFront = CanMailbox.getReadableCanMailbox(MessageDictionary.AT_FLOOR_BASE_CAN_ID + ReplicationComputer.computeReplicationId(5, Hallway.FRONT));
-		mAtFloorFiveFront = new AtFloorCanPayloadTranslator(networkAtFloorFiveFront, 5, Hallway.FRONT);
-		canInterface.registerTimeTriggered(networkAtFloorFiveFront);
-		//6 front
-		networkAtFloorSixFront = CanMailbox.getReadableCanMailbox(MessageDictionary.AT_FLOOR_BASE_CAN_ID + ReplicationComputer.computeReplicationId(6, Hallway.FRONT));
-		mAtFloorSixFront = new AtFloorCanPayloadTranslator(networkAtFloorSixFront, 6, Hallway.FRONT);
-		canInterface.registerTimeTriggered(networkAtFloorSixFront);
-		//7 front        
-		networkAtFloorSevenFront = CanMailbox.getReadableCanMailbox(MessageDictionary.AT_FLOOR_BASE_CAN_ID + ReplicationComputer.computeReplicationId(7, Hallway.FRONT));
-		mAtFloorSevenFront = new AtFloorCanPayloadTranslator(networkAtFloorSevenFront, 7, Hallway.FRONT);
-		canInterface.registerTimeTriggered(networkAtFloorSevenFront);
-		//7 back   
-		networkAtFloorSevenBack = CanMailbox.getReadableCanMailbox(MessageDictionary.AT_FLOOR_BASE_CAN_ID + ReplicationComputer.computeReplicationId(7, Hallway.BACK));
-		mAtFloorSevenBack = new AtFloorCanPayloadTranslator(networkAtFloorSevenBack, 7, Hallway.BACK);
-		canInterface.registerTimeTriggered(networkAtFloorSevenBack);
-		//8 front        
-		networkAtFloorEightFront = CanMailbox.getReadableCanMailbox(MessageDictionary.AT_FLOOR_BASE_CAN_ID + ReplicationComputer.computeReplicationId(8, Hallway.FRONT));
-		mAtFloorEightFront = new AtFloorCanPayloadTranslator(networkAtFloorEightFront, 8, Hallway.FRONT);
-		canInterface.registerTimeTriggered(networkAtFloorEightFront);
-		
 		//mLevel
 		networkLevelUp = CanMailbox.getReadableCanMailbox(MessageDictionary.LEVELING_BASE_CAN_ID + ReplicationComputer.computeReplicationId(Direction.UP));
 		mLevelUp = new LevelingCanPayloadTranslator(networkLevelUp, Direction.UP);
@@ -220,25 +156,7 @@ public class DriveControl extends Controller {
 		networkLevelDown = CanMailbox.getReadableCanMailbox(MessageDictionary.LEVELING_BASE_CAN_ID + ReplicationComputer.computeReplicationId(Direction.DOWN));
 		mLevelDown = new LevelingCanPayloadTranslator(networkLevelDown, Direction.DOWN);
 		canInterface.registerTimeTriggered(networkLevelDown);
-		
-		//mDoorClosed
-		//Front Left
-		networkDoorClosedFrontLeft = CanMailbox.getReadableCanMailbox(MessageDictionary.DOOR_CLOSED_SENSOR_BASE_CAN_ID + ReplicationComputer.computeReplicationId(Hallway.FRONT, Side.LEFT));
-		mDoorClosedFrontLeft = new DoorClosedCanPayloadTranslator(networkDoorClosedFrontLeft, Hallway.FRONT, Side.LEFT);
-		canInterface.registerTimeTriggered(networkDoorClosedFrontLeft);
-		//Front Right
-		networkDoorClosedFrontRight = CanMailbox.getReadableCanMailbox(MessageDictionary.DOOR_CLOSED_SENSOR_BASE_CAN_ID + ReplicationComputer.computeReplicationId(Hallway.FRONT, Side.RIGHT));
-		mDoorClosedFrontRight = new DoorClosedCanPayloadTranslator(networkDoorClosedFrontRight, Hallway.FRONT, Side.RIGHT);
-		canInterface.registerTimeTriggered(networkDoorClosedFrontRight);
-		//Back Left
-		networkDoorClosedBackLeft = CanMailbox.getReadableCanMailbox(MessageDictionary.DOOR_CLOSED_SENSOR_BASE_CAN_ID + ReplicationComputer.computeReplicationId(Hallway.BACK, Side.LEFT));
-		mDoorClosedBackLeft = new DoorClosedCanPayloadTranslator(networkDoorClosedBackLeft, Hallway.BACK, Side.LEFT);
-		canInterface.registerTimeTriggered(networkDoorClosedBackLeft);
-		//Back Right
-		networkDoorClosedBackRight = CanMailbox.getReadableCanMailbox(MessageDictionary.DOOR_CLOSED_SENSOR_BASE_CAN_ID + ReplicationComputer.computeReplicationId(Hallway.BACK, Side.RIGHT));
-		mDoorClosedBackRight = new DoorClosedCanPayloadTranslator(networkDoorClosedBackRight, Hallway.BACK, Side.RIGHT);
-		canInterface.registerTimeTriggered(networkDoorClosedBackRight);
-		
+
 		//mDoorMotor
 		networkDoorMotorFrontLeft = CanMailbox.getReadableCanMailbox(MessageDictionary.DOOR_MOTOR_COMMAND_BASE_CAN_ID + ReplicationComputer.computeReplicationId(Hallway.FRONT, Side.LEFT));
 		mDoorMotorFrontLeft = new DoorMotorCanPayloadTranslator(networkDoorMotorFrontLeft, Hallway.FRONT, Side.LEFT);
@@ -256,7 +174,6 @@ public class DriveControl extends Controller {
 		mDoorMotorBackRight = new DoorMotorCanPayloadTranslator(networkDoorMotorBackRight, Hallway.BACK, Side.RIGHT);
 		canInterface.registerTimeTriggered(networkDoorMotorBackRight);
 		
-		
 		//mDesiredFloor
 		networkDesiredFloor = CanMailbox.getReadableCanMailbox(MessageDictionary.DESIRED_FLOOR_CAN_ID);
 		mDesiredFloor = new DesiredFloorCanPayloadTranslator(networkDesiredFloor);
@@ -272,6 +189,9 @@ public class DriveControl extends Controller {
 		mDriveSpeed = new DriveSpeedCanPayloadTranslator(networkDriveSpeed);
 		canInterface.sendTimeTriggered(networkDriveSpeed, period);
 		
+		AtFloor_array = new AtFloorArray(canInterface);
+		DoorClosed_front_array = new DoorClosedArray(Hallway.FRONT, canInterface);
+		DoorClosed_back_array = new DoorClosedArray(Hallway.BACK, canInterface);
 		timer.start(period);
 	}
 	
@@ -283,110 +203,54 @@ public class DriveControl extends Controller {
      */
 	public void timerExpired(Object callbackData) {
 		State newState = state;
-		//Utility.AtFloorArray floorArray = new Utility.AtFloorArray(canInterface);
-		//Utility.DoorClosedArray frontDoorClosedArray = new Utility.DoorClosedArray(Hallway.FRONT, canInterface);
-		//Utility.DoorClosedArray backDoorClosedArray = new Utility.DoorClosedArray(Hallway.BACK, canInterface);
 		
 		boolean allDoorClosed;
 		boolean allDoorMotorStop;
 		boolean levelFlag;
-		
-		/*******************************
+
 		switch (state) {
 			case STOP:
-				 //state actions for 'STOP'
-				 localDrive.set(Speed.STOP, Direction.STOP);
-				 mDrive.set(Speed.STOP, Direction.STOP);
-				 // mDriveSpeed.set(Speed.STOP, Direction.STOP);
-				 tempCurrFloor = getCurrentFloor();
-				 //#transition 'T6.1'
-				 if ((tempCurrFloor != mDesiredFloor.getFloor()) && (mDoorClosed.getValue() == true)) {
-					  newState = State.MOVING;
-				 } 
-				 else {
-					  newState = state;
-				 }
-				 break;
-			case MOVING:
-				 //state actions for 'MOVING'
-				 localDrive.set(Speed.SLOW, mDesiredFloor.getDirection());
-				 mDrive.set(Speed.SLOW, mDesiredFloor.getDirection());
-				 // mDriveSpeed.set(Speed.SLOW, movingDirection);				 				 
-				 // System.out.println("mDrive.getDirection() is " + mDrive.getDirection());
-				 // System.out.println("mDrive.getSpeed() is " + mDrive.getSpeed());
+				currentFloor = AtFloor_array.getCurrentFloor();
+				allDoorClosed = DoorClosed_front_array.getBothClosed() && DoorClosed_back_array.getBothClosed();
+				
+				allDoorMotorStop = checkAllDoorMotorStop();
+				
+				//state actions for 'STOP'
+				desiredDirection = getDesiredDirection(mDesiredFloor, currentFloor);
+				desiredFloor = getDesiredFloor();
+				
+				commandSpeed = Speed.STOP;
+				localDrive.set(commandSpeed, desiredDirection);
+				mDrive.set(commandSpeed, desiredDirection);
+				mDriveSpeed.set(localDriveSpeed.speed(), localDriveSpeed.direction());
 				 
-				 boolean atFLoorFlag = false;
-				 tempCurrFloor = 0;
-				 for(int i = 0; i < 8; i++) {
-					 atFLoorFlag = atFLoorFlag || mAtFloor[i].getValue();
-					 if(atFLoorFlag) {
-						 tempCurrFloor = i + 1;
-						 break;
-					 }					 
-				 }
-				 
-				//#transition 'T6.2'
-				 if ((atFLoorFlag == true) && (tempCurrFloor == mDesiredFloor.getFloor())) {
-					  newState = State.STOP;				 
-				 } 
-				 else {
-					  newState = state;
-				 }
-				 break;
-			default:
-				 throw new RuntimeException("State " + state + " was not recognized.");
-		}
-		******************************************/
-		// (3)
-		switch (state) {
-			case STOP:
-				 currentFloor = getCurrentFloor();
-				 allDoorClosed = checkAllDoorClosed();	
-				 allDoorMotorStop = checkAllDoorMotorStop();
-				 
-				 //state actions for 'STOP'
-				 desiredDirection = getDesiredDirection(mDesiredFloor, currentFloor);
-				 desiredFloor = getDesiredFloor();
-				 
-				 commandSpeed = Speed.STOP;
-				 localDrive.set(commandSpeed, desiredDirection);
-				 mDrive.set(commandSpeed, desiredDirection);
-				 mDriveSpeed.set(localDriveSpeed.speed(), localDriveSpeed.direction());
-				 
-				 System.out.println("currentFloor is " + currentFloor);
-				 System.out.println("mDesiredFloor is " + desiredFloor);
-			    System.out.println("desiredDirection is " + desiredDirection);
-			    System.out.println("allDoorClosed is " + allDoorClosed);
-			    System.out.println("allMotorStop is " + allDoorMotorStop);
-				 
-//#transition 'T6.1' STOP -> LEVEL UP
-				 if ((allDoorClosed == false) && (mLevelDown.getValue() == false)) {
+//#transition 'T6.1' STOP -> LEVEL_UP
+				 if ((allDoorClosed == false) && (mLevelUp.getValue() == false)) {
 					  newState = State.LEVEL_UP;
 				 }
-//#transition 'T6.3' STOP -> SLOW UP			 
+//#transition 'T6.3' STOP -> SLOW_UP			 
 				 else if (allDoorClosed == true && allDoorMotorStop == true && (currentFloor != desiredFloor) && desiredDirection == Direction.UP) {
-						newState = State.SLOW_UP;
+					 newState = State.SLOW_UP;
 				 }
-//#transition 'T6.5' STOP -> LEVEL DOWN		 
-				 else if (allDoorClosed == false && (mLevelUp.getValue() == false)) {
+//#transition 'T6.5' STOP -> LEVEL_DOWN		 
+				 else if (allDoorClosed == false && (mLevelDown.getValue() == false)) {
 						newState = State.LEVEL_DOWN;
 				 }
-//#transition 'T6.7' STOP -> SLOW DOWN		 
+//#transition 'T6.7' STOP -> SLOW_DOWN		 
 				 else if (allDoorClosed && allDoorMotorStop  == true && (currentFloor != desiredFloor) && desiredDirection == Direction.DOWN) {
-						newState = State.SLOW_DOWN;
+					 newState = State.SLOW_DOWN;
 				 } 
 				 else {
 					  newState = state;
 				 }
 				 break;
 			case LEVEL_UP:				 			
-				 //state actions for 'LEVEL UP'
+				 //state actions for 'LEVEL_UP'
 				 desiredDirection = Direction.UP;
 				 commandSpeed = Speed.LEVEL;
 				 localDrive.set(commandSpeed, desiredDirection);
-				 mDrive.set(Speed.SLOW, desiredDirection);
+				 mDrive.set(Speed.LEVEL, desiredDirection);
 				 mDriveSpeed.set(localDriveSpeed.speed(), localDriveSpeed.direction());
-				 				 
 //#transition 'T6.2'
 				 if ((mLevelDown.getValue() == true && mLevelUp.getValue()==true) || (mEmergencyBrake.getValue()==true) || (mHoistwayLimitDown.getValue()==true) || (mHoistwayLimitUp.getValue()==true)) {
 					  newState = State.STOP;				 
@@ -395,11 +259,11 @@ public class DriveControl extends Controller {
 				 }
 				 break;
 			case LEVEL_DOWN:
-				 //state actions for 'LEVEL DOWN'
+				 //state actions for 'LEVEL_DOWN'
 				 desiredDirection = Direction.DOWN;
 				 commandSpeed = Speed.LEVEL;
 				 localDrive.set(commandSpeed, desiredDirection);
-				 mDrive.set(Speed.SLOW, desiredDirection);
+				 mDrive.set(Speed.LEVEL, desiredDirection);
 				 mDriveSpeed.set(localDriveSpeed.speed(), localDriveSpeed.direction());
 				 
 //#transition 'T6.6'
@@ -410,8 +274,8 @@ public class DriveControl extends Controller {
 				 }
 				 break;
 			case SLOW_UP:
-				 currentFloor = getCurrentFloor();
-				 allDoorClosed = checkAllDoorClosed();	
+				 currentFloor = AtFloor_array.getCurrentFloor();
+			     allDoorClosed = DoorClosed_front_array.getBothClosed() && DoorClosed_back_array.getBothClosed();
 				 allDoorMotorStop = checkAllDoorMotorStop();
 				 levelFlag = mLevelDown.getValue() && mLevelUp.getValue();
 				
@@ -436,8 +300,8 @@ public class DriveControl extends Controller {
 				 }
 				 break;
 			case SLOW_DOWN:
-				 currentFloor = getCurrentFloor();
-				 allDoorClosed = checkAllDoorClosed();	
+				 currentFloor = AtFloor_array.getCurrentFloor();
+				 allDoorClosed = DoorClosed_front_array.getBothClosed() && DoorClosed_back_array.getBothClosed();
 				 allDoorMotorStop = checkAllDoorMotorStop();
 				 levelFlag = mLevelDown.getValue() && mLevelUp.getValue();
 				
@@ -465,8 +329,6 @@ public class DriveControl extends Controller {
 				 throw new RuntimeException("State " + state + " was not recognized.");
 		}
 		
-		/////////////////////////////////////////////////////////////
-		
 	  //log the results of this iteration
 	  if (state == newState) {
 			log("remains in state: ",state);
@@ -485,24 +347,7 @@ public class DriveControl extends Controller {
 	  //the timer
 	  timer.start(period);
 	}
-	
-	// /*
-	private int getCurrentFloor() {
-		int cf = -1;
-		
-		if(mAtFloorOneFront.getValue()==true || mAtFloorOneBack.getValue()==true)	cf=1;
-		if(mAtFloorTwoBack.getValue()==true)	cf=2;
-		if(mAtFloorThreeFront.getValue()==true)	cf=3;
-		if(mAtFloorFourFront.getValue()==true)	cf=4;
-		if(mAtFloorFiveFront.getValue()==true)	cf=5;
-		if(mAtFloorSixFront.getValue()==true)	cf=6;
-		if(mAtFloorSevenFront.getValue()==true || mAtFloorSevenBack.getValue()==true)	cf=7;
-		if(mAtFloorEightFront.getValue()==true)	cf=8;
 
-		return cf;
-	}
-	// */
-	
 	private Direction getDesiredDirection(DesiredFloorCanPayloadTranslator mDesiredFloor, int currentFloor) {
 		Direction d;
 		if(mDesiredFloor.getFloor() > currentFloor) {
@@ -531,13 +376,7 @@ public class DriveControl extends Controller {
 		return df;
 	}
 	
-	
 	private boolean checkAllDoorMotorStop() {
 		return (mDoorMotorFrontLeft.getDoorCommand() == DoorCommand.STOP) && (mDoorMotorFrontRight.getDoorCommand()==DoorCommand.STOP) && (mDoorMotorBackLeft.getDoorCommand()==DoorCommand.STOP) && (mDoorMotorBackRight.getDoorCommand()==DoorCommand.STOP);
-	}
-	
-	private boolean checkAllDoorClosed() {
-		return mDoorClosedFrontLeft.getValue() && mDoorClosedFrontRight.getValue() &&
-                	mDoorClosedBackLeft.getValue() && mDoorClosedBackRight.getValue();
 	}
 }
