@@ -162,11 +162,11 @@ public class Dispatcher extends Controller {
 			mDesiredFloor.set(target, lastDir, desiredHallway);
 			mDesiredDwell_b.set(dwell);
 			mDesiredDwell_f.set(dwell);
-			// #transition 'T11.1'
+// #transition 'T11.1'
 			if (atFloorArray.getCurrentFloor() == MessageDictionary.NONE
 					&& !(doorClosedBack.getBothClosed() && doorClosedFront.getBothClosed())) {
 				newState = State.EMERGENCY_MOVE;
-				// #transition 'T11.3'
+// #transition 'T11.3'
 			} else if (atFloorArray.getCurrentFloor() == mDesiredFloor
 					.getFloor()
 					&& !(doorClosedBack.getBothClosed() && doorClosedFront.getBothClosed())) {
@@ -182,7 +182,7 @@ public class Dispatcher extends Controller {
             lastDir = getDesiredDirectoin();
 			mDesiredFloor.set(target, getDesiredDirectoin(), desiredHallway);
 
-			// #transition 'T11.2'
+// #transition 'T11.2'
 			if (currentFloor != target) {
 				newState = State.HOLD;
 			}
