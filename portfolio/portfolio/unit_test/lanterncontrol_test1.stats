@@ -1,128 +1,47 @@
+; 18649 Fall 2013
+; group 17
+; Qiang Zhang(qiangz)
+; lanterncontrol_test1.stats
 Simulator Parameters:
-Command line = -cf lanterncontrol.cf -mf lanterncontrol_test1.mf -rt 0s
-RandomSeed = 1381451689059
+Command line = -cf lanterncontrol.cf -mf lanterncontrol_test1.mf
+RandomSeed = 1382053553033
 CanNetworkBitTime = 0 ns
 Effective Can Bitrate = Infinity
-Run Time = 0.0s
+Run Time = null
 Real time rate = null
 Message File = lanterncontrol_test1.mf
 Controller File = lanterncontrol.cf
 
 
-[LanternControl[UP]] @0.000000000: Create CarLantern Control with tim period = 0.2s
 [Elevator] @0.000000000: Starting Simulation ***
-[LanternControl[UP]] @0.200000000: remains in state: Lantern_Off
-[LanternControl[UP]] @0.200000000: State stored: STATE<-Lantern_Off
-[LanternControl[UP]] @0.400000000: remains in state: Lantern_Off
-[LanternControl[UP]] @0.400000000: State stored: STATE<-Lantern_Off
-[LanternControl[UP]] @0.600000000: remains in state: Lantern_Off
-[LanternControl[UP]] @0.600000000: State stored: STATE<-Lantern_Off
-[LanternControl[UP]] @0.800000000: remains in state: Lantern_Off
-[LanternControl[UP]] @0.800000000: State stored: STATE<-Lantern_Off
-[LanternControl[UP]] @1.000000000: remains in state: Lantern_Off
-[LanternControl[UP]] @1.000000000: State stored: STATE<-Lantern_Off
 [AssertionMonitor] @1.200000000: **********************************************************************************************************
-[AssertionMonitor] @1.200000000: PASSED simulator.payloads.CarLanternPayload$ReadableCarLanternPayload@45b9ce4b :: lighted ?== false PASSED
+[AssertionMonitor] @1.200000000: PASSED simulator.payloads.CarLanternPayload$ReadableCarLanternPayload@1f292d26 :: lighted ?== false PASSED
 [AssertionMonitor] @1.200000000: **********************************************************************************************************
-[LanternControl[UP]] @1.200000000: remains in state: Lantern_Off
-[LanternControl[UP]] @1.200000000: State stored: STATE<-Lantern_Off
-[LanternControl[UP]] @1.400000000: remains in state: Lantern_Off
-[LanternControl[UP]] @1.400000000: State stored: STATE<-Lantern_Off
-[LanternControl[UP]] @1.600000000: remains in state: Lantern_Off
-[LanternControl[UP]] @1.600000000: State stored: STATE<-Lantern_Off
-[LanternControl[UP]] @1.800000000: remains in state: Lantern_Off
-[LanternControl[UP]] @1.800000000: State stored: STATE<-Lantern_Off
-[LanternControl[UP]] @2.000000000: remains in state: Lantern_Off
-[LanternControl[UP]] @2.000000000: State stored: STATE<-Lantern_Off
-[LanternControl[UP]] @2.200000000: Transition: Lantern_Off -> No_On
-[LanternControl[UP]] @2.200000000: State stored: STATE<-No_On
-[LanternControl[UP]] @2.400000000: remains in state: No_On
-[LanternControl[UP]] @2.400000000: State stored: STATE<-No_On
 [AssertionMonitor] @2.600000000: **********************************************************************************************************
-[AssertionMonitor] @2.600000000: PASSED simulator.payloads.CarLanternPayload$ReadableCarLanternPayload@44bd928a :: lighted ?== false PASSED
+[AssertionMonitor] @2.600000000: PASSED simulator.payloads.CarLanternPayload$ReadableCarLanternPayload@57bcc0bc :: lighted ?== false PASSED
 [AssertionMonitor] @2.600000000: **********************************************************************************************************
 [AssertionMonitor] @2.600000000: *************************************************************
 [AssertionMonitor] @2.600000000: PASSED LanternControl[UP]::checkState(STATE) ?== No_On PASSED
 [AssertionMonitor] @2.600000000: *************************************************************
-[LanternControl[UP]] @2.600000000: remains in state: No_On
-[LanternControl[UP]] @2.600000000: State stored: STATE<-No_On
-[LanternControl[UP]] @2.800000000: remains in state: No_On
-[LanternControl[UP]] @2.800000000: State stored: STATE<-No_On
-[LanternControl[UP]] @3.000000000: remains in state: No_On
-[LanternControl[UP]] @3.000000000: State stored: STATE<-No_On
-[LanternControl[UP]] @3.200000000: remains in state: No_On
-[LanternControl[UP]] @3.200000000: State stored: STATE<-No_On
-[LanternControl[UP]] @3.400000000: remains in state: No_On
-[LanternControl[UP]] @3.400000000: State stored: STATE<-No_On
-[LanternControl[UP]] @3.600000000: Transition: No_On -> Lantern_Off
-[LanternControl[UP]] @3.600000000: State stored: STATE<-Lantern_Off
-[LanternControl[UP]] @3.800000000: remains in state: Lantern_Off
-[LanternControl[UP]] @3.800000000: State stored: STATE<-Lantern_Off
-[LanternControl[UP]] @4.000000000: remains in state: Lantern_Off
-[LanternControl[UP]] @4.000000000: State stored: STATE<-Lantern_Off
-[LanternControl[UP]] @4.200000000: remains in state: Lantern_Off
-[LanternControl[UP]] @4.200000000: State stored: STATE<-Lantern_Off
 [AssertionMonitor] @4.400000000: **********************************************************************************************************
-[AssertionMonitor] @4.400000000: PASSED simulator.payloads.CarLanternPayload$ReadableCarLanternPayload@584fce71 :: lighted ?== false PASSED
+[AssertionMonitor] @4.400000000: PASSED simulator.payloads.CarLanternPayload$ReadableCarLanternPayload@2fdb7df8 :: lighted ?== false PASSED
 [AssertionMonitor] @4.400000000: **********************************************************************************************************
 [AssertionMonitor] @4.400000000: *******************************************************************
 [AssertionMonitor] @4.400000000: PASSED LanternControl[UP]::checkState(STATE) ?== Lantern_Off PASSED
 [AssertionMonitor] @4.400000000: *******************************************************************
-[LanternControl[UP]] @4.400000000: remains in state: Lantern_Off
-[LanternControl[UP]] @4.400000000: State stored: STATE<-Lantern_Off
-[LanternControl[UP]] @4.600000000: remains in state: Lantern_Off
-[LanternControl[UP]] @4.600000000: State stored: STATE<-Lantern_Off
-[LanternControl[UP]] @4.800000000: remains in state: Lantern_Off
-[LanternControl[UP]] @4.800000000: State stored: STATE<-Lantern_Off
-[LanternControl[UP]] @5.000000000: remains in state: Lantern_Off
-[LanternControl[UP]] @5.000000000: State stored: STATE<-Lantern_Off
-[LanternControl[UP]] @5.200000000: Transition: Lantern_Off -> Lantern_On
-[LanternControl[UP]] @5.200000000: State stored: STATE<-Lantern_On
-[LanternControl[UP]] @5.400000000: remains in state: Lantern_On
-[LanternControl[UP]] @5.400000000: State stored: STATE<-Lantern_On
-[LanternControl[UP]] @5.600000000: remains in state: Lantern_On
-[LanternControl[UP]] @5.600000000: State stored: STATE<-Lantern_On
-[AssertionMonitor] @5.800000000: *********************************************************************************************************
-[AssertionMonitor] @5.800000000: PASSED simulator.payloads.CarLanternPayload$ReadableCarLanternPayload@6db3f829 :: lighted ?== true PASSED
-[AssertionMonitor] @5.800000000: *********************************************************************************************************
+[AssertionMonitor] @5.800000000: **********************************************************************************************************
+[AssertionMonitor] @5.800000000: PASSED simulator.payloads.CarLanternPayload$ReadableCarLanternPayload@6262937c :: lighted ?== false PASSED
+[AssertionMonitor] @5.800000000: **********************************************************************************************************
 [AssertionMonitor] @5.800000000: ******************************************************************
 [AssertionMonitor] @5.800000000: PASSED LanternControl[UP]::checkState(STATE) ?== Lantern_On PASSED
 [AssertionMonitor] @5.800000000: ******************************************************************
-[LanternControl[UP]] @5.800000000: remains in state: Lantern_On
-[LanternControl[UP]] @5.800000000: State stored: STATE<-Lantern_On
-[LanternControl[UP]] @6.000000000: remains in state: Lantern_On
-[LanternControl[UP]] @6.000000000: State stored: STATE<-Lantern_On
-[LanternControl[UP]] @6.200000000: remains in state: Lantern_On
-[LanternControl[UP]] @6.200000000: State stored: STATE<-Lantern_On
-[LanternControl[UP]] @6.400000000: remains in state: Lantern_On
-[LanternControl[UP]] @6.400000000: State stored: STATE<-Lantern_On
-[LanternControl[UP]] @6.600000000: remains in state: Lantern_On
-[LanternControl[UP]] @6.600000000: State stored: STATE<-Lantern_On
-[LanternControl[UP]] @6.800000000: remains in state: Lantern_On
-[LanternControl[UP]] @6.800000000: State stored: STATE<-Lantern_On
-[LanternControl[UP]] @7.000000000: remains in state: Lantern_On
-[LanternControl[UP]] @7.000000000: State stored: STATE<-Lantern_On
-[LanternControl[UP]] @7.200000000: Transition: Lantern_On -> Lantern_Off
-[LanternControl[UP]] @7.200000000: State stored: STATE<-Lantern_Off
-[LanternControl[UP]] @7.400000000: remains in state: Lantern_Off
-[LanternControl[UP]] @7.400000000: State stored: STATE<-Lantern_Off
-[LanternControl[UP]] @7.600000000: remains in state: Lantern_Off
-[LanternControl[UP]] @7.600000000: State stored: STATE<-Lantern_Off
-[LanternControl[UP]] @7.800000000: remains in state: Lantern_Off
-[LanternControl[UP]] @7.800000000: State stored: STATE<-Lantern_Off
-[LanternControl[UP]] @8.000000000: remains in state: Lantern_Off
-[LanternControl[UP]] @8.000000000: State stored: STATE<-Lantern_Off
-[LanternControl[UP]] @8.200000000: remains in state: Lantern_Off
-[LanternControl[UP]] @8.200000000: State stored: STATE<-Lantern_Off
 [AssertionMonitor] @8.400000000: **********************************************************************************************************
-[AssertionMonitor] @8.400000000: PASSED simulator.payloads.CarLanternPayload$ReadableCarLanternPayload@60765a16 :: lighted ?== false PASSED
+[AssertionMonitor] @8.400000000: PASSED simulator.payloads.CarLanternPayload$ReadableCarLanternPayload@4ca31e1b :: lighted ?== false PASSED
 [AssertionMonitor] @8.400000000: **********************************************************************************************************
 [AssertionMonitor] @8.400000000: *******************************************************************
 [AssertionMonitor] @8.400000000: PASSED LanternControl[UP]::checkState(STATE) ?== Lantern_Off PASSED
 [AssertionMonitor] @8.400000000: *******************************************************************
-[LanternControl[UP]] @8.400000000: remains in state: Lantern_Off
-[LanternControl[UP]] @8.400000000: State stored: STATE<-Lantern_Off
-[Elevator] @8.400000000: Simulation Finished ***
+[Elevator] @13.400000000: Simulation Finished ***
 ******************Summary******************
 Passed:  9
 Failed:  0

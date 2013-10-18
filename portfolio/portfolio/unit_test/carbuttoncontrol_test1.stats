@@ -1,3 +1,7 @@
+; 18649 Fall 2013
+; Group 17 
+; Shen Yu (sheny)
+; carbuttoncontrol_test1.stats
 
 Simulator Parameters:
 Command line = -cf carbuttoncontrol.cf -mf carbuttoncontrol_test1.mf

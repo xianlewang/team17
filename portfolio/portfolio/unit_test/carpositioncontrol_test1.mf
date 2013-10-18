@@ -1,6 +1,7 @@
-;Testing CarPositionControl
-;Group 17 
-;Member Name: Shen Yu  Andrew ID: sheny
+; 18649 Fall 2013
+; Group 17 
+; Shen Yu (sheny)
+; carpositioncontrol_test1.mf
 
 ;include CAN id and period definitions
 #INCLUDE carposition_defines.mf
