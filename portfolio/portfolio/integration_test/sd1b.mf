@@ -74,7 +74,7 @@
 ;#arc '1B/3a'
 ;#arc '1B/3b'
 8s I MESSAGE_PERIOD F HallCall 4 FRONT UP  = true
-9s I MESSAGE_PERIOD F HallCall 4 FRONT UP  = false
+;9s I MESSAGE_PERIOD F HallCall 4 FRONT UP  = false
 
 ;#arc '1B/4'
 10s A F HallLight 4 FRONT UP : lighted == true
@@ -86,7 +86,6 @@
 
 ;#arc '1B/5a'
 14s A F DoorMotor FRONT LEFT : command == STOP
-
 
 ;****verify postcondition
 15s A N AT_FLOOR_4F_CAN_ID AtFloor 4 FRONT : getValue == true
