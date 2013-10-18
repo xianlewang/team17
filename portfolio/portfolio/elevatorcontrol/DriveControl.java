@@ -224,19 +224,19 @@ public class DriveControl extends Controller {
 				mDrive.set(commandSpeed, desiredDirection);
 				mDriveSpeed.set(localDriveSpeed.speed(), localDriveSpeed.direction());
 				 
-//#transition 'T6.1' STOP -> LEVEL_UP
+//#transition 'T6.1'
 				 if ((allDoorClosed == false) && (mLevelUp.getValue() == false)) {
 					  newState = State.LEVEL_UP;
 				 }
-//#transition 'T6.3' STOP -> SLOW_UP			 
+//#transition 'T6.3'
 				 else if (allDoorClosed == true && allDoorMotorStop == true && (currentFloor != desiredFloor) && desiredDirection == Direction.UP) {
 					 newState = State.SLOW_UP;
 				 }
-//#transition 'T6.5' STOP -> LEVEL_DOWN		 
+//#transition 'T6.5'
 				 else if (allDoorClosed == false && (mLevelDown.getValue() == false)) {
 						newState = State.LEVEL_DOWN;
 				 }
-//#transition 'T6.7' STOP -> SLOW_DOWN		 
+//#transition 'T6.7'		 
 				 else if (allDoorClosed && allDoorMotorStop  == true && (currentFloor != desiredFloor) && desiredDirection == Direction.DOWN) {
 					 newState = State.SLOW_DOWN;
 				 } 
