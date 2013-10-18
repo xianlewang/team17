@@ -1,6 +1,7 @@
 ;18649 fall 2013
 ;Zhang Qiang
 ;qiangz
+;lantern_defines.mf
 ;can ID's used:
 ;AtFloor[1][Front] = 0x0C4C2800 + 0 + 0 = 0x0C4C2800
 #DEFINE ATFLOOR_1F_FRONT_CAN_ID 0x0C4C2800

@@ -1,3 +1,8 @@
+; 18649 Fall 2013
+; group 17
+; Qiang Zhang(qiangz)
+; doorcontrol_test1.mf
+
 #INCLUDE door_defines.mf ;include CAN ID and Period Definations
 ;initialize
 0s I MESSAGE_PERIOD N ATFLOOR_1F_FRONT_CAN_ID AtFloor 1 FRONT = true
