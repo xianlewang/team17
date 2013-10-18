@@ -1,5 +1,6 @@
-;18649 Fall 2013
-;Group 17 
-;Member Name: Shen Yu  Andrew ID: sheny
-;carbuttoncontrol.cf
+; 18649 Fall 2013
+; Group 17 
+; Shen Yu (sheny)
+; carbuttoncontrol.cf
+
 CarButtonControl 4 FRONT 100ms TRUE
