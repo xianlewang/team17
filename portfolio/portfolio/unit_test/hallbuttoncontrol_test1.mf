@@ -3,7 +3,6 @@
 ; Xianle Wang(xianlew)
 ; hallbuttoncontrol_test1.mf
 
-
 ;this test file demonstrates network and framework message injections
 ;and network, framework, and controller state assertions.
 
