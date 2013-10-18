@@ -1,7 +1,7 @@
-;18649 Fall 2013
-;Group 17 
-;Member Name: Shen Yu  Andrew ID: sheny
-;carbuttoncontrol_test1.mf
+; 18649 Fall 2013
+; Group 17 
+; Shen Yu (sheny)
+; carbuttoncontrol_test1.mf
 
 ;include CAN id and period definitions
 #INCLUDE carbutton_defines.mf
