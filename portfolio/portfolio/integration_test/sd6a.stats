@@ -1,161 +1,28 @@
+
 Simulator Parameters:
-Command line = -cf sd6a.cf -mf sd6a.mf -rt 0s
-RandomSeed = 1381534685651
+Command line = -cf sd6a.cf -mf sd6a.mf
+RandomSeed = 1382054759959
 CanNetworkBitTime = 0 ns
 Effective Can Bitrate = Infinity
-Run Time = 0.0s
+Run Time = null
 Real time rate = null
 Message File = sd6a.mf
 Controller File = sd6a.cf
 
+Assertion Results:
+@1.0s:  PASSED simulator.payloads.CarPositionIndicatorPayload$ReadableCarPositionIndicatorPayload@4208719e :: floor ?== 1 PASSED
+@2.3s:  PASSED simulator.payloads.DrivePayload$ReadableDrivePayload@76745477 :: speed ?== SLOW PASSED
+@2.3s:  PASSED simulator.payloads.DrivePayload$ReadableDrivePayload@79b5459e :: direction ?== UP PASSED
+@2.3s:  PASSED simulator.payloads.CanMailbox$ReadableCanMailbox@4782b18d :: getSpeed ?== SLOW PASSED
+@2.3s:  PASSED simulator.payloads.CanMailbox$ReadableCanMailbox@33891d5d :: getDirection ?== UP PASSED
+@2.3s:  PASSED DriveControl::checkState(STATE) ?== SLOW_UP PASSED
+@5.0s:  PASSED simulator.payloads.DrivePayload$ReadableDrivePayload@4e433359 :: speed ?== STOP PASSED
+@5.0s:  PASSED simulator.payloads.CanMailbox$ReadableCanMailbox@6d96e397 :: getSpeed ?== STOP PASSED
+@6.0s:  PASSED simulator.payloads.CarPositionIndicatorPayload$ReadableCarPositionIndicatorPayload@1940be55 :: floor ?== 2 PASSED
 
-[DriveControl] @0.000000000: Created DriveControl with period = 0.1s
-[CarPositionControl] @0.000000000: Created CarPositionControl with period = 0.05s
-[Elevator] @0.000000000: Starting Simulation ***
-[CarPositionControl] @0.050000000: remains in state: STATE_FIRST
-[CarPositionControl] @0.050000000: State stored: STATE<-STATE_FIRST
-[CarPositionControl] @0.100000000: remains in state: STATE_FIRST
-[CarPositionControl] @0.100000000: State stored: STATE<-STATE_FIRST
-[DriveControl] @0.100000000: remains in state: STOP
-[DriveControl] @0.100000000: State stored: STATE<-STOP
-[CarPositionControl] @0.150000000: remains in state: STATE_FIRST
-[CarPositionControl] @0.150000000: State stored: STATE<-STATE_FIRST
-[DriveControl] @0.200000000: remains in state: STOP
-[DriveControl] @0.200000000: State stored: STATE<-STOP
-[CarPositionControl] @0.200000000: remains in state: STATE_FIRST
-[CarPositionControl] @0.200000000: State stored: STATE<-STATE_FIRST
-[CarPositionControl] @0.250000000: remains in state: STATE_FIRST
-[CarPositionControl] @0.250000000: State stored: STATE<-STATE_FIRST
-[CarPositionControl] @0.300000000: remains in state: STATE_FIRST
-[CarPositionControl] @0.300000000: State stored: STATE<-STATE_FIRST
-[DriveControl] @0.300000000: remains in state: STOP
-[DriveControl] @0.300000000: State stored: STATE<-STOP
-[CarPositionControl] @0.350000000: remains in state: STATE_FIRST
-[CarPositionControl] @0.350000000: State stored: STATE<-STATE_FIRST
-[DriveControl] @0.400000000: remains in state: STOP
-[DriveControl] @0.400000000: State stored: STATE<-STOP
-[CarPositionControl] @0.400000000: remains in state: STATE_FIRST
-[CarPositionControl] @0.400000000: State stored: STATE<-STATE_FIRST
-[CarPositionControl] @0.450000000: remains in state: STATE_FIRST
-[CarPositionControl] @0.450000000: State stored: STATE<-STATE_FIRST
-[CarPositionControl] @0.500000000: remains in state: STATE_FIRST
-[CarPositionControl] @0.500000000: State stored: STATE<-STATE_FIRST
-[DriveControl] @0.500000000: remains in state: STOP
-[DriveControl] @0.500000000: State stored: STATE<-STOP
-[CarPositionControl] @0.550000000: remains in state: STATE_FIRST
-[CarPositionControl] @0.550000000: State stored: STATE<-STATE_FIRST
-[DriveControl] @0.600000000: Transition:STOP->MOVING
-[DriveControl] @0.600000000: State stored: STATE<-MOVING
-[CarPositionControl] @0.600000000: remains in state: STATE_FIRST
-[CarPositionControl] @0.600000000: State stored: STATE<-STATE_FIRST
-[CarPositionControl] @0.650000000: remains in state: STATE_FIRST
-[CarPositionControl] @0.650000000: State stored: STATE<-STATE_FIRST
-[DriveControl] @0.700000000: remains in state: MOVING
-[DriveControl] @0.700000000: State stored: STATE<-MOVING
-[CarPositionControl] @0.700000000: remains in state: STATE_FIRST
-[CarPositionControl] @0.700000000: State stored: STATE<-STATE_FIRST
-[CarPositionControl] @0.750000000: remains in state: STATE_FIRST
-[CarPositionControl] @0.750000000: State stored: STATE<-STATE_FIRST
-[CarPositionControl] @0.800000000: remains in state: STATE_FIRST
-[CarPositionControl] @0.800000000: State stored: STATE<-STATE_FIRST
-[DriveControl] @0.800000000: remains in state: MOVING
-[DriveControl] @0.800000000: State stored: STATE<-MOVING
-[CarPositionControl] @0.850000000: remains in state: STATE_FIRST
-[CarPositionControl] @0.850000000: State stored: STATE<-STATE_FIRST
-[DriveControl] @0.900000000: remains in state: MOVING
-[DriveControl] @0.900000000: State stored: STATE<-MOVING
-[CarPositionControl] @0.900000000: remains in state: STATE_FIRST
-[CarPositionControl] @0.900000000: State stored: STATE<-STATE_FIRST
-[CarPositionControl] @0.950000000: remains in state: STATE_FIRST
-[CarPositionControl] @0.950000000: State stored: STATE<-STATE_FIRST
-[AssertionMonitor] @1.000000000: ***********************************************************************************************************************
-[AssertionMonitor] @1.000000000: PASSED simulator.payloads.CarPositionIndicatorPayload$ReadableCarPositionIndicatorPayload@86e293a :: floor ?== 1 PASSED
-[AssertionMonitor] @1.000000000: ***********************************************************************************************************************
-[AssertionMonitor] @1.000000000: *********************************************************************************************
-[AssertionMonitor] @1.000000000: PASSED simulator.payloads.DrivePayload$ReadableDrivePayload@7ca3d4cf :: speed ?== SLOW PASSED
-[AssertionMonitor] @1.000000000: *********************************************************************************************
-[AssertionMonitor] @1.000000000: ***********************************************************************************************
-[AssertionMonitor] @1.000000000: PASSED simulator.payloads.DrivePayload$ReadableDrivePayload@59e152c5 :: direction ?== UP PASSED
-[AssertionMonitor] @1.000000000: ***********************************************************************************************
-[AssertionMonitor] @1.000000000: ********************************************************
-[AssertionMonitor] @1.000000000: PASSED DriveControl::checkState(STATE) ?== MOVING PASSED
-[AssertionMonitor] @1.000000000: ********************************************************
-[CarPositionControl] @1.000000000: remains in state: STATE_FIRST
-[CarPositionControl] @1.000000000: State stored: STATE<-STATE_FIRST
-[DriveControl] @1.000000000: remains in state: MOVING
-[DriveControl] @1.000000000: State stored: STATE<-MOVING
-[CarPositionControl] @1.050000000: remains in state: STATE_FIRST
-[CarPositionControl] @1.050000000: State stored: STATE<-STATE_FIRST
-[DriveControl] @1.100000000: remains in state: MOVING
-[DriveControl] @1.100000000: State stored: STATE<-MOVING
-[CarPositionControl] @1.100000000: remains in state: STATE_FIRST
-[CarPositionControl] @1.100000000: State stored: STATE<-STATE_FIRST
-[CarPositionControl] @1.150000000: remains in state: STATE_FIRST
-[CarPositionControl] @1.150000000: State stored: STATE<-STATE_FIRST
-[CarPositionControl] @1.200000000: remains in state: STATE_FIRST
-[CarPositionControl] @1.200000000: State stored: STATE<-STATE_FIRST
-[DriveControl] @1.200000000: remains in state: MOVING
-[DriveControl] @1.200000000: State stored: STATE<-MOVING
-[CarPositionControl] @1.250000000: remains in state: STATE_FIRST
-[CarPositionControl] @1.250000000: State stored: STATE<-STATE_FIRST
-[CarPositionControl] @1.300000000: remains in state: STATE_FIRST
-[CarPositionControl] @1.300000000: State stored: STATE<-STATE_FIRST
-[DriveControl] @1.300000000: remains in state: MOVING
-[DriveControl] @1.300000000: State stored: STATE<-MOVING
-[CarPositionControl] @1.350000000: remains in state: STATE_FIRST
-[CarPositionControl] @1.350000000: State stored: STATE<-STATE_FIRST
-[DriveControl] @1.400000000: remains in state: MOVING
-[DriveControl] @1.400000000: State stored: STATE<-MOVING
-[CarPositionControl] @1.400000000: remains in state: STATE_FIRST
-[CarPositionControl] @1.400000000: State stored: STATE<-STATE_FIRST
-[CarPositionControl] @1.450000000: remains in state: STATE_FIRST
-[CarPositionControl] @1.450000000: State stored: STATE<-STATE_FIRST
-[CarPositionControl] @1.500000000: remains in state: STATE_FIRST
-[CarPositionControl] @1.500000000: State stored: STATE<-STATE_FIRST
-[DriveControl] @1.500000000: remains in state: MOVING
-[DriveControl] @1.500000000: State stored: STATE<-MOVING
-[CarPositionControl] @1.550000000: Transition:STATE_FIRST->STATE_SECOND
-[CarPositionControl] @1.550000000: State stored: STATE<-STATE_SECOND
-[DriveControl] @1.600000000: Transition:MOVING->STOP
-[DriveControl] @1.600000000: State stored: STATE<-STOP
-[CarPositionControl] @1.600000000: remains in state: STATE_SECOND
-[CarPositionControl] @1.600000000: State stored: STATE<-STATE_SECOND
-[CarPositionControl] @1.650000000: remains in state: STATE_SECOND
-[CarPositionControl] @1.650000000: State stored: STATE<-STATE_SECOND
-[DriveControl] @1.700000000: remains in state: STOP
-[DriveControl] @1.700000000: State stored: STATE<-STOP
-[CarPositionControl] @1.700000000: remains in state: STATE_SECOND
-[CarPositionControl] @1.700000000: State stored: STATE<-STATE_SECOND
-[CarPositionControl] @1.750000000: remains in state: STATE_SECOND
-[CarPositionControl] @1.750000000: State stored: STATE<-STATE_SECOND
-[DriveControl] @1.800000000: remains in state: STOP
-[DriveControl] @1.800000000: State stored: STATE<-STOP
-[CarPositionControl] @1.800000000: remains in state: STATE_SECOND
-[CarPositionControl] @1.800000000: State stored: STATE<-STATE_SECOND
-[CarPositionControl] @1.850000000: remains in state: STATE_SECOND
-[CarPositionControl] @1.850000000: State stored: STATE<-STATE_SECOND
-[CarPositionControl] @1.900000000: remains in state: STATE_SECOND
-[CarPositionControl] @1.900000000: State stored: STATE<-STATE_SECOND
-[DriveControl] @1.900000000: remains in state: STOP
-[DriveControl] @1.900000000: State stored: STATE<-STOP
-[CarPositionControl] @1.950000000: remains in state: STATE_SECOND
-[CarPositionControl] @1.950000000: State stored: STATE<-STATE_SECOND
-[AssertionMonitor] @2.000000000: *********************************************************************************************
-[AssertionMonitor] @2.000000000: PASSED simulator.payloads.DrivePayload$ReadableDrivePayload@28d08633 :: speed ?== STOP PASSED
-[AssertionMonitor] @2.000000000: *********************************************************************************************
-[AssertionMonitor] @2.000000000: ************************************************************************************************
-[AssertionMonitor] @2.000000000: PASSED simulator.payloads.DrivePayload$ReadableDrivePayload@eb64435 :: direction ?== STOP PASSED
-[AssertionMonitor] @2.000000000: ************************************************************************************************
-[AssertionMonitor] @2.000000000: ************************************************************************************************************************
-[AssertionMonitor] @2.000000000: PASSED simulator.payloads.CarPositionIndicatorPayload$ReadableCarPositionIndicatorPayload@7b479feb :: floor ?== 2 PASSED
-[AssertionMonitor] @2.000000000: ************************************************************************************************************************
-[DriveControl] @2.000000000: remains in state: STOP
-[DriveControl] @2.000000000: State stored: STATE<-STOP
-[CarPositionControl] @2.000000000: remains in state: STATE_SECOND
-[CarPositionControl] @2.000000000: State stored: STATE<-STATE_SECOND
-[Elevator] @2.000000000: Simulation Finished ***
+
 ******************Summary******************
-Passed:  7
+Passed:  9
 Failed:  0
-Total :  7
+Total :  9
 
