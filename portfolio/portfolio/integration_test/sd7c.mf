@@ -111,12 +111,3 @@
 
 ;#arc '7C/4b'
 6s A F Drive : speed == SLOW
-;#arc '7C/5a'
-7s I MESSAGE_PERIOD N HOISTWAY_LIMIT_[UP]_CAN_ID HoistwayLimitSensor UP = true
-;#arc '7C/5b'
-8s A F Drive : speed == STOP
-
-
-;****verify postcondition
-10s A N DOOR_CLOSED_FL_CAN_ID DoorClosed FRONT LEFT : getValue == true
-10s A F DoorMotor FRONT LEFT : command == STOP
