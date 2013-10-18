@@ -1,7 +1,7 @@
 ; 18649 Fall 2013
 ; group 17
 ; Jiang He (jiangh)
-; 8a.cf
+; sd8a.cf
 
 Dispatcher 8 50ms TRUE
 DoorControl FRONT LEFT 10ms TRUE
