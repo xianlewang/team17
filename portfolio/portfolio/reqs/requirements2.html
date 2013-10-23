@@ -996,6 +996,7 @@
             <li>CountDown: a count-down timer for Door Dwell[b] (implemented in
                 simulation by scheduling a future task execution at time of expiration)
             </li>
+            <li> Reversal: a boolean value to record if the door has been reversed. </li>
         </ul>
         <h3> CONSTRAINTS: </h3>
         5.1&nbsp;&nbsp;&nbsp; DoorClosed[b, *] shall be True when there is no
@@ -1016,13 +1017,14 @@
         &nbsp;&nbsp;&nbsp; 5.7.1&nbsp; DoorMotor[b, r] shall be commanded to Open. <br>
         &nbsp;&nbsp;&nbsp; 5.7.2&nbsp; mDoorMotor[b, r] shall be commanded to Open. <br>
         &nbsp;&nbsp;&nbsp; 5.7.3&nbsp; CountDown shall be set to Dwell. <br>
+        &nbsp;&nbsp;&nbsp; 5.7.4&nbsp; Reversal shall be set to False. <br>
         5.8 &nbsp;&nbsp; If mDoorOpened[b, r] is True, then:<br>
         &nbsp;&nbsp;&nbsp; 5.8.1&nbsp; DoorMotor[b, r] shall be commanded to Stop. <br>
         &nbsp;&nbsp;&nbsp; 5.8.2&nbsp; mDoorMotor[b, r] shall be commanded to Stop. <br>
         &nbsp;&nbsp;&nbsp; 5.8.3&nbsp; CountDown shall be decremented. <br>
-        5.9 &nbsp;&nbsp; If CountDown &lt; 0, then: <br>
-        &nbsp;&nbsp;&nbsp; 5.9.1&nbsp; DoorMotor[b, r] shall be commanded to Nudge. <br>
-        &nbsp;&nbsp;&nbsp; 5.9.2&nbsp; mDoorMotor[b, r] shall be commanded to Nudge. <br>
+        5.9 &nbsp;&nbsp; If CountDown &lt; 0 AND Reversal is False then: <br>
+        &nbsp;&nbsp;&nbsp; 5.9.1&nbsp; DoorMotor[b, r] shall be commanded to Close. <br>
+        &nbsp;&nbsp;&nbsp; 5.9.2&nbsp; mDoorMotor[b, r] shall be commanded to Close. <br>
         &nbsp;&nbsp;&nbsp; 5.9.3&nbsp; CountDown shall be set to zero and stop decreasing. <br>
         5.10 &nbsp;&nbsp; If mDoorClosed[b, r] is True, then: <br>
         &nbsp;&nbsp;&nbsp; 5.10.1&nbsp; DoorMotor[b, r] shall be commanded to Stop. <br>
@@ -1035,6 +1037,11 @@
         &nbsp;&nbsp;&nbsp; 5.12.1&nbsp; DoorMotor[b, r] shall be commanded to Open. <br>
         &nbsp;&nbsp;&nbsp; 5.12.2&nbsp; mDoorMotor[b, r] shall be commanded to Open. <br>
         &nbsp;&nbsp;&nbsp; 5.12.3&nbsp; CountDown shall be set to Dwell. <br>
+        &nbsp;&nbsp;&nbsp; 5.12.4&nbsp; Reversal shall be set to True. <br>
+        5.13 &nbsp;&nbsp; If CountDown &lt; 0 AND Reversal is True then: <br>
+        &nbsp;&nbsp;&nbsp; 5.13.1&nbsp; DoorMotor[b, r] shall be commanded to Nudge. <br>
+        &nbsp;&nbsp;&nbsp; 5.13.2&nbsp; mDoorMotor[b, r] shall be commanded to Nudge. <br>
+        &nbsp;&nbsp;&nbsp; 5.13.3&nbsp; CountDown shall be set to zero and stop decreasing. <br>
         <h3>State Chart:</h3>
         State Chart for Door Control<br> <!-- State Chart for Door Control -->
         <br>
@@ -1097,6 +1104,24 @@
                     <td style="vertical-align: top;">mDoorReversal[b,r]&nbsp;&larr;&nbsp;True <br>
                     </td>
                 </tr>
+                <tr>
+                    <td style="vertical-align: top;">T5.8<br>
+                    </td>
+                    <td style="vertical-align: top;">mDoorOpened[b,r]&nbsp;&larr;&nbsp;True <br>
+                    </td>
+                </tr>
+                <tr>
+                    <td style="vertical-align: top;">T5.9<br>
+                    </td>
+                    <td style="vertical-align: top;">CountDown&nbsp;&lt;&nbsp;0 <br>
+                    </td>
+                </tr>
+                <tr>
+                    <td style="vertical-align: top;">T5.10<br>
+                    </td>
+                    <td style="vertical-align: top;">mDoorClosed[b,r]&nbsp;&larr;&nbsp;True <br>
+                    </td>
+                </tr>
             </tbody>
         </table>
         <!--Door Cotrol table End-->
@@ -1122,6 +1147,8 @@
                     </td>
                     <td style="vertical-align: top;">R5.7.3<br>
                     </td>
+                    <td style="vertical-aligh: top;">R5.7.4<br>
+                    </td>
                     <td style="vertical-align: top;">R5.8.1<br>
                     </td>
                     <td style="vertical-align: top;">R5.8.2<br>
@@ -1150,168 +1177,365 @@
                     </td>
                     <td style="vertical-align: top;">R5.12.3<br>
                     </td>
+                    <td style="vertical-align: top;">R5.12.4<br>
+                    </td>
+                    <td style="vertical-align: top;">R5.13.1<br>
+                    </td>
+                    <td style="vertical-align: top;">R5.13.2<br>
+                    </td>
+                    <td style="vertical-align: top;">R5.13.3<br>
+                    </td>
                 </tr>
                 <tr>
                     <td style="vertical-align: top;">S5.1 Closed<br>
                     </td>
-                    <td style="vertical-align: top;">X<br>
+                    <td style="vertical-align: top;">X<br> <!--5.6-->
                     </td>
-                    <td style="vertical-align: top;"><br>
+                    <td style="vertical-align: top;"><br> <!--5.7.1-->
                     </td>
-                    <td style="vertical-align: top;"><br>
+                    <td style="vertical-align: top;"><br> <!--5.7.2-->
                     </td>
-                    <td style="vertical-align: top;"><br>
+                    <td style="vertical-align: top;"><br> <!--5.7.3-->
                     </td>
-                    <td style="vertical-align: top;"><br>
+                    <td style="vertical-align: top;">X<br> <!--5.7.4-->
                     </td>
-                    <td style="vertical-align: top;"><br>
+                    <td style="vertical-align: top;"><br> <!--5.8.1-->
                     </td>
-                    <td style="vertical-align: top;"><br>
+                    <td style="vertical-align: top;"><br> <!--5.8.2-->
                     </td>
-                    <td style="vertical-align: top;"><br>
+                    <td style="vertical-align: top;"><br> <!--5.8.3-->
                     </td>
-                    <td style="vertical-align: top;"><br>
+                    <td style="vertical-align: top;"><br> <!--5.9.1-->
                     </td>
-                    <td style="vertical-align: top;"><br>
+                    <td style="vertical-align: top;"><br> <!--5.9.2-->
                     </td>
-                    <td style="vertical-align: top;">X<br>
+                    <td style="vertical-align: top;"><br> <!--5.9.3-->
                     </td>
-                    <td style="vertical-align: top;">X<br>
+                    <td style="vertical-align: top;">X<br> <!--5.10.1-->
                     </td>
-                    <td style="vertical-align: top;"><br>
+                    <td style="vertical-align: top;">X<br> <!--5.10.2-->
                     </td>
-                    <td style="vertical-align: top;"><br>
+                    <td style="vertical-align: top;"><br> <!--5.11.1-->
                     </td>
-                    <td style="vertical-align: top;"><br>
+                    <td style="vertical-align: top;"><br> <!--5.11.2-->
                     </td>
-                    <td style="vertical-align: top;"><br>
+                    <td style="vertical-align: top;"><br> <!--5.11.3-->
                     </td>
-                    <td style="vertical-align: top;"><br>
+                    <td style="vertical-align: top;"><br> <!--5.12.1-->
                     </td>
-                    <td style="vertical-align: top;"><br>
+                    <td style="vertical-align: top;"><br> <!--5.12.2-->
+                    </td>
+                    <td style="vertical-align: top;"><br> <!--5.12.3-->
+                    </td>
+                    <td style="vertical-align: top;"><br> <!--5.12.4-->
+                    </td>
+                    <td style="vertical-align: top;"><br> <!--5.13.1-->
+                    </td>
+                    <td style="vertical-align: top;"><br> <!--5.13.2-->
+                    </td>
+                    <td style="vertical-align: top;"><br> <!--5.13.3-->
                     </td>
                 </tr>
                 <tr>
                     <td style="vertical-align: top;">S5.2 Before Open<br>
                     </td>
-                    <td style="vertical-align: top;"><br>
+                    <td style="vertical-align: top;"><br> <!--5.6-->
                     </td>
-                    <td style="vertical-align: top;">X<br>
+                    <td style="vertical-align: top;">X<br> <!--5.7.1-->
                     </td>
-                    <td style="vertical-align: top;">X<br>
+                    <td style="vertical-align: top;">X<br> <!--5.7.2-->
                     </td>
-                    <td style="vertical-align: top;">X<br>
+                    <td style="vertical-align: top;">X<br> <!--5.7.3-->
                     </td>
-                    <td style="vertical-align: top;"><br>
+                    <td style="vertical-align: top;"><br> <!--5.7.4-->
                     </td>
-                    <td style="vertical-align: top;"><br>
+                    <td style="vertical-align: top;"><br> <!--5.8.1-->
                     </td>
-                    <td style="vertical-align: top;"><br>
+                    <td style="vertical-align: top;"><br> <!--5.8.2-->
                     </td>
-                    <td style="vertical-align: top;"><br>
+                    <td style="vertical-align: top;"><br> <!--5.8.3-->
                     </td>
-                    <td style="vertical-align: top;"><br>
+                    <td style="vertical-align: top;"><br> <!--5.9.1-->
                     </td>
-                    <td style="vertical-align: top;"><br>
+                    <td style="vertical-align: top;"><br> <!--5.9.2-->
                     </td>
-                    <td style="vertical-align: top;"><br>
+                    <td style="vertical-align: top;"><br> <!--5.9.3-->
                     </td>
-                    <td style="vertical-align: top;"><br>
+                    <td style="vertical-align: top;"><br> <!--5.10.1-->
                     </td>
-                    <td style="vertical-align: top;">X<br>
+                    <td style="vertical-align: top;"><br> <!--5.10.2-->
                     </td>
-                    <td style="vertical-align: top;">X<br>
+                    <td style="vertical-align: top;">X<br> <!--5.11.1-->
                     </td>
-                    <td style="vertical-align: top;">X<br>
+                    <td style="vertical-align: top;">X<br> <!--5.11.2-->
                     </td>
-                    <td style="vertical-align: top;">X<br>
+                    <td style="vertical-align: top;">X<br> <!--5.11.3-->
                     </td>
-                    <td style="vertical-align: top;">X<br>
+                    <td style="vertical-align: top;"><br> <!--5.12.1-->
                     </td>
-                    <td style="vertical-align: top;">X<br>
+                    <td style="vertical-align: top;"><br> <!--5.12.2-->
+                    </td>
+                    <td style="vertical-align: top;"><br> <!--5.12.3-->
+                    </td>
+                    <td style="vertical-align: top;"><br> <!--5.12.4-->
+                    </td>
+                    <td style="vertical-align: top;"><br> <!--5.13.1-->
+                    </td>
+                    <td style="vertical-align: top;"><br> <!--5.13.2-->
+                    </td>
+                    <td style="vertical-align: top;"><br> <!--5.13.3-->
                     </td>
                 </tr>
                 <tr>
                     <td style="vertical-align: top;">S5.3 Opened<br>
                     </td>
-                    <td style="vertical-align: top;"><br>
+                    <td style="vertical-align: top;"><br> <!--5.6-->
                     </td>
-                    <td style="vertical-align: top;"><br>
+                    <td style="vertical-align: top;"><br> <!--5.7.1-->
                     </td>
-                    <td style="vertical-align: top;"><br>
+                    <td style="vertical-align: top;"><br> <!--5.7.2-->
                     </td>
-                    <td style="vertical-align: top;"><br>
+                    <td style="vertical-align: top;"><br> <!--5.7.3-->
                     </td>
-                    <td style="vertical-align: top;">X<br>
+                    <td style="vertical-align: top;"><br> <!--5.7.4-->
                     </td>
-                    <td style="vertical-align: top;">X<br>
+                    <td style="vertical-align: top;">X<br> <!--5.8.1-->
                     </td>
-                    <td style="vertical-align: top;">X<br>
+                    <td style="vertical-align: top;">X<br> <!--5.8.2-->
                     </td>
-                    <td style="vertical-align: top;"><br>
+                    <td style="vertical-align: top;">X<br> <!--5.8.3-->
                     </td>
-                    <td style="vertical-align: top;"><br>
+                    <td style="vertical-align: top;"><br> <!--5.9.1-->
                     </td>
-                    <td style="vertical-align: top;"><br>
+                    <td style="vertical-align: top;"><br> <!--5.9.2-->
                     </td>
-                    <td style="vertical-align: top;"><br>
+                    <td style="vertical-align: top;"><br> <!--5.9.3-->
                     </td>
-                    <td style="vertical-align: top;"><br>
+                    <td style="vertical-align: top;"><br> <!--5.10.1-->
                     </td>
-                    <td style="vertical-align: top;"><br>
+                    <td style="vertical-align: top;"><br> <!--5.10.2-->
                     </td>
-                    <td style="vertical-align: top;"><br>
+                    <td style="vertical-align: top;"><br> <!--5.11.1-->
                     </td>
-                    <td style="vertical-align: top;"><br>
+                    <td style="vertical-align: top;"><br> <!--5.11.2-->
                     </td>
-                    <td style="vertical-align: top;"><br>
+                    <td style="vertical-align: top;"><br> <!--5.11.3-->
                     </td>
-                    <td style="vertical-align: top;"><br>
+                    <td style="vertical-align: top;"><br> <!--5.12.1-->
                     </td>
-                    <td style="vertical-align: top;"><br>
+                    <td style="vertical-align: top;"><br> <!--5.12.2-->
+                    </td>
+                    <td style="vertical-align: top;"><br> <!--5.12.3-->
+                    </td>
+                    <td style="vertical-align: top;"><br> <!--5.12.4-->
+                    </td>
+                    <td style="vertical-align: top;"><br> <!--5.13.1-->
+                    </td>
+                    <td style="vertical-align: top;"><br> <!--5.13.2-->
+                    </td>
+                    <td style="vertical-align: top;"><br> <!--5.13.3-->
                     </td>
                 </tr>
                 <tr>
                     <td style="vertical-align: top;">S5.4 Closing<br>
                     </td>
-                    <td style="vertical-align: top;"><br>
+                    <td style="vertical-align: top;"><br> <!--5.6-->
                     </td>
-                    <td style="vertical-align: top;"><br>
+                    <td style="vertical-align: top;"><br> <!--5.7.1-->
                     </td>
-                    <td style="vertical-align: top;"><br>
+                    <td style="vertical-align: top;"><br> <!--5.7.2-->
                     </td>
-                    <td style="vertical-align: top;"><br>
+                    <td style="vertical-align: top;"><br> <!--5.7.3-->
                     </td>
-                    <td style="vertical-align: top;"><br>
+                    <td style="vertical-align: top;"><br> <!--5.7.4-->
                     </td>
-                    <td style="vertical-align: top;"><br>
+                    <td style="vertical-align: top;"><br> <!--5.8.1-->
                     </td>
-                    <td style="vertical-align: top;"><br>
+                    <td style="vertical-align: top;"><br> <!--5.8.2-->
                     </td>
-                    <td style="vertical-align: top;">X<br>
+                    <td style="vertical-align: top;"><br> <!--5.8.3-->
                     </td>
-                    <td style="vertical-align: top;">X<br>
+                    <td style="vertical-align: top;">X<br> <!--5.9.1-->
                     </td>
-                    <td style="vertical-align: top;">X<br>
+                    <td style="vertical-align: top;">X<br> <!--5.9.2-->
                     </td>
-                    <td style="vertical-align: top;"><br>
+                    <td style="vertical-align: top;">X<br> <!--5.9.3-->
                     </td>
-                    <td style="vertical-align: top;"><br>
+                    <td style="vertical-align: top;"><br> <!--5.10.1-->
                     </td>
-                    <td style="vertical-align: top;"><br>
+                    <td style="vertical-align: top;"><br> <!--5.10.2-->
                     </td>
-                    <td style="vertical-align: top;"><br>
+                    <td style="vertical-align: top;"><br> <!--5.11.1-->
                     </td>
-                    <td style="vertical-align: top;"><br>
+                    <td style="vertical-align: top;"><br> <!--5.11.2-->
                     </td>
-                    <td style="vertical-align: top;"><br>
+                    <td style="vertical-align: top;"><br> <!--5.11.3-->
                     </td>
-                    <td style="vertical-align: top;"><br>
+                    <td style="vertical-align: top;"><br> <!--5.12.1-->
                     </td>
-                    <td style="vertical-align: top;"><br>
+                    <td style="vertical-align: top;"><br> <!--5.12.2-->
+                    </td>
+                    <td style="vertical-align: top;"><br> <!--5.12.3-->
+                    </td>
+                    <td style="vertical-align: top;"><br> <!--5.12.4-->
+                    </td>
+                    <td style="vertical-align: top;"><br> <!--5.13.1-->
+                    </td>
+                    <td style="vertical-align: top;"><br> <!--5.13.2-->
+                    </td>
+                    <td style="vertical-align: top;"><br> <!--5.13.3-->
                     </td>
                 </tr>
-                
+                <tr>
+                    <td style="vertical-align: top;">S5.5 Reverse Open<br>
+                    </td>
+                    <td style="vertical-align: top;"><br> <!--5.6-->
+                    </td>
+                    <td style="vertical-align: top;"><br> <!--5.7.1-->
+                    </td>
+                    <td style="vertical-align: top;"><br> <!--5.7.2-->
+                    </td>
+                    <td style="vertical-align: top;"><br> <!--5.7.3-->
+                    </td>
+                    <td style="vertical-align: top;"><br> <!--5.7.4-->
+                    </td>
+                    <td style="vertical-align: top;"><br> <!--5.8.1-->
+                    </td>
+                    <td style="vertical-align: top;"><br> <!--5.8.2-->
+                    </td>
+                    <td style="vertical-align: top;"><br> <!--5.8.3-->
+                    </td>
+                    <td style="vertical-align: top;"><br> <!--5.9.1-->
+                    </td>
+                    <td style="vertical-align: top;"><br> <!--5.9.2-->
+                    </td>
+                    <td style="vertical-align: top;"><br> <!--5.9.3-->
+                    </td>
+                    <td style="vertical-align: top;"><br> <!--5.10.1-->
+                    </td>
+                    <td style="vertical-align: top;"><br> <!--5.10.2-->
+                    </td>
+                    <td style="vertical-align: top;"><br> <!--5.11.1-->
+                    </td>
+                    <td style="vertical-align: top;"><br> <!--5.11.2-->
+                    </td>
+                    <td style="vertical-align: top;"><br> <!--5.11.3-->
+                    </td>
+                    <td style="vertical-align: top;">X<br> <!--5.12.1-->
+                    </td>
+                    <td style="vertical-align: top;">X<br> <!--5.12.2-->
+                    </td>
+                    <td style="vertical-align: top;">X<br> <!--5.12.3-->
+                    </td>
+                    <td style="vertical-align: top;">X<br> <!--5.12.4-->
+                    </td>
+                    <td style="vertical-align: top;"><br> <!--5.13.1-->
+                    </td>
+                    <td style="vertical-align: top;"><br> <!--5.13.2-->
+                    </td>
+                    <td style="vertical-align: top;"><br> <!--5.13.3-->
+                    </td>
+                </tr>
+                <tr>
+                    <td style="vertical-align: top;">S5.6 Reverse Opened<br>
+                    </td>
+                    <td style="vertical-align: top;"><br> <!--5.6-->
+                    </td>
+                    <td style="vertical-align: top;"><br> <!--5.7.1-->
+                    </td>
+                    <td style="vertical-align: top;"><br> <!--5.7.2-->
+                    </td>
+                    <td style="vertical-align: top;"><br> <!--5.7.3-->
+                    </td>
+                    <td style="vertical-align: top;"><br> <!--5.7.4-->
+                    </td>
+                    <td style="vertical-align: top;">X<br> <!--5.8.1-->
+                    </td>
+                    <td style="vertical-align: top;">X<br> <!--5.8.2-->
+                    </td>
+                    <td style="vertical-align: top;">X<br> <!--5.8.3-->
+                    </td>
+                    <td style="vertical-align: top;"><br> <!--5.9.1-->
+                    </td>
+                    <td style="vertical-align: top;"><br> <!--5.9.2-->
+                    </td>
+                    <td style="vertical-align: top;"><br> <!--5.9.3-->
+                    </td>
+                    <td style="vertical-align: top;"><br> <!--5.10.1-->
+                    </td>
+                    <td style="vertical-align: top;"><br> <!--5.10.2-->
+                    </td>
+                    <td style="vertical-align: top;"><br> <!--5.11.1-->
+                    </td>
+                    <td style="vertical-align: top;"><br> <!--5.11.2-->
+                    </td>
+                    <td style="vertical-align: top;"><br> <!--5.11.3-->
+                    </td>
+                    <td style="vertical-align: top;"><br> <!--5.12.1-->
+                    </td>
+                    <td style="vertical-align: top;"><br> <!--5.12.2-->
+                    </td>
+                    <td style="vertical-align: top;"><br> <!--5.12.3-->
+                    </td>
+                    <td style="vertical-align: top;"><br> <!--5.12.4-->
+                    </td>
+                    <td style="vertical-align: top;"><br> <!--5.13.1-->
+                    </td>
+                    <td style="vertical-align: top;"><br> <!--5.13.2-->
+                    </td>
+                    <td style="vertical-align: top;"><br> <!--5.13.3-->
+                    </td>
+                </tr>
+                <tr>
+                    <td style="vertical-align: top;">S5.7 Reverse Closing<br>
+                    </td>
+                    <td style="vertical-align: top;"><br> <!--5.6-->
+                    </td>
+                    <td style="vertical-align: top;"><br> <!--5.7.1-->
+                    </td>
+                    <td style="vertical-align: top;"><br> <!--5.7.2-->
+                    </td>
+                    <td style="vertical-align: top;"><br> <!--5.7.3-->
+                    </td>
+                    <td style="vertical-align: top;"><br> <!--5.7.4-->
+                    </td>
+                    <td style="vertical-align: top;"><br> <!--5.8.1-->
+                    </td>
+                    <td style="vertical-align: top;"><br> <!--5.8.2-->
+                    </td>
+                    <td style="vertical-align: top;"><br> <!--5.8.3-->
+                    </td>
+                    <td style="vertical-align: top;"><br> <!--5.9.1-->
+                    </td>
+                    <td style="vertical-align: top;"><br> <!--5.9.2-->
+                    </td>
+                    <td style="vertical-align: top;"><br> <!--5.9.3-->
+                    </td>
+                    <td style="vertical-align: top;"><br> <!--5.10.1-->
+                    </td>
+                    <td style="vertical-align: top;"><br> <!--5.10.2-->
+                    </td>
+                    <td style="vertical-align: top;"><br> <!--5.11.1-->
+                    </td>
+                    <td style="vertical-align: top;"><br> <!--5.11.2-->
+                    </td>
+                    <td style="vertical-align: top;"><br> <!--5.11.3-->
+                    </td>
+                    <td style="vertical-align: top;"><br> <!--5.12.1-->
+                    </td>
+                    <td style="vertical-align: top;"><br> <!--5.12.2-->
+                    </td>
+                    <td style="vertical-align: top;"><br> <!--5.12.3-->
+                    </td>
+                    <td style="vertical-align: top;"><br> <!--5.12.4-->
+                    </td>
+                    <td style="vertical-align: top;">X<br> <!--5.13.1-->
+                    </td>
+                    <td style="vertical-align: top;">X<br> <!--5.13.2-->
+                    </td>
+                    <td style="vertical-align: top;">X<br> <!--5.13.3-->
+                    </td>
+                </tr>
                 <tr>
                     <td style="vertical-align: top;">Transitions<br>
                     </td>
@@ -1323,6 +1547,8 @@
                     </td>
                     <td style="vertical-align: top;">R5.7.3<br>
                     </td>
+                    <td style="vertical-aligh: top;">R5.7.4<br>
+                    </td>
                     <td style="vertical-align: top;">R5.8.1<br>
                     </td>
                     <td style="vertical-align: top;">R5.8.2<br>
@@ -1351,285 +1577,514 @@
                     </td>
                     <td style="vertical-align: top;">R5.12.3<br>
                     </td>
+                    <td style="vertical-align: top;">R5.12.4<br>
+                    </td>
+                    <td style="vertical-align: top;">R5.13.1<br>
+                    </td>
+                    <td style="vertical-align: top;">R5.13.2<br>
+                    </td>
+                    <td style="vertical-align: top;">R5.13.3<br>
+                    </td>
+
                 </tr>
                 <tr>
                     <td style="vertical-align: top;">T5.1<br>
                     </td>
-                    <td style="vertical-align: top;">X<br>
+                    <td style="vertical-align: top;">X<br> <!--5.6-->
                     </td>
-                    <td style="vertical-align: top;">X<br>
+                    <td style="vertical-align: top;">X<br> <!--5.7.1-->
                     </td>
-                    <td style="vertical-align: top;">X<br>
+                    <td style="vertical-align: top;">X<br> <!--5.7.2-->
                     </td>
-                    <td style="vertical-align: top;">X<br>
+                    <td style="vertical-align: top;">X<br> <!--5.7.3-->
                     </td>
-                    <td style="vertical-align: top;"><br>
+                    <td style="vertical-align: top;">X<br> <!--5.7.4-->
                     </td>
-                    <td style="vertical-align: top;"><br>
+                    <td style="vertical-align: top;"><br> <!--5.8.1-->
                     </td>
-                    <td style="vertical-align: top;"><br>
+                    <td style="vertical-align: top;"><br> <!--5.8.2-->
                     </td>
-                    <td style="vertical-align: top;"><br>
+                    <td style="vertical-align: top;"><br> <!--5.8.3-->
                     </td>
-                    <td style="vertical-align: top;"><br>
+                    <td style="vertical-align: top;"><br> <!--5.9.1-->
                     </td>
-                    <td style="vertical-align: top;"><br>
+                    <td style="vertical-align: top;"><br> <!--5.9.2-->
                     </td>
-                    <td style="vertical-align: top;">X<br>
+                    <td style="vertical-align: top;"><br> <!--5.9.3-->
                     </td>
-                    <td style="vertical-align: top;">X<br>
+                    <td style="vertical-align: top;"><br> <!--5.10.1-->
                     </td>
-                    <td style="vertical-align: top;"><br>
+                    <td style="vertical-align: top;"><br> <!--5.10.2-->
                     </td>
-                    <td style="vertical-align: top;"><br>
+                    <td style="vertical-align: top;"><br> <!--5.11.1-->
                     </td>
-                    <td style="vertical-align: top;"><br>
+                    <td style="vertical-align: top;"><br> <!--5.11.2-->
                     </td>
-                    <td style="vertical-align: top;"><br>
+                    <td style="vertical-align: top;"><br> <!--5.11.3-->
                     </td>
-                    <td style="vertical-align: top;"><br>
+                    <td style="vertical-align: top;"><br> <!--5.12.1-->
                     </td>
-                    <td style="vertical-align: top;"><br>
+                    <td style="vertical-align: top;"><br> <!--5.12.2-->
+                    </td>
+                    <td style="vertical-align: top;"><br> <!--5.12.3-->
+                    </td>
+                    <td style="vertical-align: top;"><br> <!--5.12.4-->
+                    </td>
+                    <td style="vertical-align: top;"><br> <!--5.13.1-->
+                    </td>
+                    <td style="vertical-align: top;"><br> <!--5.13.2-->
+                    </td>
+                    <td style="vertical-align: top;"><br> <!--5.13.3-->
                     </td>
                 </tr>
                 <tr>
                     <td style="vertical-align: top;">T5.2<br>
                     </td>
-                    <td style="vertical-align: top;"><br>
+                    <td style="vertical-align: top;"><br> <!--5.6-->
                     </td>
-                    <td style="vertical-align: top;">X<br>
+                    <td style="vertical-align: top;">X<br> <!--5.7.1-->
                     </td>
-                    <td style="vertical-align: top;">X<br>
+                    <td style="vertical-align: top;">X<br> <!--5.7.2-->
                     </td>
-                    <td style="vertical-align: top;">X<br>
+                    <td style="vertical-align: top;">X<br> <!--5.7.3-->
                     </td>
-                    <td style="vertical-align: top;">X<br>
+                    <td style="vertical-align: top;"><br> <!--5.7.4-->
                     </td>
-                    <td style="vertical-align: top;">X<br>
+                    <td style="vertical-align: top;"><br> <!--5.8.1-->
                     </td>
-                    <td style="vertical-align: top;">X<br>
+                    <td style="vertical-align: top;"><br> <!--5.8.2-->
                     </td>
-                    <td style="vertical-align: top;"><br>
+                    <td style="vertical-align: top;"><br> <!--5.8.3-->
                     </td>
-                    <td style="vertical-align: top;"><br>
+                    <td style="vertical-align: top;"><br> <!--5.9.1-->
                     </td>
-                    <td style="vertical-align: top;"><br>
+                    <td style="vertical-align: top;"><br> <!--5.9.2-->
                     </td>
-                    <td style="vertical-align: top;"><br>
+                    <td style="vertical-align: top;"><br> <!--5.9.3-->
                     </td>
-                    <td style="vertical-align: top;"><br>
+                    <td style="vertical-align: top;"><br> <!--5.10.1-->
                     </td>
-                    <td style="vertical-align: top;"><br>
+                    <td style="vertical-align: top;"><br> <!--5.10.2-->
                     </td>
-                    <td style="vertical-align: top;"><br>
+                    <td style="vertical-align: top;"><br> <!--5.11.1-->
                     </td>
-                    <td style="vertical-align: top;"><br>
+                    <td style="vertical-align: top;"><br> <!--5.11.2-->
                     </td>
-                    <td style="vertical-align: top;"><br>
+                    <td style="vertical-align: top;"><br> <!--5.11.3-->
                     </td>
-                    <td style="vertical-align: top;"><br>
+                    <td style="vertical-align: top;"><br> <!--5.12.1-->
                     </td>
-                    <td style="vertical-align: top;"><br>
+                    <td style="vertical-align: top;"><br> <!--5.12.2-->
+                    </td>
+                    <td style="vertical-align: top;"><br> <!--5.12.3-->
+                    </td>
+                    <td style="vertical-align: top;"><br> <!--5.12.4-->
+                    </td>
+                    <td style="vertical-align: top;"><br> <!--5.13.1-->
+                    </td>
+                    <td style="vertical-align: top;"><br> <!--5.13.2-->
+                    </td>
+                    <td style="vertical-align: top;"><br> <!--5.13.3-->
                     </td>
                 </tr>
                 <tr>
                     <td style="vertical-align: top;">T5.3<br>
                     </td>
-                    <td style="vertical-align: top;"><br>
+                    <td style="vertical-align: top;"><br> <!--5.6-->
                     </td>
-                    <td style="vertical-align: top;"><br>
+                    <td style="vertical-align: top;"><br> <!--5.7.1-->
                     </td>
-                    <td style="vertical-align: top;"><br>
+                    <td style="vertical-align: top;"><br> <!--5.7.2-->
                     </td>
-                    <td style="vertical-align: top;"><br>
+                    <td style="vertical-align: top;"><br> <!--5.7.3-->
                     </td>
-                    <td style="vertical-align: top;">X<br>
+                    <td style="vertical-align: top;"><br> <!--5.7.4-->
                     </td>
-                    <td style="vertical-align: top;">X<br>
+                    <td style="vertical-align: top;">X<br> <!--5.8.1-->
                     </td>
-                    <td style="vertical-align: top;">X<br>
+                    <td style="vertical-align: top;">X<br> <!--5.8.2-->
                     </td>
-                    <td style="vertical-align: top;">X<br>
+                    <td style="vertical-align: top;">X<br> <!--5.8.3-->
                     </td>
-                    <td style="vertical-align: top;">X<br>
+                    <td style="vertical-align: top;">X<br> <!--5.9.1-->
                     </td>
-                    <td style="vertical-align: top;">X<br>
+                    <td style="vertical-align: top;">X<br> <!--5.9.2-->
                     </td>
-                    <td style="vertical-align: top;">X<br>
+                    <td style="vertical-align: top;">X<br> <!--5.9.3-->
                     </td>
-                    <td style="vertical-align: top;"><br>
+                    <td style="vertical-align: top;"><br> <!--5.10.1-->
                     </td>
-                    <td style="vertical-align: top;"><br>
+                    <td style="vertical-align: top;"><br> <!--5.10.2-->
                     </td>
-                    <td style="vertical-align: top;"><br>
+                    <td style="vertical-align: top;"><br> <!--5.11.1-->
                     </td>
-                    <td style="vertical-align: top;"><br>
+                    <td style="vertical-align: top;"><br> <!--5.11.2-->
                     </td>
-                    <td style="vertical-align: top;"><br>
+                    <td style="vertical-align: top;"><br> <!--5.11.3-->
                     </td>
-                    <td style="vertical-align: top;"><br>
+                    <td style="vertical-align: top;"><br> <!--5.12.1-->
                     </td>
-                    <td style="vertical-align: top;"><br>
+                    <td style="vertical-align: top;"><br> <!--5.12.2-->
+                    </td>
+                    <td style="vertical-align: top;"><br> <!--5.12.3-->
+                    </td>
+                    <td style="vertical-align: top;"><br> <!--5.12.4-->
+                    </td>
+                    <td style="vertical-align: top;"><br> <!--5.13.1-->
+                    </td>
+                    <td style="vertical-align: top;"><br> <!--5.13.2-->
+                    </td>
+                    <td style="vertical-align: top;"><br> <!--5.13.3-->
                     </td>
                 </tr>
                 <tr>
                     <td style="vertical-align: top;">T5.4<br>
                     </td>
-                    <td style="vertical-align: top;"><br>
+                    <td style="vertical-align: top;"><br> <!--5.6-->
                     </td>
-                    <td style="vertical-align: top;"><br>
+                    <td style="vertical-align: top;"><br> <!--5.7.1-->
                     </td>
-                    <td style="vertical-align: top;"><br>
+                    <td style="vertical-align: top;"><br> <!--5.7.2-->
                     </td>
-                    <td style="vertical-align: top;"><br>
+                    <td style="vertical-align: top;"><br> <!--5.7.3-->
                     </td>
-                    <td style="vertical-align: top;"><br>
+                    <td style="vertical-align: top;"><br> <!--5.7.4-->
                     </td>
-                    <td style="vertical-align: top;"><br>
+                    <td style="vertical-align: top;"><br> <!--5.8.1-->
                     </td>
-                    <td style="vertical-align: top;"><br>
+                    <td style="vertical-align: top;"><br> <!--5.8.2-->
                     </td>
-                    <td style="vertical-align: top;">X<br>
+                    <td style="vertical-align: top;"><br> <!--5.8.3-->
                     </td>
-                    <td style="vertical-align: top;">X<br>
+                    <td style="vertical-align: top;"><br> <!--5.9.1-->
                     </td>
-                    <td style="vertical-align: top;">X<br>
+                    <td style="vertical-align: top;"><br> <!--5.9.2-->
                     </td>
-                    <td style="vertical-align: top;">X<br>
+                    <td style="vertical-align: top;"><br> <!--5.9.3-->
                     </td>
-                    <td style="vertical-align: top;">X<br>
+                    <td style="vertical-align: top;">X<br> <!--5.10.1-->
                     </td>
-                    <td style="vertical-align: top;"><br>
+                    <td style="vertical-align: top;">X<br> <!--5.10.2-->
                     </td>
-                    <td style="vertical-align: top;"><br>
+                    <td style="vertical-align: top;"><br> <!--5.11.1-->
                     </td>
-                    <td style="vertical-align: top;"><br>
+                    <td style="vertical-align: top;"><br> <!--5.11.2-->
                     </td>
-                    <td style="vertical-align: top;"><br>
+                    <td style="vertical-align: top;"><br> <!--5.11.3-->
                     </td>
-                    <td style="vertical-align: top;"><br>
+                    <td style="vertical-align: top;"><br> <!--5.12.1-->
                     </td>
-                    <td style="vertical-align: top;"><br>
+                    <td style="vertical-align: top;"><br> <!--5.12.2-->
+                    </td>
+                    <td style="vertical-align: top;"><br> <!--5.12.3-->
+                    </td>
+                    <td style="vertical-align: top;"><br> <!--5.12.4-->
+                    </td>
+                    <td style="vertical-align: top;"><br> <!--5.13.1-->
+                    </td>
+                    <td style="vertical-align: top;"><br> <!--5.13.2-->
+                    </td>
+                    <td style="vertical-align: top;"><br> <!--5.13.3-->
                     </td>
                 </tr>
                 <tr>
                     <td style="vertical-align: top;">T5.5<br>
                     </td>
-                    <td style="vertical-align: top;"><br>
+                    <td style="vertical-align: top;"><br> <!--5.6-->
                     </td>
-                    <td style="vertical-align: top;"><br>
+                    <td style="vertical-align: top;"><br> <!--5.7.1-->
                     </td>
-                    <td style="vertical-align: top;"><br>
+                    <td style="vertical-align: top;"><br> <!--5.7.2-->
                     </td>
-                    <td style="vertical-align: top;"><br>
+                    <td style="vertical-align: top;"><br> <!--5.7.3-->
                     </td>
-                    <td style="vertical-align: top;"><br>
+                    <td style="vertical-align: top;"><br> <!--5.7.4-->
                     </td>
-                    <td style="vertical-align: top;"><br>
+                    <td style="vertical-align: top;"><br> <!--5.8.1-->
                     </td>
-                    <td style="vertical-align: top;"><br>
+                    <td style="vertical-align: top;"><br> <!--5.8.2-->
                     </td>
-                    <td style="vertical-align: top;"><br>
+                    <td style="vertical-align: top;"><br> <!--5.8.3-->
                     </td>
-                    <td style="vertical-align: top;"><br>
+                    <td style="vertical-align: top;"><br> <!--5.9.1-->
                     </td>
-                    <td style="vertical-align: top;"><br>
+                    <td style="vertical-align: top;"><br> <!--5.9.2-->
                     </td>
-                    <td style="vertical-align: top;"><br>
+                    <td style="vertical-align: top;"><br> <!--5.9.3-->
                     </td>
-                    <td style="vertical-align: top;"><br>
+                    <td style="vertical-align: top;"><br> <!--5.10.1-->
                     </td>
-                    <td style="vertical-align: top;">X<br>
+                    <td style="vertical-align: top;"><br> <!--5.10.2-->
                     </td>
-                    <td style="vertical-align: top;">X<br>
+                    <td style="vertical-align: top;">X<br> <!--5.11.1-->
                     </td>
-                    <td style="vertical-align: top;">X<br>
+                    <td style="vertical-align: top;">X<br> <!--5.11.2-->
                     </td>
-                    <td style="vertical-align: top;"><br>
+                    <td style="vertical-align: top;">X<br> <!--5.11.3-->
                     </td>
-                    <td style="vertical-align: top;"><br>
+                    <td style="vertical-align: top;"><br> <!--5.12.1-->
                     </td>
-                    <td style="vertical-align: top;"><br>
+                    <td style="vertical-align: top;"><br> <!--5.12.2-->
+                    </td>
+                    <td style="vertical-align: top;"><br> <!--5.12.3-->
+                    </td>
+                    <td style="vertical-align: top;"><br> <!--5.12.4-->
+                    </td>
+                    <td style="vertical-align: top;"><br> <!--5.13.1-->
+                    </td>
+                    <td style="vertical-align: top;"><br> <!--5.13.2-->
+                    </td>
+                    <td style="vertical-align: top;"><br> <!--5.13.3-->
                     </td>
                 </tr>
                 <tr>
                     <td style="vertical-align: top;">T5.6<br>
                     </td>
-                    <td style="vertical-align: top;"><br>
+                    <td style="vertical-align: top;"><br> <!--5.6-->
                     </td>
-                    <td style="vertical-align: top;"><br>
+                    <td style="vertical-align: top;"><br> <!--5.7.1-->
                     </td>
-                    <td style="vertical-align: top;"><br>
+                    <td style="vertical-align: top;"><br> <!--5.7.2-->
                     </td>
-                    <td style="vertical-align: top;"><br>
+                    <td style="vertical-align: top;"><br> <!--5.7.3-->
                     </td>
-                    <td style="vertical-align: top;"><br>
+                    <td style="vertical-align: top;"><br> <!--5.7.4-->
                     </td>
-                    <td style="vertical-align: top;"><br>
+                    <td style="vertical-align: top;"><br> <!--5.8.1-->
                     </td>
-                    <td style="vertical-align: top;"><br>
+                    <td style="vertical-align: top;"><br> <!--5.8.2-->
                     </td>
-                    <td style="vertical-align: top;"><br>
+                    <td style="vertical-align: top;"><br> <!--5.8.3-->
                     </td>
-                    <td style="vertical-align: top;"><br>
+                    <td style="vertical-align: top;"><br> <!--5.9.1-->
                     </td>
-                    <td style="vertical-align: top;"><br>
+                    <td style="vertical-align: top;"><br> <!--5.9.2-->
                     </td>
-                    <td style="vertical-align: top;"><br>
+                    <td style="vertical-align: top;"><br> <!--5.9.3-->
                     </td>
-                    <td style="vertical-align: top;"><br>
+                    <td style="vertical-align: top;"><br> <!--5.10.1-->
                     </td>
-                    <td style="vertical-align: top;">X<br>
+                    <td style="vertical-align: top;"><br> <!--5.10.2-->
                     </td>
-                    <td style="vertical-align: top;">X<br>
+                    <td style="vertical-align: top;">X<br> <!--5.11.1-->
                     </td>
-                    <td style="vertical-align: top;">X<br>
+                    <td style="vertical-align: top;">X<br> <!--5.11.2-->
                     </td>
-                    <td style="vertical-align: top;"><br>
+                    <td style="vertical-align: top;">X<br> <!--5.11.3-->
                     </td>
-                    <td style="vertical-align: top;"><br>
+                    <td style="vertical-align: top;"><br> <!--5.12.1-->
                     </td>
-                    <td style="vertical-align: top;"><br>
+                    <td style="vertical-align: top;"><br> <!--5.12.2-->
+                    </td>
+                    <td style="vertical-align: top;"><br> <!--5.12.3-->
+                    </td>
+                    <td style="vertical-align: top;"><br> <!--5.12.4-->
+                    </td>
+                    <td style="vertical-align: top;"><br> <!--5.13.1-->
+                    </td>
+                    <td style="vertical-align: top;"><br> <!--5.13.2-->
+                    </td>
+                    <td style="vertical-align: top;"><br> <!--5.13.3-->
                     </td>
                 </tr>
                 <tr>
                     <td style="vertical-align: top;">T5.7<br>
                     </td>
-                    <td style="vertical-align: top;"><br>
+                    <td style="vertical-align: top;"><br> <!--5.6-->
                     </td>
-                    <td style="vertical-align: top;"><br>
+                    <td style="vertical-align: top;"><br> <!--5.7.1-->
                     </td>
-                    <td style="vertical-align: top;"><br>
+                    <td style="vertical-align: top;"><br> <!--5.7.2-->
                     </td>
-                    <td style="vertical-align: top;"><br>
+                    <td style="vertical-align: top;"><br> <!--5.7.3-->
                     </td>
-                    <td style="vertical-align: top;"><br>
+                    <td style="vertical-align: top;"><br> <!--5.7.4-->
                     </td>
-                    <td style="vertical-align: top;"><br>
+                    <td style="vertical-align: top;"><br> <!--5.8.1-->
                     </td>
-                    <td style="vertical-align: top;"><br>
+                    <td style="vertical-align: top;"><br> <!--5.8.2-->
                     </td>
-                    <td style="vertical-align: top;"><br>
+                    <td style="vertical-align: top;"><br> <!--5.8.3-->
                     </td>
-                    <td style="vertical-align: top;"><br>
+                    <td style="vertical-align: top;"><br> <!--5.9.1-->
                     </td>
-                    <td style="vertical-align: top;"><br>
+                    <td style="vertical-align: top;"><br> <!--5.9.2-->
                     </td>
-                    <td style="vertical-align: top;"><br>
+                    <td style="vertical-align: top;"><br> <!--5.9.3-->
                     </td>
-                    <td style="vertical-align: top;"><br>
+                    <td style="vertical-align: top;"><br> <!--5.10.1-->
                     </td>
-                    <td style="vertical-align: top;"><br>
+                    <td style="vertical-align: top;"><br> <!--5.10.2-->
                     </td>
-                    <td style="vertical-align: top;"><br>
+                    <td style="vertical-align: top;"><br> <!--5.11.1-->
                     </td>
-                    <td style="vertical-align: top;"><br>
+                    <td style="vertical-align: top;"><br> <!--5.11.2-->
                     </td>
-                    <td style="vertical-align: top;">X<br>
+                    <td style="vertical-align: top;"><br> <!--5.11.3-->
                     </td>
-                    <td style="vertical-align: top;">X<br>
+                    <td style="vertical-align: top;">X<br> <!--5.12.1-->
                     </td>
-                    <td style="vertical-align: top;">X<br>
+                    <td style="vertical-align: top;">X<br> <!--5.12.2-->
+                    </td>
+                    <td style="vertical-align: top;">X<br> <!--5.12.3-->
+                    </td>
+                    <td style="vertical-align: top;">X<br> <!--5.12.4-->
+                    </td>
+                    <td style="vertical-align: top;"><br> <!--5.13.1-->
+                    </td>
+                    <td style="vertical-align: top;"><br> <!--5.13.2-->
+                    </td>
+                    <td style="vertical-align: top;"><br> <!--5.13.3-->
+                    </td>
+                </tr>
+                <tr>
+                    <td style="vertical-align: top;">T5.8<br>
+                    </td>
+                    <td style="vertical-align: top;"><br> <!--5.6-->
+                    </td>
+                    <td style="vertical-align: top;">X<br> <!--5.7.1-->
+                    </td>
+                    <td style="vertical-align: top;">X<br> <!--5.7.2-->
+                    </td>
+                    <td style="vertical-align: top;">X<br> <!--5.7.3-->
+                    </td>
+                    <td style="vertical-align: top;"><br> <!--5.7.4-->
+                    </td>
+                    <td style="vertical-align: top;"><br> <!--5.8.1-->
+                    </td>
+                    <td style="vertical-align: top;"><br> <!--5.8.2-->
+                    </td>
+                    <td style="vertical-align: top;"><br> <!--5.8.3-->
+                    </td>
+                    <td style="vertical-align: top;"><br> <!--5.9.1-->
+                    </td>
+                    <td style="vertical-align: top;"><br> <!--5.9.2-->
+                    </td>
+                    <td style="vertical-align: top;"><br> <!--5.9.3-->
+                    </td>
+                    <td style="vertical-align: top;"><br> <!--5.10.1-->
+                    </td>
+                    <td style="vertical-align: top;"><br> <!--5.10.2-->
+                    </td>
+                    <td style="vertical-align: top;"><br> <!--5.11.1-->
+                    </td>
+                    <td style="vertical-align: top;"><br> <!--5.11.2-->
+                    </td>
+                    <td style="vertical-align: top;"><br> <!--5.11.3-->
+                    </td>
+                    <td style="vertical-align: top;"><br> <!--5.12.1-->
+                    </td>
+                    <td style="vertical-align: top;"><br> <!--5.12.2-->
+                    </td>
+                    <td style="vertical-align: top;"><br> <!--5.12.3-->
+                    </td>
+                    <td style="vertical-align: top;"><br> <!--5.12.4-->
+                    </td>
+                    <td style="vertical-align: top;"><br> <!--5.13.1-->
+                    </td>
+                    <td style="vertical-align: top;"><br> <!--5.13.2-->
+                    </td>
+                    <td style="vertical-align: top;"><br> <!--5.13.3-->
+                    </td>
+                </tr>
+                <tr>
+                    <td style="vertical-align: top;">T5.9<br>
+                    </td>
+                    <td style="vertical-align: top;"><br> <!--5.6-->
+                    </td>
+                    <td style="vertical-align: top;"><br> <!--5.7.1-->
+                    </td>
+                    <td style="vertical-align: top;"><br> <!--5.7.2-->
+                    </td>
+                    <td style="vertical-align: top;"><br> <!--5.7.3-->
+                    </td>
+                    <td style="vertical-align: top;"><br> <!--5.7.4-->
+                    </td>
+                    <td style="vertical-align: top;"><br> <!--5.8.1-->
+                    </td>
+                    <td style="vertical-align: top;"><br> <!--5.8.2-->
+                    </td>
+                    <td style="vertical-align: top;"><br> <!--5.8.3-->
+                    </td>
+                    <td style="vertical-align: top;"><br> <!--5.9.1-->
+                    </td>
+                    <td style="vertical-align: top;"><br> <!--5.9.2-->
+                    </td>
+                    <td style="vertical-align: top;"><br> <!--5.9.3-->
+                    </td>
+                    <td style="vertical-align: top;"><br> <!--5.10.1-->
+                    </td>
+                    <td style="vertical-align: top;"><br> <!--5.10.2-->
+                    </td>
+                    <td style="vertical-align: top;"><br> <!--5.11.1-->
+                    </td>
+                    <td style="vertical-align: top;"><br> <!--5.11.2-->
+                    </td>
+                    <td style="vertical-align: top;"><br> <!--5.11.3-->
+                    </td>
+                    <td style="vertical-align: top;"><br> <!--5.12.1-->
+                    </td>
+                    <td style="vertical-align: top;"><br> <!--5.12.2-->
+                    </td>
+                    <td style="vertical-align: top;"><br> <!--5.12.3-->
+                    </td>
+                    <td style="vertical-align: top;"><br> <!--5.12.4-->
+                    </td>
+                    <td style="vertical-align: top;">X<br> <!--5.13.1-->
+                    </td>
+                    <td style="vertical-align: top;">X<br> <!--5.13.2-->
+                    </td>
+                    <td style="vertical-align: top;">X<br> <!--5.13.3-->
+                    </td>
+                </tr>
+                <tr>
+                    <td style="vertical-align: top;">T5.10<br>
+                    </td>
+                    <td style="vertical-align: top;"><br> <!--5.6-->
+                    </td>
+                    <td style="vertical-align: top;"><br> <!--5.7.1-->
+                    </td>
+                    <td style="vertical-align: top;"><br> <!--5.7.2-->
+                    </td>
+                    <td style="vertical-align: top;"><br> <!--5.7.3-->
+                    </td>
+                    <td style="vertical-align: top;"><br> <!--5.7.4-->
+                    </td>
+                    <td style="vertical-align: top;"><br> <!--5.8.1-->
+                    </td>
+                    <td style="vertical-align: top;"><br> <!--5.8.2-->
+                    </td>
+                    <td style="vertical-align: top;"><br> <!--5.8.3-->
+                    </td>
+                    <td style="vertical-align: top;"><br> <!--5.9.1-->
+                    </td>
+                    <td style="vertical-align: top;"><br> <!--5.9.2-->
+                    </td>
+                    <td style="vertical-align: top;"><br> <!--5.9.3-->
+                    </td>
+                    <td style="vertical-align: top;">X<br> <!--5.10.1-->
+                    </td>
+                    <td style="vertical-align: top;">X<br> <!--5.10.2-->
+                    </td>
+                    <td style="vertical-align: top;"><br> <!--5.11.1-->
+                    </td>
+                    <td style="vertical-align: top;"><br> <!--5.11.2-->
+                    </td>
+                    <td style="vertical-align: top;"><br> <!--5.11.3-->
+                    </td>
+                    <td style="vertical-align: top;"><br> <!--5.12.1-->
+                    </td>
+                    <td style="vertical-align: top;"><br> <!--5.12.2-->
+                    </td>
+                    <td style="vertical-align: top;"><br> <!--5.12.3-->
+                    </td>
+                    <td style="vertical-align: top;"><br> <!--5.12.4-->
+                    </td>
+                    <td style="vertical-align: top;"><br> <!--5.13.1-->
+                    </td>
+                    <td style="vertical-align: top;"><br> <!--5.13.2-->
+                    </td>
+                    <td style="vertical-align: top;"><br> <!--5.13.3-->
                     </td>
                 </tr>
             </tbody>
