@@ -3802,7 +3802,7 @@
         &nbsp;&nbsp;&nbsp; 8.1.1&nbsp; HallLight[f,b,d] shall be set to on. <br>
         &nbsp;&nbsp;&nbsp; 8.1.2&nbsp; mHallCall[f,b,d] shall be set to True.
         <br>
-        8.2&nbsp;&nbsp;&nbsp; If f is CurrentFloor, and HallCall[f,b,d] is Idle, and mDesiredFloor is CurrentFloor<!--, and mDoorClosed[b,*] is False-->, then,<br>
+        8.2&nbsp;&nbsp;&nbsp; If f is CurrentFloor, and HallCall[f,b,d] is Idle, and mDesiredFloor.d equals d and mDoorClosed[b,*] is False, then,<br>
         &nbsp;&nbsp;&nbsp; 8.2.1&nbsp; HallLight[f,b,CurrentDirection] shall be set to off.<br>
         &nbsp;&nbsp;&nbsp; 8.2.2&nbsp;  mHallCall[f,b,CurrentDirection] shall be set to False.<br>
         8.3&nbsp;&nbsp;&nbsp; mHallLight[f,b,d] always has the same value as HallLights[f,b,d].
@@ -4587,6 +4587,8 @@
             <li>mHallCall[f, b, d]&nbsp;&nbsp; </li>
             <li>mCarCall[f, b]&nbsp;&nbsp;&nbsp; </li>
             <li>mCarWeight </li>
+            <li>mDriveSpeed //**note: this input is added in order to enable dispatcher to calculate the commit point**//</li>
+            <li>mCarLevelPosition //**note: this input is added in order to enable dispatcher to calculate the commit point, and enable the dispatcher to know the current positoin when the speed is fast**//</li>
         </ul>
         <h3> Output Interface: </h3>
         <ul>
@@ -4597,12 +4599,13 @@
         <ul>
             <li>Target: an integer Floor number for desired Floor, initialized to
                 Lobby = 1. </li>
-            <li>DesiredHallway: {FRONT, BACK, BOTH} base on the value of mAtFloor.b where mAtFloor.f equals Target. </li>
+            <li>DesiredHallway: {FRONT, BACK, BOTH} base on the calls at Target floor. </li>
             <li>CurrentFloor, is a shorthand notation for the value of whichever
                 mAtFloor[f, b] is True, if any.&nbsp; If CurrentFloor is invalid it has
                 a mnemonic value of None. 
             </li>
         </ul>
+
         <h3> CONSTRAINTS: </h3>
         11.1&nbsp;&nbsp;&nbsp; Target shall be a valid Floor number from 1 ..
         MaxFloor inclusive.<br>
@@ -4610,24 +4613,24 @@
         d) shall not be Up when f = MaxFloor .<br>
         11.3&nbsp;&nbsp;&nbsp; The desired direction d of mDesiredFloor(f, b,
         d) shall not be Down when f = 1.
+
         <h3> TIME-TRIGGERED BEHAVIORS: </h3>
         11.4&nbsp;&nbsp;&nbsp; mDesiredFloor.f shall always be set to Target.<br>
-        11.5&nbsp;&nbsp;&nbsp; mDesiredFloor.d shall always be set to Stop.<br>
-        11.6&nbsp;&nbsp;&nbsp; Whenever any mDoorClosed [b, r] is False, then<br>
-        &nbsp;&nbsp; 11.6.1&nbsp; Target
-        shall be set equal to ((f mod MaxFloors) + 1) <br>
-        &nbsp;&nbsp; 11.6.2 &nbsp; mDesiredFloor.b shall
-        be set to b, where f, b is whichever mAtFloor[f, b] is True<br>
-        11.7&nbsp; If all mAtFloor[f, b] are False AND any mDoorClosed [b, r]
-        is False (which means doors are not
-        closed between floors!); then<br>
-        &nbsp;&nbsp;&nbsp; 11.7.1&nbsp;&nbsp; Target shall be set to 1<br>
-        &nbsp;&nbsp;&nbsp; 11.7.2&nbsp;&nbsp; mDesiredFloor.b
-        shall be set to None .<br>
-        11.8 &nbsp; If two mAtFloor[f, b] values are True with the same value
-        f, then mDesiredFloor.b shall be set to Both.<br>
-        11.9 &nbsp;&nbsp; mDesiredDwell shall always be set to a constant
-        appropriate value for door open dwell. &nbsp; &nbsp;
+        11.5&nbsp;&nbsp;&nbsp; If mDesiredFloor.d is STOP, and has a pending call at floor f, if f is higher than Target, mDesiredFloor.d shall be set to UP. <br>
+        11.6&nbsp;&nbsp;&nbsp; If mDesiredFloor.d is STOP, and has a pending call at floor f, if f is lower than Target, mDesiredFloor.d shall be set to DOWN. <br>
+        11.7&nbsp;&nbsp;&nbsp; If currentFloor is Target and any mDoorClosed is False, and mDesiredFloor.d is STOP, and any pending call at floor f, Target shall be set to f. <br>
+        11.8&nbsp;&nbsp;&nbsp; If currentFloor is Target and any mDoorClosed is False, and mDesiredFloor.d is UP, Target shall be set to upper called floor.<br>
+        11.9&nbsp;&nbsp;&nbsp; If currentFloor is Target and any mDoorClosed is False, and mDesiredFloor.d is DOWN, Target shall be set to lower called floor.<br>
+        11.10&nbsp;&nbsp;&nbsp; If Target is lower than mCarLevelPosition, then Target shall be set to closest lower floor among the CarCall and same direction HallCall.<br>
+        11.11&nbsp;&nbsp;&nbsp; If Target is higher than mCarLevelPosition, then Target shall be set to closest higher floor among the CarCall and same direction HallCall.<br>
+        11.12&nbsp;&nbsp;&nbsp; If there is no other floor hase pending call besides Target, mDesiredFloor.d shall be set to STOP.<br>
+        11.13&nbsp;&nbsp;&nbsp; If currentFloor is not Target and there are more calls with same direction, then mDesiredFloor.d shall be set to same as current direction.<br>
+        11.14&nbsp;&nbsp;&nbsp; If currentFloor is not Target and there is no more calls with same direction, and the farthermost different direction hall call is farther than target, then mDesiredFloor.d shall be set to same as current direction.<br>
+        11.15&nbsp;&nbsp;&nbsp; If currentFloor is not Target and there is no more calls with same direction, and the farthermost different direction hall call is closer than target, then mDesiredFloor.d shall be set to the different direction.<br>
+        11.16&nbsp;&nbsp;&nbsp; mDesiredFloor.b shall be set to appropriate value based on the Calls of the Target floor.<br>
+        11.17 &nbsp;&nbsp; mDesiredDwell shall always be set to a constant appropriate value for door open dwell. <br>
+        11.18 &nbsp;&nbsp; if any floor is within the commit point, it's call shall be ignored. <br>
+
         <h3>Statechart</h3>
         Statechart for Dispatcher
         <div style="text-align: center;"><a href="dispatcher_state_diagram.png"><img
