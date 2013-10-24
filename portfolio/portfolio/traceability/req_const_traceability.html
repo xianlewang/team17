@@ -140,6 +140,20 @@
                     <td style="vertical-align: top;">~<br>
                     </td>
                 </tr>
+					 <tr>
+                    <td style="vertical-align: top;">5.7.4 At floor f and stop --&gt; Reversal set to true <br>
+                    </td>
+                    <td style="vertical-align: top;">~<br>
+                    </td>
+                    <td style="vertical-align: top;">~<br>
+                    </td>
+                    <td style="vertical-align: top;">~<br>
+                    </td>
+                    <td style="vertical-align: top;">~<br>
+                    </td>
+                    <td style="vertical-align: top;">~<br>
+                    </td>
+                </tr>
                 <tr>
                     <td style="vertical-align: top;">5.8.1 Door opened --&gt; door stop moving <br>
                     </td>
@@ -282,6 +296,105 @@
                 </tr>
                 <tr>
                     <td style="vertical-align: top;">5.11.3 weight exceeds the limit AND door is not opened --&gt; set countdown <br>
+                    </td>
+                    <td style="vertical-align: top;">~<br>
+                    </td>
+                    <td style="vertical-align: top;">~<br>
+                    </td>
+                    <td style="vertical-align: top;">~<br>
+                    </td>
+                    <td style="vertical-align: top;">~<br>
+                    </td>
+                    <td style="vertical-align: top;">~<br>
+                    </td>
+                </tr>
+					 
+					 <tr>
+                    <td style="vertical-align: top;">5.12.1 door reversal triggered --&gt; door open <br>
+                    </td>
+                    <td style="vertical-align: top;">~<br>
+                    </td>
+                    <td style="vertical-align: top;">X<br>
+                    </td>
+                    <td style="vertical-align: top;">~<br>
+                    </td>
+                    <td style="vertical-align: top;">~<br>
+                    </td>
+                    <td style="vertical-align: top;">~<br>
+                    </td>
+                </tr>
+					 <tr>
+                    <td style="vertical-align: top;">5.12.2 door reversal triggered --&gt; door open <br>
+                    </td>
+                    <td style="vertical-align: top;">~<br>
+                    </td>
+                    <td style="vertical-align: top;">X<br>
+                    </td>
+                    <td style="vertical-align: top;">~<br>
+                    </td>
+                    <td style="vertical-align: top;">~<br>
+                    </td>
+                    <td style="vertical-align: top;">~<br>
+                    </td>
+                </tr>
+					 <tr>
+                    <td style="vertical-align: top;">5.12.3 door reversal triggered --&gt; countdown set to Dwell <br>
+                    </td>
+                    <td style="vertical-align: top;">~<br>
+                    </td>
+                    <td style="vertical-align: top;">~<br>
+                    </td>
+                    <td style="vertical-align: top;">~<br>
+                    </td>
+                    <td style="vertical-align: top;">~<br>
+                    </td>
+                    <td style="vertical-align: top;">~<br>
+                    </td>
+                </tr>
+					 <tr>
+                    <td style="vertical-align: top;">5.12.4 door reversal triggered --&gt; DoorReversal set to true <br>
+                    </td>
+                    <td style="vertical-align: top;">~<br>
+                    </td>
+                    <td style="vertical-align: top;">~<br>
+                    </td>
+                    <td style="vertical-align: top;">~<br>
+                    </td>
+                    <td style="vertical-align: top;">~<br>
+                    </td>
+                    <td style="vertical-align: top;">~<br>
+                    </td>
+                </tr>
+					 <tr>
+                    <td style="vertical-align: top;">5.13.1 countdown &lt; 0 AND Reversal is true --&gt; door nudge <br>
+                    </td>
+                    <td style="vertical-align: top;">~<br>
+                    </td>
+                    <td style="vertical-align: top;">~<br>
+                    </td>
+                    <td style="vertical-align: top;">X<br>
+                    </td>
+                    <td style="vertical-align: top;">~<br>
+                    </td>
+                    <td style="vertical-align: top;">~<br>
+                    </td>
+                </tr>
+					 <tr>
+                    <td style="vertical-align: top;">5.13.2 countdown &lt; 0 AND Reversal is true --&gt; door nudge <br>
+                    </td>
+                    <td style="vertical-align: top;">~<br>
+                    </td>
+                    <td style="vertical-align: top;">~<br>
+                    </td>
+                    <td style="vertical-align: top;">X<br>
+                    </td>
+                    <td style="vertical-align: top;">~<br>
+                    </td>
+                    <td style="vertical-align: top;">~<br>
+                    </td>
+                </tr>
+					 <tr>
+                    <td style="vertical-align: top;">5.13.3 countdown &lt; 0 AND Reversal is true --&gt; countdown set to zero and stop decreasing <br>
                     </td>
                     <td style="vertical-align: top;">~<br>
                     </td>
@@ -520,7 +633,7 @@
                 </tr>
 					 
 					 <tr>
-                    <td style="vertical-align: top;">6.13.1 Drive.s != STOP AND |DesiredFloor height - mCarLevelPosition| > 1m --> mDrive[s,d]=[FAST,d]<br>
+                    <td style="vertical-align: top;">6.13.1 Drive.s != STOP AND |DesiredFloor height - mCarLevelPosition| &gt; 1m --&gt; mDrive[s,d]=[FAST,d]<br>
                     </td>
                     <td style="vertical-align: top;">~<br>
                     </td>
@@ -534,7 +647,7 @@
                     </td>
                 </tr>
 					 <tr>
-                    <td style="vertical-align: top;">6.13.2 Drive.s != STOP AND |DesiredFloor height - mCarLevelPosition| > 1m --> mDriveSpeed[s,d]=[v,d]<br>
+                    <td style="vertical-align: top;">6.13.2 Drive.s != STOP AND |DesiredFloor height - mCarLevelPosition| &gt; 1m --&gt; mDriveSpeed[s,d]=[v,d]<br>
                     </td>
                     <td style="vertical-align: top;">~<br>
                     </td>
@@ -548,7 +661,7 @@
                     </td>
                 </tr>
 					 <tr>
-                    <td style="vertical-align: top;">6.14.1 Drive.s != STOP AND |DesiredFloor height - mCarLevelPosition| <= 1m --> mDrive[s,d]=[SLOW,d]<br>
+                    <td style="vertical-align: top;">6.14.1 Drive.s != STOP AND |DesiredFloor height - mCarLevelPosition| &lt;= 1m --&gt; mDrive[s,d]=[SLOW,d]<br>
                     </td>
                     <td style="vertical-align: top;">~<br>
                     </td>
@@ -562,7 +675,7 @@
                     </td>
                 </tr>
 					 <tr>
-                    <td style="vertical-align: top;">6.14.2 Drive.s != STOP AND |DesiredFloor height - mCarLevelPosition| <= 1m --> mDriveSpeed[s,d]=[v,d]<br>
+                    <td style="vertical-align: top;">6.14.2 Drive.s != STOP AND |DesiredFloor height - mCarLevelPosition| &lt;= 1m --&gt; mDriveSpeed[s,d]=[v,d]<br>
                     </td>
                     <td style="vertical-align: top;">~<br>
                     </td>
