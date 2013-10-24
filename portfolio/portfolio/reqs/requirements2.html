@@ -3802,7 +3802,7 @@
         &nbsp;&nbsp;&nbsp; 8.1.1&nbsp; HallLight[f,b,d] shall be set to on. <br>
         &nbsp;&nbsp;&nbsp; 8.1.2&nbsp; mHallCall[f,b,d] shall be set to True.
         <br>
-        8.2&nbsp;&nbsp;&nbsp; If f is CurrentFloor, and HallCall[f,b,d] is Idle, and mDesiredFloor is CurrentFloor<!--, and mDoorClosed[b,*] is False-->, then,<br>
+        8.2&nbsp;&nbsp;&nbsp; If f is CurrentFloor, and HallCall[f,b,d] is Idle, and mDesiredFloor.d equals d and mDoorClosed[b,*] is False, then,<br>
         &nbsp;&nbsp;&nbsp; 8.2.1&nbsp; HallLight[f,b,CurrentDirection] shall be set to off.<br>
         &nbsp;&nbsp;&nbsp; 8.2.2&nbsp;  mHallCall[f,b,CurrentDirection] shall be set to False.<br>
         8.3&nbsp;&nbsp;&nbsp; mHallLight[f,b,d] always has the same value as HallLights[f,b,d].
@@ -4587,8 +4587,8 @@
             <li>mHallCall[f, b, d]&nbsp;&nbsp; </li>
             <li>mCarCall[f, b]&nbsp;&nbsp;&nbsp; </li>
             <li>mCarWeight </li>
-            <li>mDriveSpeed</li>
-            <li>mCarLevelPosition</li>
+            <li>mDriveSpeed //**note: this input is added in order to enable dispatcher to calculate the commit point**//</li>
+            <li>mCarLevelPosition //**note: this input is added in order to enable dispatcher to calculate the commit point, and enable the dispatcher to know the current positoin when the speed is fast**//</li>
         </ul>
         <h3> Output Interface: </h3>
         <ul>
