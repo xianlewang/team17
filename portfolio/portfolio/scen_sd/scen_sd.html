@@ -36,13 +36,22 @@ Name: Qiang Zhang &nbsp Andrew ID: qiangz <br>
     <li><a href="#scenario2b">Scenario 2B</a></li>
   </ul>
   <li><a href="#usecase3">3. Passenger Enters Car</a> </li>
+	<ul>
+    <li><a href="#scenario3a">Scenario 3A</a> </li>
+   </ul>
   <li><a href="#usecase4">4. Passenger Exits Car</a> </li>
+	<ul>
+    <li><a href="#scenario4a">Scenario 4A</a> </li>
+   </ul>
   <li><a href="#usecase5">5. Passenger Triggers Door Reversal</a> </li>
   <ul>
-    <li><a href="#scenario5a">Scenario 5A</a> </li>
+    <li><a href="#scenario5a">Scenario 5A - R-T10</a> </li>
     <li><a href="#scenario5b">Scenario 5B</a></li>
   </ul>
   <li><a href="#usecase6">6. Determine Car Position</a> </li>
+	<ul>
+    <li><a href="#scenario6a">Scenario 6A</a> </li>
+   </ul>
   <li><a href="#usecase7">7. Determine Car Direction</a> </li>
   <ul>
     <li><a href="#scenario7a">Scenario 7A</a> </li>
@@ -52,7 +61,13 @@ Name: Qiang Zhang &nbsp Andrew ID: qiangz <br>
     <div style="margin-left: 40px;"><a href="#scenario7c">Scenario 7C</a></div>
   </li>
   <li><a href="#usecase8">8. Move Car to Next Floor</a> </li>
+	<ul>
+    <li><a href="#scenario8a">Scenario 8A - R-T9</a> </li>
+   </ul>
   <li><a href="#usecase9">9. Cycle Doors</a></li>
+	<ul>
+    <li><a href="#scenario9a">Scenario 9A</a> </li>
+   </ul>
 </ul>
 <div align="center">
 <hr size="2" width="100%" align="center"> </div>
@@ -222,7 +237,7 @@ has not yet exited the car. </li>
 <p> &nbsp; </p>
 <h2> <a name="usecase3" id="usecase3"></a>Use Case 3: Passenger Enters
 Elevator </h2>
-<h3> Scenario 3A: Passenger is waiting at a hallway for the elevator
+<h3> <a name="scenario3a" id="scenario3a"></a>Scenario 3A: Passenger is waiting at a hallway for the elevator
 and has already pressed the hall call button. </h3>
 <h3> Author name: Xianle Wang &nbsp &nbsp Andrew ID: xianlew</h3>
 <h3> Pre-Conditions: </h3>
@@ -259,7 +274,7 @@ has already been pressed </li>
 <p> &nbsp; </p>
 <h2> <a name="usecase4" id="usecase4"></a>Use Case 4: Passenger Exits
 Elevator </h2>
-<h3> Scenario 4A: Passenger is in the elevator as it arrives at the
+<h3> <a name="scenario4a" id="scenario4a"></a>Scenario 4A: Passenger is in the elevator as it arrives at the
 passenger's desired hallway. </h3>
 <h3> Author name: Shen Yu &nbsp &nbsp Andrew ID: sheny </h3>
 <h3> Pre-Conditions: </h3>
@@ -351,7 +366,7 @@ attempts to exit the car as the doors begin to close. </h3>
 <p> &nbsp; </p>
 <h2> <a name="usecase6" id="usecase6"></a>Use Case 6: Determine Car
 Position </h2>
-<h3> Scenario 6A: Car moves from hallway f on floor x to adjacent hallway g 
+<h3> <a name="scenario6a" id="scenario6a"></a>Scenario 6A: Car moves from hallway f on floor x to adjacent hallway g 
 on floor y and stops. </h3>
 <p> Note: Recall that the Drive of the&nbsp;elevator we provided is
 never commanded to go Fast, so the elevator only moves Slow and can
@@ -490,7 +505,7 @@ doors close on a hallway. </h3>
 <p> &nbsp; </p>
 <h2> <a name="usecase8" id="usecase8"></a>Use Case 8: Move Car to Next
 Floor </h2>
-<h3> Scenario 8A: Elevator moves from {floor f, hallway b} to {floor g,
+<h3> <a name="scenario8a" id="scenario8a"></a>Scenario 8A: Elevator moves from {floor f, hallway b} to {floor g,
 hallway c} in
 direction d. </h3>
 <p> Note: You will want to create other scenarios that involve fast
@@ -529,7 +544,7 @@ open.
 <hr size="2" width="100%" align="center"> </div>
 <p> &nbsp; </p>
 <h2> <a name="usecase9" id="usecase9"></a>Use Case 9: Cycle Doors </h2>
-<h3> Scenario 9A: Elevator stops at hallway and doors open. Dispatcher
+<h3> <a name="scenario9a" id="scenario9a"></a>Scenario 9A: Elevator stops at hallway and doors open. Dispatcher
 computes next desired floor just as doors open. Doors close. </h3>
 <p> Note: This dispatcher is really dumb and stops at every floor, in
 order. It would be much better to stop only at floors with people on
