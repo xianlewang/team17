@@ -441,42 +441,6 @@
                     <td style="vertical-align: top;">Implementation(code)<br>
                     </td>
                 </tr>
-                <tr>
-                    <td style="vertical-align: top;">22<br>
-                    </td>
-                    <td style="vertical-align: top;">10/31/2013<br>
-                    </td>
-                    <td style="vertical-align: top;">10/31/2013<br>
-                    </td>
-                    <td style="vertical-align: top;">Shen Yu<br>
-                    </td>
-                    <td style="vertical-align: top;">CarPositionControl<br>
-                    </td>
-                    <td style="vertical-align: top;">State chart and requirements need to be changed.<br>
-                    </td>
-                    <td style="vertical-align: top;">Modify the state chart and requirements.<br>
-                    </td>
-                    <td style="vertical-align: top;">CarPositionControl<br>
-                    </td>
-                </tr>
-                <tr>
-                    <td style="vertical-align: top;">23<br>
-                    </td>
-                    <td style="vertical-align: top;">10/31/2013<br>
-                    </td>
-                    <td style="vertical-align: top;">10/31/2013<br>
-                    </td>
-                    <td style="vertical-align: top;">Shen Yu<br>
-                    </td>
-                    <td style="vertical-align: top;">CarButtonControl<br>
-                    </td>
-                    <td style="vertical-align: top;">State action needs to be changed.<br>
-                    </td>
-                    <td style="vertical-align: top;">Modify the state action.<br>
-                    </td>
-                    <td style="vertical-align: top;">CarButtonControl<br>
-                    </td>
-                </tr>
             </tbody>
         </table>
         <br>

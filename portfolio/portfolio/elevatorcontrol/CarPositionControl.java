@@ -9,12 +9,11 @@ package simulator.elevatorcontrol;
 import jSimPack.SimTime;
 import simulator.elevatormodules.CarLevelPositionCanPayloadTranslator;
 import simulator.framework.Controller;
-import simulator.framework.Hallway;
 import simulator.payloads.CanMailbox;
 import simulator.payloads.CanMailbox.ReadableCanMailbox;
 import simulator.payloads.CarPositionIndicatorPayload;
 import simulator.payloads.CarPositionIndicatorPayload.WriteableCarPositionIndicatorPayload;
-import simulator.elevatorcontrol.Utility.AtFloorArray;;
+import simulator.elevatorcontrol.Utility.NearestFloor;
 
 public class CarPositionControl extends Controller{
 	/***************************************************************************
@@ -22,7 +21,7 @@ public class CarPositionControl extends Controller{
      **************************************************************************/
     //note that inputs are Readable objects, while outputs are Writeable objects
 	//input
-	private AtFloorArray AtFloorArray;
+	private NearestFloor NearestFloor;
 	//received desired floor message
 	private ReadableCanMailbox networkDesiredFloor;
     //translator for the desired floor message
@@ -36,21 +35,13 @@ public class CarPositionControl extends Controller{
     
     //store the period for the controller
     private SimTime period;
-    private Hallway front = Hallway.FRONT;
-    private Hallway back = Hallway.BACK;
     //enumerate states
     private enum State{
-    	STATE_FIRST,
-    	STATE_SECOND,
-    	STATE_THIRD,
-    	STATE_FOURTH,
-    	STATE_FIFTH,
-    	STATE_SIXTH,
-    	STATE_SEVENTH,
-    	STATE_EIGHTH
+    	STATE_INITIAL,
+    	STATE_FLOOR
     }
     //state variable initialized to the initial state STATE_LIGHT_OFF
-    private State state = State.STATE_FIRST;
+    private State state = State.STATE_INITIAL;
     /**
      * The arguments listed in the .cf configuration file should match the order and
      * type given here.
@@ -72,7 +63,8 @@ public class CarPositionControl extends Controller{
     	mDesiredFloor = new DesiredFloorCanPayloadTranslator(networkDesiredFloor);
     	canInterface.registerTimeTriggered(networkDesiredFloor);
     	
-    	AtFloorArray = new AtFloorArray(canInterface);
+    	NearestFloor = new NearestFloor(canInterface);
+    	
     	//initialize output
     	CarPositionIndicator = CarPositionIndicatorPayload.getWriteablePayload();
     	physicalInterface.sendTimeTriggered(CarPositionIndicator, period);
@@ -83,116 +75,26 @@ public class CarPositionControl extends Controller{
     public void timerExpired(Object callbackData) {
     	State nextstate = state;
     	switch (state) {
-    	case STATE_FIRST:
-    		//state actions for 'STATE_FIRST'
+    	case STATE_INITIAL:
+    		//state actions for 'STATE_INITIAL'
     		CarPositionIndicator.set(1);
 //#transition 'T10.1'
-    		if (AtFloorArray.isAtFloor(2, back) == true) {
-    			nextstate = State.STATE_SECOND;
-    		}
+    		if (mCarLevelPosition.getPosition() > 2500) {
+    			nextstate = State.STATE_FLOOR;
+    		}		
     		else {
-    			nextstate = state;
+    			nextstate = State.STATE_INITIAL;
     		}
     		break;
-    	case STATE_SECOND:
-    		//state actions for 'STATE_SECOND'
-    		CarPositionIndicator.set(2);
+    	case STATE_FLOOR:
+    		//state actions for 'STATE_FLOOR'
+    		CarPositionIndicator.set(NearestFloor.getvalue());
 //#transition 'T10.2'
-    		if (AtFloorArray.isAtFloor(3, front) == true) {
-    			nextstate = State.STATE_THIRD;
-    		}
-//#transition 'T10.3'
-		    else if (AtFloorArray.isAtFloor(1, front) == true || AtFloorArray.isAtFloor(1, back) == true) {
-			    nextstate = State.STATE_FIRST;
-		    }
-		    else {
-		    	nextstate = state;
-		    }
-		    break;
-    	case STATE_THIRD:
-    		//state actions for 'STATE_THIRD'
-    		CarPositionIndicator.set(3);
-//#transition 'T10.4'
-    		if (AtFloorArray.isAtFloor(4, front) == true) {
-    			nextstate = State.STATE_FOURTH;
-    		}
-//#transition 'T10.5'
-		    else if (AtFloorArray.isAtFloor(2, back) == true) {
-			    nextstate = State.STATE_SECOND;
-		    }
-		    else {
-		    	nextstate = state;
-		    }
-		    break;
-    	case STATE_FOURTH:
-    		//state actions for 'STATE_FOURTH'
-    		CarPositionIndicator.set(4);
-//#transition 'T10.6'
-    		if (AtFloorArray.isAtFloor(5, front) == true) {
-    			nextstate = State.STATE_FIFTH;
-    		}
-//#transition 'T10.7'
-		    else if (AtFloorArray.isAtFloor(3, front) == true) {
-			    nextstate = State.STATE_THIRD;
-		    }
-		    else {
-		    	nextstate = state;
-		    }
-		    break;
-    	case STATE_FIFTH:
-    		//state actions for 'STATE_FIFTH'
-    		CarPositionIndicator.set(5);
-//#transition 'T10.8'
-    		if (AtFloorArray.isAtFloor(6, front) == true) {
-    			nextstate = State.STATE_SIXTH;
-    		}
-//#transition 'T10.9'
-		    else if (AtFloorArray.isAtFloor(4, front) == true) {
-			    nextstate = State.STATE_FOURTH;
-		    }
-		    else {
-		    	nextstate = state;
-		    }
-		    break;
-    	case STATE_SIXTH:
-    		//state actions for 'STATE_SIXTH'
-    		CarPositionIndicator.set(6);
-//#transition 'T10.10'
-    		if (AtFloorArray.isAtFloor(7, front) == true || AtFloorArray.isAtFloor(7, back) == true) {
-    			nextstate = State.STATE_SEVENTH;
-    		}
-//#transition 'T10.11'
-		    else if (AtFloorArray.isAtFloor(5, front) == true) {
-			    nextstate = State.STATE_FIFTH;
-		    }
-		    else {
-		    	nextstate = state;
-		    }
-		    break;
-    	case STATE_SEVENTH:
-    		//state actions for 'STATE_SEVENTH'
-    		CarPositionIndicator.set(7);
-//#transition 'T10.12'
-    		if (AtFloorArray.isAtFloor(8, front) == true) {
-    			nextstate = State.STATE_EIGHTH;
-    		}
-//#transition 'T10.13'
-		    else if (AtFloorArray.isAtFloor(6, front) == true) {
-			    nextstate = State.STATE_SIXTH;
-		    }
-		    else {
-		    	nextstate = state;
-		    }
-		    break;
-    	case STATE_EIGHTH:
-    		//state actions for 'STATE_EIGHTH'
-    		CarPositionIndicator.set(8);
-//#transition 'T10.14'
-    		if (AtFloorArray.isAtFloor(7, front) == true || AtFloorArray.isAtFloor(7, back) == true) {
-    			nextstate = State.STATE_SEVENTH;
+    		if (mCarLevelPosition.getPosition() <= 2500) {
+    			nextstate = State.STATE_INITIAL;
     		}
 		    else {
-		    	nextstate = state;
+		    	nextstate = State.STATE_FLOOR;
 		    }
 		    break;
     	default:
