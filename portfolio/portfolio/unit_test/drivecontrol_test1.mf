@@ -1,4 +1,4 @@
-;18649 2013
+;18649 Fall 2013
 ;Group 17 
 ;Member Name: Jiang He  Andrew ID: jiangh
 ;drivecontrol_test1.mf
@@ -31,6 +31,8 @@
 0s I MESSAGE_PERIOD N DOOR_MOTOR_COMMAND_[BACK][LEFT]_CAN_ID DoorMotor BACK LEFT = STOP
 0s I MESSAGE_PERIOD N DOOR_MOTOR_COMMAND_[BACK][RIGHT]_CAN_ID DoorMotor BACK RIGHT = STOP
 
+0s I MESSAGE_PERIOD N CAR_LEVEL_POSITION_CAN_ID CarLevelPosition = 10000
+
 ; check the Drive is STOP and check STATE is STOP
 0.11s A F Drive : speed == STOP
 0.11s A N DRIVE_COMMAND_CAN_ID DriveCommand : getSpeed == STOP
@@ -57,7 +59,7 @@
 2s A N DRIVE_COMMAND_CAN_ID DriveCommand : getSpeed == STOP
 2s A S DriveControl : STATE == STOP
 
-;set conditins for T6.3
+;set conditins for (T6.3) t6.11
 2.5s I MESSAGE_PERIOD N DOOR_MOTOR_COMMAND_[FRONT][LEFT]_CAN_ID DoorMotor FRONT LEFT = STOP
 2.5s I MESSAGE_PERIOD N DOOR_MOTOR_COMMAND_[FRONT][RIGHT]_CAN_ID DoorMotor FRONT RIGHT = STOP
 2.5s I MESSAGE_PERIOD N DOOR_MOTOR_COMMAND_[BACK][LEFT]_CAN_ID DoorMotor BACK LEFT = STOP
@@ -72,23 +74,28 @@
 
 2.5s I MESSAGE_PERIOD N AT_FLOOR_[3][FRONT]_CAN_ID AtFloor 3 FRONT = true
 
-;check Drive is SLOW UP, mDrive is SLOW UP and STATE is SLOW_UP
-3.3s A F Drive : speed == SLOW
+;check Drive is FAST UP, mDrive is FAST UP and STATE is FAST_UP
+3.3s A F Drive : speed == FAST
 3.3s A F Drive : direction == UP
-3.3s A N DRIVE_COMMAND_CAN_ID DriveCommand : getSpeed == SLOW
+3.3s A N DRIVE_COMMAND_CAN_ID DriveCommand : getSpeed == FAST
 3.3s A N DRIVE_COMMAND_CAN_ID DriveCommand : getDirection == UP
-3.3s A S DriveControl : STATE == SLOW_UP
+3.3s A S DriveControl : STATE == FAST_UP
+
+;set conditins for T6.12
+3.5s I MESSAGE_PERIOD N CAR_LEVEL_POSITION_CAN_ID CarLevelPosition = 14200
+
+;check Drive is SLOW UP, mDrive is SLOW UP and STATE is SLOW_UP
+3.75s A F Drive : speed == SLOW
+3.75s A F Drive : direction == UP
+3.75s A N DRIVE_COMMAND_CAN_ID DriveCommand : getSpeed == SLOW
+3.75s A N DRIVE_COMMAND_CAN_ID DriveCommand : getDirection == UP
+3.75s A S DriveControl : STATE == SLOW_UP
 
 ;set conditins for T6.4
 4s I MESSAGE_PERIOD N AT_FLOOR_[3][FRONT]_CAN_ID AtFloor 3 FRONT = false
 4s I MESSAGE_PERIOD N AT_FLOOR_[4][FRONT]_CAN_ID AtFloor 4 FRONT = true
 4s I MESSAGE_PERIOD N LEVEL_SENSOR_[UP]_CAN_ID Leveling UP = false
 4s I MESSAGE_PERIOD N LEVEL_SENSOR_[DOWN]_CAN_ID Leveling DOWN = false
-
-;4s I MESSAGE_PERIOD N HOISTWAY_LIMIT_[UP]_CAN_ID HoistwayLimitSensor = true
-;4s I MESSAGE_PERIOD N HOISTWAY_LIMIT_[DOWN]_CAN_ID HoistwayLimitSensor = true
-;4s I MESSAGE_PERIOD N EMERGENCY_BRAKE_CAN_ID Boolean = true
-
 
 ;check Drive is LEVEL UP, mDrive is SLOW UP and STATE is LEVEL UP
 5s A F Drive : speed == LEVEL
@@ -130,7 +137,7 @@
 13s A N DRIVE_COMMAND_CAN_ID DriveCommand : getSpeed == STOP
 13s A S DriveControl : STATE == STOP
 
-;set conditins for T6.7
+;set conditins for (T6.7) T6.13
 14s I MESSAGE_PERIOD N DOOR_MOTOR_COMMAND_[FRONT][LEFT]_CAN_ID DoorMotor FRONT LEFT = STOP
 14s I MESSAGE_PERIOD N DOOR_MOTOR_COMMAND_[FRONT][RIGHT]_CAN_ID DoorMotor FRONT RIGHT = STOP
 14s I MESSAGE_PERIOD N DOOR_MOTOR_COMMAND_[BACK][LEFT]_CAN_ID DoorMotor BACK LEFT = STOP
@@ -145,12 +152,24 @@
 
 14s I MESSAGE_PERIOD N AT_FLOOR_[4][FRONT]_CAN_ID AtFloor 4 FRONT = true
 
-;check Drive is SLOW DOWN, mDrive is SLOW DOWN and STATE is SLOW_DOWN
-15s A F Drive : speed == SLOW
+14s I MESSAGE_PERIOD N CAR_LEVEL_POSITION_CAN_ID CarLevelPosition = 15000
+
+;check Drive is FAST DOWN, mDrive is FAST DOWN and STATE is FAST_DOWN
+15s A F Drive : speed == FAST
 15s A F Drive : direction == DOWN
-15s A N DRIVE_COMMAND_CAN_ID DriveCommand : getSpeed == SLOW
+15s A N DRIVE_COMMAND_CAN_ID DriveCommand : getSpeed == FAST
 15s A N DRIVE_COMMAND_CAN_ID DriveCommand : getDirection == DOWN
-15s A S DriveControl : STATE == SLOW_DOWN
+15s A S DriveControl : STATE == FAST_DOWN
+
+;set conditins for T6.14
+15.2s I MESSAGE_PERIOD N CAR_LEVEL_POSITION_CAN_ID CarLevelPosition = 10800
+
+;check Drive is SLOW DOWN, mDrive is SLOW DOWN and STATE is SLOW_DOWN
+15.5s A F Drive : speed == SLOW
+15.5s A F Drive : direction == DOWN
+15.5s A N DRIVE_COMMAND_CAN_ID DriveCommand : getSpeed == SLOW
+15.5s A N DRIVE_COMMAND_CAN_ID DriveCommand : getDirection == DOWN
+15.5s A S DriveControl : STATE == SLOW_DOWN
 
 ;set conditins for T6.8
 16s I MESSAGE_PERIOD N AT_FLOOR_[3][FRONT]_CAN_ID AtFloor 3 FRONT = true
@@ -176,7 +195,7 @@
 19s A S DriveControl : STATE == STOP
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;Emergencybrake
+;Emergencybrake feature
 ;set conditins for T6.3
 20s I MESSAGE_PERIOD N DOOR_MOTOR_COMMAND_[FRONT][LEFT]_CAN_ID DoorMotor FRONT LEFT = STOP
 20s I MESSAGE_PERIOD N DOOR_MOTOR_COMMAND_[FRONT][RIGHT]_CAN_ID DoorMotor FRONT RIGHT = STOP
@@ -192,12 +211,12 @@
 
 20s I MESSAGE_PERIOD N AT_FLOOR_[3][FRONT]_CAN_ID AtFloor 3 FRONT = true
 
-;check Drive is SLOW UP, mDrive is SLOW UP and STATE is SLOW_UP
-21s A F Drive : speed == SLOW
+;check Drive is FAST UP, mDrive is FAST UP and STATE is FAST_UP
+21s A F Drive : speed == FAST
 21s A F Drive : direction == UP
-21s A N DRIVE_COMMAND_CAN_ID DriveCommand : getSpeed == SLOW
+21s A N DRIVE_COMMAND_CAN_ID DriveCommand : getSpeed == FAST
 21s A N DRIVE_COMMAND_CAN_ID DriveCommand : getDirection == UP
-21s A S DriveControl : STATE == SLOW_UP
+21s A S DriveControl : STATE == FAST_UP
 
 ;set conditins for T6.9
 22s I MESSAGE_PERIOD N EMERGENCY_BRAKE_CAN_ID Boolean = true
@@ -230,12 +249,12 @@
 
 24s I MESSAGE_PERIOD N AT_FLOOR_[3][FRONT]_CAN_ID AtFloor 3 FRONT = true
 
-;check Drive is SLOW DOWN, mDrive is SLOW DOWN and STATE is SLOW_DOWN
-25s A F Drive : speed == SLOW
+;check Drive is FAST DOWN, mDrive is FAST DOWN and STATE is FAST_DOWN
+25s A F Drive : speed == FAST
 25s A F Drive : direction == DOWN
-25s A N DRIVE_COMMAND_CAN_ID DriveCommand : getSpeed == SLOW
+25s A N DRIVE_COMMAND_CAN_ID DriveCommand : getSpeed == FAST
 25s A N DRIVE_COMMAND_CAN_ID DriveCommand : getDirection == DOWN
-25s A S DriveControl : STATE == SLOW_DOWN
+25s A S DriveControl : STATE == FAST_DOWN
 
 ;set conditins for T6.10
 26s I MESSAGE_PERIOD N EMERGENCY_BRAKE_CAN_ID Boolean = true
