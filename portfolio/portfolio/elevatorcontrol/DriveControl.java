@@ -1,14 +1,9 @@
-/*
- 18649 Fall 2013
- Group 17
- Jiang He(jiangh)
- (other names would go here)
- */
 package simulator.elevatorcontrol;
 
 import jSimPack.SimTime;
 import simulator.elevatorcontrol.Utility.AtFloorArray;
 import simulator.elevatorcontrol.Utility.DoorClosedArray;
+import simulator.elevatormodules.CarLevelPositionCanPayloadTranslator;
 import simulator.elevatormodules.HoistwayLimitSensorCanPayloadTranslator;
 import simulator.elevatormodules.LevelingCanPayloadTranslator;
 import simulator.framework.Controller;
@@ -53,10 +48,15 @@ public class DriveControl extends Controller {
 	private ReadableCanMailbox networkHoistwayLimitDown;
 	private HoistwayLimitSensorCanPayloadTranslator mHoistwayLimitDown;
 	
+	// mCarLevelPosition
+	private ReadableCanMailbox networkCarLevelPosition;
+	private CarLevelPositionCanPayloadTranslator mCarLevelPosition;
+	
 	//mAtFloor array
 	private AtFloorArray AtFloor_array;
 	private DoorClosedArray DoorClosed_front_array;
 	private DoorClosedArray DoorClosed_back_array;
+	
 	//mLevel
 	private ReadableCanMailbox networkLevelUp;
 	private LevelingCanPayloadTranslator mLevelUp;
@@ -89,10 +89,12 @@ public class DriveControl extends Controller {
 	// private ReadableCanMailbox networkCarWeight;
 	// private CarWeightCanPayloadTranslator mCarWeight;
 	
+	
 	//additional internal state variables
 	private Speed commandSpeed = Speed.STOP; 
 	private Direction desiredDirection = Direction.STOP; 
 	private int currentFloor;
+	private double desiredFloorHeight;
 	
 	private int desiredFloor;
 	
@@ -106,6 +108,8 @@ public class DriveControl extends Controller {
 	  LEVEL_DOWN,
 	  SLOW_UP,
 	  SLOW_DOWN,
+	  FAST_UP,
+	  FAST_DOWN,
 	}
 	
 	//state variable initialized to the initial state STOP
@@ -148,6 +152,11 @@ public class DriveControl extends Controller {
 		mHoistwayLimitDown = new HoistwayLimitSensorCanPayloadTranslator(networkHoistwayLimitDown, Direction.DOWN);
 		canInterface.registerTimeTriggered(networkHoistwayLimitDown);
 		
+		// mCarLevelPosition
+		networkCarLevelPosition = CanMailbox.getReadableCanMailbox(MessageDictionary.CAR_LEVEL_POSITION_CAN_ID);
+		mCarLevelPosition = new CarLevelPositionCanPayloadTranslator(networkCarLevelPosition);
+		canInterface.registerTimeTriggered(networkCarLevelPosition);
+		
 		//mLevel
 		networkLevelUp = CanMailbox.getReadableCanMailbox(MessageDictionary.LEVELING_BASE_CAN_ID + ReplicationComputer.computeReplicationId(Direction.UP));
 		mLevelUp = new LevelingCanPayloadTranslator(networkLevelUp, Direction.UP);
@@ -174,6 +183,7 @@ public class DriveControl extends Controller {
 		mDoorMotorBackRight = new DoorMotorCanPayloadTranslator(networkDoorMotorBackRight, Hallway.BACK, Side.RIGHT);
 		canInterface.registerTimeTriggered(networkDoorMotorBackRight);
 		
+		
 		//mDesiredFloor
 		networkDesiredFloor = CanMailbox.getReadableCanMailbox(MessageDictionary.DESIRED_FLOOR_CAN_ID);
 		mDesiredFloor = new DesiredFloorCanPayloadTranslator(networkDesiredFloor);
@@ -189,6 +199,7 @@ public class DriveControl extends Controller {
 		mDriveSpeed = new DriveSpeedCanPayloadTranslator(networkDriveSpeed);
 		canInterface.sendTimeTriggered(networkDriveSpeed, period);
 		
+		// state variable
 		AtFloor_array = new AtFloorArray(canInterface);
 		DoorClosed_front_array = new DoorClosedArray(Hallway.FRONT, canInterface);
 		DoorClosed_back_array = new DoorClosedArray(Hallway.BACK, canInterface);
@@ -207,6 +218,10 @@ public class DriveControl extends Controller {
 		boolean allDoorClosed;
 		boolean allDoorMotorStop;
 		boolean levelFlag;
+		
+		// 1st floor is 0m. getDesiredFloor is within [1,8]
+		// unit: millimeter
+		desiredFloorHeight = 5000 * (getDesiredFloor() - 1);
 
 		switch (state) {
 			case STOP:
@@ -236,7 +251,7 @@ public class DriveControl extends Controller {
 				 else if (allDoorClosed == false && (mLevelDown.getValue() == false)) {
 						newState = State.LEVEL_DOWN;
 				 }
-//#transition 'T6.7'		 
+//#transition 'T6.7'
 				 else if (allDoorClosed && allDoorMotorStop  == true && (currentFloor != desiredFloor) && desiredDirection == Direction.DOWN) {
 					 newState = State.SLOW_DOWN;
 				 } 
@@ -275,7 +290,7 @@ public class DriveControl extends Controller {
 				 break;
 			case SLOW_UP:
 				 currentFloor = AtFloor_array.getCurrentFloor();
-			     allDoorClosed = DoorClosed_front_array.getBothClosed() && DoorClosed_back_array.getBothClosed();
+			    allDoorClosed = DoorClosed_front_array.getBothClosed() && DoorClosed_back_array.getBothClosed();
 				 allDoorMotorStop = checkAllDoorMotorStop();
 				 levelFlag = mLevelDown.getValue() && mLevelUp.getValue();
 				
@@ -294,6 +309,10 @@ public class DriveControl extends Controller {
 //#transition 'T6.9'
 				 else if(mHoistwayLimitDown.getValue()==true || mHoistwayLimitUp.getValue()==true || mEmergencyBrake.getValue()==true) {
 					  newState = State.STOP;
+				 }
+//#transition 'T6.11'
+				 else if(Math.abs(desiredFloorHeight - (double)mCarLevelPosition.getPosition()) > 1000 && desiredFloor > 0) {
+					newState = State.FAST_UP;
 				 }
 				 else {
 					  newState = state;
@@ -320,11 +339,60 @@ public class DriveControl extends Controller {
 //#transition 'T6.10'
 				 else if(mHoistwayLimitDown.getValue()==true || mHoistwayLimitUp.getValue()==true || mEmergencyBrake.getValue()==true) {
 					  newState = State.STOP;
+				 }
+//#transition 'T6.13'
+				 else if(Math.abs(desiredFloorHeight - (double)mCarLevelPosition.getPosition()) > 1000 && desiredFloor > 0) {
+					newState = State.FAST_DOWN;
 				 }				 
 				 else {
 					  newState = state;
 				 }
 				 break;
+			case FAST_UP:
+				 currentFloor = AtFloor_array.getCurrentFloor();
+			    allDoorClosed = DoorClosed_front_array.getBothClosed() && DoorClosed_back_array.getBothClosed();
+				 allDoorMotorStop = checkAllDoorMotorStop();
+				 levelFlag = mLevelDown.getValue() && mLevelUp.getValue();
+				
+				 //state actions for 'FAST_UP'
+				 desiredDirection = Direction.UP;
+				 desiredFloor = getDesiredFloor();
+				 commandSpeed = Speed.FAST;
+				 localDrive.set(commandSpeed, desiredDirection);
+				 mDrive.set(commandSpeed, desiredDirection);
+				 mDriveSpeed.set(localDriveSpeed.speed(), localDriveSpeed.direction());
+				 
+//#transition 'T6.12'
+				 if ((Math.abs(desiredFloorHeight - (double)mCarLevelPosition.getPosition()) <= 1000 && desiredFloor > 0) || (mHoistwayLimitDown.getValue()==true || mHoistwayLimitUp.getValue()==true || mEmergencyBrake.getValue()==true)) {
+					  newState = State.SLOW_UP;
+				 }
+				 else {
+					  newState = state;
+				 }
+				 break;
+			case FAST_DOWN:
+				 currentFloor = AtFloor_array.getCurrentFloor();
+			    allDoorClosed = DoorClosed_front_array.getBothClosed() && DoorClosed_back_array.getBothClosed();
+				 allDoorMotorStop = checkAllDoorMotorStop();
+				 levelFlag = mLevelDown.getValue() && mLevelUp.getValue();
+				
+				 //state actions for 'FAST_DOWN'
+				 desiredDirection = Direction.DOWN;
+				 desiredFloor = getDesiredFloor();
+				 commandSpeed = Speed.FAST;
+				 localDrive.set(commandSpeed, desiredDirection);
+				 mDrive.set(commandSpeed, desiredDirection);
+				 mDriveSpeed.set(localDriveSpeed.speed(), localDriveSpeed.direction());
+				 
+//#transition 'T6.14'
+				 if ((Math.abs(desiredFloorHeight - (double)mCarLevelPosition.getPosition()) <= 1000 && desiredFloor > 0) || (mHoistwayLimitDown.getValue()==true || mHoistwayLimitUp.getValue()==true || mEmergencyBrake.getValue()==true)) {
+					  newState = State.SLOW_DOWN;
+				 }
+				 else {
+					  newState = state;
+				 }
+				 break;
+			
 			default:
 				 throw new RuntimeException("State " + state + " was not recognized.");
 		}
