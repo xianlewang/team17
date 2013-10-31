@@ -3833,8 +3833,6 @@
 		<li>CurrentFloor, is a shorthand notation for the value f of
 			whichever mAtFloor[f, b] is True, if any.&nbsp; If CurrentFloor is
 			invalid it has a mnemonic value of None.</li>
-		<li>NearestFloor, is the floor that is the closest to the current car
-		    level position. At initialization, it is set to 1.</li>	
 		<li>CommitPoint[f](v); v = {Reached, NotReached} calculated based
 			on car's acceleration profile, current speed, and distance from the
 			floor f, to determine whether or not the car can still stop at the
@@ -3851,7 +3849,8 @@
 	direction the Drive is moving. By "close approximation" we mean within
 	stopping distance in the direction of motion.
 	<h3>TIME-TRIGGERED BEHAVIORS:</h3>
-	10.4 &nbsp;&nbsp;&nbsp; CarPositionIndicator shall always be set to NearestFloor.&nbsp;
+	10.4 &nbsp;&nbsp;&nbsp; Whenever any mAtFloor[f, b] is True,
+	CarPositionIndicator shall be commanded to display CurrentFloor.&nbsp;
 	<br> 10.5 &nbsp;&nbsp;&nbsp; mCarPositionIndicator shall always be
 	set to CarPositionIndicator.
 	<br>
@@ -3876,14 +3875,98 @@
 				<td style="vertical-align: top;">T10.1<br>
 				</td>
 				<td style="vertical-align: top;">
-					mCarLevelPosition&nbsp;>&nbsp;2500 <br>
+					mAtFloor[2,BACK]&nbsp;==&nbsp;true <br>
 				</td>
 			</tr>
 			<tr>
 				<td style="vertical-align: top;">T10.2<br>
 				</td>
 				<td style="vertical-align: top;">
-					mCarLevelPosition&nbsp;<=&nbsp;2500 <br>
+					mAtFloor[3,FRONT]&nbsp;==&nbsp;true <br>
+				</td>
+			</tr>
+			<tr>
+				<td style="vertical-align: top;">T10.3<br>
+				</td>
+				<td style="vertical-align: top;">
+					mAtFloor[1,*]&nbsp;==&nbsp;true <br>
+				</td>
+			</tr>
+			<tr>
+				<td style="vertical-align: top;">T10.4<br>
+				</td>
+				<td style="vertical-align: top;">
+					mAtFloor[4,FRONT]&nbsp;==&nbsp;true <br>
+				</td>
+			</tr>
+			<tr>
+				<td style="vertical-align: top;">T10.5<br>
+				</td>
+				<td style="vertical-align: top;">
+					mAtFloor[2,BACK]&nbsp;==&nbsp;true <br>
+				</td>
+			</tr>
+			<tr>
+				<td style="vertical-align: top;">T10.6<br>
+				</td>
+				<td style="vertical-align: top;">
+					mAtFloor[5,FRONT]&nbsp;==&nbsp;true <br>
+				</td>
+			</tr>
+			<tr>
+				<td style="vertical-align: top;">T10.7<br>
+				</td>
+				<td style="vertical-align: top;">
+					mAtFloor[3,FRONT]&nbsp;==&nbsp;true <br>
+				</td>
+			</tr>
+			<tr>
+				<td style="vertical-align: top;">T10.8<br>
+				</td>
+				<td style="vertical-align: top;">
+					mAtFloor[6,FRONT]&nbsp;==&nbsp;true <br>
+				</td>
+			</tr>
+			<tr>
+				<td style="vertical-align: top;">T10.9<br>
+				</td>
+				<td style="vertical-align: top;">
+					mAtFloor[4,FRONT]&nbsp;==&nbsp;true <br>
+				</td>
+			</tr>
+			<tr>
+				<td style="vertical-align: top;">T10.10<br>
+				</td>
+				<td style="vertical-align: top;">
+					mAtFloor[7,*]&nbsp;==&nbsp;true <br>
+				</td>
+			</tr>
+			<tr>
+				<td style="vertical-align: top;">T10.11<br>
+				</td>
+				<td style="vertical-align: top;">
+					mAtFloor[5,FRONT]&nbsp;==&nbsp;true <br>
+				</td>
+			</tr>
+			<tr>
+				<td style="vertical-align: top;">T10.12<br>
+				</td>
+				<td style="vertical-align: top;">
+					mAtFloor[8,FRONT]&nbsp;==&nbsp;true <br>
+				</td>
+			</tr>
+			<tr>
+				<td style="vertical-align: top;">T10.13<br>
+				</td>
+				<td style="vertical-align: top;">
+					mAtFloor[6,FRONT]&nbsp;==&nbsp;true <br>
+				</td>
+			</tr>
+			<tr>
+				<td style="vertical-align: top;">T10.14<br>
+				</td>
+				<td style="vertical-align: top;">
+					mAtFloor[7,*]&nbsp;==&nbsp;true <br>
 				</td>
 			</tr>
 		</tbody>
@@ -3906,20 +3989,61 @@
 				</td>
 			</tr>
 			<tr>
-				<td style="vertical-align: top;">State 10.1: Initial<br>
+				<td style="vertical-align: top;">State 10.1: First<br>
 				</td>
-				<td style="vertical-align: top;">X<br></td>
+				<td style="vertical-align: top;"><br></td>
 				<td style="vertical-align: top;">X<br>
 				</td>
 			</tr>
 			<tr>
-				<td style="vertical-align: top;">State 10.2: Floor<br>
+				<td style="vertical-align: top;">State 10.2: Second<br>
 				</td>
-				<td style="vertical-align: top;">X<br></td>
+				<td style="vertical-align: top;"><br></td>
 				<td style="vertical-align: top;">X<br>
 				</td>
 			</tr>
-			
+			<tr>
+				<td style="vertical-align: top;">State 10.3: Third<br>
+				</td>
+				<td style="vertical-align: top;"><br></td>
+				<td style="vertical-align: top;">X<br>
+				</td>
+			</tr>
+			<tr>
+				<td style="vertical-align: top;">State 10.4: Fourth<br>
+				</td>
+				<td style="vertical-align: top;"><br></td>
+				<td style="vertical-align: top;">X<br>
+				</td>
+			</tr>
+			<tr>
+				<td style="vertical-align: top;">State 10.5: Fifth<br>
+				</td>
+				<td style="vertical-align: top;"><br></td>
+				<td style="vertical-align: top;">X<br>
+				</td>
+			</tr>
+			<tr>
+				<td style="vertical-align: top;">State 10.6: Sixth<br>
+				</td>
+				<td style="vertical-align: top;"><br></td>
+				<td style="vertical-align: top;">X<br>
+				</td>
+			</tr>
+			<tr>
+				<td style="vertical-align: top;">State 10.7: Seventh<br>
+				</td>
+				<td style="vertical-align: top;"><br></td>
+				<td style="vertical-align: top;">X<br>
+				</td>
+			</tr>
+			<tr>
+				<td style="vertical-align: top;">State 10.8: Eighth<br>
+				</td>
+				<td style="vertical-align: top;"><br></td>
+				<td style="vertical-align: top;">X<br>
+				</td>
+			</tr>
 			<tr>
 				<td style="vertical-align: top;"><b>Transitions</b><br></td>
 				<td style="vertical-align: top;">10.4<br>
@@ -3941,7 +4065,90 @@
 				</td>
 				<td style="vertical-align: top;"><br></td>
 			</tr>
-			
+			<tr>
+				<td style="vertical-align: top;">T10.3 <br>
+				</td>
+				<td style="vertical-align: top;">X<br>
+				</td>
+				<td style="vertical-align: top;"><br></td>
+			</tr>
+			<tr>
+				<td style="vertical-align: top;">T10.4 <br>
+				</td>
+				<td style="vertical-align: top;">X<br>
+				</td>
+				<td style="vertical-align: top;"><br></td>
+			</tr>
+			<tr>
+				<td style="vertical-align: top;">T10.5 <br>
+				</td>
+				<td style="vertical-align: top;">X<br>
+				</td>
+				<td style="vertical-align: top;"><br></td>
+			</tr>
+			<tr>
+				<td style="vertical-align: top;">T10.6 <br>
+				</td>
+				<td style="vertical-align: top;">X<br>
+				</td>
+				<td style="vertical-align: top;"><br></td>
+			</tr>
+			<tr>
+				<td style="vertical-align: top;">T10.7 <br>
+				</td>
+				<td style="vertical-align: top;">X<br>
+				</td>
+				<td style="vertical-align: top;"><br></td>
+			</tr>
+			<tr>
+				<td style="vertical-align: top;">T10.8 <br>
+				</td>
+				<td style="vertical-align: top;">X<br>
+				</td>
+				<td style="vertical-align: top;"><br></td>
+			</tr>
+			<tr>
+				<td style="vertical-align: top;">T10.9 <br>
+				</td>
+				<td style="vertical-align: top;">X<br>
+				</td>
+				<td style="vertical-align: top;"><br></td>
+			</tr>
+			<tr>
+				<td style="vertical-align: top;">T10.10 <br>
+				</td>
+				<td style="vertical-align: top;">X<br>
+				</td>
+				<td style="vertical-align: top;"><br></td>
+			</tr>
+			<tr>
+				<td style="vertical-align: top;">T10.11 <br>
+				</td>
+				<td style="vertical-align: top;">X<br>
+				</td>
+				<td style="vertical-align: top;"><br></td>
+			</tr>
+			<tr>
+				<td style="vertical-align: top;">T10.12 <br>
+				</td>
+				<td style="vertical-align: top;">X<br>
+				</td>
+				<td style="vertical-align: top;"><br></td>
+			</tr>
+			<tr>
+				<td style="vertical-align: top;">T10.13 <br>
+				</td>
+				<td style="vertical-align: top;">X<br>
+				</td>
+				<td style="vertical-align: top;"><br></td>
+			</tr>
+			<tr>
+				<td style="vertical-align: top;">T10.14 <br>
+				</td>
+				<td style="vertical-align: top;">X<br>
+				</td>
+				<td style="vertical-align: top;"><br></td>
+			</tr>
 		</tbody>
 	</table>
 
