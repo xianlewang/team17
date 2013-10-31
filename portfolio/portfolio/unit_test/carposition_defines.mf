@@ -4,18 +4,7 @@
 ; carposition_defines.mf
 
 ;can id used
-#DEFINE AT_FLOOR_1F_CAN_ID                     0xC4C2800
-#DEFINE AT_FLOOR_1B_CAN_ID                     0xC4C2801
-#DEFINE AT_FLOOR_2B_CAN_ID                     0xC4C2803
-#DEFINE AT_FLOOR_3F_CAN_ID                     0xC4C2804
-#DEFINE AT_FLOOR_4F_CAN_ID                     0xC4C2806
-#DEFINE AT_FLOOR_5F_CAN_ID                     0xC4C2808
-#DEFINE AT_FLOOR_6F_CAN_ID                     0xC4C280A
-#DEFINE AT_FLOOR_7F_CAN_ID                     0xC4C280C
-#DEFINE AT_FLOOR_7B_CAN_ID                     0xC4C280D
-#DEFINE AT_FLOOR_8F_CAN_ID                     0xC4C280E
-
-#DEFINE DESIRED_FLOOR_CAN_ID                       0xF0CB600
 #DEFINE CAR_LEVEL_POSITION_CAN_ID                  0xCB03C00
+
 ;message period
 #DEFINE MESSAGE_PERIOD 50ms

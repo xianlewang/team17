@@ -140,9 +140,9 @@ include all information listed in the project handouts.<br>
       </td>
       <td style="vertical-align: top;"><a href="carpositioncontrol.cf">carpositioncontrol.cf</a></td>
       <td style="vertical-align: top;"><a href="carpositioncontrol_test1.mf">carpositioncontrol_test1.mf</a></td>
-      <td style="vertical-align: top;">State numbers 2 / Transition numbers 2<br>
+      <td style="vertical-align: top;">State numbers 8 / Transition numbers 14<br>
       </td>
-      <td style="vertical-align: top;">6<br>
+      <td style="vertical-align: top;">30<br>
       </td>
       <td style="vertical-align: top;">0<br>
       </td>
