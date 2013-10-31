@@ -31,6 +31,9 @@ public class DoorControl extends Controller {
         BEFORE_OPEN,
         OPENED,
         CLOSING,
+        REVERSE_OPEN,
+        REVERSE_OPENED,
+        REVERSE_CLOSING,
     }
     // (in ms) how often this module should send out messages
     private final SimTime period;
@@ -155,8 +158,10 @@ public class DoorControl extends Controller {
 				}
 				break;
 			case CLOSING:
-				door_motor.set(DoorCommand.NUDGE);
-				mDoorMotor.setDoorCommand(DoorCommand.NUDGE);
+				desFloor = mDesiredFloor.getFloor(); 
+				curFloor = mAtFloor_array.getCurrentFloor();
+				door_motor.set(DoorCommand.CLOSE);
+				mDoorMotor.setDoorCommand(DoorCommand.CLOSE);
 				countdown = 0;
 //#transition 'T 5.4'
 				if (mDoorClosed.getValue()) {
@@ -168,12 +173,66 @@ public class DoorControl extends Controller {
 				}
 //#transition 'T 5.7'
 				else if (mDoorReversal.getValue() && mAtFloor_array.isAtFloor(mAtFloor_array.getCurrentFloor(), hallway)) {
+					nextState = State.REVERSE_OPEN;
+				}
+//#transition 'T 5.13'
+				else if (curFloor == desFloor && mAtFloor_array.isAtFloor(curFloor, hallway)) {
 					nextState = State.BEFORE_OPEN;
 				}
 				else {
 					nextState = currentState;
 				}
 				break;
+			case REVERSE_OPEN:
+				door_motor.set(DoorCommand.OPEN);
+				mDoorMotor.setDoorCommand(DoorCommand.OPEN);
+				countdown = Dwell;
+//#transition 'T 5.8'
+				if (mDoorOpened.getValue()) {
+					nextState = State.REVERSE_OPENED;
+				} else {
+					nextState = currentState;
+				}
+				break;
+			case REVERSE_OPENED:
+				door_motor.set(DoorCommand.STOP);
+				mDoorMotor.setDoorCommand(DoorCommand.STOP);
+				if (countdown > 0) {
+					nextState = currentState;
+					countdown -= 1;
+				}
+//#transition 'T 5.9'
+				else {
+					nextState = State.REVERSE_CLOSING;
+				}
+				break;
+			case REVERSE_CLOSING:
+				desFloor = mDesiredFloor.getFloor(); 
+				curFloor = mAtFloor_array.getCurrentFloor();
+				countdown = 0;
+				door_motor.set(DoorCommand.NUDGE);
+				mDoorMotor.setDoorCommand(DoorCommand.NUDGE);
+//#transition 'T 5.10'
+				if (mDoorClosed.getValue()) {
+					nextState = State.CLOSED;
+				}
+//#transition 'T 5.11'
+				else if (mDoorReversal.getValue() && mAtFloor_array.isAtFloor(mAtFloor_array.getCurrentFloor(), hallway)) {
+					nextState = State.REVERSE_OPEN;
+				}
+//#transition 'T 5.12'
+				else if (mCarWeight.getWeight() >= MAX_Weight && mAtFloor_array.isAtFloor(mAtFloor_array.getCurrentFloor(), hallway)) {
+					nextState = State.BEFORE_OPEN;
+				}
+//#transition 'T 5.14'
+				else if (curFloor == desFloor && mAtFloor_array.isAtFloor(curFloor, hallway)) {
+					nextState = State.BEFORE_OPEN;
+				}
+				else {
+					nextState = currentState;
+				}
+				break;
+				
 			default:
 				throw new RuntimeException("State " + currentState + " wasn't recognized");
 		}
