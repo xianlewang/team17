@@ -4,12 +4,15 @@
  */
 package simulator.elevatorcontrol;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 import simulator.elevatormodules.AtFloorCanPayloadTranslator;
 import simulator.elevatormodules.CarLevelPositionCanPayloadTranslator;
 import simulator.elevatormodules.DoorClosedCanPayloadTranslator;
 import simulator.payloads.CANNetwork;
+import simulator.framework.Direction;
 import simulator.framework.Elevator;
 import simulator.framework.Hallway;
 import simulator.framework.Harness;
@@ -17,6 +20,7 @@ import simulator.framework.ReplicationComputer;
 import simulator.framework.Side;
 import simulator.payloads.CanMailbox;
 import simulator.payloads.CanMailbox.ReadableCanMailbox;
+import simulator.payloads.translators.BooleanCanPayloadTranslator;
 
 /**
  * This class provides some example utility classes that might be useful in more
@@ -125,6 +129,133 @@ public class Utility {
                 }
             }
             return retval;
+        }
+    }
+    
+    public static class CallArray {
+
+        HashMap<Integer, BooleanCanPayloadTranslator> carCallArray = new HashMap<Integer, BooleanCanPayloadTranslator>();
+        HashMap<Integer, BooleanCanPayloadTranslator> hallCallArray = new HashMap<Integer, BooleanCanPayloadTranslator>();
+        List<Integer> carIndexList = new ArrayList<Integer>();
+        List<Integer> hallIndexList = new ArrayList<Integer>();
+
+        public CallArray(CANNetwork.CanConnection conn) {
+            // ini car call
+            for (Hallway b : Hallway.replicationValues) {
+
+                for (int f = 1; f <= 8; ++f) {
+                    int index = ReplicationComputer.computeReplicationId(f, b);
+                    carIndexList.add(index);
+                    ReadableCanMailbox m = CanMailbox
+                            .getReadableCanMailbox(MessageDictionary.CAR_CALL_BASE_CAN_ID
+                                    + index);
+                    BooleanCanPayloadTranslator t = new BooleanCanPayloadTranslator(
+                            m);
+                    conn.registerTimeTriggered(m);
+                    carCallArray.put(index, t);
+                }
+            }
+
+            // ini hall call
+            for (Hallway b : Hallway.replicationValues) {
+                for (Direction d : Direction.replicationValues) {
+                    for (int f = 1; f <= 8; ++f) {
+                        int index = ReplicationComputer.computeReplicationId(f,
+                                b, d);
+                        hallIndexList.add(index);
+
+                        ReadableCanMailbox m = CanMailbox
+                                .getReadableCanMailbox(MessageDictionary.HALL_CALL_BASE_CAN_ID
+                                        + index);
+                        BooleanCanPayloadTranslator t = new BooleanCanPayloadTranslator(
+                                m);
+                        conn.registerTimeTriggered(m);
+                        hallCallArray.put(index, t);
+                    }
+                }
+            }
+        }
+
+        public int size() {
+            int sum = 0;
+            for (int i : carIndexList) {
+                if (carCallArray.get(i).getValue()) {
+                    ++sum;
+                }
+            }
+            for (int i : hallIndexList) {
+                if (hallCallArray.get(i).getValue()) {
+                    ++sum;
+                }
+            }
+            return sum;
+        }
+
+        public boolean isCalled(int f, Direction d) {
+            //System.out.println("is called? "+f+d);
+            int iCarFront = ReplicationComputer.computeReplicationId(f,
+                    Hallway.FRONT);
+            int iCarBack = ReplicationComputer.computeReplicationId(f,
+                    Hallway.BACK);
+            if (carCallArray.get(iCarFront).getValue()
+                    || carCallArray.get(iCarBack).getValue()) {
+                return true;
+            }
+            int iHallFront = ReplicationComputer.computeReplicationId(f,
+                    Hallway.FRONT, d);
+            int iHallBack = ReplicationComputer.computeReplicationId(f,
+                    Hallway.BACK, d);
+            if (hallCallArray.get(iHallFront).getValue()
+                    || hallCallArray.get(iHallBack).getValue()) {
+                return true;
+            }
+            return false;
+        }
+        public boolean isCalled(int f, Direction d, Hallway b) {
+            int iCar = ReplicationComputer.computeReplicationId(f,
+                    b);
+
+            if (carCallArray.get(iCar).getValue()) {
+                return true;
+            }
+            
+            int iHall = ReplicationComputer.computeReplicationId(f,
+                    b, d);
+            if (hallCallArray.get(iHall).getValue()) {
+                return true;
+            }
+            return false;
+        }
+
+        public Hallway getHallway(int f, Direction d) {
+            int front = 0;
+            int back = 0;
+            int iCarFront = ReplicationComputer.computeReplicationId(f,
+                    Hallway.FRONT);
+            int iCarBack = ReplicationComputer.computeReplicationId(f,
+                    Hallway.BACK);
+            if (carCallArray.get(iCarFront).getValue())
+                front = 1;
+            if (carCallArray.get(iCarBack).getValue())
+                back = 1;
+
+            int iHallFront = ReplicationComputer.computeReplicationId(f,
+                    Hallway.FRONT, d);
+            int iHallBack = ReplicationComputer.computeReplicationId(f,
+                    Hallway.BACK, d);
+            if (hallCallArray.get(iHallFront).getValue())
+                front = 1;
+            if (hallCallArray.get(iHallBack).getValue())
+                back = 1;
+            
+            if(front==1&&back==1)
+                return Hallway.BOTH;
+            else if(front==1){
+                return Hallway.FRONT;
+            }else if(back==1){
+                return Hallway.BACK;
+            }
+            return Hallway.NONE;
         }
     }
 }
