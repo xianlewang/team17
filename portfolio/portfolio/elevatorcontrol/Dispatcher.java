@@ -5,15 +5,24 @@ Xianle Wang(xianlew)
 (other names would go here)
  */
 package simulator.elevatorcontrol;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
+
 import jSimPack.SimTime;
 import simulator.elevatorcontrol.Utility.AtFloorArray;
 import simulator.elevatorcontrol.Utility.DoorClosedArray;
+import simulator.elevatorcontrol.Utility.CallArray;
+import simulator.elevatormodules.CarLevelPositionCanPayloadTranslator;
 import simulator.framework.Controller;
 import simulator.framework.Direction;
-import simulator.framework.Elevator;
 import simulator.framework.Hallway;
 import simulator.framework.ReplicationComputer;
+import simulator.framework.Speed;
 import simulator.payloads.CanMailbox;
+import simulator.payloads.CanMailbox.ReadableCanMailbox;
 import simulator.payloads.CanMailbox.WriteableCanMailbox;
 import simulator.payloads.translators.IntegerCanPayloadTranslator;
 
@@ -25,23 +34,27 @@ public class Dispatcher extends Controller {
 	// note that inputs are Readable objects, while outputs are Writeable
 	// objects
 
-	//mDoorClosed
-	private DoorClosedArray doorClosedFront = new DoorClosedArray(Hallway.FRONT, canInterface);
-	private DoorClosedArray doorClosedBack = new DoorClosedArray(Hallway.BACK, canInterface);
-	
-	// send mDesiredFloor message
+	// mDoorClosed
+	private DoorClosedArray doorClosedFront = new DoorClosedArray(
+			Hallway.FRONT, canInterface);
+	private DoorClosedArray doorClosedBack = new DoorClosedArray(Hallway.BACK,
+			canInterface);
+	// mCarLevelPosition
+	private ReadableCanMailbox networkCarLevelPosition;
+	private CarLevelPositionCanPayloadTranslator mCarLevelPosition;
+	// mDriveSpeed
+	private ReadableCanMailbox networkDriveSpeed;
+	private DriveSpeedCanPayloadTranslator mDriveSpeed;
+	// mDesiredFloor message
 	private WriteableCanMailbox networkDesiredFloor;
-	// translator for the at floor message
 	private DesiredFloorCanPayloadTranslator mDesiredFloor;
 
 	// send mDesiredDwell_b message
 	private WriteableCanMailbox networkDesiredDwell_b;
-	// translator for the at floor message
 	private IntegerCanPayloadTranslator mDesiredDwell_b;
 
 	// send mDesiredDwell_b message
 	private WriteableCanMailbox networkDesiredDwell_f;
-	// translator for the at floor message
 	private IntegerCanPayloadTranslator mDesiredDwell_f;
 
 	// store the period for the controller
@@ -54,16 +67,17 @@ public class Dispatcher extends Controller {
 	private int target = 1;
 	private Hallway desiredHallway = null;
 	private AtFloorArray atFloorArray = null;
-
 	private int dwell = 1000;
-    private Direction lastDir = Direction.STOP;
+	private Direction desiredDir = Direction.STOP;
+	private Direction targetDir = Direction.STOP;
+	private CallArray callArray;
 	// enumerate states
 	private enum State {
-		MOVE, EMERGENCY_MOVE, HOLD
+		OPERATING, EMERGENCY, IDLE
 	}
 
 	// state variable initialized to the initial state FLASH_OFF
-	private State state = State.HOLD;
+	private State state = State.IDLE;
 
 	/**
 	 * For your elevator controllers, you should make sure that the constructor
@@ -77,69 +91,61 @@ public class Dispatcher extends Controller {
 		this.period = period;
 		this.numFloors = numFloors;
 
-		/*
-		 * The log() method is inherited from the Controller class. It takes an
-		 * array of objects which will be converted to strings and concatenated
-		 * only if the log message is actually written.
-		 * 
-		 * For performance reasons, call with comma-separated lists, e.g.:
-		 * log("object=",object); Do NOT call with concatenated objects like:
-		 * log("object=" + object);
-		 */
 		log("Created DispatcherControl with period = ", period);
-
+		callArray = new CallArray(canInterface);
 		/*
 		 * mDesiredFloor
 		 */
-		// initialize network interface
 		networkDesiredFloor = CanMailbox
 				.getWriteableCanMailbox(MessageDictionary.DESIRED_FLOOR_CAN_ID);
-		// initialize a translator
 		mDesiredFloor = new DesiredFloorCanPayloadTranslator(
 				networkDesiredFloor);
-		// register with network interface to receive periodic update
 		canInterface.sendTimeTriggered(networkDesiredFloor, period);
 
 		/*
 		 * mDesiredDwell_b
 		 */
-		// initialize network interface
 		networkDesiredDwell_b = CanMailbox
 				.getWriteableCanMailbox(MessageDictionary.DESIRED_DWELL_BASE_CAN_ID
 						+ ReplicationComputer
 								.computeReplicationId(Hallway.BACK));
-		// initialize a translator
 		mDesiredDwell_b = new IntegerCanPayloadTranslator(networkDesiredDwell_b);
-		// register with network interface to send periodic update
 		canInterface.sendTimeTriggered(networkDesiredDwell_b, period);
+		/*
+		 * mCarLevelPosition
+		 */
+		networkCarLevelPosition = CanMailbox
+				.getReadableCanMailbox(MessageDictionary.CAR_LEVEL_POSITION_CAN_ID);
+		mCarLevelPosition = new CarLevelPositionCanPayloadTranslator(
+				networkCarLevelPosition);
+		canInterface.registerTimeTriggered(networkCarLevelPosition);
 
 		// currentFloor
 		atFloorArray = new AtFloorArray(canInterface);
 		currentFloor = atFloorArray.getCurrentFloor();
 
 		/*
+		 * mDriveSpeed
+		 */
+		networkDriveSpeed = CanMailbox
+				.getReadableCanMailbox(MessageDictionary.DRIVE_SPEED_CAN_ID);
+		mDriveSpeed = new DriveSpeedCanPayloadTranslator(networkDriveSpeed);
+		canInterface.registerTimeTriggered(networkDriveSpeed);
+
+		/*
 		 * mDesiredDwell_f
 		 */
-		// initialize network interface
 		networkDesiredDwell_f = CanMailbox
 				.getWriteableCanMailbox(MessageDictionary.DESIRED_DWELL_BASE_CAN_ID
 						+ ReplicationComputer
 								.computeReplicationId(Hallway.FRONT));
-		// initialize a translator
 		mDesiredDwell_f = new IntegerCanPayloadTranslator(networkDesiredDwell_f);
-		// register with network interface to send periodic update
 		canInterface.sendTimeTriggered(networkDesiredDwell_f, period);
 
 		// currentFloor
 		atFloorArray = new AtFloorArray(canInterface);
 		currentFloor = atFloorArray.getCurrentFloor();
 
-		/*
-		 * issuing the timer start method with no callback data means a NULL
-		 * value will be passed to the callback later. Use the callback data to
-		 * distinguish callbacks from multiple calls to timer.start() (e.g. if
-		 * you have multiple timers.
-		 */
 		timer.start(period);
 	}
 
@@ -153,41 +159,41 @@ public class Dispatcher extends Controller {
 	public void timerExpired(Object callbackData) {
 		State newState = state;
 		switch (state) {
-		case HOLD:
+		case IDLE:
 			// state var
 			currentFloor = atFloorArray.getCurrentFloor();
-			setDesiredHallway();
-
 			// state actions for 'HOLD'
-			mDesiredFloor.set(target, lastDir, desiredHallway);
+			mDesiredFloor.set(currentFloor, Direction.STOP, Hallway.NONE);
 			mDesiredDwell_b.set(dwell);
 			mDesiredDwell_f.set(dwell);
-// #transition 'T11.1'
+			//System.out.println("---callArray.size= "+callArray.size());
+// #transition 'T11.4'
 			if (atFloorArray.getCurrentFloor() == MessageDictionary.NONE
-					&& !(doorClosedBack.getBothClosed() && doorClosedFront.getBothClosed())) {
-				newState = State.EMERGENCY_MOVE;
-// #transition 'T11.3'
-			} else if (atFloorArray.getCurrentFloor() == mDesiredFloor
-					.getFloor()
-					&& !(doorClosedBack.getBothClosed() && doorClosedFront.getBothClosed())) {
-				newState = State.MOVE;
+					&& !(doorClosedBack.getBothClosed() && doorClosedFront
+							.getBothClosed())) {
+				newState = State.EMERGENCY;
+			} else if (callArray.size() > 0) {
+// #transition 'T11.1'
+				newState = State.OPERATING;
 			}
 			break;
-		case MOVE:
+		case OPERATING:
 			// state var
 			currentFloor = atFloorArray.getCurrentFloor();
-			setDesiredHallway();
-			// state actions for 'HOLD'
-			target = currentFloor % numFloors + 1;
-            lastDir = getDesiredDirectoin();
-			mDesiredFloor.set(target, getDesiredDirectoin(), desiredHallway);
-
+			target = getTarget();
+			// state actions for 'OPERATING'
+			mDesiredFloor.set(target, desiredDir, desiredHallway);
+// #transition 'T11.3'
+			if (atFloorArray.getCurrentFloor() == MessageDictionary.NONE
+					&& !(doorClosedBack.getBothClosed() && doorClosedFront
+							.getBothClosed())) {
+				newState = State.EMERGENCY;
+			} else if (callArray.size() == 0) {
 // #transition 'T11.2'
-			if (currentFloor != target) {
-				newState = State.HOLD;
+				newState = State.IDLE;
 			}
 			break;
-		case EMERGENCY_MOVE:
+		case EMERGENCY:
 			target = 1;
 			mDesiredFloor.set(target, Direction.STOP, Hallway.NONE);
 			break;
@@ -198,9 +204,13 @@ public class Dispatcher extends Controller {
 
 		// log the results of this iteration
 		if (state == newState) {
-			log("remains in state: ", state, ", disiredFloor:d,f,b:  ",mDesiredFloor.getDirection(),mDesiredFloor.getFloor(),mDesiredFloor.getHallway());
+			log("remains in state: ", state, ", disiredFloor:d,f,b:  ",
+					mDesiredFloor.getDirection(), mDesiredFloor.getFloor(),
+					mDesiredFloor.getHallway());
 		} else {
-			log("Transition:", state, "->", newState, "disiredFloor:d,f,b:  ",mDesiredFloor.getDirection(),mDesiredFloor.getFloor(),mDesiredFloor.getHallway());
+			log("Transition:", state, "->", newState, "disiredFloor:d,f,b:  ",
+					mDesiredFloor.getDirection(), mDesiredFloor.getFloor(),
+					mDesiredFloor.getHallway());
 		}
 
 		// update the state variable
@@ -215,29 +225,139 @@ public class Dispatcher extends Controller {
 		timer.start(period);
 	}
 
-	private void setDesiredHallway() {
-		int f = currentFloor;
-		if (f == MessageDictionary.NONE) {
-			desiredHallway = Hallway.NONE;
-			return;
-		}
-		if (atFloorArray.isAtFloor(f, Hallway.FRONT)) {
-			if (atFloorArray.isAtFloor(f, Hallway.BACK)) {
-				desiredHallway = Hallway.BOTH;
-			} else {
-				desiredHallway = Hallway.FRONT;
+	private int getTarget() {
+		Direction tmpDir = getTmpDir();
+		List<Integer> floors = getCommitFloorList(tmpDir);
+		if(tmpDir.equals(Direction.STOP)){// choose any one)
+			for (int i : floors) {
+				if (callArray.isCalled(i, Direction.UP)){
+					desiredHallway = callArray.getHallway(i, Direction.UP);
+					desiredDir = Direction.UP;
+					return i;
+				}else if(callArray.isCalled(i, Direction.DOWN)) {
+					desiredHallway = callArray.getHallway(i, Direction.DOWN);
+					desiredDir = Direction.DOWN;
+					return i;
+				}
 			}
-		} else if (atFloorArray.isAtFloor(f, Hallway.BACK)) {
-			desiredHallway = Hallway.BACK;
-		} else {
-			desiredHallway = Hallway.NONE;
+			return currentFloor;
 		}
+		int sameDirTarget = 9;
+		for (int i : floors) {
+			if (callArray.isCalled(i, tmpDir)) {// choose the nearest
+				if ((tmpDir == Direction.UP && sameDirTarget > i)
+						|| (tmpDir == Direction.DOWN && sameDirTarget < i))
+					sameDirTarget = i;
+			}
+		}
+		if (sameDirTarget != 9) {
+			desiredDir = tmpDir;
+			desiredHallway = callArray.getHallway(sameDirTarget, tmpDir);
+			return sameDirTarget;
+		}
+		// revDirTarget;
+		Direction revDir = reverseDir(tmpDir);
+		int revDirTarget = 9;
+		for (int i : floors) {
+			if (callArray.isCalled(i, tmpDir)) {// choose the farthest
+				if ((tmpDir == Direction.UP && revDirTarget < i)
+						|| (tmpDir == Direction.DOWN && revDirTarget > i))
+					revDirTarget = i;
+			}
+		}
+		if (revDirTarget != 9) {
+			desiredDir = revDir;
+			desiredHallway = callArray.getHallway(revDirTarget, revDir);
+			return revDirTarget;
+		}
+		// no call at the desired direction,
+		throw new RuntimeException(
+				"no call at the desired direction\ndesiredDir = " + desiredDir
+						+ "\ncurr position = "
+						+ mCarLevelPosition.getPosition());
 	}
-	private Direction getDesiredDirectoin(){
-		if(atFloorArray.getCurrentFloor()<Elevator.numFloors){
-			return Direction.UP;
-		}else{
+
+	private Direction getTmpDir() {
+		Direction tmpDir = Direction.STOP;
+		//System.out.println("speed:----------------"+mDriveSpeed.getSpeed()+mDriveSpeed.getDirection());
+		if (mDriveSpeed.getSpeed()>0.1 ) {//!= Speed.LEVEL&& mDriveSpeed.getSpeed() != Speed.STOP
+			tmpDir = mDriveSpeed.getDirection();
+			targetDir = tmpDir;
+			//System.out.println("-----set to "+tmpDir);
+		} else {
+			//System.out.println("read dir "+targetDir);
+			tmpDir = targetDir;
+		}
+		return tmpDir;
+	}
+
+	private Direction reverseDir(Direction tmpDir) {
+		if (tmpDir.equals(Direction.UP)) {
 			return Direction.DOWN;
 		}
+		if (tmpDir.equals(Direction.UP)) {
+			return Direction.DOWN;
+		}
+		return Direction.STOP;
 	}
+
+	private List<Integer> getCommitFloorList(Direction tmpDir) {
+		List<Integer> out = new ArrayList<Integer>();
+		int pos = mCarLevelPosition.getPosition();
+		int dist = 0;
+		double speed = mDriveSpeed.getSpeed();
+		if (speed>0.8) {
+			dist = 1000;
+		} else {
+			dist = 0;
+		}
+		if (tmpDir.equals(Direction.DOWN)) {
+			int tmp = pos - dist;
+			//System.out.println("commit point: " + tmp);
+
+			for (int i = 1; i * 5000 - 50 <= tmp; ++i) {
+				out.add(i);
+			}
+		} else if (tmpDir.equals(Direction.UP)) {
+			int tmp = pos + dist;
+			//System.out.println("commit point: " + tmp);
+
+			for (int i = 8; (i * 5000 + 50 >= tmp)&&i>0; --i) {
+				out.add(i);
+			}
+		} else {
+			for (int i = 1; i <= 8; ++i) {
+				out.add(i);
+			}
+		}
+		Collections.sort(out);
+		return out;
+	}
+
+//	private void setDesiredHallway() {
+//		int f = currentFloor;
+//		if (f == MessageDictionary.NONE) {
+//			desiredHallway = Hallway.NONE;
+//			return;
+//		}
+//		if (atFloorArray.isAtFloor(f, Hallway.FRONT)) {
+//			if (atFloorArray.isAtFloor(f, Hallway.BACK)) {
+//				desiredHallway = Hallway.BOTH;
+//			} else {
+//				desiredHallway = Hallway.FRONT;
+//			}
+//		} else if (atFloorArray.isAtFloor(f, Hallway.BACK)) {
+//			desiredHallway = Hallway.BACK;
+//		} else {
+//			desiredHallway = Hallway.NONE;
+//		}
+//	}
+//
+//	private Direction getDesiredDirectoin(int target) {
+//		if (atFloorArray.getCurrentFloor() < Elevator.numFloors) {
+//			return Direction.UP;
+//		} else {
+//			return Direction.DOWN;
+//		}
+//	}
 }
