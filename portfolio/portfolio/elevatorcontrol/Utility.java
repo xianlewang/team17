@@ -1,6 +1,8 @@
 /*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
+ 18649 Fall 2013
+ Group 17
+ Shen Yu (sheny)
+ Xianle Wang (xianlew)
  */
 package simulator.elevatorcontrol;
 
