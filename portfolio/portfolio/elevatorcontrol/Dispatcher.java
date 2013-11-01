@@ -162,7 +162,7 @@ public class Dispatcher extends Controller {
 		case IDLE:
 			// state var
 			currentFloor = atFloorArray.getCurrentFloor();
-			// state actions for 'HOLD'
+			// state actions for 'IDLE'
 			mDesiredFloor.set(currentFloor, Direction.STOP, Hallway.NONE);
 			mDesiredDwell_b.set(dwell);
 			mDesiredDwell_f.set(dwell);
@@ -195,6 +195,7 @@ public class Dispatcher extends Controller {
 			break;
 		case EMERGENCY:
 			target = 1;
+            // state actions for 'EMERGENCY'
 			mDesiredFloor.set(target, Direction.STOP, Hallway.NONE);
 			break;
 		default:
