@@ -1,11 +1,6 @@
-; 18649 Fall 2013
-; group 17
-; Xianle Wang(xianlew)
-; dispatcher_test1.stats
-
 Simulator Parameters:
 Command line = -cf dispatcher.cf -mf dispatcher_test1.mf
-RandomSeed = 1381980956153
+RandomSeed = 1383264790681
 CanNetworkBitTime = 0 ns
 Effective Can Bitrate = Infinity
 Run Time = null
@@ -13,25 +8,343 @@ Real time rate = null
 Message File = dispatcher_test1.mf
 Controller File = dispatcher.cf
 
-Assertion Results:
-@0.21s:  PASSED simulator.payloads.CanMailbox$ReadableCanMailbox@9604a9e :: getFloor ?== 1 PASSED
-@0.21s:  PASSED simulator.payloads.CanMailbox$ReadableCanMailbox@65ddc55f :: getDirection ?== STOP PASSED
-@0.21s:  PASSED simulator.payloads.CanMailbox$ReadableCanMailbox@1f4e8ac9 :: getHallway ?== FRONT PASSED
-@0.21s:  PASSED DispatcherControl::checkState(STATE) ?== HOLD PASSED
-@0.21s:  PASSED simulator.payloads.CanMailbox$ReadableCanMailbox@7c298508 :: getValue ?== 1000 PASSED
-@0.56s:  PASSED DispatcherControl::checkState(STATE) ?== MOVE PASSED
-@0.71s:  PASSED simulator.payloads.CanMailbox$ReadableCanMailbox@1b1c7295 :: getFloor ?== 2 PASSED
-@0.71s:  PASSED simulator.payloads.CanMailbox$ReadableCanMailbox@13dc8ea3 :: getDirection ?== UP PASSED
-@0.71s:  PASSED simulator.payloads.CanMailbox$ReadableCanMailbox@19d2052b :: getHallway ?== FRONT PASSED
-@0.71s:  PASSED simulator.payloads.CanMailbox$ReadableCanMailbox@693a1324 :: getValue ?== 1000 PASSED
-@1.01s:  PASSED simulator.payloads.CanMailbox$ReadableCanMailbox@5f18cd5 :: getFloor ?== 1 PASSED
-@1.01s:  PASSED simulator.payloads.CanMailbox$ReadableCanMailbox@5d23fab3 :: getDirection ?== STOP PASSED
-@1.01s:  PASSED simulator.payloads.CanMailbox$ReadableCanMailbox@238df2e4 :: getHallway ?== NONE PASSED
-@1.01s:  PASSED simulator.payloads.CanMailbox$ReadableCanMailbox@70ee90b1 :: getValue ?== 1000 PASSED
 
-
+[DispatcherControl] @0.000000000: Created DispatcherControl with period = 0.05s
+[Elevator] @0.000000000: Starting Simulation ***
+[DispatcherControl] @0.050000000: remains in state: IDLE, disiredFloor:d,f,b:  STOP1NONE
+[DispatcherControl] @0.050000000: State stored: STATE<-IDLE
+[DispatcherControl] @0.100000000: remains in state: IDLE, disiredFloor:d,f,b:  STOP1NONE
+[DispatcherControl] @0.100000000: State stored: STATE<-IDLE
+[DispatcherControl] @0.150000000: remains in state: IDLE, disiredFloor:d,f,b:  STOP1NONE
+[DispatcherControl] @0.150000000: State stored: STATE<-IDLE
+[DispatcherControl] @0.200000000: remains in state: IDLE, disiredFloor:d,f,b:  STOP1NONE
+[DispatcherControl] @0.200000000: State stored: STATE<-IDLE
+[AssertionMonitor] @0.210000000: *****************************************************************************************
+[AssertionMonitor] @0.210000000: PASSED simulator.payloads.CanMailbox$ReadableCanMailbox@692a3722 :: getFloor ?== 1 PASSED
+[AssertionMonitor] @0.210000000: *****************************************************************************************
+[AssertionMonitor] @0.210000000: ************************************************************************************************
+[AssertionMonitor] @0.210000000: PASSED simulator.payloads.CanMailbox$ReadableCanMailbox@557ce4e7 :: getDirection ?== STOP PASSED
+[AssertionMonitor] @0.210000000: ************************************************************************************************
+[AssertionMonitor] @0.210000000: **********************************************************************************************
+[AssertionMonitor] @0.210000000: PASSED simulator.payloads.CanMailbox$ReadableCanMailbox@1ac88440 :: getHallway ?== NONE PASSED
+[AssertionMonitor] @0.210000000: **********************************************************************************************
+[AssertionMonitor] @0.210000000: ***********************************************************
+[AssertionMonitor] @0.210000000: PASSED DispatcherControl::checkState(STATE) ?== IDLE PASSED
+[AssertionMonitor] @0.210000000: ***********************************************************
+[AssertionMonitor] @0.210000000: *******************************************************************************************
+[AssertionMonitor] @0.210000000: PASSED simulator.payloads.CanMailbox$ReadableCanMailbox@acfec48 :: getValue ?== 1000 PASSED
+[AssertionMonitor] @0.210000000: *******************************************************************************************
+[DispatcherControl] @0.250000000: remains in state: IDLE, disiredFloor:d,f,b:  STOP1NONE
+[DispatcherControl] @0.250000000: State stored: STATE<-IDLE
+[DispatcherControl] @0.300000000: remains in state: IDLE, disiredFloor:d,f,b:  STOP1NONE
+[DispatcherControl] @0.300000000: State stored: STATE<-IDLE
+[DispatcherControl] @0.350000000: remains in state: IDLE, disiredFloor:d,f,b:  STOP1NONE
+[DispatcherControl] @0.350000000: State stored: STATE<-IDLE
+[DispatcherControl] @0.400000000: remains in state: IDLE, disiredFloor:d,f,b:  STOP1NONE
+[DispatcherControl] @0.400000000: State stored: STATE<-IDLE
+[DispatcherControl] @0.450000000: Transition:IDLE->OPERATINGdisiredFloor:d,f,b:  STOP1NONE
+[DispatcherControl] @0.450000000: State stored: STATE<-OPERATING
+[DispatcherControl] @0.500000000: remains in state: OPERATING, disiredFloor:d,f,b:  DOWN3FRONT
+[DispatcherControl] @0.500000000: State stored: STATE<-OPERATING
+[DispatcherControl] @0.550000000: remains in state: OPERATING, disiredFloor:d,f,b:  DOWN3FRONT
+[DispatcherControl] @0.550000000: State stored: STATE<-OPERATING
+[AssertionMonitor] @0.600000000: *****************************************************************************************
+[AssertionMonitor] @0.600000000: PASSED simulator.payloads.CanMailbox$ReadableCanMailbox@4ca31e1b :: getFloor ?== 3 PASSED
+[AssertionMonitor] @0.600000000: *****************************************************************************************
+[AssertionMonitor] @0.600000000: ************************************************************************************************
+[AssertionMonitor] @0.600000000: PASSED simulator.payloads.CanMailbox$ReadableCanMailbox@7f081d2e :: getDirection ?== DOWN PASSED
+[AssertionMonitor] @0.600000000: ************************************************************************************************
+[AssertionMonitor] @0.600000000: ***********************************************************************************************
+[AssertionMonitor] @0.600000000: PASSED simulator.payloads.CanMailbox$ReadableCanMailbox@42698403 :: getHallway ?== FRONT PASSED
+[AssertionMonitor] @0.600000000: ***********************************************************************************************
+[AssertionMonitor] @0.600000000: ****************************************************************
+[AssertionMonitor] @0.600000000: PASSED DispatcherControl::checkState(STATE) ?== OPERATING PASSED
+[AssertionMonitor] @0.600000000: ****************************************************************
+[DispatcherControl] @0.600000000: remains in state: OPERATING, disiredFloor:d,f,b:  DOWN3FRONT
+[DispatcherControl] @0.600000000: State stored: STATE<-OPERATING
+[DispatcherControl] @0.650000000: remains in state: OPERATING, disiredFloor:d,f,b:  DOWN3FRONT
+[DispatcherControl] @0.650000000: State stored: STATE<-OPERATING
+[DispatcherControl] @0.700000000: remains in state: OPERATING, disiredFloor:d,f,b:  DOWN3FRONT
+[DispatcherControl] @0.700000000: State stored: STATE<-OPERATING
+[DispatcherControl] @0.750000000: remains in state: OPERATING, disiredFloor:d,f,b:  UP2BACK
+[DispatcherControl] @0.750000000: State stored: STATE<-OPERATING
+[DispatcherControl] @0.800000000: remains in state: OPERATING, disiredFloor:d,f,b:  UP2BACK
+[DispatcherControl] @0.800000000: State stored: STATE<-OPERATING
+[DispatcherControl] @0.850000000: remains in state: OPERATING, disiredFloor:d,f,b:  UP2BACK
+[DispatcherControl] @0.850000000: State stored: STATE<-OPERATING
+[DispatcherControl] @0.900000000: remains in state: OPERATING, disiredFloor:d,f,b:  UP2BACK
+[DispatcherControl] @0.900000000: State stored: STATE<-OPERATING
+[DispatcherControl] @0.950000000: remains in state: OPERATING, disiredFloor:d,f,b:  DOWN2BACK
+[DispatcherControl] @0.950000000: State stored: STATE<-OPERATING
+[DispatcherControl] @1.000000000: remains in state: OPERATING, disiredFloor:d,f,b:  DOWN2BACK
+[DispatcherControl] @1.000000000: State stored: STATE<-OPERATING
+[DispatcherControl] @1.050000000: Transition:OPERATING->IDLEdisiredFloor:d,f,b:  DOWN2BACK
+[DispatcherControl] @1.050000000: State stored: STATE<-IDLE
+[DispatcherControl] @1.100000000: remains in state: IDLE, disiredFloor:d,f,b:  STOP2NONE
+[DispatcherControl] @1.100000000: State stored: STATE<-IDLE
+[DispatcherControl] @1.150000000: remains in state: IDLE, disiredFloor:d,f,b:  STOP2NONE
+[DispatcherControl] @1.150000000: State stored: STATE<-IDLE
+[AssertionMonitor] @1.200000000: *****************************************************************************************
+[AssertionMonitor] @1.200000000: PASSED simulator.payloads.CanMailbox$ReadableCanMailbox@60765a16 :: getFloor ?== 2 PASSED
+[AssertionMonitor] @1.200000000: *****************************************************************************************
+[AssertionMonitor] @1.200000000: ************************************************************************************************
+[AssertionMonitor] @1.200000000: PASSED simulator.payloads.CanMailbox$ReadableCanMailbox@5ae80842 :: getDirection ?== STOP PASSED
+[AssertionMonitor] @1.200000000: ************************************************************************************************
+[AssertionMonitor] @1.200000000: **********************************************************************************************
+[AssertionMonitor] @1.200000000: PASSED simulator.payloads.CanMailbox$ReadableCanMailbox@396fe0f4 :: getHallway ?== NONE PASSED
+[AssertionMonitor] @1.200000000: **********************************************************************************************
+[AssertionMonitor] @1.200000000: ***********************************************************
+[AssertionMonitor] @1.200000000: PASSED DispatcherControl::checkState(STATE) ?== IDLE PASSED
+[AssertionMonitor] @1.200000000: ***********************************************************
+[DispatcherControl] @1.200000000: remains in state: IDLE, disiredFloor:d,f,b:  STOP2NONE
+[DispatcherControl] @1.200000000: State stored: STATE<-IDLE
+[DispatcherControl] @1.250000000: remains in state: IDLE, disiredFloor:d,f,b:  STOP2NONE
+[DispatcherControl] @1.250000000: State stored: STATE<-IDLE
+[DispatcherControl] @1.300000000: remains in state: IDLE, disiredFloor:d,f,b:  STOP2NONE
+[DispatcherControl] @1.300000000: State stored: STATE<-IDLE
+[DispatcherControl] @1.350000000: remains in state: IDLE, disiredFloor:d,f,b:  STOP2NONE
+[DispatcherControl] @1.350000000: State stored: STATE<-IDLE
+[DispatcherControl] @1.400000000: remains in state: IDLE, disiredFloor:d,f,b:  STOP2NONE
+[DispatcherControl] @1.400000000: State stored: STATE<-IDLE
+[DispatcherControl] @1.450000000: remains in state: IDLE, disiredFloor:d,f,b:  STOP2NONE
+[DispatcherControl] @1.450000000: State stored: STATE<-IDLE
+[DispatcherControl] @1.500000000: remains in state: IDLE, disiredFloor:d,f,b:  STOP2NONE
+[DispatcherControl] @1.500000000: State stored: STATE<-IDLE
+[DispatcherControl] @1.550000000: Transition:IDLE->EMERGENCYdisiredFloor:d,f,b:  STOP-1NONE
+[DispatcherControl] @1.550000000: State stored: STATE<-EMERGENCY
+[DispatcherControl] @1.600000000: remains in state: EMERGENCY, disiredFloor:d,f,b:  STOP1NONE
+[DispatcherControl] @1.600000000: State stored: STATE<-EMERGENCY
+[DispatcherControl] @1.650000000: remains in state: EMERGENCY, disiredFloor:d,f,b:  STOP1NONE
+[DispatcherControl] @1.650000000: State stored: STATE<-EMERGENCY
+[DispatcherControl] @1.700000000: remains in state: EMERGENCY, disiredFloor:d,f,b:  STOP1NONE
+[DispatcherControl] @1.700000000: State stored: STATE<-EMERGENCY
+[DispatcherControl] @1.750000000: remains in state: EMERGENCY, disiredFloor:d,f,b:  STOP1NONE
+[DispatcherControl] @1.750000000: State stored: STATE<-EMERGENCY
+[DispatcherControl] @1.800000000: remains in state: EMERGENCY, disiredFloor:d,f,b:  STOP1NONE
+[DispatcherControl] @1.800000000: State stored: STATE<-EMERGENCY
+[DispatcherControl] @1.850000000: remains in state: EMERGENCY, disiredFloor:d,f,b:  STOP1NONE
+[DispatcherControl] @1.850000000: State stored: STATE<-EMERGENCY
+[DispatcherControl] @1.900000000: remains in state: EMERGENCY, disiredFloor:d,f,b:  STOP1NONE
+[DispatcherControl] @1.900000000: State stored: STATE<-EMERGENCY
+[DispatcherControl] @1.950000000: remains in state: EMERGENCY, disiredFloor:d,f,b:  STOP1NONE
+[DispatcherControl] @1.950000000: State stored: STATE<-EMERGENCY
+[AssertionMonitor] @2.000000000: *****************************************************************************************
+[AssertionMonitor] @2.000000000: PASSED simulator.payloads.CanMailbox$ReadableCanMailbox@19c247a0 :: getFloor ?== 1 PASSED
+[AssertionMonitor] @2.000000000: *****************************************************************************************
+[AssertionMonitor] @2.000000000: ************************************************************************************************
+[AssertionMonitor] @2.000000000: PASSED simulator.payloads.CanMailbox$ReadableCanMailbox@27431340 :: getDirection ?== STOP PASSED
+[AssertionMonitor] @2.000000000: ************************************************************************************************
+[AssertionMonitor] @2.000000000: **********************************************************************************************
+[AssertionMonitor] @2.000000000: PASSED simulator.payloads.CanMailbox$ReadableCanMailbox@452bb7e0 :: getHallway ?== NONE PASSED
+[AssertionMonitor] @2.000000000: **********************************************************************************************
+[AssertionMonitor] @2.000000000: ****************************************************************
+[AssertionMonitor] @2.000000000: PASSED DispatcherControl::checkState(STATE) ?== EMERGENCY PASSED
+[AssertionMonitor] @2.000000000: ****************************************************************
+[DispatcherControl] @2.000000000: remains in state: EMERGENCY, disiredFloor:d,f,b:  STOP1NONE
+[DispatcherControl] @2.000000000: State stored: STATE<-EMERGENCY
+[DispatcherControl] @2.050000000: remains in state: EMERGENCY, disiredFloor:d,f,b:  STOP1NONE
+[DispatcherControl] @2.050000000: State stored: STATE<-EMERGENCY
+[DispatcherControl] @2.100000000: remains in state: EMERGENCY, disiredFloor:d,f,b:  STOP1NONE
+[DispatcherControl] @2.100000000: State stored: STATE<-EMERGENCY
+[DispatcherControl] @2.150000000: remains in state: EMERGENCY, disiredFloor:d,f,b:  STOP1NONE
+[DispatcherControl] @2.150000000: State stored: STATE<-EMERGENCY
+[DispatcherControl] @2.200000000: remains in state: EMERGENCY, disiredFloor:d,f,b:  STOP1NONE
+[DispatcherControl] @2.200000000: State stored: STATE<-EMERGENCY
+[DispatcherControl] @2.250000000: remains in state: EMERGENCY, disiredFloor:d,f,b:  STOP1NONE
+[DispatcherControl] @2.250000000: State stored: STATE<-EMERGENCY
+[DispatcherControl] @2.300000000: remains in state: EMERGENCY, disiredFloor:d,f,b:  STOP1NONE
+[DispatcherControl] @2.300000000: State stored: STATE<-EMERGENCY
+[DispatcherControl] @2.350000000: remains in state: EMERGENCY, disiredFloor:d,f,b:  STOP1NONE
+[DispatcherControl] @2.350000000: State stored: STATE<-EMERGENCY
+[DispatcherControl] @2.400000000: remains in state: EMERGENCY, disiredFloor:d,f,b:  STOP1NONE
+[DispatcherControl] @2.400000000: State stored: STATE<-EMERGENCY
+[DispatcherControl] @2.450000000: remains in state: EMERGENCY, disiredFloor:d,f,b:  STOP1NONE
+[DispatcherControl] @2.450000000: State stored: STATE<-EMERGENCY
+[DispatcherControl] @2.500000000: remains in state: EMERGENCY, disiredFloor:d,f,b:  STOP1NONE
+[DispatcherControl] @2.500000000: State stored: STATE<-EMERGENCY
+[DispatcherControl] @2.550000000: remains in state: EMERGENCY, disiredFloor:d,f,b:  STOP1NONE
+[DispatcherControl] @2.550000000: State stored: STATE<-EMERGENCY
+[DispatcherControl] @2.600000000: remains in state: EMERGENCY, disiredFloor:d,f,b:  STOP1NONE
+[DispatcherControl] @2.600000000: State stored: STATE<-EMERGENCY
+[DispatcherControl] @2.650000000: remains in state: EMERGENCY, disiredFloor:d,f,b:  STOP1NONE
+[DispatcherControl] @2.650000000: State stored: STATE<-EMERGENCY
+[DispatcherControl] @2.700000000: remains in state: EMERGENCY, disiredFloor:d,f,b:  STOP1NONE
+[DispatcherControl] @2.700000000: State stored: STATE<-EMERGENCY
+[DispatcherControl] @2.750000000: remains in state: EMERGENCY, disiredFloor:d,f,b:  STOP1NONE
+[DispatcherControl] @2.750000000: State stored: STATE<-EMERGENCY
+[DispatcherControl] @2.800000000: remains in state: EMERGENCY, disiredFloor:d,f,b:  STOP1NONE
+[DispatcherControl] @2.800000000: State stored: STATE<-EMERGENCY
+[DispatcherControl] @2.850000000: remains in state: EMERGENCY, disiredFloor:d,f,b:  STOP1NONE
+[DispatcherControl] @2.850000000: State stored: STATE<-EMERGENCY
+[DispatcherControl] @2.900000000: remains in state: EMERGENCY, disiredFloor:d,f,b:  STOP1NONE
+[DispatcherControl] @2.900000000: State stored: STATE<-EMERGENCY
+[DispatcherControl] @2.950000000: remains in state: EMERGENCY, disiredFloor:d,f,b:  STOP1NONE
+[DispatcherControl] @2.950000000: State stored: STATE<-EMERGENCY
+[DispatcherControl] @3.000000000: remains in state: EMERGENCY, disiredFloor:d,f,b:  STOP1NONE
+[DispatcherControl] @3.000000000: State stored: STATE<-EMERGENCY
+[DispatcherControl] @3.050000000: remains in state: EMERGENCY, disiredFloor:d,f,b:  STOP1NONE
+[DispatcherControl] @3.050000000: State stored: STATE<-EMERGENCY
+[DispatcherControl] @3.100000000: remains in state: EMERGENCY, disiredFloor:d,f,b:  STOP1NONE
+[DispatcherControl] @3.100000000: State stored: STATE<-EMERGENCY
+[DispatcherControl] @3.150000000: remains in state: EMERGENCY, disiredFloor:d,f,b:  STOP1NONE
+[DispatcherControl] @3.150000000: State stored: STATE<-EMERGENCY
+[DispatcherControl] @3.200000000: remains in state: EMERGENCY, disiredFloor:d,f,b:  STOP1NONE
+[DispatcherControl] @3.200000000: State stored: STATE<-EMERGENCY
+[DispatcherControl] @3.250000000: remains in state: EMERGENCY, disiredFloor:d,f,b:  STOP1NONE
+[DispatcherControl] @3.250000000: State stored: STATE<-EMERGENCY
+[DispatcherControl] @3.300000000: remains in state: EMERGENCY, disiredFloor:d,f,b:  STOP1NONE
+[DispatcherControl] @3.300000000: State stored: STATE<-EMERGENCY
+[DispatcherControl] @3.350000000: remains in state: EMERGENCY, disiredFloor:d,f,b:  STOP1NONE
+[DispatcherControl] @3.350000000: State stored: STATE<-EMERGENCY
+[DispatcherControl] @3.400000000: remains in state: EMERGENCY, disiredFloor:d,f,b:  STOP1NONE
+[DispatcherControl] @3.400000000: State stored: STATE<-EMERGENCY
+[DispatcherControl] @3.450000000: remains in state: EMERGENCY, disiredFloor:d,f,b:  STOP1NONE
+[DispatcherControl] @3.450000000: State stored: STATE<-EMERGENCY
+[DispatcherControl] @3.500000000: remains in state: EMERGENCY, disiredFloor:d,f,b:  STOP1NONE
+[DispatcherControl] @3.500000000: State stored: STATE<-EMERGENCY
+[DispatcherControl] @3.550000000: remains in state: EMERGENCY, disiredFloor:d,f,b:  STOP1NONE
+[DispatcherControl] @3.550000000: State stored: STATE<-EMERGENCY
+[DispatcherControl] @3.600000000: remains in state: EMERGENCY, disiredFloor:d,f,b:  STOP1NONE
+[DispatcherControl] @3.600000000: State stored: STATE<-EMERGENCY
+[DispatcherControl] @3.650000000: remains in state: EMERGENCY, disiredFloor:d,f,b:  STOP1NONE
+[DispatcherControl] @3.650000000: State stored: STATE<-EMERGENCY
+[DispatcherControl] @3.700000000: remains in state: EMERGENCY, disiredFloor:d,f,b:  STOP1NONE
+[DispatcherControl] @3.700000000: State stored: STATE<-EMERGENCY
+[DispatcherControl] @3.750000000: remains in state: EMERGENCY, disiredFloor:d,f,b:  STOP1NONE
+[DispatcherControl] @3.750000000: State stored: STATE<-EMERGENCY
+[DispatcherControl] @3.800000000: remains in state: EMERGENCY, disiredFloor:d,f,b:  STOP1NONE
+[DispatcherControl] @3.800000000: State stored: STATE<-EMERGENCY
+[DispatcherControl] @3.850000000: remains in state: EMERGENCY, disiredFloor:d,f,b:  STOP1NONE
+[DispatcherControl] @3.850000000: State stored: STATE<-EMERGENCY
+[DispatcherControl] @3.900000000: remains in state: EMERGENCY, disiredFloor:d,f,b:  STOP1NONE
+[DispatcherControl] @3.900000000: State stored: STATE<-EMERGENCY
+[DispatcherControl] @3.950000000: remains in state: EMERGENCY, disiredFloor:d,f,b:  STOP1NONE
+[DispatcherControl] @3.950000000: State stored: STATE<-EMERGENCY
+[DispatcherControl] @4.000000000: remains in state: EMERGENCY, disiredFloor:d,f,b:  STOP1NONE
+[DispatcherControl] @4.000000000: State stored: STATE<-EMERGENCY
+[DispatcherControl] @4.050000000: remains in state: EMERGENCY, disiredFloor:d,f,b:  STOP1NONE
+[DispatcherControl] @4.050000000: State stored: STATE<-EMERGENCY
+[DispatcherControl] @4.100000000: remains in state: EMERGENCY, disiredFloor:d,f,b:  STOP1NONE
+[DispatcherControl] @4.100000000: State stored: STATE<-EMERGENCY
+[DispatcherControl] @4.150000000: remains in state: EMERGENCY, disiredFloor:d,f,b:  STOP1NONE
+[DispatcherControl] @4.150000000: State stored: STATE<-EMERGENCY
+[DispatcherControl] @4.200000000: remains in state: EMERGENCY, disiredFloor:d,f,b:  STOP1NONE
+[DispatcherControl] @4.200000000: State stored: STATE<-EMERGENCY
+[DispatcherControl] @4.250000000: remains in state: EMERGENCY, disiredFloor:d,f,b:  STOP1NONE
+[DispatcherControl] @4.250000000: State stored: STATE<-EMERGENCY
+[DispatcherControl] @4.300000000: remains in state: EMERGENCY, disiredFloor:d,f,b:  STOP1NONE
+[DispatcherControl] @4.300000000: State stored: STATE<-EMERGENCY
+[DispatcherControl] @4.350000000: remains in state: EMERGENCY, disiredFloor:d,f,b:  STOP1NONE
+[DispatcherControl] @4.350000000: State stored: STATE<-EMERGENCY
+[DispatcherControl] @4.400000000: remains in state: EMERGENCY, disiredFloor:d,f,b:  STOP1NONE
+[DispatcherControl] @4.400000000: State stored: STATE<-EMERGENCY
+[DispatcherControl] @4.450000000: remains in state: EMERGENCY, disiredFloor:d,f,b:  STOP1NONE
+[DispatcherControl] @4.450000000: State stored: STATE<-EMERGENCY
+[DispatcherControl] @4.500000000: remains in state: EMERGENCY, disiredFloor:d,f,b:  STOP1NONE
+[DispatcherControl] @4.500000000: State stored: STATE<-EMERGENCY
+[DispatcherControl] @4.550000000: remains in state: EMERGENCY, disiredFloor:d,f,b:  STOP1NONE
+[DispatcherControl] @4.550000000: State stored: STATE<-EMERGENCY
+[DispatcherControl] @4.600000000: remains in state: EMERGENCY, disiredFloor:d,f,b:  STOP1NONE
+[DispatcherControl] @4.600000000: State stored: STATE<-EMERGENCY
+[DispatcherControl] @4.650000000: remains in state: EMERGENCY, disiredFloor:d,f,b:  STOP1NONE
+[DispatcherControl] @4.650000000: State stored: STATE<-EMERGENCY
+[DispatcherControl] @4.700000000: remains in state: EMERGENCY, disiredFloor:d,f,b:  STOP1NONE
+[DispatcherControl] @4.700000000: State stored: STATE<-EMERGENCY
+[DispatcherControl] @4.750000000: remains in state: EMERGENCY, disiredFloor:d,f,b:  STOP1NONE
+[DispatcherControl] @4.750000000: State stored: STATE<-EMERGENCY
+[DispatcherControl] @4.800000000: remains in state: EMERGENCY, disiredFloor:d,f,b:  STOP1NONE
+[DispatcherControl] @4.800000000: State stored: STATE<-EMERGENCY
+[DispatcherControl] @4.850000000: remains in state: EMERGENCY, disiredFloor:d,f,b:  STOP1NONE
+[DispatcherControl] @4.850000000: State stored: STATE<-EMERGENCY
+[DispatcherControl] @4.900000000: remains in state: EMERGENCY, disiredFloor:d,f,b:  STOP1NONE
+[DispatcherControl] @4.900000000: State stored: STATE<-EMERGENCY
+[DispatcherControl] @4.950000000: remains in state: EMERGENCY, disiredFloor:d,f,b:  STOP1NONE
+[DispatcherControl] @4.950000000: State stored: STATE<-EMERGENCY
+[DispatcherControl] @5.000000000: remains in state: EMERGENCY, disiredFloor:d,f,b:  STOP1NONE
+[DispatcherControl] @5.000000000: State stored: STATE<-EMERGENCY
+[DispatcherControl] @5.050000000: remains in state: EMERGENCY, disiredFloor:d,f,b:  STOP1NONE
+[DispatcherControl] @5.050000000: State stored: STATE<-EMERGENCY
+[DispatcherControl] @5.100000000: remains in state: EMERGENCY, disiredFloor:d,f,b:  STOP1NONE
+[DispatcherControl] @5.100000000: State stored: STATE<-EMERGENCY
+[DispatcherControl] @5.150000000: remains in state: EMERGENCY, disiredFloor:d,f,b:  STOP1NONE
+[DispatcherControl] @5.150000000: State stored: STATE<-EMERGENCY
+[DispatcherControl] @5.200000000: remains in state: EMERGENCY, disiredFloor:d,f,b:  STOP1NONE
+[DispatcherControl] @5.200000000: State stored: STATE<-EMERGENCY
+[DispatcherControl] @5.250000000: remains in state: EMERGENCY, disiredFloor:d,f,b:  STOP1NONE
+[DispatcherControl] @5.250000000: State stored: STATE<-EMERGENCY
+[DispatcherControl] @5.300000000: remains in state: EMERGENCY, disiredFloor:d,f,b:  STOP1NONE
+[DispatcherControl] @5.300000000: State stored: STATE<-EMERGENCY
+[DispatcherControl] @5.350000000: remains in state: EMERGENCY, disiredFloor:d,f,b:  STOP1NONE
+[DispatcherControl] @5.350000000: State stored: STATE<-EMERGENCY
+[DispatcherControl] @5.400000000: remains in state: EMERGENCY, disiredFloor:d,f,b:  STOP1NONE
+[DispatcherControl] @5.400000000: State stored: STATE<-EMERGENCY
+[DispatcherControl] @5.450000000: remains in state: EMERGENCY, disiredFloor:d,f,b:  STOP1NONE
+[DispatcherControl] @5.450000000: State stored: STATE<-EMERGENCY
+[DispatcherControl] @5.500000000: remains in state: EMERGENCY, disiredFloor:d,f,b:  STOP1NONE
+[DispatcherControl] @5.500000000: State stored: STATE<-EMERGENCY
+[DispatcherControl] @5.550000000: remains in state: EMERGENCY, disiredFloor:d,f,b:  STOP1NONE
+[DispatcherControl] @5.550000000: State stored: STATE<-EMERGENCY
+[DispatcherControl] @5.600000000: remains in state: EMERGENCY, disiredFloor:d,f,b:  STOP1NONE
+[DispatcherControl] @5.600000000: State stored: STATE<-EMERGENCY
+[DispatcherControl] @5.650000000: remains in state: EMERGENCY, disiredFloor:d,f,b:  STOP1NONE
+[DispatcherControl] @5.650000000: State stored: STATE<-EMERGENCY
+[DispatcherControl] @5.700000000: remains in state: EMERGENCY, disiredFloor:d,f,b:  STOP1NONE
+[DispatcherControl] @5.700000000: State stored: STATE<-EMERGENCY
+[DispatcherControl] @5.750000000: remains in state: EMERGENCY, disiredFloor:d,f,b:  STOP1NONE
+[DispatcherControl] @5.750000000: State stored: STATE<-EMERGENCY
+[DispatcherControl] @5.800000000: remains in state: EMERGENCY, disiredFloor:d,f,b:  STOP1NONE
+[DispatcherControl] @5.800000000: State stored: STATE<-EMERGENCY
+[DispatcherControl] @5.850000000: remains in state: EMERGENCY, disiredFloor:d,f,b:  STOP1NONE
+[DispatcherControl] @5.850000000: State stored: STATE<-EMERGENCY
+[DispatcherControl] @5.900000000: remains in state: EMERGENCY, disiredFloor:d,f,b:  STOP1NONE
+[DispatcherControl] @5.900000000: State stored: STATE<-EMERGENCY
+[DispatcherControl] @5.950000000: remains in state: EMERGENCY, disiredFloor:d,f,b:  STOP1NONE
+[DispatcherControl] @5.950000000: State stored: STATE<-EMERGENCY
+[DispatcherControl] @6.000000000: remains in state: EMERGENCY, disiredFloor:d,f,b:  STOP1NONE
+[DispatcherControl] @6.000000000: State stored: STATE<-EMERGENCY
+[DispatcherControl] @6.050000000: remains in state: EMERGENCY, disiredFloor:d,f,b:  STOP1NONE
+[DispatcherControl] @6.050000000: State stored: STATE<-EMERGENCY
+[DispatcherControl] @6.100000000: remains in state: EMERGENCY, disiredFloor:d,f,b:  STOP1NONE
+[DispatcherControl] @6.100000000: State stored: STATE<-EMERGENCY
+[DispatcherControl] @6.150000000: remains in state: EMERGENCY, disiredFloor:d,f,b:  STOP1NONE
+[DispatcherControl] @6.150000000: State stored: STATE<-EMERGENCY
+[DispatcherControl] @6.200000000: remains in state: EMERGENCY, disiredFloor:d,f,b:  STOP1NONE
+[DispatcherControl] @6.200000000: State stored: STATE<-EMERGENCY
+[DispatcherControl] @6.250000000: remains in state: EMERGENCY, disiredFloor:d,f,b:  STOP1NONE
+[DispatcherControl] @6.250000000: State stored: STATE<-EMERGENCY
+[DispatcherControl] @6.300000000: remains in state: EMERGENCY, disiredFloor:d,f,b:  STOP1NONE
+[DispatcherControl] @6.300000000: State stored: STATE<-EMERGENCY
+[DispatcherControl] @6.350000000: remains in state: EMERGENCY, disiredFloor:d,f,b:  STOP1NONE
+[DispatcherControl] @6.350000000: State stored: STATE<-EMERGENCY
+[DispatcherControl] @6.400000000: remains in state: EMERGENCY, disiredFloor:d,f,b:  STOP1NONE
+[DispatcherControl] @6.400000000: State stored: STATE<-EMERGENCY
+[DispatcherControl] @6.450000000: remains in state: EMERGENCY, disiredFloor:d,f,b:  STOP1NONE
+[DispatcherControl] @6.450000000: State stored: STATE<-EMERGENCY
+[DispatcherControl] @6.500000000: remains in state: EMERGENCY, disiredFloor:d,f,b:  STOP1NONE
+[DispatcherControl] @6.500000000: State stored: STATE<-EMERGENCY
+[DispatcherControl] @6.550000000: remains in state: EMERGENCY, disiredFloor:d,f,b:  STOP1NONE
+[DispatcherControl] @6.550000000: State stored: STATE<-EMERGENCY
+[DispatcherControl] @6.600000000: remains in state: EMERGENCY, disiredFloor:d,f,b:  STOP1NONE
+[DispatcherControl] @6.600000000: State stored: STATE<-EMERGENCY
+[DispatcherControl] @6.650000000: remains in state: EMERGENCY, disiredFloor:d,f,b:  STOP1NONE
+[DispatcherControl] @6.650000000: State stored: STATE<-EMERGENCY
+[DispatcherControl] @6.700000000: remains in state: EMERGENCY, disiredFloor:d,f,b:  STOP1NONE
+[DispatcherControl] @6.700000000: State stored: STATE<-EMERGENCY
+[DispatcherControl] @6.750000000: remains in state: EMERGENCY, disiredFloor:d,f,b:  STOP1NONE
+[DispatcherControl] @6.750000000: State stored: STATE<-EMERGENCY
+[DispatcherControl] @6.800000000: remains in state: EMERGENCY, disiredFloor:d,f,b:  STOP1NONE
+[DispatcherControl] @6.800000000: State stored: STATE<-EMERGENCY
+[DispatcherControl] @6.850000000: remains in state: EMERGENCY, disiredFloor:d,f,b:  STOP1NONE
+[DispatcherControl] @6.850000000: State stored: STATE<-EMERGENCY
+[DispatcherControl] @6.900000000: remains in state: EMERGENCY, disiredFloor:d,f,b:  STOP1NONE
+[DispatcherControl] @6.900000000: State stored: STATE<-EMERGENCY
+[DispatcherControl] @6.950000000: remains in state: EMERGENCY, disiredFloor:d,f,b:  STOP1NONE
+[DispatcherControl] @6.950000000: State stored: STATE<-EMERGENCY
+[DispatcherControl] @7.000000000: remains in state: EMERGENCY, disiredFloor:d,f,b:  STOP1NONE
+[DispatcherControl] @7.000000000: State stored: STATE<-EMERGENCY
+[Elevator] @7.000000000: Simulation Finished ***
 ******************Summary******************
-Passed:  14
+Passed:  17
 Failed:  0
-Total :  14
+Total :  17
 
