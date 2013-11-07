@@ -15,8 +15,8 @@
 
 ;#state 'State 9.1: Light Off'
 0.21s A F CarLight 4 FRONT : isLighted == false
-0.21s A N CAR_LIGHT_4F_CAN_ID Boolean : getValue == false
-0.21s A N CAR_CALL_4F_CAN_ID Boolean : getValue == false
+0.21s A N CAR_LIGHT_4F_CAN_ID CarLight 4 FRONT : getValue == false
+0.21s A N CAR_CALL_4F_CAN_ID CarCall 4 FRONT : getValue == false
 0.21s A S CarButtonControl[4][FRONT] : STATE == STATE_LIGHT_OFF
 
 ;#transition 'T9.1'
@@ -24,8 +24,8 @@
 
 ;#state 'State 9.2: Light On'
 2s A F CarLight 4 FRONT : isLighted == true
-2s A N CAR_LIGHT_4F_CAN_ID Boolean : getValue == true
-2s A N CAR_CALL_4F_CAN_ID Boolean : getValue == true
+2s A N CAR_LIGHT_4F_CAN_ID CarLight 4 FRONT : getValue == true
+2s A N CAR_CALL_4F_CAN_ID CarCall 4 FRONT : getValue == true
 2s A S CarButtonControl[4][FRONT] : STATE == STATE_LIGHT_ON
 
 ;#transition 'T9.2'
@@ -36,6 +36,6 @@
 
 ;#state 'State 9.1: Light Off'
 4s A F CarLight 4 FRONT : isLighted == false
-4s A N CAR_LIGHT_4F_CAN_ID Boolean : getValue == false
-4s A N CAR_CALL_4F_CAN_ID Boolean : getValue == false
+4s A N CAR_LIGHT_4F_CAN_ID CarLight 4 FRONT : getValue == false
+4s A N CAR_CALL_4F_CAN_ID CarCall 4 FRONT : getValue == false
 4s A S CarButtonControl[4][FRONT] : STATE == STATE_LIGHT_OFF
