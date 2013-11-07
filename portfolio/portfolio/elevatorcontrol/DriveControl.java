@@ -1,3 +1,9 @@
+/*
+18649 Fall 2013
+Group 17
+Jiang He(jiangh)
+(other names would go here)
+ */
 package simulator.elevatorcontrol;
 
 import jSimPack.SimTime;
@@ -137,7 +143,7 @@ public class DriveControl extends Controller {
 		physicalInterface.registerTimeTriggered(localDriveSpeed);
 		
 		//initialize network interface
-		/*****************************registrate network message*****************************/
+		/*****************************register network message*****************************/
 		//mEmergencyBrake
 		networkEmergencyBrake = CanMailbox.getReadableCanMailbox(MessageDictionary.EMERGENCY_BRAKE_CAN_ID);
 		mEmergencyBrake = new BooleanCanPayloadTranslator(networkEmergencyBrake);
@@ -235,10 +241,10 @@ public class DriveControl extends Controller {
 				desiredFloor = getDesiredFloor();
 				
 				commandSpeed = Speed.STOP;
-				localDrive.set(commandSpeed, desiredDirection);
-				mDrive.set(commandSpeed, desiredDirection);
+				localDrive.set(commandSpeed, Direction.STOP);//wxl
+				mDrive.set(commandSpeed, Direction.STOP);//wxl
 				mDriveSpeed.set(localDriveSpeed.speed(), localDriveSpeed.direction());
-				 
+								 
 //#transition 'T6.1'
 				 if ((allDoorClosed == false) && (mLevelUp.getValue() == false)) {
 					  newState = State.LEVEL_UP;
@@ -265,7 +271,7 @@ public class DriveControl extends Controller {
 				 commandSpeed = Speed.LEVEL;
 				 localDrive.set(commandSpeed, desiredDirection);
 				 mDrive.set(Speed.LEVEL, desiredDirection);
-				 mDriveSpeed.set(localDriveSpeed.speed(), localDriveSpeed.direction());
+				 mDriveSpeed.set(localDriveSpeed.speed(), localDriveSpeed.direction());				 
 //#transition 'T6.2'
 				 if ((mLevelDown.getValue() == true && mLevelUp.getValue()==true) || (mEmergencyBrake.getValue()==true) || (mHoistwayLimitDown.getValue()==true) || (mHoistwayLimitUp.getValue()==true)) {
 					  newState = State.STOP;				 
@@ -311,7 +317,7 @@ public class DriveControl extends Controller {
 					  newState = State.STOP;
 				 }
 //#transition 'T6.11'
-				 else if(Math.abs(desiredFloorHeight - (double)mCarLevelPosition.getPosition()) > 1000 && desiredFloor > 0) {
+				 else if((Math.abs(desiredFloorHeight - (double)mCarLevelPosition.getPosition()) > 1000 && desiredFloor > 0) && (localDriveSpeed.speed() >= 0.25)) {	 				 
 					newState = State.FAST_UP;
 				 }
 				 else {
@@ -341,7 +347,7 @@ public class DriveControl extends Controller {
 					  newState = State.STOP;
 				 }
 //#transition 'T6.13'
-				 else if(Math.abs(desiredFloorHeight - (double)mCarLevelPosition.getPosition()) > 1000 && desiredFloor > 0) {
+				 else if((Math.abs(desiredFloorHeight - (double)mCarLevelPosition.getPosition()) > 1000 && desiredFloor > 0) && (localDriveSpeed.speed() >= 0.25)) {
 					newState = State.FAST_DOWN;
 				 }				 
 				 else {
@@ -363,7 +369,11 @@ public class DriveControl extends Controller {
 				 mDriveSpeed.set(localDriveSpeed.speed(), localDriveSpeed.direction());
 				 
 //#transition 'T6.12'
-				 if ((Math.abs(desiredFloorHeight - (double)mCarLevelPosition.getPosition()) <= 1000 && desiredFloor > 0) || (mHoistwayLimitDown.getValue()==true || mHoistwayLimitUp.getValue()==true || mEmergencyBrake.getValue()==true)) {
+<<<<<<< HEAD
+				 if ((Math.abs(desiredFloorHeight - (double)mCarLevelPosition.getPosition()) <= 1000 && desiredFloor > 0 /* && localDriveSpeed.speed() < 0.25 */) || (mHoistwayLimitDown.getValue()==true || mHoistwayLimitUp.getValue()==true || mEmergencyBrake.getValue()==true)) {
+=======
+				 if ((Math.abs(desiredFloorHeight - (double)mCarLevelPosition.getPosition()) <= 1000 && desiredFloor > 0 && localDriveSpeed.speed() < 0.25) || (mHoistwayLimitDown.getValue()==true || mHoistwayLimitUp.getValue()==true || mEmergencyBrake.getValue()==true)) {
+>>>>>>> 377299a69cd2b4b047c744870fd108defc5cf79e
 					  newState = State.SLOW_UP;
 				 }
 				 else {
@@ -385,7 +395,11 @@ public class DriveControl extends Controller {
 				 mDriveSpeed.set(localDriveSpeed.speed(), localDriveSpeed.direction());
 				 
 //#transition 'T6.14'
-				 if ((Math.abs(desiredFloorHeight - (double)mCarLevelPosition.getPosition()) <= 1000 && desiredFloor > 0) || (mHoistwayLimitDown.getValue()==true || mHoistwayLimitUp.getValue()==true || mEmergencyBrake.getValue()==true)) {
+<<<<<<< HEAD
+				 if ((Math.abs(desiredFloorHeight - (double)mCarLevelPosition.getPosition()) <= 1000 && desiredFloor > 0 /* && localDriveSpeed.speed() < 0.25 */) || (mHoistwayLimitDown.getValue()==true || mHoistwayLimitUp.getValue()==true || mEmergencyBrake.getValue()==true)) {
+=======
+				 if ((Math.abs(desiredFloorHeight - (double)mCarLevelPosition.getPosition()) <= 1000 && desiredFloor > 0 && localDriveSpeed.speed() < 0.25) || (mHoistwayLimitDown.getValue()==true || mHoistwayLimitUp.getValue()==true || mEmergencyBrake.getValue()==true)) {
+>>>>>>> 377299a69cd2b4b047c744870fd108defc5cf79e
 					  newState = State.SLOW_DOWN;
 				 }
 				 else {

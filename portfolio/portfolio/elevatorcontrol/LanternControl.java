@@ -74,7 +74,15 @@ public class LanternControl extends Controller{
 			case Lantern_Off:
 				car_lantern.set(false);
 				// code for desired direction for this simple design
-				DesiredDirection = mDesiredFloor.getDirection();
+                //wxl
+                if(mDesiredFloor.getFloor()==mAtFloor_array.getCurrentFloor()){
+                    DesiredDirection = mDesiredFloor.getDirection();
+                }else if(mDesiredFloor.getFloor()>mAtFloor_array.getCurrentFloor()){
+                    DesiredDirection=Direction.UP;
+                }else{
+                    DesiredDirection=Direction.DOWN;
+                }
+				
 				// should be DesiredDirection = mDesiredFloor.getDirection();
 				allClose = mDoorClosed_front_array.getBothClosed() && mDoorClosed_back_array.getBothClosed();
 //#transition 'T 7.1'
@@ -83,7 +91,7 @@ public class LanternControl extends Controller{
 						break;
 					}
 //#transition 'T 7.2'
-					else if (allClose == false && DesiredDirection == direction && mDesiredFloor.getFloor() != mAtFloor_array.getCurrentFloor()) {
+					else if (allClose == false && DesiredDirection == direction) {//wxl && mDesiredFloor.getFloor() != mAtFloor_array.getCurrentFloor()) {
 						nextState = State.Lantern_On;
 						break;
 					}
@@ -103,7 +111,7 @@ public class LanternControl extends Controller{
 				}
 				break;
 			case Lantern_On:
-				car_lantern.set(false);
+				car_lantern.set(true);//wxl
 				allClose = mDoorClosed_front_array.getBothClosed() && mDoorClosed_back_array.getBothClosed();
 //#transition 'T 7.4'
 				if (allClose) {

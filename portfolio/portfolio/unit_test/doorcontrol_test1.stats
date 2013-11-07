@@ -1,3 +1,7 @@
+;18649 fall 2013
+;Zhang Qiang
+;qiangz
+;doorcontrol_test1.stats
 Simulator Parameters:
 Command line = -cf doorcontrol.cf -mf doorcontrol_test1.mf
 RandomSeed = 1383255248991
