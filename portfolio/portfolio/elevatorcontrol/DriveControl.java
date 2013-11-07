@@ -369,7 +369,11 @@ public class DriveControl extends Controller {
 				 mDriveSpeed.set(localDriveSpeed.speed(), localDriveSpeed.direction());
 				 
 //#transition 'T6.12'
+<<<<<<< HEAD
 				 if ((Math.abs(desiredFloorHeight - (double)mCarLevelPosition.getPosition()) <= 1000 && desiredFloor > 0 /* && localDriveSpeed.speed() < 0.25 */) || (mHoistwayLimitDown.getValue()==true || mHoistwayLimitUp.getValue()==true || mEmergencyBrake.getValue()==true)) {
+=======
+				 if ((Math.abs(desiredFloorHeight - (double)mCarLevelPosition.getPosition()) <= 1000 && desiredFloor > 0 && localDriveSpeed.speed() < 0.25) || (mHoistwayLimitDown.getValue()==true || mHoistwayLimitUp.getValue()==true || mEmergencyBrake.getValue()==true)) {
+>>>>>>> 377299a69cd2b4b047c744870fd108defc5cf79e
 					  newState = State.SLOW_UP;
 				 }
 				 else {
@@ -391,7 +395,11 @@ public class DriveControl extends Controller {
 				 mDriveSpeed.set(localDriveSpeed.speed(), localDriveSpeed.direction());
 				 
 //#transition 'T6.14'
+<<<<<<< HEAD
 				 if ((Math.abs(desiredFloorHeight - (double)mCarLevelPosition.getPosition()) <= 1000 && desiredFloor > 0 /* && localDriveSpeed.speed() < 0.25 */) || (mHoistwayLimitDown.getValue()==true || mHoistwayLimitUp.getValue()==true || mEmergencyBrake.getValue()==true)) {
+=======
+				 if ((Math.abs(desiredFloorHeight - (double)mCarLevelPosition.getPosition()) <= 1000 && desiredFloor > 0 && localDriveSpeed.speed() < 0.25) || (mHoistwayLimitDown.getValue()==true || mHoistwayLimitUp.getValue()==true || mEmergencyBrake.getValue()==true)) {
+>>>>>>> 377299a69cd2b4b047c744870fd108defc5cf79e
 					  newState = State.SLOW_DOWN;
 				 }
 				 else {
