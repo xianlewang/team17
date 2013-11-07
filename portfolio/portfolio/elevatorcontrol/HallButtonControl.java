@@ -261,10 +261,10 @@ public class HallButtonControl extends Controller {
 			// transitions -- note that transition conditions are mutually
 			// exclusive
 			// #transition 'T8.2'
-			if (currentFloor != mDesiredFloor.getFloor()
-					&& !mDoorClosed.getValue()
+			if (//wxl currentFloor != mDesiredFloor.getFloor()
+					!mDoorClosed.getValue()
 					&& this.floor == currentFloor
-					//&& (currentDirection == this.direction || currentDirection == Direction.STOP)
+					&& (currentDirection == this.direction || currentDirection == Direction.STOP)
 					&& !localHallCall.pressed()) {
 				newState = State.LIGHT_OFF;
 			}
@@ -301,7 +301,7 @@ public class HallButtonControl extends Controller {
 		} else if (currentFloor < mDesiredFloor.getFloor()) {
 			d = Direction.UP;
 		} else {
-			d = Direction.STOP;
+			d = mDesiredFloor.getDirection();
 		}
 		return d;
 	}

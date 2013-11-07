@@ -54,9 +54,9 @@ public class DriveSpeedCanPayloadTranslator extends CanPayloadTranslator {
     }
 
     public double getSpeed() {
-        int val = getIntFromBitset(getMessagePayload(), 0, 32);
+        double val = getIntFromBitset(getMessagePayload(), 0, 32);
          
-		  return val/1000;
+		  return val/1000.0;
     }
 
     public void setDirection(Direction dir) {

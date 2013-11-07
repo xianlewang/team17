@@ -13,7 +13,7 @@ import simulator.payloads.CanMailbox;
 import simulator.payloads.CanMailbox.ReadableCanMailbox;
 import simulator.payloads.CarPositionIndicatorPayload;
 import simulator.payloads.CarPositionIndicatorPayload.WriteableCarPositionIndicatorPayload;
-import simulator.elevatorcontrol.Utility.NearestFloor;
+import simulator.elevatorcontrol.Utility.NearestFloor;;
 
 public class CarPositionControl extends Controller{
 	/***************************************************************************

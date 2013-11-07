@@ -16,6 +16,7 @@ import simulator.payloads.DoorMotorPayload.WriteableDoorMotorPayload;
 import simulator.elevatorcontrol.DesiredFloorCanPayloadTranslator;
 import simulator.elevatorcontrol.DriveCommandCanPayloadTranslator;
 import simulator.elevatorcontrol.Utility.AtFloorArray;
+import simulator.elevatorcontrol.Utility.CallArray;
 import simulator.elevatorcontrol.DoorMotorCanPayloadTranslator;
 
 /*
@@ -34,6 +35,7 @@ public class DoorControl extends Controller {
         REVERSE_OPEN,
         REVERSE_OPENED,
         REVERSE_CLOSING,
+        WAIT_DISPATCHER,
     }
     // (in ms) how often this module should send out messages
     private final SimTime period;
@@ -46,23 +48,28 @@ public class DoorControl extends Controller {
     private ReadableCanMailbox networkDesiredFloor;
     private DesiredFloorCanPayloadTranslator mDesiredFloor;
     private ReadableCanMailbox networkDriveSpeed;
-    private DriveCommandCanPayloadTranslator mDriveSpeed;
+    private DriveSpeedCanPayloadTranslator mDriveSpeed;
     private ReadableCanMailbox networkDoorOpened;
     private DoorOpenedCanPayloadTranslator mDoorOpened;
     private ReadableCanMailbox networkDoorClosed;
     private DoorClosedCanPayloadTranslator mDoorClosed;
     private ReadableCanMailbox networkCarWeight;
     private CarWeightCanPayloadTranslator mCarWeight;
-    private ReadableCanMailbox networkDoorReversal;                // reversal
-    private DoorReversalCanPayloadTranslator mDoorReversal;        // reversal
+    private ReadableCanMailbox networkDoorReversal_left;                // reversal
+    private ReadableCanMailbox networkDoorReversal_right;
+    private DoorReversalCanPayloadTranslator mDoorReversal_left;        // reversal
+    private DoorReversalCanPayloadTranslator mDoorReversal_right;
     private int mDesiredDwell = 100;
-    private int MAX_Weight = 14000;
+    private int MAX_Weight = 15000;
+    private CallArray callArray;
+    
     // output network
     private WriteableCanMailbox networkDoorMotor;
     private DoorMotorCanPayloadTranslator mDoorMotor;
     // State variables
     private State currentState;
     private int countdown = 0;
+    private int waitDispatcher = 0;
     private int Dwell = mDesiredDwell;
     public DoorControl(Hallway hallway, Side side, SimTime period, boolean verbose) {
         super ("DoorControl" + ReplicationComputer.makeReplicationString(hallway, side), verbose);
@@ -80,26 +87,34 @@ public class DoorControl extends Controller {
         
         // instantiate message objects
         networkDesiredFloor = CanMailbox.getReadableCanMailbox(MessageDictionary.DESIRED_FLOOR_CAN_ID);
-        networkDriveSpeed = CanMailbox.getReadableCanMailbox(MessageDictionary.DRIVE_COMMAND_CAN_ID);
+        networkDriveSpeed = CanMailbox.getReadableCanMailbox(MessageDictionary.DRIVE_SPEED_CAN_ID);
         networkDoorOpened = CanMailbox.getReadableCanMailbox(MessageDictionary.DOOR_OPEN_SENSOR_BASE_CAN_ID + 
         		ReplicationComputer.computeReplicationId(hallway, side));
         networkCarWeight = CanMailbox.getReadableCanMailbox(MessageDictionary.CAR_WEIGHT_CAN_ID);
         networkDoorClosed = CanMailbox.getReadableCanMailbox(MessageDictionary.DOOR_CLOSED_SENSOR_BASE_CAN_ID + 
         		ReplicationComputer.computeReplicationId(hallway, side));
-        networkDoorReversal = CanMailbox.getReadableCanMailbox(MessageDictionary.DOOR_REVERSAL_SENSOR_BASE_CAN_ID + 
-        		ReplicationComputer.computeReplicationId(hallway, side));
+        //networkDoorReversal = CanMailbox.getReadableCanMailbox(MessageDictionary.DOOR_REVERSAL_SENSOR_BASE_CAN_ID + 
+        //		ReplicationComputer.computeReplicationId(hallway, side));
+        networkDoorReversal_left = CanMailbox.getReadableCanMailbox(MessageDictionary.DOOR_REVERSAL_SENSOR_BASE_CAN_ID + 
+        		ReplicationComputer.computeReplicationId(hallway, Side.LEFT));
+        networkDoorReversal_right = CanMailbox.getReadableCanMailbox(MessageDictionary.DOOR_REVERSAL_SENSOR_BASE_CAN_ID + 
+        		ReplicationComputer.computeReplicationId(hallway, Side.RIGHT));
         mDesiredFloor = new DesiredFloorCanPayloadTranslator(networkDesiredFloor);
-        mDriveSpeed = new DriveCommandCanPayloadTranslator(networkDriveSpeed);
+        mDriveSpeed = new DriveSpeedCanPayloadTranslator(networkDriveSpeed);
         mDoorOpened = new DoorOpenedCanPayloadTranslator(networkDoorOpened, hallway, side);
         mDoorClosed = new DoorClosedCanPayloadTranslator(networkDoorClosed, hallway, side);
         mCarWeight = new CarWeightCanPayloadTranslator(networkCarWeight);
-        mDoorReversal = new DoorReversalCanPayloadTranslator(networkDoorReversal, hallway, side);
+        //mDoorReversal = new DoorReversalCanPayloadTranslator(networkDoorReversal, hallway, side);
+        mDoorReversal_left = new DoorReversalCanPayloadTranslator(networkDoorReversal_left, hallway, Side.LEFT);
+        mDoorReversal_right = new DoorReversalCanPayloadTranslator(networkDoorReversal_right, hallway, Side.RIGHT);
         canInterface.registerTimeTriggered(networkDesiredFloor);
         canInterface.registerTimeTriggered(networkDriveSpeed);
         canInterface.registerTimeTriggered(networkDoorOpened);
         canInterface.registerTimeTriggered(networkDoorClosed);
         canInterface.registerTimeTriggered(networkCarWeight);
-        canInterface.registerTimeTriggered(networkDoorReversal);
+        //canInterface.registerTimeTriggered(networkDoorReversal);
+        canInterface.registerTimeTriggered(networkDoorReversal_left);
+        canInterface.registerTimeTriggered(networkDoorReversal_right);
         // output
         networkDoorMotor = CanMailbox.getWriteableCanMailbox(MessageDictionary.DOOR_MOTOR_COMMAND_BASE_CAN_ID + 
         		ReplicationComputer.computeReplicationId(hallway, side));
@@ -107,6 +122,7 @@ public class DoorControl extends Controller {
         canInterface.sendTimeTriggered(networkDoorMotor, period);
         // instantiate an array of AtFloor class 
         mAtFloor_array = new AtFloorArray(canInterface);
+        callArray = new CallArray(canInterface);
         // ready now
         timer.start(period);
     }
@@ -121,11 +137,16 @@ public class DoorControl extends Controller {
 				int desFloor = mDesiredFloor.getFloor(); 
 				int curFloor = mAtFloor_array.getCurrentFloor();
 //#transition 'T 5.1'
-				if (curFloor == desFloor && mAtFloor_array.isAtFloor(curFloor, hallway)) {
-					if (mDriveSpeed.getSpeed() == Speed.STOP ||
-							mDriveSpeed.getDirection() == Direction.STOP) {
+				if (curFloor == desFloor && mAtFloor_array.isAtFloor(curFloor, hallway) && 
+						(callArray.isCalled(curFloor, Direction.STOP) || callArray.isCalled(curFloor, Direction.UP, hallway) || callArray.isCalled(curFloor, Direction.DOWN, hallway))) {
+					if (mDriveSpeed.getSpeed() == 0 && mDriveSpeed.getDirection() == Direction.STOP) {
+						System.out.println("To BEFORE_OPEN From CLOSED");
 						nextState = State.BEFORE_OPEN;
 					}
+				}
+//#transition 'T 5.11'
+				else if ((mDoorReversal_left.getValue() || mDoorReversal_right.getValue()) && mAtFloor_array.isAtFloor(mAtFloor_array.getCurrentFloor(), hallway)) {
+					nextState = State.REVERSE_OPEN;
 				}
 //#transition 'T 5.6'
 				else if (mCarWeight.getWeight() >= MAX_Weight && mAtFloor_array.isAtFloor(curFloor, hallway)) {
@@ -163,22 +184,24 @@ public class DoorControl extends Controller {
 				door_motor.set(DoorCommand.CLOSE);
 				mDoorMotor.setDoorCommand(DoorCommand.CLOSE);
 				countdown = 0;
+				waitDispatcher = 100;
 //#transition 'T 5.4'
 				if (mDoorClosed.getValue()) {
-					nextState = State.CLOSED;
+					nextState = State.WAIT_DISPATCHER;
+					//nextState = State.CLOSED;
 				}
 //#transition 'T 5.5'
 				else if (mCarWeight.getWeight() >= MAX_Weight && mAtFloor_array.isAtFloor(mAtFloor_array.getCurrentFloor(), hallway)) {
 					nextState = State.BEFORE_OPEN;
 				}
 //#transition 'T 5.7'
-				else if (mDoorReversal.getValue() && mAtFloor_array.isAtFloor(mAtFloor_array.getCurrentFloor(), hallway)) {
+				else if ((mDoorReversal_left.getValue() || mDoorReversal_right.getValue()) && mAtFloor_array.isAtFloor(mAtFloor_array.getCurrentFloor(), hallway)) {
 					nextState = State.REVERSE_OPEN;
 				}
 //#transition 'T 5.13'
-				else if (curFloor == desFloor && mAtFloor_array.isAtFloor(curFloor, hallway)) {
-					nextState = State.BEFORE_OPEN;
-				}
+				//else if (curFloor == desFloor && mAtFloor_array.isAtFloor(curFloor, hallway)) {
+				//	nextState = State.BEFORE_OPEN;
+				//}
 				else {
 					nextState = currentState;
 				}
@@ -214,10 +237,11 @@ public class DoorControl extends Controller {
 				mDoorMotor.setDoorCommand(DoorCommand.NUDGE);
 //#transition 'T 5.10'
 				if (mDoorClosed.getValue()) {
-					nextState = State.CLOSED;
+					//nextState = State.CLOSED;
+					nextState = State.WAIT_DISPATCHER;
 				}
 //#transition 'T 5.11'
-				else if (mDoorReversal.getValue() && mAtFloor_array.isAtFloor(mAtFloor_array.getCurrentFloor(), hallway)) {
+				else if ((mDoorReversal_left.getValue() || mDoorReversal_right.getValue()) && mAtFloor_array.isAtFloor(mAtFloor_array.getCurrentFloor(), hallway)) {
 					nextState = State.REVERSE_OPEN;
 				}
 //#transition 'T 5.12'
@@ -225,14 +249,27 @@ public class DoorControl extends Controller {
 					nextState = State.BEFORE_OPEN;
 				}
 //#transition 'T 5.14'
-				else if (curFloor == desFloor && mAtFloor_array.isAtFloor(curFloor, hallway)) {
-					nextState = State.BEFORE_OPEN;
+				else if (curFloor == desFloor && mAtFloor_array.isAtFloor(curFloor, hallway) && 
+						(callArray.isCalled(curFloor, Direction.STOP) || callArray.isCalled(curFloor, Direction.UP, hallway) || callArray.isCalled(curFloor, Direction.DOWN, hallway))) {
+					if (mDriveSpeed.getSpeed() == 0 && mDriveSpeed.getDirection() == Direction.STOP) {
+						nextState = State.BEFORE_OPEN;
+					}
 				}
 				else {
 					nextState = currentState;
 				}
 				break;
-				
+				// add new state
+			case WAIT_DISPATCHER:
+				door_motor.set(DoorCommand.STOP);
+				mDoorMotor.setDoorCommand(DoorCommand.STOP);
+				if (waitDispatcher > 0) {
+					nextState = currentState;
+					waitDispatcher -= 1;
+				} else {
+					nextState = State.CLOSED;
+				}
+				break;
 			default:
 				throw new RuntimeException("State " + currentState + " wasn't recognized");
 		}
