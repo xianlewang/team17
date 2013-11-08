@@ -881,6 +881,47 @@
     <br>
     <h2>Simulation Analysis</h2>
     <br> Compare theoretical and simulated results.
-    <br>
+    <br>Running the simulation with bandwidth of 60kbps, we obtain the results
+listed below.&nbsp; Multiplying the network bandwidth by the
+utilization gives us the actual bandwidth used:<br>
+&nbsp; 60000 * 0.4161 = 24966 bps<br>
+This is between the best- and worst-case values predicted by our
+analysis.<br>
+<br>
+In addition the above results, this test revealed issue #17 from the
+issue log.<br>
+<br>
+<br>
+Simulator Parameters:<br>
+Command line = -cc 15 -rt 6000s -b 60<br>
+RandomSeed = 1265845088385<br>
+CanNetworkBitTime = 16667 ns<br>
+Effective Can Bitrate = 59998.800023999516<br>
+Run Time = 6000.0s<br>
+Real time rate = null<br>
+Running Acceptance Test for 15 customers<br>
+<br>
+<br>
+[Elevator] @0.000000000: Starting Simulation<br>
+[Elevator] @60.000000000: Progress indicator<br>
+[Elevator] @120.000000000: Progress indicator<br>
+[Elevator] @180.000000000: Progress indicator<br>
+[Elevator] @240.000000000: Progress indicator<br>
+[Elevator] @300.000000000: Progress indicator<br>
+[Elevator] @336.794000000: Simulation Finished<br>
+<br>
+Network Utilization Summary:<br>
+Recent: 41.61 % Max: 41.61 %&nbsp; Overall:&nbsp; 41.61 %<br>
+<br>
+STATISTICS FOR CUSTOMERS<br>
+------------------------<br>
+<br>
+<br>
+Customer Summary<br>
+Satisfied: 15<br>
+Unsatisfied: 0<br>
+Total: 15<br>
+<br>
+
 </body>
 </html>
