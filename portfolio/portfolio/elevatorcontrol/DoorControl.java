@@ -14,7 +14,6 @@ import simulator.payloads.CanMailbox.ReadableCanMailbox;
 import simulator.payloads.CanMailbox.WriteableCanMailbox;
 import simulator.payloads.DoorMotorPayload.WriteableDoorMotorPayload;
 import simulator.elevatorcontrol.DesiredFloorCanPayloadTranslator;
-import simulator.elevatorcontrol.DriveCommandCanPayloadTranslator;
 import simulator.elevatorcontrol.Utility.AtFloorArray;
 import simulator.elevatorcontrol.Utility.CallArray;
 import simulator.elevatorcontrol.DoorMotorCanPayloadTranslator;
@@ -140,7 +139,7 @@ public class DoorControl extends Controller {
 				if (curFloor == desFloor && mAtFloor_array.isAtFloor(curFloor, hallway) && 
 						(callArray.isCalled(curFloor, Direction.STOP) || callArray.isCalled(curFloor, Direction.UP, hallway) || callArray.isCalled(curFloor, Direction.DOWN, hallway))) {
 					if (mDriveSpeed.getSpeed() == 0 && mDriveSpeed.getDirection() == Direction.STOP) {
-						System.out.println("To BEFORE_OPEN From CLOSED");
+						//System.out.println("To BEFORE_OPEN From CLOSED");
 						nextState = State.BEFORE_OPEN;
 					}
 				}

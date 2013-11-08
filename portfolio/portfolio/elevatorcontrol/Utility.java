@@ -22,7 +22,7 @@ import simulator.payloads.CanMailbox.ReadableCanMailbox;
 import simulator.payloads.CanMailbox.WriteableCanMailbox;
 import simulator.payloads.translators.BooleanCanPayloadTranslator;
 import simulator.elevatormodules.CarLevelPositionCanPayloadTranslator;
-
+import simulator.elevatorcontrol.*;
 /**
  * This class provides some example utility classes that might be useful in more
  * than one spot. It is okay to create new classes (or modify the ones given
@@ -34,8 +34,8 @@ import simulator.elevatormodules.CarLevelPositionCanPayloadTranslator;
 public class Utility {
 
     public static class CallArray {
-        HashMap<Integer, BooleanCanPayloadTranslator> carCallArray = new HashMap<Integer, BooleanCanPayloadTranslator>();
-        HashMap<Integer, BooleanCanPayloadTranslator> hallCallArray = new HashMap<Integer, BooleanCanPayloadTranslator>();
+        HashMap<Integer, CarCallCanPayloadTranslator> carCallArray = new HashMap<Integer, CarCallCanPayloadTranslator>();
+        HashMap<Integer, HallCallCanPayloadTranslator> hallCallArray = new HashMap<Integer, HallCallCanPayloadTranslator>();
         List<Integer> carIndexList = new ArrayList<Integer>();
         List<Integer> hallIndexList = new ArrayList<Integer>();
         public CallArray(CANNetwork.CanConnection conn) {
@@ -45,7 +45,8 @@ public class Utility {
                     int index = ReplicationComputer.computeReplicationId(f, b);
                     carIndexList.add(index);
                     ReadableCanMailbox m = CanMailbox.getReadableCanMailbox(MessageDictionary.CAR_CALL_BASE_CAN_ID + index);
-                    BooleanCanPayloadTranslator t = new BooleanCanPayloadTranslator(m);
+                    //BooleanCanPayloadTranslator t = new BooleanCanPayloadTranslator(m);
+                    CarCallCanPayloadTranslator t = new CarCallCanPayloadTranslator(m, f, b);
                     conn.registerTimeTriggered(m);
                     carCallArray.put(index, t);
                 }
@@ -57,7 +58,8 @@ public class Utility {
                         int index = ReplicationComputer.computeReplicationId(f, b, d);
                         hallIndexList.add(index);
                         ReadableCanMailbox m = CanMailbox.getReadableCanMailbox(MessageDictionary.HALL_CALL_BASE_CAN_ID + index);
-                        BooleanCanPayloadTranslator t = new BooleanCanPayloadTranslator(m);
+                        //BooleanCanPayloadTranslator t = new BooleanCanPayloadTranslator(m);
+                        HallCallCanPayloadTranslator t = new HallCallCanPayloadTranslator(m, f, b, d);
                         conn.registerTimeTriggered(m);
                         hallCallArray.put(index, t);
                     }
