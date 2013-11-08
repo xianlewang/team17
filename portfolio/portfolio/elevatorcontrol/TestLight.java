@@ -176,7 +176,8 @@ public class TestLight extends Controller {
      * each state.  Each case block executes actions for that state, then executes
      * a transition to the next state if the transition conditions are met.
      */
-    public void timerExpired(Object callbackData) {
+    @Override
+	public void timerExpired(Object callbackData) {
         State newState = state;
         switch (state) {
             case STATE_FLASH_OFF:

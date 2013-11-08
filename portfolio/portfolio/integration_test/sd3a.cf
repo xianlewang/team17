@@ -3,8 +3,8 @@
 ; Xianle Wang(xianlew)
 ; 3a.cf
 
-DoorControl FRONT LEFT 10ms true
-DoorControl BACK LEFT 10ms true
-DoorControl FRONT RIGHT 10ms true
-DoorControl BACK RIGHT 10ms true
-HallButtonControl 4 FRONT UP 50ms true
+DoorControl FRONT LEFT 10ms false
+DoorControl BACK LEFT 10ms false
+DoorControl FRONT RIGHT 10ms false
+DoorControl BACK RIGHT 10ms false
+HallButtonControl 4 FRONT UP 50ms false

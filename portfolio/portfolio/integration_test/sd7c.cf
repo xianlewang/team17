@@ -3,9 +3,9 @@
 ; Xianle Wang(xianlew)
 ; 7c.cf
 
-Dispatcher 8 50ms true
-DoorControl FRONT LEFT 10ms true
-DoorControl BACK LEFT 10ms true
-DoorControl FRONT RIGHT 10ms true
-DoorControl BACK RIGHT 10ms true
-DriveControl 10ms true
+Dispatcher 8 50ms false
+DoorControl FRONT LEFT 10ms false
+DoorControl BACK LEFT 10ms false
+DoorControl FRONT RIGHT 10ms false
+DoorControl BACK RIGHT 10ms false
+DriveControl 10ms false

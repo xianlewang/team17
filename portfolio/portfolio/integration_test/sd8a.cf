@@ -3,9 +3,9 @@
 ; Jiang He (jiangh)
 ; sd8a.cf
 
-Dispatcher 8 50ms TRUE
-DoorControl FRONT LEFT 10ms TRUE
-DoorControl FRONT RIGHT 10ms TRUE
-DoorControl BACK LEFT 10ms TRUE
-DoorControl BACK RIGHT 10ms TRUE
-DriveControl 10ms TRUE
+Dispatcher 8 50ms false
+DoorControl FRONT LEFT 10ms false
+DoorControl FRONT RIGHT 10ms false
+DoorControl BACK LEFT 10ms false
+DoorControl BACK RIGHT 10ms false
+DriveControl 10ms false

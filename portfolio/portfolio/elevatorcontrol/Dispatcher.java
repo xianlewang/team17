@@ -20,7 +20,6 @@ import simulator.framework.Controller;
 import simulator.framework.Direction;
 import simulator.framework.Hallway;
 import simulator.framework.ReplicationComputer;
-import simulator.framework.Speed;
 import simulator.payloads.CanMailbox;
 import simulator.payloads.CanMailbox.ReadableCanMailbox;
 import simulator.payloads.CanMailbox.WriteableCanMailbox;
@@ -158,11 +157,12 @@ public class Dispatcher extends Controller {
      * then executes a transition to the next state if the transition conditions
      * are met.
      */
-    public void timerExpired(Object callbackData) {
+    @Override
+	public void timerExpired(Object callbackData) {
         State newState = state;
         switch (state) {
         case IDLE:
-            System.out.println("in IDLE");
+            //System.out.println("in IDLE");
             // state var
             currentFloor = atFloorArray.getCurrentFloor();
             // state actions for 'HOLD'
@@ -181,7 +181,7 @@ public class Dispatcher extends Controller {
             }
             break;
         case OPERATING:
-            System.out.println("in OPERATING");
+            //System.out.println("in OPERATING");
             // state var
             currentFloor = atFloorArray.getCurrentFloor();
             target = getTarget();
@@ -192,7 +192,7 @@ public class Dispatcher extends Controller {
                     && !(doorClosedBack.getBothClosed() && doorClosedFront
                             .getBothClosed())) {
                 newState = State.EMERGENCY;
-            } else if (callArray.size() == 0 && target.d == Direction.STOP) {
+            } else if (callArray.size() == 0 /*&& target.d == Direction.STOP*/) {
 // #transition 'T11.2'
                 newState = State.IDLE;
             } else if (!(doorClosedBack.getBothClosed() && doorClosedFront
@@ -206,7 +206,7 @@ public class Dispatcher extends Controller {
             mDesiredFloor.set(1, Direction.STOP, Hallway.NONE);
             break;
         case REACH:
-            System.out.println("in REACH");
+            //System.out.println("in REACH");
             // state var
             currentFloor = atFloorArray.getCurrentFloor();
             target = getTarget();
@@ -217,27 +217,26 @@ public class Dispatcher extends Controller {
                     && !(doorClosedBack.getBothClosed() && doorClosedFront
                             .getBothClosed())) {
                 newState = State.EMERGENCY;
-            } else if (callArray.size() == 0 && target.d == Direction.STOP) {
+            } else if (callArray.size() == 0 /*&& target.d == Direction.STOP*/) {
 // #transition 'T11.2'
                 newState = State.IDLE;
-            } else if (target.f!=currentFloor&&(doorClosedBack.getBothClosed() && doorClosedFront
-                    .getBothClosed())) {
+            } else if (target.f!=currentFloor&&(doorClosedBack.getBothClosed() && doorClosedFront.getBothClosed())) {
 // #transition 'T11.6'
                 newState = State.LEAVE;
             }
             break;
         case LEAVE:
-            System.out.println("in LEAVE");
+            //System.out.println("in LEAVE");
             // state var
             currentFloor = atFloorArray.getCurrentFloor();
             // state actions for 'OPERATING'
             mDesiredFloor.set(target.f, target.d, target.b);
-// #transition 'T11.3'
             if (atFloorArray.getCurrentFloor() == MessageDictionary.NONE
                     && !(doorClosedBack.getBothClosed() && doorClosedFront
                             .getBothClosed())) {
+// #transition 'T11.3'
                 newState = State.EMERGENCY;
-            } else if (callArray.size() == 0 && target.d == Direction.STOP) {
+            } else if (callArray.size() == 0 /*&& target.d == Direction.STOP*/) {
 // #transition 'T11.2'
                 newState = State.IDLE;
             } else if (mCarLevelPosition.getPosition()%5000>200&&mCarLevelPosition.getPosition()%5000<4800) {
@@ -276,6 +275,7 @@ public class Dispatcher extends Controller {
     private Target getTarget() {
         Direction tmpDir = getTmpDir();
         List<Integer> floors = getCommitFloorList(tmpDir);
+        
         if (mDriveSpeed.getSpeed() < 0.3) {
             if ((mDriveSpeed.getDirection() == Direction.UP && mCarLevelPosition
                     .getPosition() % 5000 < 200)
@@ -287,14 +287,14 @@ public class Dispatcher extends Controller {
             }
         }
 
-        System.out.println("tmpDir: " + tmpDir + " speed: "
-                + mDriveSpeed.getSpeed() + " pos: "
-                + mCarLevelPosition.getPosition() + " looking at: "
-                + Arrays.toString(floors.toArray()));
+        //System.out.println("tmpDir: " + tmpDir + " speed: "
+        //        + mDriveSpeed.getSpeed() + " pos: "
+        //        + mCarLevelPosition.getPosition() + " looking at: "
+        //       + Arrays.toString(floors.toArray()));
         if (tmpDir.equals(Direction.STOP)) {// idle, choose any one)
             currentFloor = Math
                     .round((mCarLevelPosition.getPosition() / 5000) + 1);
-            System.out.println("currentFloor " + currentFloor);
+            //System.out.println("currentFloor " + currentFloor);
             if (callArray.isCalled(currentFloor, Direction.STOP)) {
                 return target;
             }
@@ -378,7 +378,6 @@ public class Dispatcher extends Controller {
                     if (revUp < i) {
                         revUp = i;
                     }
-
                 }
             }
             if (revUp != 0) {
@@ -461,8 +460,8 @@ public class Dispatcher extends Controller {
             }
         }
 
-        System.out.println("no target in desired direction: " + tmpDir
-                + " from floors: " + Arrays.toString(floors.toArray()));
+        //System.out.println("no target in desired direction: " + tmpDir
+        //        + " from floors: " + Arrays.toString(floors.toArray()));
         return target;
         // no call at the desired direction,
         // throw new RuntimeException(
