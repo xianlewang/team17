@@ -4,7 +4,7 @@
 ; carposition_defines.mf
 
 ;can id used
-#DEFINE CAR_LEVEL_POSITION_CAN_ID                  0xCB03C00
+#DEFINE CAR_LEVEL_POSITION_CAN_ID              0x0C517200
 
 ;message period
 #DEFINE MESSAGE_PERIOD 50ms

@@ -54,7 +54,7 @@
 5.1s I MESSAGE_PERIOD N DESIRED_FLOOR_CAN_ID DesiredFloor = 4 FRONT UP
 
 ; T 7.2
-5.8s A F CarLantern UP : lighted == false
+5.8s A F CarLantern UP : lighted == true
 5.8s A S LanternControl[UP] : STATE == Lantern_On
 
 ; set condition to T 7.4
