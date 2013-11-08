@@ -10,48 +10,48 @@
 ;definitions for inputs' id
 
 ;mAtFloor
-;mAtFloor 1 FRONT ID = 0x0C4C2800 + (1-1)*2 + 0
-#DEFINE AT_FLOOR_1F_CAN_ID 0xC4C2800
-;mAtFloor 4 FRONT ID = 0x0C4C2800 + (4-1)*2 + 0
-#DEFINE AT_FLOOR_4F_CAN_ID 0xC4C2806
+;mAtFloor 1 FRONT ID = 0x0C4D6F00 + (1-1)*2 + 0
+#DEFINE AT_FLOOR_1F_CAN_ID 0xC4D6F00
+;mAtFloor 4 FRONT ID = 0x0C4D6F00 + (4-1)*2 + 0
+#DEFINE AT_FLOOR_4F_CAN_ID 0xC4D6F06
 
 ;mDesiredFloor
-;ID = 0x0F0CB600
-#DEFINE DESIRED_FLOOR_CAN_ID 0xF0CB600 
+;ID = 0x0C4E7000
+#DEFINE DESIRED_FLOOR_CAN_ID 0x0C4E7000 
 
 ;mDoorClosed
-;mDoorClosed FRONT LEFT ID = 0x0D145000 + 0*2 + 0
-#DEFINE DOOR_CLOSED_FL_CAN_ID 0xD145000
+;mDoorClosed FRONT LEFT ID = 0x0CB27900 + 0*2 + 0
+#DEFINE DOOR_CLOSED_FL_CAN_ID 0x0CB27900
 
 
 
 ;definitions for outputs's id
 
 ;mHallCall
-;mHallCall 4 FRONT UP ID = 0x0F0FB900 + (4-1)*4 + 0*2 + 0
-#DEFINE HALL_CALL_4FU_CAN_ID 0xF0FB90C
+;mHallCall 4 FRONT UP ID = 0x0CB17800 + (4-1)*4 + 0*2 + 0
+#DEFINE HALL_CALL_4FU_CAN_ID 0x0CB1780C
 
 ;mHallLight
-;mHallLight 4 FRONT UP ID = 0x0F10B900 + (4-1)*4 + 0*2 + 0
-#DEFINE HALL_LIGHT_4FU_CAN_ID 0xF10B90C
+;mHallLight 4 FRONT UP ID = 0x0CB07800 + (4-1)*4 + 0*2 + 0
+#DEFINE HALL_LIGHT_4FU_CAN_ID 0x0CB0780C
 
 ;----------------------------------------------
 
-;mDriveSpeed = 0x0F0AB500
-#DEFINE DRIVE_SPEED_CAN_ID  0x0F0AB500
+;mDriveSpeed = 0x0BE86400
+#DEFINE DRIVE_SPEED_CAN_ID  0x0BE86400
 
-;mDoorOpened = 0x0EA4A000 + 0 + 0 = 0x0EA4A001
-#DEFINE DOOR_OPENED_FL_CAN_ID  0x0EA4A000
+;mDoorOpened = 0x0D157C00 + 0 + 0 = 0x0D157C00
+#DEFINE DOOR_OPENED_FL_CAN_ID  0x0D157C00
 
-;mCarWeight = 0x0DDC7800
-#DEFINE CAR_WEIGHT_CAN_ID  0x0DDC7800
+;mCarWeight = 0x0D187E00
+#DEFINE CAR_WEIGHT_CAN_ID  0x0D187E00
 
 ;intialize 
 0s I MESSAGE_PERIOD F HallCall 4 FRONT UP  = true
 0s I MESSAGE_PERIOD N DESIRED_FLOOR_CAN_ID DesiredFloor = 4 FRONT STOP
 0s I MESSAGE_PERIOD N DOOR_CLOSED_FL_CAN_ID DoorClosed FRONT LEFT = true
 1s I MESSAGE_PERIOD F HallCall 4 FRONT UP  = false
-2s I MESSAGE_PERIOD N DRIVE_SPEED_CAN_ID DriveCommand = STOP STOP
+2s I MESSAGE_PERIOD N DRIVE_SPEED_CAN_ID DriveSpeed = 0 STOP
 2s I MESSAGE_PERIOD N AT_FLOOR_4F_CAN_ID AtFloor 4 FRONT = true
 2s I MESSAGE_PERIOD N DOOR_CLOSED_FL_CAN_ID DoorClosed FRONT LEFT = false
 2.5s I MESSAGE_PERIOD N DESIRED_FLOOR_CAN_ID DesiredFloor = 5 FRONT STOP
@@ -61,14 +61,14 @@
 ;****verify precondition
 4s A N AT_FLOOR_4F_CAN_ID AtFloor 4 FRONT : getValue == true
 4s A F HallLight 4 FRONT UP : lighted == false
-4s A N HALL_LIGHT_4FU_CAN_ID Boolean : getValue == false ;mHallLight
-4s A N HALL_CALL_4FU_CAN_ID Boolean : getValue == false ;mHallCall
+4s A N HALL_LIGHT_4FU_CAN_ID HallLight 4 FRONT UP : getValue == false ;mHallLight
+4s A N HALL_CALL_4FU_CAN_ID HallCall 4 FRONT UP : getValue == false ;mHallCall
 4s A S HallButtonControl[4][FRONT][UP] : STATE == LIGHT_OFF
 4s A F DoorMotor FRONT LEFT : command == STOP
 
 ;#arc '1B/1a'
 6s I MESSAGE_PERIOD N DOOR_OPENED_FL_CAN_ID DoorOpened FRONT LEFT = false
-6s A F DoorMotor FRONT LEFT : command == NUDGE
+6s A F DoorMotor FRONT LEFT : command == CLOSE
 
 ;#arc '1B/2'
 ;#arc '1B/3a'
@@ -78,8 +78,8 @@
 
 ;#arc '1B/4'
 10s A F HallLight 4 FRONT UP : lighted == true
-10s A N HALL_LIGHT_4FU_CAN_ID Boolean : getValue == true ;mHallLight
-10s A N HALL_CALL_4FU_CAN_ID Boolean : getValue == true ;mHallCall
+10s A N HALL_LIGHT_4FU_CAN_ID HallLight 4 FRONT UP : getValue == true ;mHallLight
+10s A N HALL_CALL_4FU_CAN_ID HallCall 4 FRONT UP : getValue == true ;mHallCall
 
 ;#arc '1B/5a'
 12s I MESSAGE_PERIOD N DOOR_CLOSED_FL_CAN_ID DoorClosed FRONT LEFT = true
@@ -91,4 +91,4 @@
 15s A N AT_FLOOR_4F_CAN_ID AtFloor 4 FRONT : getValue == true
 15s A N DOOR_CLOSED_FL_CAN_ID DoorClosed FRONT LEFT : getValue == true
 15s A F HallLight 4 FRONT UP : lighted == true
-15s A N HALL_LIGHT_4FU_CAN_ID Boolean : getValue == true ;mHallLight
+15s A N HALL_LIGHT_4FU_CAN_ID HallLight 4 FRONT UP : getValue == true ;mHallLight

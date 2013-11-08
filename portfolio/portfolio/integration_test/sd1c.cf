@@ -3,5 +3,5 @@
 ; Xianle Wang(xianlew)
 ; 1C.cf
 
-HallButtonControl 4 FRONT UP 100ms true
-DoorControl FRONT LEFT 10ms TRUE
+HallButtonControl 4 FRONT UP 100ms false
+DoorControl FRONT LEFT 10ms FALSE
