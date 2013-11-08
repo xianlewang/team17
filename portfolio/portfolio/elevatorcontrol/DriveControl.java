@@ -26,8 +26,6 @@ import simulator.payloads.DrivePayload;
 import simulator.payloads.DrivePayload.WriteableDrivePayload;
 import simulator.payloads.DriveSpeedPayload;
 import simulator.payloads.DriveSpeedPayload.ReadableDriveSpeedPayload;
-import simulator.payloads.EmergencyBrakePayload.ReadableEmergencyBrakePayload;
-import simulator.payloads.HoistwayLimitPayload.ReadableHoistwayLimitPayload;
 import simulator.payloads.translators.BooleanCanPayloadTranslator;
 
 /**
@@ -218,6 +216,7 @@ public class DriveControl extends Controller {
      * each state.  Each case block executes actions for that state, then executes
      * a transition to the next state if the transition conditions are met.
      */
+	@Override
 	public void timerExpired(Object callbackData) {
 		State newState = state;
 		
@@ -241,8 +240,8 @@ public class DriveControl extends Controller {
 				desiredFloor = getDesiredFloor();
 				
 				commandSpeed = Speed.STOP;
-				localDrive.set(commandSpeed, Direction.STOP);
-				mDrive.set(commandSpeed, Direction.STOP);
+				localDrive.set(commandSpeed, Direction.STOP);//wxl
+				mDrive.set(commandSpeed, Direction.STOP);//wxl
 				mDriveSpeed.set(localDriveSpeed.speed(), localDriveSpeed.direction());
 								 
 //#transition 'T6.1'
@@ -317,7 +316,7 @@ public class DriveControl extends Controller {
 					  newState = State.STOP;
 				 }
 //#transition 'T6.11'
-				 else if((Math.abs(desiredFloorHeight - (double)mCarLevelPosition.getPosition()) > 1000 && desiredFloor > 0) && (localDriveSpeed.speed() >= 0.25)) {	 				 
+				 else if((Math.abs(desiredFloorHeight - mCarLevelPosition.getPosition()) > 1000 && desiredFloor > 0) && (localDriveSpeed.speed() >= 0.25)) {	 				 
 					newState = State.FAST_UP;
 				 }
 				 else {
@@ -347,7 +346,7 @@ public class DriveControl extends Controller {
 					  newState = State.STOP;
 				 }
 //#transition 'T6.13'
-				 else if((Math.abs(desiredFloorHeight - (double)mCarLevelPosition.getPosition()) > 1000 && desiredFloor > 0) && (localDriveSpeed.speed() >= 0.25)) {
+				 else if((Math.abs(desiredFloorHeight - mCarLevelPosition.getPosition()) > 1000 && desiredFloor > 0) && (localDriveSpeed.speed() >= 0.25)) {
 					newState = State.FAST_DOWN;
 				 }				 
 				 else {
@@ -369,7 +368,7 @@ public class DriveControl extends Controller {
 				 mDriveSpeed.set(localDriveSpeed.speed(), localDriveSpeed.direction());
 				 
 //#transition 'T6.12'
-				 if ((Math.abs(desiredFloorHeight - (double)mCarLevelPosition.getPosition()) <= 1000 && desiredFloor > 0 /* && localDriveSpeed.speed() < 0.25 */) || (mHoistwayLimitDown.getValue()==true || mHoistwayLimitUp.getValue()==true || mEmergencyBrake.getValue()==true)) {
+				 if ((Math.abs(desiredFloorHeight - mCarLevelPosition.getPosition()) <= 1000 && desiredFloor > 0 /* && localDriveSpeed.speed() < 0.25 */) || (mHoistwayLimitDown.getValue()==true || mHoistwayLimitUp.getValue()==true || mEmergencyBrake.getValue()==true)) {
 					  newState = State.SLOW_UP;
 				 }
 				 else {
@@ -391,7 +390,7 @@ public class DriveControl extends Controller {
 				 mDriveSpeed.set(localDriveSpeed.speed(), localDriveSpeed.direction());
 				 
 //#transition 'T6.14'
-				 if ((Math.abs(desiredFloorHeight - (double)mCarLevelPosition.getPosition()) <= 1000 && desiredFloor > 0 /* && localDriveSpeed.speed() < 0.25 */) || (mHoistwayLimitDown.getValue()==true || mHoistwayLimitUp.getValue()==true || mEmergencyBrake.getValue()==true)) {
+				 if ((Math.abs(desiredFloorHeight - mCarLevelPosition.getPosition()) <= 1000 && desiredFloor > 0 /* && localDriveSpeed.speed() < 0.25 */) || (mHoistwayLimitDown.getValue()==true || mHoistwayLimitUp.getValue()==true || mEmergencyBrake.getValue()==true)) {
 					  newState = State.SLOW_DOWN;
 				 }
 				 else {

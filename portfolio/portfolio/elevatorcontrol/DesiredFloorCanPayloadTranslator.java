@@ -70,7 +70,7 @@ public class DesiredFloorCanPayloadTranslator extends CanPayloadTranslator {
 
 
     /**
-     * Set the floor for mDesiredFloor into the loweest 5 bits of the payload
+     * Set the floor for mDesiredFloor into the loweest 4 bits of the payload
      * @param floor
      */
     public void setFloor(int floor) {
@@ -88,7 +88,7 @@ public class DesiredFloorCanPayloadTranslator extends CanPayloadTranslator {
     }
 
     /**
-     * Set the direction for mDesiredFloor in bits 5-8 of the can payload
+     * Set the direction for mDesiredFloor in bits 4-7 of the can payload
      * @param dir
      */
     public void setDirection(Direction dir) {
@@ -112,7 +112,7 @@ public class DesiredFloorCanPayloadTranslator extends CanPayloadTranslator {
     }
 
     /**
-     * Set the hallway for mDesiredFloor in bits 9-12 of the can payload
+     * Set the hallway for mDesiredFloor in bits 8-11 of the can payload
      * @param hallway
      */
     public void setHallway(Hallway hallway) {

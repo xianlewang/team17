@@ -47,7 +47,8 @@ public class SamplePerformanceMonitor extends RuntimeMonitor {
         return arr;
     }
 
-    public void timerExpired(Object callbackData) {
+    @Override
+	public void timerExpired(Object callbackData) {
         //do nothing
     }
 

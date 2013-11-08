@@ -70,7 +70,8 @@ public class Proj7RuntimeMonitor extends RuntimeMonitor {
         arr[2] = "Reversal Count = " + ReversalCount;  
         return arr;
     }
-    public void timerExpired(Object callbackData) {
+    @Override
+	public void timerExpired(Object callbackData) {
         //do nothing
     }
     /**************************************************************************
