@@ -15,8 +15,6 @@ import simulator.framework.Direction;
 import simulator.framework.Hallway;
 import simulator.framework.ReplicationComputer;
 import simulator.framework.Side;
-import simulator.payloads.AtFloorPayload;
-import simulator.payloads.AtFloorPayload.ReadableAtFloorPayload;
 import simulator.payloads.CanMailbox;
 import simulator.payloads.CanMailbox.ReadableCanMailbox;
 import simulator.payloads.CanMailbox.WriteableCanMailbox;
@@ -42,12 +40,12 @@ public class HallButtonControl extends Controller {
 	// receive hall call from the other button
 	private WriteableCanMailbox networkHallLightOut;
 	// translator for the hall light message -- this is a generic translator
-	private BooleanCanPayloadTranslator mHallLight;
+	private HallLightCanPayloadTranslator mHallLight;
 
 	// network, sent mHallCal
 	private WriteableCanMailbox networkHallCall;
 	// translator for mHallCall
-	private BooleanCanPayloadTranslator mHallCall;
+	private HallCallCanPayloadTranslator mHallCall;
 
 	// received door closed message
 	private ReadableCanMailbox networkDoorClosed;
@@ -158,7 +156,7 @@ public class HallButtonControl extends Controller {
 		 * may wish to write your own translators, although you can do so at any
 		 * time.
 		 */
-		mHallLight = new BooleanCanPayloadTranslator(networkHallLightOut);
+		mHallLight = new HallLightCanPayloadTranslator(networkHallLightOut, floor, hallway, direction);
 		// register the mailbox to have its value broadcast on the network
 		// periodically
 		// with a period specified by the period parameter.
@@ -169,7 +167,7 @@ public class HallButtonControl extends Controller {
 						+ ReplicationComputer.computeReplicationId(floor,
 								hallway, direction));
 		// translator
-		mHallCall = new BooleanCanPayloadTranslator(networkHallCall);
+		mHallCall = new HallCallCanPayloadTranslator(networkHallCall, floor, hallway, direction);
 		// register to periodic sent message
 		canInterface.sendTimeTriggered(networkHallCall, period);
 		/*
@@ -232,6 +230,7 @@ public class HallButtonControl extends Controller {
 	 * then executes a transition to the next state if the transition conditions
 	 * are met.
 	 */
+	@Override
 	public void timerExpired(Object callbackData) {
 		State newState = state;
 		switch (state) {

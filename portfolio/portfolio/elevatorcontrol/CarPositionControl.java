@@ -72,7 +72,8 @@ public class CarPositionControl extends Controller{
     	timer.start(period);
     }
     
-    public void timerExpired(Object callbackData) {
+    @Override
+	public void timerExpired(Object callbackData) {
     	State nextstate = state;
     	switch (state) {
     	case STATE_INITIAL:

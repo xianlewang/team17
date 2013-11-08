@@ -8,7 +8,6 @@ package simulator.elevatorcontrol;
 
 import java.util.BitSet;
 import simulator.framework.Direction;
-import simulator.framework.Speed;
 import simulator.payloads.CanMailbox.ReadableCanMailbox;
 import simulator.payloads.CanMailbox.WriteableCanMailbox;
 import simulator.payloads.translators.CanPayloadTranslator;

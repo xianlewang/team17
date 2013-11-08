@@ -46,11 +46,11 @@ public class CarButtonControl extends Controller{
     //receive car light
     private WriteableCanMailbox networkCarLight;
     //translator for the car light message -- this is a generic translator
-    private BooleanCanPayloadTranslator mCarLight;
+    private CarLightCanPayloadTranslator mCarLight;
     // receive car call from the other button
     private WriteableCanMailbox networkCarCall;
     //translator for the car call message -- this is a generic translator
-    private BooleanCanPayloadTranslator mCarCall;
+    private CarCallCanPayloadTranslator mCarCall;
     //these variables keep track of which instance this is.
     private final Hallway hallway;
     private final int floor;
@@ -106,18 +106,19 @@ public class CarButtonControl extends Controller{
     	
     	networkCarLight = CanMailbox.getWriteableCanMailbox(MessageDictionary.CAR_LIGHT_BASE_CAN_ID + 
     			ReplicationComputer.computeReplicationId(floor, hallway));
-    	mCarLight = new BooleanCanPayloadTranslator(networkCarLight);
+    	mCarLight = new CarLightCanPayloadTranslator(networkCarLight, floor, hallway);
     	canInterface.sendTimeTriggered(networkCarLight, period);
     	
     	networkCarCall = CanMailbox.getWriteableCanMailbox(MessageDictionary.CAR_CALL_BASE_CAN_ID + 
     			ReplicationComputer.computeReplicationId(floor, hallway));
-    	mCarCall = new BooleanCanPayloadTranslator(networkCarCall);
+    	mCarCall = new CarCallCanPayloadTranslator(networkCarCall, floor, hallway);
     	canInterface.sendTimeTriggered(networkCarCall, period);
     	
     	timer.start(period);
     }
     
-    public void timerExpired(Object callbackData) {
+    @Override
+	public void timerExpired(Object callbackData) {
     	State nextstate = state;
     	switch (state) {
     	case STATE_LIGHT_OFF:
