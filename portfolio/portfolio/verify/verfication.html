@@ -22,6 +22,8 @@ Verification<br>
 For high level requirement R-T6, the Runtime Monitor should check whether the car 
 stops at floors that have no pending calls. The monitor shall throw a warning every 
 time the motor was commanded to stop while there are not pending calls at CurrentFloor. 
+The states colored in green are valid, while the one colored in red is invalid. 
+If the elevator enters an invalid state, then the monitor should throw a warning. 
 The statechart for high level requirement R-T6 is: <br>
 <div style="text-align: center;">
 		<a href="R-T6-statechart.png"><img
