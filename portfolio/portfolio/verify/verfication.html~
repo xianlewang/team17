@@ -18,6 +18,7 @@ Verification<br>
 <hr style="width: 100%; height: 2px;">
 <h2>Verification Framework Description<br>
 </h2>
+<br>
 For high level requirement R-T6, the Runtime Monitor should check whether the car 
 stops at floors that have no pending calls. The monitor shall throw a warning every 
 time the motor was commanded to stop while there are not pending calls at CurrentFloor. 
@@ -29,20 +30,6 @@ The statechart for high level requirement R-T6 is: <br>
 			alt="R-T6-statechart.png"
 			src="R-T6-statechart.png"
 			style="border: 0px solid; width: 750px; height: 369px;"></a><br>
-</div>
-<br>
-For high level requirement R-T7, the Runtime Monitor should check whether the car 
-opens Doors at Hallways that have no pending calls. The monitor shall throw a warning every 
-time the Doormotors at hallway b were commanded to open while there are not pending calls at CurrentFloor, 
-hallway b. 
-The states colored in green are valid, while the one colored in red is invalid. 
-If the elevator enters an invalid state, then the monitor should throw a warning. 
-The statechart for high level requirement R-T7 is: <br>
-<div style="text-align: center;">
-		<a href="R-T7-statechart.png"><img
-			alt="R-T7-statechart.png"
-			src="R-T7-statechart.png"
-			style="border: 0px solid; width: 782px; height: 380px;"></a><br>
 </div>
 <br>
 For high-level requirement RT9, the invalid state is the car is moving too slow when it’s supposed to be moving faster. The car will travel about 0.04m after leaving a certain floor and moving in slow speed. Thus, if the car speed is less than 0.25m/s under the condition that mCarLevelPosition is still quite far away from desired floor (e.g. more than 1 meter), it is moving too slow and a warning should be issued.
