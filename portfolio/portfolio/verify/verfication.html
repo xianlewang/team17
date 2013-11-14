@@ -47,7 +47,7 @@ The statechart for high level requirement R-T7 is: <br>
 <!--Qiang R8_1-->
 <br>
 For high-level requirement RT8-1:
-At first, the monitor is in “Lantern Off” state. 
+At first, the monitor is in Lantern Off state. 
 1. If door is not closed and there are pending calls at other floors. The car lantern will be turn on based on the target floor compared with current floor. This is the correct implementation.
 2. If door is not closed and there are no pending calls at other floors. If the car lantern is turn on, then this is the wrong implementation. The monitor should show some warnings to the tester.
 <br>
@@ -59,7 +59,7 @@ At first, the monitor is in “Lantern Off” state.
 </div>
 <br>
 For high-level requirement RT8-2:
-At first, the monitor is in “Lantern Off” state.
+At first, the monitor is in Lantern Off state.
 1. If door is opening and Desired Direction is up, it means the car will keep going up after it stops at this floor. So lantern[up] is on. In this case, if lantern[down] is turned on before door closed. Then it is a wrong implementation.
 2. If door is opening and Desired Direction is down, it means the car will keep going down after it stops at this floor. So lantern[down] is on. In this case, if lantern[up] is turned on before door closed. Then it is a wrong implementation.
 <br>
@@ -71,7 +71,7 @@ At first, the monitor is in “Lantern Off” state.
 </div>
 <br>
 For high-level requirement RT8-3:
-At first, the monitor is in “Lantern Off” state.
+At first, the monitor is in Lantern Off state.
 1. If door is opening and Desired Direction is up, it means the car will keep going up after it stops at this floor. So If the target floor is smaller or equal to current floor, then it means the car lantern indicates the wrong direction. So the implementation is wrong.
 2. If door is opening and Desired Direction is down, it means the car will keep going down after it stops at this floor. So If the target floor is larger or equal to current floor, then it means the car lantern indicates the wrong direction. So the implementation is wrong.
 <br>
