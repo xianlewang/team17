@@ -1,0 +1,80 @@
+
+Simulator Parameters:
+Command line = -b 200 -gui -pf proj10acceptance1.pass -monitor Proj11RuntimeMonitor
+RandomSeed = 1384477001007
+CanNetworkBitTime = 5000 ns
+Effective Can Bitrate = 199999.99999999997
+Run Time = null
+Real time rate = null
+Acceptance Test File = proj10acceptance1.pass
+Monitors: Proj11RuntimeMonitor  
+
+STATISTICS FOR ELEVATOR SIMULATION PASSENGER DELIVERY
+-----------------------------------------------------
+
+
+These passengers were delivered:
+Passenger 9: INJECTED AT 5.0s and DELIVERED in 24.272s
+  Satisfaction score: 100.0
+Passenger 0: INJECTED AT 0.0s and DELIVERED in 42.211s
+  Satisfaction score: 100.0
+Passenger 2: INJECTED AT 0.6s and DELIVERED in 59.52s
+  Satisfaction score: 100.0
+Passenger 5: INJECTED AT 3.0s and DELIVERED in 59.215s
+  Satisfaction score: 100.0
+Passenger 7: INJECTED AT 3.0s and DELIVERED in 60.644s
+  Satisfaction score: 100.0
+Passenger 4: INJECTED AT 2.0s and DELIVERED in 92.724s
+  Satisfaction score: 100.0
+Passenger 3: INJECTED AT 1.0s and DELIVERED in 107.324s
+  Satisfaction score: 100.0
+Passenger 1: INJECTED AT 0.3s and DELIVERED in 109.798s
+  Satisfaction score: 100.0
+Passenger 6: INJECTED AT 3.0s and DELIVERED in 118.545s
+  Satisfaction score: 100.0
+Passenger 16: INJECTED AT 101.0s and DELIVERED in 46.54s
+  Satisfaction score: 100.0
+Passenger 15: INJECTED AT 100.0s and DELIVERED in 74.233s
+  Satisfaction score: 100.0
+Passenger 14: INJECTED AT 66.2s and DELIVERED in 134.467s
+  Satisfaction score: 100.0
+Passenger 13: INJECTED AT 58.0s and DELIVERED in 155.626s
+  Satisfaction score: 100.0
+Passenger 12: INJECTED AT 7.1s and DELIVERED in 246.29s
+  Satisfaction score: 100.0
+Passenger 10: INJECTED AT 6.0s and DELIVERED in 260.735s
+  Satisfaction score: 100.0
+Passenger 11: INJECTED AT 7.0s and DELIVERED in 277.947s
+  Satisfaction score: 100.0
+Passenger 8: INJECTED AT 4.0s and DELIVERED in 294.577s
+  Satisfaction score: 100.0
+
+Passenger Delivery Summary
+Delivered: 17
+Stranded: 0
+Total: 17
+
+Deliver Stats (lower is better):
+Average_delivery_time: 127.333
+Maximum_delivery_time:  294.577
+Delivery_performance_score:  803.911
+
+Satisfaction Stats (higher is better):
+Average_satisfaction_score: 100.000
+Min_satisfaction_score:  100.000
+Satisfaction_performance_score:  500.000
+
+
+
+
+Network Utilization Summary:
+Recent: 91.20 % Max: 91.20 %  Overall:  91.20 %
+
+Monitors Warning Results: 
+RuntimeMonitor generated 1 warnings.
+
+Monitors Summmary Results: 
+Overweight Count = 1
+NoCall Count = 0
+Reversal Count = 59.04
+
