@@ -115,15 +115,23 @@ public class Proj11RuntimeMonitor extends RuntimeMonitor {
     private void doorOpening(Hallway hallway) {
     	// if door opens at a floor but no hall call or car call then add 1 to the noCallCount;
     	if (noHallCall[0] && noCarCall[0]) {
+<<<<<<< HEAD
     		// R-T7
     		warning("No Call At Front");
+=======
+    		warning("R-T.7 Violated: No Call At Front");
+>>>>>>> 6bc46e06803e7ce9107b6424f96c2b1d3df2b914
     		noCallCount += 1;
     		noHallCall[0] = false;
     		noCarCall[0]  = false;
     	}
     	if (noHallCall[1] && noCarCall[1]) {
+<<<<<<< HEAD
     		// R-T7
     		warning("No Hall Call At Back");
+=======
+    		warning("R-T.7 Violated: No Hall Call At Back");
+>>>>>>> 6bc46e06803e7ce9107b6424f96c2b1d3df2b914
     		noCallCount += 1;
     		noHallCall[1] = false;
     		noCarCall[1]  = false;
@@ -183,7 +191,11 @@ public class Proj11RuntimeMonitor extends RuntimeMonitor {
     private void doorNudging(Hallway hallway) {
     	//R-T10
     	if (tmpReversalCount[hallway.ordinal()][0] == 0 && tmpReversalCount[hallway.ordinal()][1] == 0) {
+<<<<<<< HEAD
     		warning("More than one revesal signal before ndging" + tmpReversalCount[hallway.ordinal()][0] + " " + tmpReversalCount[hallway.ordinal()][1]);
+=======
+    		warning("R-T.10 Violated: More than one revesal signal before ndging" + tmpReversalCount[hallway.ordinal()][0] + " " + tmpReversalCount[hallway.ordinal()][1]);
+>>>>>>> 6bc46e06803e7ce9107b6424f96c2b1d3df2b914
     	}
     	tmpReversalCount[hallway.ordinal()][0] = 0;
     	tmpReversalCount[hallway.ordinal()][1] = 0;
@@ -210,7 +222,11 @@ public class Proj11RuntimeMonitor extends RuntimeMonitor {
     private void driveStop() {
     	// R-T6
     	if (!haveCall(currentFloor)) {
+<<<<<<< HEAD
     		warning("Car Stop at floor where no call appears");
+=======
+    		warning("R-T.6 Violated: Car Stop at floor where no call appears");
+>>>>>>> 6bc46e06803e7ce9107b6424f96c2b1d3df2b914
     	}
     }
     private void driveFast() {
@@ -223,7 +239,11 @@ public class Proj11RuntimeMonitor extends RuntimeMonitor {
     	if ((carPosition < slowRangeBottom || carPosition > slowRangeTop) && carPosition != 0) {
     		//warning("CarPosition: " + carLevelPosition.position());
     		//warning("Car Floor " + carPositionIndicator.floor());
+<<<<<<< HEAD
     		warning("Drive command should be fast rather than slow" + " CurrentFloor is " + carPositionIndicator.floor() + " currentPosition is " + carPositionIndicator.floor());
+=======
+    		warning("R-T.9 Violated: Drive command should be fast rather than slow" + " CurrentFloor is " + carPositionIndicator.floor() + " currentPosition is " + carPositionIndicator.floor());
+>>>>>>> 6bc46e06803e7ce9107b6424f96c2b1d3df2b914
     	}
     }
     
@@ -246,6 +266,7 @@ public class Proj11RuntimeMonitor extends RuntimeMonitor {
     	lanternUpOn = true;
     	// RT 8-1
     	if (!havePendingCall()) {
+<<<<<<< HEAD
     		warning("Lantern is on when there are no pending call");
     	}
     	// RT 8-2
@@ -255,6 +276,17 @@ public class Proj11RuntimeMonitor extends RuntimeMonitor {
     	// RT 8-3
     	if (!havePendingCallUp(currentFloor)) {
     		warning("Lantern[Up] is on when no more pending call above this floor.");
+=======
+    		warning("R-T.8-1 Violated: Lantern is on when there are no pending call");
+    	}
+    	// RT 8-2
+    	if (lanternDownOn) {
+    		warning("R-T.8-2 Violated: Lantern[Down] is already on, passenger is confused");
+    	}
+    	// RT 8-3
+    	if (!havePendingCallUp(currentFloor)) {
+    		warning("R-T.8-3 Violated: Lantern[Up] is on when no more pending call above this floor.");
+>>>>>>> 6bc46e06803e7ce9107b6424f96c2b1d3df2b914
     	}
     }
     /**
@@ -265,6 +297,7 @@ public class Proj11RuntimeMonitor extends RuntimeMonitor {
     	lanternDownOn = true;
     	// RT 8-1
     	if (!havePendingCall()) {
+<<<<<<< HEAD
     		warning("Lantern is on when there are no pending call");
     	}
     	// RT 8-2
@@ -274,13 +307,28 @@ public class Proj11RuntimeMonitor extends RuntimeMonitor {
     	// RT 8-3
     	if (!havePendingCallDown(currentFloor)) {
     		warning("Lantern[Down] is on when no more pending call below this floor.");
+=======
+    		warning("R-T.8-1 Violated: Lantern is on when there are no pending call");
+    	}
+    	// RT 8-2
+    	if (lanternUpOn) {
+    		warning("R-T.8-2 Violated: Lantern[Up] is already on, passenger is confused");
+    	}
+    	// RT 8-3
+    	if (!havePendingCallDown(currentFloor)) {
+    		warning("R-T.8-3 Violated: Lantern[Down] is on when no more pending call below this floor.");
+>>>>>>> 6bc46e06803e7ce9107b6424f96c2b1d3df2b914
     	}
     }
     /**
      * Called when both lanterns are on
      */
     private void lanternBoth() {
+<<<<<<< HEAD
     	warning("Both lanterns are on at same time");
+=======
+    	warning("R-T.8 Violated: Both lanterns are on at same time");
+>>>>>>> 6bc46e06803e7ce9107b6424f96c2b1d3df2b914
     }
     
     /*************************************************************************

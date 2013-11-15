@@ -68,6 +68,7 @@ public class Dispatcher extends Controller {
     private Target target;
     private AtFloorArray atFloorArray = null;
     private int dwell = 1000;
+    private int wait = 0;
     // private Direction desiredDir = Direction.STOP;
     // private Direction movedDir = Direction.STOP;
     private CallArray callArray;
@@ -79,6 +80,9 @@ public class Dispatcher extends Controller {
 
     // state variable initialized to the initial state FLASH_OFF
     private State state = State.IDLE;
+    private Direction lanternDir = Direction.STOP;
+    private Direction movingDir = Direction.STOP;
+    
 
     /**
      * For your elevator controllers, you should make sure that the constructor
@@ -158,12 +162,14 @@ public class Dispatcher extends Controller {
      * are met.
      */
     @Override
-	public void timerExpired(Object callbackData) {
+    public void timerExpired(Object callbackData) {
         State newState = state;
         switch (state) {
         case IDLE:
             //System.out.println("in IDLE");
             // state var
+            wait=0;
+            target = new Target(currentFloor, Direction.STOP, Hallway.NONE);
             currentFloor = atFloorArray.getCurrentFloor();
             // state actions for 'HOLD'
             mDesiredFloor.set(currentFloor, Direction.STOP, Hallway.NONE);
@@ -177,14 +183,16 @@ public class Dispatcher extends Controller {
                 newState = State.EMERGENCY;
             } else if (callArray.size() > 0) {
 // #transition 'T11.1'
-                newState = State.OPERATING;
+                newState = State.REACH;
+                lanternDir = Direction.STOP;
             }
             break;
         case OPERATING:
             //System.out.println("in OPERATING");
             // state var
+            wait=0;
             currentFloor = atFloorArray.getCurrentFloor();
-            target = getTarget();
+            target = getTarget(movingDir);
             // state actions for 'OPERATING'
             mDesiredFloor.set(target.f, target.d, target.b);
 // #transition 'T11.3'
@@ -192,13 +200,11 @@ public class Dispatcher extends Controller {
                     && !(doorClosedBack.getBothClosed() && doorClosedFront
                             .getBothClosed())) {
                 newState = State.EMERGENCY;
-            } else if (callArray.size() == 0 /*&& target.d == Direction.STOP*/) {
-// #transition 'T11.2'
-                newState = State.IDLE;
             } else if (!(doorClosedBack.getBothClosed() && doorClosedFront
                     .getBothClosed()) && currentFloor == target.f) {
 // #transition 'T11.4'
                 newState = State.REACH;
+                lanternDir  = target.d;
             }
             break;
         case EMERGENCY:
@@ -209,7 +215,7 @@ public class Dispatcher extends Controller {
             //System.out.println("in REACH");
             // state var
             currentFloor = atFloorArray.getCurrentFloor();
-            target = getTarget();
+            target = getTarget2(lanternDir);
             // state actions for 'OPERATING'
             mDesiredFloor.set(target.f, target.d, target.b);
 // #transition 'T11.3'
@@ -217,8 +223,11 @@ public class Dispatcher extends Controller {
                     && !(doorClosedBack.getBothClosed() && doorClosedFront
                             .getBothClosed())) {
                 newState = State.EMERGENCY;
-            } else if (callArray.size() == 0 /*&& target.d == Direction.STOP*/) {
+            } else if ((target.f == currentFloor &&(doorClosedBack.getBothClosed() && doorClosedFront
+                            .getBothClosed())&& wait>200)||(callArray.size()==0&&lanternDir == Direction.STOP)) {
 // #transition 'T11.2'
+                //System.out.println("to IDLE!-------------------------------------wait = "+wait);
+                wait = 0;
                 newState = State.IDLE;
             } else if (target.f!=currentFloor&&(doorClosedBack.getBothClosed() && doorClosedFront.getBothClosed())) {
 // #transition 'T11.6'
@@ -229,18 +238,15 @@ public class Dispatcher extends Controller {
             //System.out.println("in LEAVE");
             // state var
             currentFloor = atFloorArray.getCurrentFloor();
-            // state actions for 'OPERATING'
             mDesiredFloor.set(target.f, target.d, target.b);
             if (atFloorArray.getCurrentFloor() == MessageDictionary.NONE
                     && !(doorClosedBack.getBothClosed() && doorClosedFront
                             .getBothClosed())) {
 // #transition 'T11.3'
                 newState = State.EMERGENCY;
-            } else if (callArray.size() == 0 /*&& target.d == Direction.STOP*/) {
-// #transition 'T11.2'
-                newState = State.IDLE;
             } else if (mCarLevelPosition.getPosition()%5000>200&&mCarLevelPosition.getPosition()%5000<4800) {
 // #transition 'T11.5'
+                movingDir = mDriveSpeed.getDirection();
                 newState = State.OPERATING;
             }
             break;
@@ -271,30 +277,26 @@ public class Dispatcher extends Controller {
         // the timer
         timer.start(period);
     }
-
-    private Target getTarget() {
-        Direction tmpDir = getTmpDir();
+    //called when moving or reaching
+    private Target getTarget(Direction tmpDir) {
         List<Integer> floors = getCommitFloorList(tmpDir);
-        
-        if (mDriveSpeed.getSpeed() < 0.3) {
-            if ((mDriveSpeed.getDirection() == Direction.UP && mCarLevelPosition
-                    .getPosition() % 5000 < 200)
-                    || (mDriveSpeed.getDirection() == Direction.DOWN && mCarLevelPosition
-                            .getPosition() % 5000 > 4800)) {
-                int i = floors.indexOf(currentFloor);
-                if (i != -1)
-                    floors.remove(i);
-            }
-        }
+        //System.out.println(tmpDir+"/"+target.f+"+"+target.d);
+        // if (mDriveSpeed.getSpeed() < 0.3) {
+        //     if ((mDriveSpeed.getDirection() == Direction.UP && mCarLevelPosition
+        //             .getPosition() % 5000 < 200)
+        //             || (mDriveSpeed.getDirection() == Direction.DOWN && mCarLevelPosition
+        //                     .getPosition() % 5000 > 4800)) {
+        //         int i = floors.indexOf(currentFloor);
+        //         if (i != -1){
+        //             floors.remove(i);
+        //             //System.out.println("--------------------------------i="+i);
+        //         }
+        //     }
+        // }
 
-        //System.out.println("tmpDir: " + tmpDir + " speed: "
-        //        + mDriveSpeed.getSpeed() + " pos: "
-        //        + mCarLevelPosition.getPosition() + " looking at: "
-        //       + Arrays.toString(floors.toArray()));
-        if (tmpDir.equals(Direction.STOP)) {// idle, choose any one)
-            currentFloor = Math
-                    .round((mCarLevelPosition.getPosition() / 5000) + 1);
-            //System.out.println("currentFloor " + currentFloor);
+
+        //when from IDLE to REACH /when reach at car call
+        if (tmpDir.equals(Direction.STOP)) {
             if (callArray.isCalled(currentFloor, Direction.STOP)) {
                 return target;
             }
@@ -311,6 +313,7 @@ public class Dispatcher extends Controller {
                             i, Direction.DOWN));
                 }
             }
+            //System.out.println("!!!!!!!!");
             return target;
         }
 
@@ -336,7 +339,7 @@ public class Dispatcher extends Controller {
             }// end
             if (Math.min(carUp, sameUp) < 9) {
                 if (carUp < sameUp) {
-                    boolean flag1 = false;
+                    boolean flag1 = false;//has more calls ahead
                     for (int i = carUp + 1; i < 9; ++i) {
                         if (callArray.isCalled(i, Direction.UP)
                                 || callArray.isCalled(i, Direction.DOWN)
@@ -345,7 +348,7 @@ public class Dispatcher extends Controller {
                             break;
                         }
                     }
-                    boolean flag2 = false;
+                    boolean flag2 = false;//has more calls behind
                     for (int i = carUp - 1; i > 0; --i) {
                         if (callArray.isCalled(i, Direction.UP)
                                 || callArray.isCalled(i, Direction.DOWN)
@@ -358,7 +361,7 @@ public class Dispatcher extends Controller {
                         return new Target(carUp, Direction.UP,
                                 callArray.getHallway(carUp, Direction.STOP));
                     } else {
-                        if (callArray.isCalled(carUp, Direction.DOWN) || flag2) {
+                        if (callArray.isCalled(carUp, Direction.DOWN)|| flag2)  {
                             return new Target(carUp, Direction.DOWN,
                                     callArray.getHallway(carUp, Direction.DOWN));
                         } else {
@@ -375,7 +378,7 @@ public class Dispatcher extends Controller {
             for (int i : floors) {
                 if (callArray.isCalled(i, Direction.DOWN)) {// choose the
                                                             // furtherest
-                    if (revUp < i) {
+                    if (revUp < i&&i>currentFloor) {
                         revUp = i;
                     }
                 }
@@ -449,7 +452,7 @@ public class Dispatcher extends Controller {
             for (int i : floors) {
                 if (callArray.isCalled(i, Direction.UP)) {// choose the
                                                             // furtherest
-                    if (revDown > i) {
+                    if (revDown > i&&i<currentFloor) {
                         revDown = i;
                     }
                 }
@@ -460,14 +463,197 @@ public class Dispatcher extends Controller {
             }
         }
 
-        //System.out.println("no target in desired direction: " + tmpDir
-        //        + " from floors: " + Arrays.toString(floors.toArray()));
+        //wait++;
         return target;
-        // no call at the desired direction,
-        // throw new RuntimeException(
-        // "no call at the curr direction\ncurrDir = " + tmpDir+" rev: "+revDir
-        // + "\ncurr position = "
-        // + mCarLevelPosition.getPosition());
+    }
+
+    private Target getTarget2(Direction tmpDir) {
+        List<Integer> floors = getCommitFloorList(tmpDir);
+        //System.out.println(tmpDir+"/"+target.f+"+"+target.d);
+        // if (mDriveSpeed.getSpeed() < 0.3) {
+        //     if ((mDriveSpeed.getDirection() == Direction.UP && mCarLevelPosition
+        //             .getPosition() % 5000 < 200)
+        //             || (mDriveSpeed.getDirection() == Direction.DOWN && mCarLevelPosition
+        //                     .getPosition() % 5000 > 4800)) {
+        //         int i = floors.indexOf(currentFloor);
+        //         if (i != -1){
+        //             floors.remove(i);
+        //             //System.out.println("--------------------------------i="+i);
+        //         }
+        //     }
+        // }
+
+
+        //when from IDLE to REACH /when reach at car call
+        if (tmpDir.equals(Direction.STOP)) {
+            if (callArray.isCalled(currentFloor, Direction.STOP)) {
+                return target;
+            }
+            for (int i : floors) {// 1-8 floor
+                if (callArray.isCalled(i, Direction.STOP)) {
+                    return new Target(i, Direction.STOP, callArray.getHallway(
+                            i, Direction.STOP));
+                }
+                if (callArray.isCalled(i, Direction.UP)) {
+                    return new Target(i, Direction.UP, callArray.getHallway(i,
+                            Direction.UP));
+                } else if (callArray.isCalled(i, Direction.DOWN)) {
+                    return new Target(i, Direction.DOWN, callArray.getHallway(
+                            i, Direction.DOWN));
+                }
+            }
+            //System.out.println("!!!!!!!!");
+            return target;
+        }
+
+        // looking up
+        if (tmpDir == Direction.UP) {
+            int carUp = 9;
+            int sameUp = 9;
+            int revUp = 0;
+            for (int i : floors) {
+                // find nearest car call
+                if (callArray.isCalled(i, Direction.STOP)) {
+                    if (carUp > i) {
+                        carUp = i;
+                    }
+                }
+                // find nearest sameDir Hall call
+                if (callArray.isCalled(i, tmpDir)) {// choose the nearest
+                    if (sameUp > i) {
+                        sameUp = i;
+                    }
+                }
+
+            }// end
+            if (Math.min(carUp, sameUp) < 9) {
+                if (carUp < sameUp) {
+                    boolean flag1 = false;//has more calls ahead
+                    for (int i = carUp + 1; i < 9; ++i) {
+                        if (callArray.isCalled(i, Direction.UP)
+                                || callArray.isCalled(i, Direction.DOWN)
+                                || callArray.isCalled(i, Direction.STOP)) {
+                            flag1 = true;
+                            break;
+                        }
+                    }
+                    boolean flag2 = false;//has more calls behind
+                    for (int i = carUp - 1; i > 0; --i) {
+                        if (callArray.isCalled(i, Direction.UP)
+                                || callArray.isCalled(i, Direction.DOWN)
+                                || callArray.isCalled(i, Direction.STOP)) {
+                            flag2 = true;
+                            break;
+                        }
+                    }
+                    if (flag1||carUp==currentFloor) {
+                        return new Target(carUp, Direction.UP,
+                                callArray.getHallway(carUp, Direction.STOP));
+                    } else {
+                        if (callArray.isCalled(carUp, Direction.DOWN)|| flag2)  {
+                            return new Target(carUp, Direction.DOWN,
+                                    callArray.getHallway(carUp, Direction.DOWN));
+                        } else {
+                            return new Target(carUp, Direction.STOP,
+                                    callArray.getHallway(carUp, Direction.STOP));
+                        }
+                    }
+                } else if (sameUp <= carUp) {
+                    return new Target(sameUp, Direction.UP,
+                            callArray.getHallway(sameUp, Direction.UP));
+                }
+            }
+            // find furtherest revDir hal call
+            for (int i : floors) {
+                if (callArray.isCalled(i, Direction.DOWN)) {// choose the
+                                                            // furtherest
+                    if (revUp < i&&i>currentFloor) {
+                        revUp = i;
+                    }
+                }
+            }
+            if (revUp != 0) {
+                return new Target(revUp, Direction.DOWN, callArray.getHallway(
+                        revUp, Direction.DOWN));
+            }
+        }
+
+        // looking down
+        if (tmpDir == Direction.DOWN) {
+            int carDown = 0;
+            int sameDown = 0;
+            for (int i : floors) {
+                // find nearest car call
+                if (callArray.isCalled(i, Direction.STOP)) {
+                    if (carDown < i) {
+                        carDown = i;
+                    }
+                }
+                // find nearest sameDir Hall call
+                if (callArray.isCalled(i, Direction.DOWN)) {// choose the
+                                                            // nearest
+                    if (sameDown < i) {
+                        sameDown = i;
+                    }
+                }
+            }// end
+            if (Math.max(carDown, sameDown) > 0) {
+                if (carDown > sameDown) {
+                    boolean flag1 = false;
+                    for (int i = carDown - 1; i > 0; --i) {
+                        if (callArray.isCalled(i, Direction.UP)
+                                || callArray.isCalled(i, Direction.DOWN)
+                                || callArray.isCalled(i, Direction.STOP)) {
+                            flag1 = true;
+                            break;
+                        }
+                    }
+                    boolean flag2 = false;
+                    for (int i = carDown + 1; i < 9; ++i) {
+                        if (callArray.isCalled(i, Direction.UP)
+                                || callArray.isCalled(i, Direction.DOWN)
+                                || callArray.isCalled(i, Direction.STOP)) {
+                            flag2 = true;
+                            break;
+                        }
+                    }
+                    if (flag1 || carDown==currentFloor) {
+                        return new Target(carDown, Direction.DOWN,
+                                callArray.getHallway(carDown, Direction.STOP));
+                    } else {
+                        if (callArray.isCalled(carDown, Direction.UP) || flag2) {
+                            return new Target(carDown, Direction.UP,
+                                    callArray.getHallway(carDown, Direction.UP));
+                        } else {
+                            return new Target(carDown, Direction.STOP,
+                                    callArray.getHallway(carDown,
+                                            Direction.STOP));
+                        }
+                    }
+                } else if (sameDown >= carDown) {
+                    return new Target(sameDown, Direction.DOWN,
+                            callArray.getHallway(sameDown, Direction.DOWN));
+                }
+            }
+
+            // no car call or sameDir hall call
+            int revDown = 9;
+            for (int i : floors) {
+                if (callArray.isCalled(i, Direction.UP)) {// choose the
+                                                            // furtherest
+                    if (revDown > i&&i<currentFloor) {
+                        revDown = i;
+                    }
+                }
+            }// end
+            if (revDown != 9) {
+                return new Target(revDown, Direction.UP, callArray.getHallway(
+                        revDown, Direction.UP));
+            }
+        }
+
+        wait++;
+        return target;
     }
 
     private Direction getTmpDir() {
@@ -475,12 +661,7 @@ public class Dispatcher extends Controller {
         // System.out.println("speed:----------------"+mDriveSpeed.getSpeed()+mDriveSpeed.getDirection());
         if (mDriveSpeed.getSpeed() > 0.06) {// while moving...
             tmpDir = mDriveSpeed.getDirection();
-            // movedDir = tmpDir;
-            // System.out.println("-----moving...set to "+tmpDir);
         } else {// stoped
-            // if(target.d.equals(Direction.STOP)){//idle
-            // tmpDir = movedDir;
-            // }else
             int pos = mCarLevelPosition.getPosition();
             if (target.f == currentFloor) {// target on current floor
                 tmpDir = target.d;
@@ -509,11 +690,12 @@ public class Dispatcher extends Controller {
         int pos = mCarLevelPosition.getPosition();
         int dist = 0;
         double speed = mDriveSpeed.getSpeed();
-        if (speed > 0.5) {
-            dist = 500;
-        } else if (speed > 0.2) {
-            dist = 50;
-        }
+        dist = (int)(speed*speed*1000/2);
+        // if (speed > 0.5) {
+        //     dist = 500;
+        // } else if (speed > 0.2) {
+        //     dist = 50;
+        // }
         if (tmpDir.equals(Direction.DOWN)) {
             int tmp = pos - dist;
             // System.out.println("commit point: " + tmp);
