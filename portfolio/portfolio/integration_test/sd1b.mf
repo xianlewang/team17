@@ -68,7 +68,7 @@
 
 ;#arc '1B/1a'
 6s I MESSAGE_PERIOD N DOOR_OPENED_FL_CAN_ID DoorOpened FRONT LEFT = false
-6s A F DoorMotor FRONT LEFT : command == CLOSE
+6s A F DoorMotor FRONT LEFT : command == STOP
 
 ;#arc '1B/2'
 ;#arc '1B/3a'

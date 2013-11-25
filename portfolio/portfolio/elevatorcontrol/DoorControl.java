@@ -48,17 +48,23 @@ public class DoorControl extends Controller {
     private DesiredFloorCanPayloadTranslator mDesiredFloor;
     private ReadableCanMailbox networkDriveSpeed;
     private DriveSpeedCanPayloadTranslator mDriveSpeed;
-    private ReadableCanMailbox networkDoorOpened;
+    private ReadableCanMailbox networkDoorOpened_left;
+    private ReadableCanMailbox networkDoorOpened_right;
     private DoorOpenedCanPayloadTranslator mDoorOpened;
-    private ReadableCanMailbox networkDoorClosed;
+    private DoorOpenedCanPayloadTranslator mDoorOpened_left;
+    private DoorOpenedCanPayloadTranslator mDoorOpened_right;
+    private ReadableCanMailbox networkDoorClosed_left;
+    private ReadableCanMailbox networkDoorClosed_right;
     private DoorClosedCanPayloadTranslator mDoorClosed;
+    private DoorClosedCanPayloadTranslator mDoorClosed_left;
+    private DoorClosedCanPayloadTranslator mDoorClosed_right;
     private ReadableCanMailbox networkCarWeight;
     private CarWeightCanPayloadTranslator mCarWeight;
     private ReadableCanMailbox networkDoorReversal_left;                // reversal
     private ReadableCanMailbox networkDoorReversal_right;
     private DoorReversalCanPayloadTranslator mDoorReversal_left;        // reversal
     private DoorReversalCanPayloadTranslator mDoorReversal_right;
-    private int mDesiredDwell = 100;
+    private int mDesiredDwell = 1000;
     private int MAX_Weight = 15000;
     private CallArray callArray;
     
@@ -87,29 +93,44 @@ public class DoorControl extends Controller {
         // instantiate message objects
         networkDesiredFloor = CanMailbox.getReadableCanMailbox(MessageDictionary.DESIRED_FLOOR_CAN_ID);
         networkDriveSpeed = CanMailbox.getReadableCanMailbox(MessageDictionary.DRIVE_SPEED_CAN_ID);
-        networkDoorOpened = CanMailbox.getReadableCanMailbox(MessageDictionary.DOOR_OPEN_SENSOR_BASE_CAN_ID + 
-        		ReplicationComputer.computeReplicationId(hallway, side));
+        networkDoorOpened_left = CanMailbox.getReadableCanMailbox(MessageDictionary.DOOR_OPEN_SENSOR_BASE_CAN_ID + 
+        		ReplicationComputer.computeReplicationId(hallway, Side.LEFT));
+        networkDoorOpened_right = CanMailbox.getReadableCanMailbox(MessageDictionary.DOOR_OPEN_SENSOR_BASE_CAN_ID + 
+        		ReplicationComputer.computeReplicationId(hallway, Side.RIGHT));
         networkCarWeight = CanMailbox.getReadableCanMailbox(MessageDictionary.CAR_WEIGHT_CAN_ID);
-        networkDoorClosed = CanMailbox.getReadableCanMailbox(MessageDictionary.DOOR_CLOSED_SENSOR_BASE_CAN_ID + 
-        		ReplicationComputer.computeReplicationId(hallway, side));
-        //networkDoorReversal = CanMailbox.getReadableCanMailbox(MessageDictionary.DOOR_REVERSAL_SENSOR_BASE_CAN_ID + 
-        //		ReplicationComputer.computeReplicationId(hallway, side));
+        networkDoorClosed_left = CanMailbox.getReadableCanMailbox(MessageDictionary.DOOR_CLOSED_SENSOR_BASE_CAN_ID + 
+        		ReplicationComputer.computeReplicationId(hallway, Side.LEFT));
+        networkDoorClosed_right = CanMailbox.getReadableCanMailbox(MessageDictionary.DOOR_CLOSED_SENSOR_BASE_CAN_ID + 
+        		ReplicationComputer.computeReplicationId(hallway, Side.RIGHT));
         networkDoorReversal_left = CanMailbox.getReadableCanMailbox(MessageDictionary.DOOR_REVERSAL_SENSOR_BASE_CAN_ID + 
         		ReplicationComputer.computeReplicationId(hallway, Side.LEFT));
         networkDoorReversal_right = CanMailbox.getReadableCanMailbox(MessageDictionary.DOOR_REVERSAL_SENSOR_BASE_CAN_ID + 
         		ReplicationComputer.computeReplicationId(hallway, Side.RIGHT));
         mDesiredFloor = new DesiredFloorCanPayloadTranslator(networkDesiredFloor);
         mDriveSpeed = new DriveSpeedCanPayloadTranslator(networkDriveSpeed);
-        mDoorOpened = new DoorOpenedCanPayloadTranslator(networkDoorOpened, hallway, side);
-        mDoorClosed = new DoorClosedCanPayloadTranslator(networkDoorClosed, hallway, side);
+        mDoorOpened_left = new DoorOpenedCanPayloadTranslator(networkDoorOpened_left, hallway, Side.LEFT);
+        mDoorOpened_right = new DoorOpenedCanPayloadTranslator(networkDoorOpened_right, hallway, Side.RIGHT);
+        mDoorClosed_left = new DoorClosedCanPayloadTranslator(networkDoorClosed_left, hallway, Side.LEFT);
+        mDoorClosed_right = new DoorClosedCanPayloadTranslator(networkDoorClosed_right, hallway, Side.RIGHT);
         mCarWeight = new CarWeightCanPayloadTranslator(networkCarWeight);
+        
+        // Give DoorOpened and DoorClosed
+        if (side.ordinal() == 0) {
+        	mDoorOpened = mDoorOpened_left;
+        	mDoorClosed = mDoorClosed_left;
+        } else {
+        	mDoorOpened = mDoorOpened_right;
+        	mDoorClosed = mDoorClosed_right;
+        }
         //mDoorReversal = new DoorReversalCanPayloadTranslator(networkDoorReversal, hallway, side);
         mDoorReversal_left = new DoorReversalCanPayloadTranslator(networkDoorReversal_left, hallway, Side.LEFT);
         mDoorReversal_right = new DoorReversalCanPayloadTranslator(networkDoorReversal_right, hallway, Side.RIGHT);
         canInterface.registerTimeTriggered(networkDesiredFloor);
         canInterface.registerTimeTriggered(networkDriveSpeed);
-        canInterface.registerTimeTriggered(networkDoorOpened);
-        canInterface.registerTimeTriggered(networkDoorClosed);
+        canInterface.registerTimeTriggered(networkDoorOpened_left);
+        canInterface.registerTimeTriggered(networkDoorOpened_right);
+        canInterface.registerTimeTriggered(networkDoorClosed_left);
+        canInterface.registerTimeTriggered(networkDoorClosed_right);
         canInterface.registerTimeTriggered(networkCarWeight);
         //canInterface.registerTimeTriggered(networkDoorReversal);
         canInterface.registerTimeTriggered(networkDoorReversal_left);
@@ -125,6 +146,15 @@ public class DoorControl extends Controller {
         // ready now
         timer.start(period);
     }
+    private boolean haveCall(int cur) {
+    	return (callArray.isCalled(cur, Direction.STOP) || callArray.isCalled(cur, Direction.UP, hallway) || callArray.isCalled(cur, Direction.DOWN, hallway));
+    }
+    private boolean eitherDoorClosed() {
+    	return (mDoorClosed_left.getValue() || mDoorClosed_right.getValue());
+    }
+    private boolean eitherDoorOpened() {
+    	return (mDoorOpened_left.getValue() || mDoorOpened_right.getValue());
+    }
 	@Override
 	public void timerExpired(Object callbackData) {
 		State nextState = currentState;
@@ -136,8 +166,7 @@ public class DoorControl extends Controller {
 				int desFloor = mDesiredFloor.getFloor(); 
 				int curFloor = mAtFloor_array.getCurrentFloor();
 //#transition 'T 5.1'
-				if (curFloor == desFloor && mAtFloor_array.isAtFloor(curFloor, hallway) && 
-						(callArray.isCalled(curFloor, Direction.STOP) || callArray.isCalled(curFloor, Direction.UP, hallway) || callArray.isCalled(curFloor, Direction.DOWN, hallway))) {
+				if (curFloor == desFloor && mAtFloor_array.isAtFloor(curFloor, hallway) && haveCall(curFloor) && eitherDoorClosed()) {
 					if (mDriveSpeed.getSpeed() == 0 && mDriveSpeed.getDirection() == Direction.STOP) {
 						//System.out.println("To BEFORE_OPEN From CLOSED");
 						nextState = State.BEFORE_OPEN;
@@ -173,7 +202,7 @@ public class DoorControl extends Controller {
 					countdown -= 1;
 				}
 //#transition 'T 5.3'
-				else {
+				else if (eitherDoorOpened()){
 					nextState = State.CLOSING;
 				}
 				break;

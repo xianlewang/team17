@@ -171,6 +171,7 @@ public class Dispatcher extends Controller {
             wait=0;
             target = new Target(currentFloor, Direction.STOP, Hallway.NONE);
             currentFloor = atFloorArray.getCurrentFloor();
+            boolean doorAllClosed = (doorClosedBack.getBothClosed() && doorClosedFront.getBothClosed());
             // state actions for 'HOLD'
             mDesiredFloor.set(currentFloor, Direction.STOP, Hallway.NONE);
             mDesiredDwell_b.set(dwell);
@@ -178,8 +179,7 @@ public class Dispatcher extends Controller {
             // System.out.println("---callArray.size= "+callArray.size());
 // #transition 'T11.3'
             if (atFloorArray.getCurrentFloor() == MessageDictionary.NONE
-                    && !(doorClosedBack.getBothClosed() && doorClosedFront
-                            .getBothClosed())) {
+                    && !doorAllClosed) {
                 newState = State.EMERGENCY;
             } else if (callArray.size() > 0) {
 // #transition 'T11.1'
@@ -193,15 +193,14 @@ public class Dispatcher extends Controller {
             wait=0;
             currentFloor = atFloorArray.getCurrentFloor();
             target = getTarget(movingDir);
+            doorAllClosed = (doorClosedBack.getBothClosed() && doorClosedFront.getBothClosed());
             // state actions for 'OPERATING'
             mDesiredFloor.set(target.f, target.d, target.b);
 // #transition 'T11.3'
             if (atFloorArray.getCurrentFloor() == MessageDictionary.NONE
-                    && !(doorClosedBack.getBothClosed() && doorClosedFront
-                            .getBothClosed())) {
+                    && ! doorAllClosed ) {
                 newState = State.EMERGENCY;
-            } else if (!(doorClosedBack.getBothClosed() && doorClosedFront
-                    .getBothClosed()) && currentFloor == target.f) {
+            } else if (! doorAllClosed && currentFloor == target.f) {
 // #transition 'T11.4'
                 newState = State.REACH;
                 lanternDir  = target.d;
@@ -212,36 +211,40 @@ public class Dispatcher extends Controller {
             mDesiredFloor.set(1, Direction.STOP, Hallway.NONE);
             break;
         case REACH:
-            //System.out.println("in REACH");
             // state var
             currentFloor = atFloorArray.getCurrentFloor();
             target = getTarget2(lanternDir);
+            doorAllClosed = (doorClosedBack.getBothClosed() && doorClosedFront.getBothClosed());
+            if(! doorAllClosed){
+                wait = 0;
+            }
             // state actions for 'OPERATING'
             mDesiredFloor.set(target.f, target.d, target.b);
+            //System.out.println("in REACH, wait = "+wait+" target"+target.f+" doorClosed: "+ doorAllClosed);
 // #transition 'T11.3'
             if (atFloorArray.getCurrentFloor() == MessageDictionary.NONE
                     && !(doorClosedBack.getBothClosed() && doorClosedFront
                             .getBothClosed())) {
                 newState = State.EMERGENCY;
-            } else if ((target.f == currentFloor &&(doorClosedBack.getBothClosed() && doorClosedFront
-                            .getBothClosed())&& wait>200)||(callArray.size()==0&&lanternDir == Direction.STOP)) {
+            } else if ((target.f == currentFloor &&doorAllClosed&& wait>5)||(callArray.size()==0&&lanternDir == Direction.STOP)) {
 // #transition 'T11.2'
                 //System.out.println("to IDLE!-------------------------------------wait = "+wait);
                 wait = 0;
                 newState = State.IDLE;
-            } else if (target.f!=currentFloor&&(doorClosedBack.getBothClosed() && doorClosedFront.getBothClosed())) {
+            } else if (mDriveSpeed.getSpeed()>0.05||(target.f!=currentFloor&& doorAllClosed)) {
 // #transition 'T11.6'
+                //System.out.println("REACH-->LEAVE");
                 newState = State.LEAVE;
             }
             break;
         case LEAVE:
             //System.out.println("in LEAVE");
             // state var
+            doorAllClosed = (doorClosedBack.getBothClosed() && doorClosedFront.getBothClosed());
             currentFloor = atFloorArray.getCurrentFloor();
             mDesiredFloor.set(target.f, target.d, target.b);
             if (atFloorArray.getCurrentFloor() == MessageDictionary.NONE
-                    && !(doorClosedBack.getBothClosed() && doorClosedFront
-                            .getBothClosed())) {
+                    && !doorAllClosed) {
 // #transition 'T11.3'
                 newState = State.EMERGENCY;
             } else if (mCarLevelPosition.getPosition()%5000>200&&mCarLevelPosition.getPosition()%5000<4800) {
@@ -486,6 +489,7 @@ public class Dispatcher extends Controller {
 
         //when from IDLE to REACH /when reach at car call
         if (tmpDir.equals(Direction.STOP)) {
+            //System.out.println("currentFloor="+currentFloor+"mDriveSpeed"+mDriveSpeed.getSpeed()+" / "+mDriveSpeed.getDirection());
             if (callArray.isCalled(currentFloor, Direction.STOP)) {
                 return target;
             }
@@ -691,6 +695,7 @@ public class Dispatcher extends Controller {
         int dist = 0;
         double speed = mDriveSpeed.getSpeed();
         dist = (int)(speed*speed*1000/2);
+        //System.out.println("disp- : "+dist);
         // if (speed > 0.5) {
         //     dist = 500;
         // } else if (speed > 0.2) {
