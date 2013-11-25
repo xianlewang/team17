@@ -117,12 +117,10 @@
 4s I MESSAGE_PERIOD N LEVEL_SENSOR_[UP]_CAN_ID Leveling UP = false
 4s I MESSAGE_PERIOD N LEVEL_SENSOR_[DOWN]_CAN_ID Leveling DOWN = false
 
-;check Drive is LEVEL UP, mDrive is SLOW UP and STATE is LEVEL UP
-5s A F Drive : speed == LEVEL
-5s A F Drive : direction == UP
-5s A N DRIVE_COMMAND_CAN_ID DriveCommand : getSpeed == LEVEL
-5s A N DRIVE_COMMAND_CAN_ID DriveCommand : getDirection == UP
-5s A S DriveControl : STATE == LEVEL_UP
+;check Drive is STOP and STATE is STOP
+5s A F Drive : speed == STOP
+5s A N DRIVE_COMMAND_CAN_ID DriveCommand : getSpeed == STOP
+5s A S DriveControl : STATE == STOP
 
 ;set conditins for T6.2
 6s I MESSAGE_PERIOD N LEVEL_SENSOR_[UP]_CAN_ID Leveling UP = true
@@ -207,12 +205,10 @@
 16s I MESSAGE_PERIOD N LEVEL_SENSOR_[DOWN]_CAN_ID Leveling DOWN = false
 16s I MESSAGE_PERIOD F DriveSpeed = DOWN 0.05
 
-;check Drive is LEVEL DOWN, mDrive is SLOW DOWN and STATE is LEVEL DOWN
-17s A F Drive : speed == LEVEL
-17s A F Drive : direction == DOWN
-17s A N DRIVE_COMMAND_CAN_ID DriveCommand : getSpeed == LEVEL
-17s A N DRIVE_COMMAND_CAN_ID DriveCommand : getDirection == DOWN
-17s A S DriveControl : STATE == LEVEL_DOWN
+;check Drive is STOP and STATE is STOP
+17s A F Drive : speed == STOP
+17s A N DRIVE_COMMAND_CAN_ID DriveCommand : getSpeed == STOP
+17s A S DriveControl : STATE == STOP
 
 
 ;set conditins for T6.6
