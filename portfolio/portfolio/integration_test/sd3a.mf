@@ -96,7 +96,7 @@
 5.10s A F DoorMotor FRONT LEFT : command == STOP
 
 ;#arc '3A/4'
-6.1s A F DoorMotor FRONT LEFT : command == CLOSE
+6.1s A F DoorMotor FRONT LEFT : command == STOP
 6.25s I MESSAGE_PERIOD N DOOR_OPEN_SENSOR_[FRONT][LEFT]_CAN_ID DoorOpened FRONT LEFT = false
 6.25s I MESSAGE_PERIOD N DOOR_OPEN_SENSOR_[FRONT][RIGHT]_CAN_ID DoorOpened FRONT RIGHT = false
 ;#arc '3A/5a'

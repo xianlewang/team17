@@ -58,7 +58,7 @@
 
 ;#arc '2B/4B'
 3s A F DoorMotor FRONT LEFT : command == OPEN
-3s A S DoorControl[FRONT][LEFT] : STATE == BEFORE_OPEN
+3s A S DoorControl[FRONT][LEFT] : STATE == REVERSE_OPEN
 
 ;#arc '2B/5A'
 3.2s I MESSAGE_PERIOD N ATFLOOR_4F_CAN_ID AtFloor 4 FRONT = true
@@ -72,7 +72,7 @@
 
 ;#arc '2B/6B'
 3.4s A F DoorMotor FRONT LEFT : command == STOP
-3.4s A S DoorControl[FRONT][LEFT] : STATE == OPENED
+3.4s A S DoorControl[FRONT][LEFT] : STATE == REVERSE_OPENED
 
 
 

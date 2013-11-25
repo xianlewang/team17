@@ -98,7 +98,7 @@
 3.0s I MESSAGE_PERIOD N DOOR_OPEN_SENSOR_[BACK][RIGHT]_CAN_ID DoorOpened BACK RIGHT = true
 
 ;#arc '8A/2'
-7.0s A F DoorMotor FRONT LEFT : command == CLOSE
+7.0s A F DoorMotor FRONT LEFT : command == STOP
 
 ;#arc '8A/3a'
 8s I MESSAGE_PERIOD N DOOR_CLOSED_SENSOR_[FRONT][LEFT]_CAN_ID DoorClosed FRONT LEFT = true
