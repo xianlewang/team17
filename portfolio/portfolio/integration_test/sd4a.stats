@@ -1,11 +1,7 @@
-; 18649 Fall 2013
-; group 17
-; Qiang Zhang (qiangz)
-; sd4a.stats
 
 Simulator Parameters:
 Command line = -cf sd4a.cf -mf sd4a.mf
-RandomSeed = 1382057112330
+RandomSeed = 1385426652653
 CanNetworkBitTime = 0 ns
 Effective Can Bitrate = Infinity
 Run Time = null
@@ -13,21 +9,13 @@ Real time rate = null
 Message File = sd4a.mf
 Controller File = sd4a.cf
 
+Assertion Results:
+@1.5s:  PASSED simulator.payloads.DoorMotorPayload$ReadableDoorMotorPayload@698fcb66 :: command ?== OPEN PASSED
+@1.5s:  PASSED DoorControl[FRONT][LEFT]::checkState(STATE) ?== BEFORE_OPEN PASSED
+@2.2s:  PASSED simulator.payloads.DoorMotorPayload$ReadableDoorMotorPayload@242e983d :: command ?== STOP PASSED
+@2.2s:  PASSED DoorControl[FRONT][LEFT]::checkState(STATE) ?== OPENED PASSED
 
-[Elevator] @0.000000000: Starting Simulation ***
-[AssertionMonitor] @1.500000000: *******************************************************************************************************
-[AssertionMonitor] @1.500000000: PASSED simulator.payloads.DoorMotorPayload$ReadableDoorMotorPayload@1f5b0afd :: command ?== OPEN PASSED
-[AssertionMonitor] @1.500000000: *******************************************************************************************************
-[AssertionMonitor] @1.500000000: *************************************************************************
-[AssertionMonitor] @1.500000000: PASSED DoorControl[FRONT][LEFT]::checkState(STATE) ?== BEFORE_OPEN PASSED
-[AssertionMonitor] @1.500000000: *************************************************************************
-[AssertionMonitor] @2.200000000: *******************************************************************************************************
-[AssertionMonitor] @2.200000000: PASSED simulator.payloads.DoorMotorPayload$ReadableDoorMotorPayload@121a9334 :: command ?== STOP PASSED
-[AssertionMonitor] @2.200000000: *******************************************************************************************************
-[AssertionMonitor] @2.200000000: ********************************************************************
-[AssertionMonitor] @2.200000000: PASSED DoorControl[FRONT][LEFT]::checkState(STATE) ?== OPENED PASSED
-[AssertionMonitor] @2.200000000: ********************************************************************
-[Elevator] @7.200000000: Simulation Finished ***
+
 ******************Summary******************
 Passed:  4
 Failed:  0

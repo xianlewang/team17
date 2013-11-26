@@ -1,10 +1,7 @@
-; 18649 Fall 2013
-; group 17
-; Xianle Wang(xianlew)
 
 Simulator Parameters:
 Command line = -cf sd1c.cf -mf sd1c.mf
-RandomSeed = 1381373592568
+RandomSeed = 1385426595905
 CanNetworkBitTime = 0 ns
 Effective Can Bitrate = Infinity
 Run Time = null
@@ -13,15 +10,15 @@ Message File = sd1c.mf
 Controller File = sd1c.cf
 
 Assertion Results:
-@4.0s:  PASSED simulator.payloads.CanMailbox$ReadableCanMailbox@7f8bea70 :: getValue ?== true PASSED
-@4.0s:  PASSED simulator.payloads.CanMailbox$ReadableCanMailbox@503c0965 :: getValue ?== false PASSED
-@4.0s:  PASSED simulator.payloads.HallLightPayload$ReadableHallLightPayload@57a18493 :: lighted ?== false PASSED
-@4.0s:  PASSED simulator.payloads.DoorMotorPayload$ReadableDoorMotorPayload@257ff759 :: command ?== NUDGE PASSED
-@5.0s:  PASSED simulator.payloads.HallLightPayload$ReadableHallLightPayload@24d6c6ea :: lighted ?== true PASSED
-@7.0s:  PASSED simulator.payloads.DoorMotorPayload$ReadableDoorMotorPayload@43b6c732 :: command ?== STOP PASSED
-@8.0s:  PASSED simulator.payloads.CanMailbox$ReadableCanMailbox@54e707bb :: getValue ?== true PASSED
-@8.0s:  PASSED simulator.payloads.CanMailbox$ReadableCanMailbox@76bb9f5b :: getValue ?== true PASSED
-@8.0s:  PASSED simulator.payloads.HallLightPayload$ReadableHallLightPayload@3e6bcef1 :: lighted ?== true PASSED
+@4.0s:  PASSED simulator.payloads.CanMailbox$ReadableCanMailbox@69a10f82 :: getValue ?== true PASSED
+@4.0s:  PASSED simulator.payloads.CanMailbox$ReadableCanMailbox@12b3f93c :: getValue ?== false PASSED
+@4.0s:  PASSED simulator.payloads.HallLightPayload$ReadableHallLightPayload@7c830624 :: lighted ?== false PASSED
+@4.099999999s:  PASSED simulator.payloads.DoorMotorPayload$ReadableDoorMotorPayload@5935b50c :: command ?== STOP PASSED
+@5.0s:  PASSED simulator.payloads.HallLightPayload$ReadableHallLightPayload@4a582dcc :: lighted ?== true PASSED
+@7.0s:  PASSED simulator.payloads.DoorMotorPayload$ReadableDoorMotorPayload@9b2c86e :: command ?== STOP PASSED
+@8.0s:  PASSED simulator.payloads.CanMailbox$ReadableCanMailbox@ff22ffa :: getValue ?== true PASSED
+@8.0s:  PASSED simulator.payloads.CanMailbox$ReadableCanMailbox@1ef2c499 :: getValue ?== true PASSED
+@8.0s:  PASSED simulator.payloads.HallLightPayload$ReadableHallLightPayload@f0de2bd :: lighted ?== true PASSED
 
 
 ******************Summary******************
