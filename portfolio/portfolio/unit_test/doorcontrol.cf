@@ -1,4 +1,4 @@
 ;18649-Fall-2013
 ;Zhang Qiang
 ;qiangz
-DoorControl FRONT RIGHT 10ms FALSE
+DoorControl FRONT LEFT 10ms false
