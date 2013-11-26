@@ -1,3 +1,7 @@
+; 18649 Fall 2013
+; Group 17
+; Qiang Zhang(qiangz), Shen Yu(sheny), Jiang He(jiangh), Xianle Wang(xianlew)
+
 Simulator Parameters:
 Command line = -pf proj7acceptance2.pass -monitor Proj7RuntimeMonitor
 RandomSeed = 1382414589732
