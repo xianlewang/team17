@@ -75,20 +75,20 @@
 2.2s A S DoorControl[FRONT][LEFT] : STATE == OPENED
 
 ;#arc '7A/4'
-4.0s A F DoorMotor FRONT LEFT : command == CLOSE
-4.0s A S DoorControl[FRONT][LEFT] : STATE == CLOSING
-4.0s I MESSAGE_PERIOD N DOOR_OPENED_FRONT_LEFT_CAN_ID DoorOpened FRONT LEFT = false
+14.0s A F DoorMotor FRONT LEFT : command == CLOSE
+14.0s A S DoorControl[FRONT][LEFT] : STATE == CLOSING
+14.0s I MESSAGE_PERIOD N DOOR_OPENED_FRONT_LEFT_CAN_ID DoorOpened FRONT LEFT = false
 
 ;#arc '7A/5a' '7A/6a'
-5.0s I MESSAGE_PERIOD N DOOR_CLOSED_FRONT_LEFT_CAN_ID DoorClosed FRONT LEFT = true
+15.0s I MESSAGE_PERIOD N DOOR_CLOSED_FRONT_LEFT_CAN_ID DoorClosed FRONT LEFT = true
 
 ;#arc '7A/5b'
-5.2s A S DoorControl[FRONT][LEFT] : STATE == WAIT_DISPATCHER
-5.2s A F DoorMotor FRONT LEFT : command == STOP
+15.2s A S DoorControl[FRONT][LEFT] : STATE == WAIT_DISPATCHER
+15.2s A F DoorMotor FRONT LEFT : command == STOP
 
 ;#arc '7A/6b'
-6.4s A S LanternControl[UP] : STATE == Lantern_Off
-6.4s A F CarLantern UP : lighted == false
+16.4s A S LanternControl[UP] : STATE == Lantern_Off
+16.4s A F CarLantern UP : lighted == false
 
 
 

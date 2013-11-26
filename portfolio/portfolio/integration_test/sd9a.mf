@@ -95,24 +95,24 @@
 2.0s A F DoorMotor FRONT LEFT : command == STOP
 
 ;#arc '9A/5'
-7.0s A F DoorMotor FRONT LEFT : command == CLOSE
-7.2s I MESSAGE_PERIOD N DOOR_OPENED_FL_CAN_ID DoorOpened FRONT LEFT = false
+17.0s A F DoorMotor FRONT LEFT : command == CLOSE
+17.0s I MESSAGE_PERIOD N DOOR_OPENED_FL_CAN_ID DoorOpened FRONT LEFT = false
 
 ;#arc '9A/6a'
-8s I MESSAGE_PERIOD N DOOR_CLOSED_FL_CAN_ID DoorClosed FRONT LEFT = true
-8s I MESSAGE_PERIOD N DOOR_CLOSED_FR_CAN_ID DoorClosed FRONT RIGHT = true
+18s I MESSAGE_PERIOD N DOOR_CLOSED_FL_CAN_ID DoorClosed FRONT LEFT = true
+18s I MESSAGE_PERIOD N DOOR_CLOSED_FR_CAN_ID DoorClosed FRONT RIGHT = true
 
 ;#arc '9A/6b'
-8.2s A F DoorMotor FRONT LEFT : command == STOP
+18.2s A F DoorMotor FRONT LEFT : command == STOP
 
 ;#arc '9A/7a'
-8.5s A N DESIRED_FLOOR_CAN_ID DesiredFloor : getFloor == 1
-8.5s A N DESIRED_FLOOR_CAN_ID DesiredFloor : getDirection == UP
+18.5s A N DESIRED_FLOOR_CAN_ID DesiredFloor : getFloor == 1
+18.5s A N DESIRED_FLOOR_CAN_ID DesiredFloor : getDirection == UP
 
 ;#arc '9A/7b'
-9s A F Drive : speed == STOP
+19s A F Drive : speed == STOP
 
 ;****verify postcondition
-10s A N DOOR_CLOSED_FL_CAN_ID DoorClosed FRONT LEFT : getValue == true
-10.5s A F DoorMotor FRONT LEFT : command == OPEN
-10.5s A F Drive : direction == STOP
+20s A N DOOR_CLOSED_FL_CAN_ID DoorClosed FRONT LEFT : getValue == true
+20.5s A F DoorMotor FRONT LEFT : command == OPEN
+20.5s A F Drive : direction == STOP
