@@ -1,3 +1,5 @@
+; 18649 Fall 2013
+; group 17
 
 Simulator Parameters:
 Command line = -cf carbuttoncontrol.cf -mf carbuttoncontrol_test1.mf

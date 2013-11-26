@@ -1,5 +1,6 @@
 ; 18649 Fall 2013
-; group 17
+; Group 17
+; Qiang Zhang(qiangz), Shen Yu(sheny), Jiang He(jiangh), Xianle Wang(xianlew)
 
 Simulator Parameters:
 Command line = -cf drivecontrol.cf -mf drivecontrol_test1.mf
