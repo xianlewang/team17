@@ -1,11 +1,7 @@
-; 18649 Fall 2013
-; group 17
-; Jiang He (jiangh)
-; sd6a.stats
 
 Simulator Parameters:
 Command line = -cf sd6a.cf -mf sd6a.mf
-RandomSeed = 1382054759959
+RandomSeed = 1385426747271
 CanNetworkBitTime = 0 ns
 Effective Can Bitrate = Infinity
 Run Time = null
@@ -14,19 +10,18 @@ Message File = sd6a.mf
 Controller File = sd6a.cf
 
 Assertion Results:
-@1.0s:  PASSED simulator.payloads.CarPositionIndicatorPayload$ReadableCarPositionIndicatorPayload@4208719e :: floor ?== 1 PASSED
-@2.3s:  PASSED simulator.payloads.DrivePayload$ReadableDrivePayload@76745477 :: speed ?== SLOW PASSED
-@2.3s:  PASSED simulator.payloads.DrivePayload$ReadableDrivePayload@79b5459e :: direction ?== UP PASSED
-@2.3s:  PASSED simulator.payloads.CanMailbox$ReadableCanMailbox@4782b18d :: getSpeed ?== SLOW PASSED
-@2.3s:  PASSED simulator.payloads.CanMailbox$ReadableCanMailbox@33891d5d :: getDirection ?== UP PASSED
+@1.0s:  PASSED simulator.payloads.CarPositionIndicatorPayload$ReadableCarPositionIndicatorPayload@7e086558 :: floor ?== 1 PASSED
+@2.3s:  PASSED simulator.payloads.DrivePayload$ReadableDrivePayload@55015495 :: speed ?== SLOW PASSED
+@2.3s:  PASSED simulator.payloads.DrivePayload$ReadableDrivePayload@6326d235 :: direction ?== UP PASSED
+@2.3s:  PASSED simulator.payloads.CanMailbox$ReadableCanMailbox@3884b2bb :: getSpeed ?== SLOW PASSED
+@2.3s:  PASSED simulator.payloads.CanMailbox$ReadableCanMailbox@652bce43 :: getDirection ?== UP PASSED
 @2.3s:  PASSED DriveControl::checkState(STATE) ?== SLOW_UP PASSED
-@5.0s:  PASSED simulator.payloads.DrivePayload$ReadableDrivePayload@4e433359 :: speed ?== STOP PASSED
-@5.0s:  PASSED simulator.payloads.CanMailbox$ReadableCanMailbox@6d96e397 :: getSpeed ?== STOP PASSED
-@6.0s:  PASSED simulator.payloads.CarPositionIndicatorPayload$ReadableCarPositionIndicatorPayload@1940be55 :: floor ?== 2 PASSED
+@5.0s:  PASSED simulator.payloads.DrivePayload$ReadableDrivePayload@17973271 :: speed ?== STOP PASSED
+@5.0s:  PASSED simulator.payloads.CanMailbox$ReadableCanMailbox@34547854 :: getSpeed ?== STOP PASSED
 
 
 ******************Summary******************
-Passed:  9
+Passed:  8
 Failed:  0
-Total :  9
+Total :  8
 
