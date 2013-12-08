@@ -313,7 +313,7 @@ public class DriveControl extends Controller {
 				 break;
 			case SLOW_UP:
                 //System.out.println("SLOW_UP");
-                slowdownDistance = ((localDriveSpeed.speed() * 1000) * (localDriveSpeed.speed() * 1000))/2000.0 + 1000; 
+                slowdownDistance = ((localDriveSpeed.speed() * 1000) * (localDriveSpeed.speed() * 1000))/2000.0 + 800;
 				 currentFloor = AtFloor_array.getCurrentFloor();
 			    allDoorClosed = DoorClosed_front_array.getBothClosed() && DoorClosed_back_array.getBothClosed();
 				 allDoorMotorStop = checkAllDoorMotorStop();
@@ -345,7 +345,7 @@ public class DriveControl extends Controller {
 				 break;
 			case SLOW_DOWN:
                 //System.out.println("SLOW_DOWN");
-                slowdownDistance = ((localDriveSpeed.speed() * 1000) * (localDriveSpeed.speed() * 1000))/2000.0 + 1000; 
+                slowdownDistance = ((localDriveSpeed.speed() * 1000) * (localDriveSpeed.speed() * 1000))/2000.0 + 800;
 				 currentFloor = AtFloor_array.getCurrentFloor();
 				 allDoorClosed = DoorClosed_front_array.getBothClosed() && DoorClosed_back_array.getBothClosed();
 				 allDoorMotorStop = checkAllDoorMotorStop();
@@ -376,7 +376,7 @@ public class DriveControl extends Controller {
 				 }
 				 break;
 			case FAST_UP:
-			   	 slowdownDistance = ((localDriveSpeed.speed() * 1000) * (localDriveSpeed.speed() * 1000))/2000.0 + 1000; 
+			   	 slowdownDistance = ((localDriveSpeed.speed() * 1000) * (localDriveSpeed.speed() * 1000))/2000.0 + 800;
                  //System.out.println("FAST_UP ");
 				 currentFloor = AtFloor_array.getCurrentFloor();
 			     allDoorClosed = DoorClosed_front_array.getBothClosed() && DoorClosed_back_array.getBothClosed();
@@ -401,7 +401,7 @@ public class DriveControl extends Controller {
 				 break;
 			case FAST_DOWN:
                 //System.out.println("FAST_DOWN");
-				 slowdownDistance = ((localDriveSpeed.speed() * 1000) * (localDriveSpeed.speed() * 1000))/2000.0 + 1000;
+				 slowdownDistance = ((localDriveSpeed.speed() * 1000) * (localDriveSpeed.speed() * 1000))/2000.0 + 800;
 				 currentFloor = AtFloor_array.getCurrentFloor();
 			     allDoorClosed = DoorClosed_front_array.getBothClosed() && DoorClosed_back_array.getBothClosed();
 				 allDoorMotorStop = checkAllDoorMotorStop();
