@@ -4050,7 +4050,7 @@
 	<div style="text-align: center;">
 		<a href="dispatcher_state_diagram.png"><img
 			alt="dispatcher_state_diagram.png" src="dispatcher_state_diagram.png"
-			style="border: 0px solid; width: 800px; height: 600px;"></a><br>
+			style="border: 0px solid; width: 700px; height: 500px;"></a><br>
 	</div>
 	<table style="text-align: left; width: 800px;" border="1"
 		cellpadding="2" cellspacing="2">
@@ -4076,7 +4076,7 @@
 				<td style="vertical-align: top;">T11.3<br>
 				</td>
 				<td style="vertical-align: top;">mDoorClosed [b, r]&larr; False
-					AND currentFloor != mDesiredFloor<br>
+					AND currentFloor &larr; -1<br>
 				</td>
 			</tr>
             <tr>
@@ -4089,15 +4089,13 @@
             <tr>
                 <td style="vertical-align: top;">T11.5<br>
                 </td>
-                <td style="vertical-align: top;">mDoorClosed [b, r]&larr; False
-                    AND currentFloor &larr;mDesiredFloor<br>
+                <td style="vertical-align: top;">mCarLevelPosition - floorPos > 200<br>
                 </td>
             </tr>
             <tr>
                 <td style="vertical-align: top;">T11.6<br>
                 </td>
-                <td style="vertical-align: top;">mDoorClosed [b, r]&larr; True
-                    AND currentFloor != mDesiredFloor<br>
+                <td style="vertical-align: top;">mDriveSpeed>0.05||(target!=currentFloor&& doorAllClosed)<br>
                 </td>
             </tr>
 		</tbody>
@@ -4152,9 +4150,9 @@
 				</td>
 				<td style="vertical-align: top;">X<br>
 				</td>
-				<td style="vertical-align: top;">X<br>
+				<td style="vertical-align: top;"><br>
 				</td>
-				<td style="vertical-align: top;">X<br>
+				<td style="vertical-align: top;"><br>
 				</td>
 				<td style="vertical-align: top;">X<br>
 				</td>
@@ -4188,7 +4186,7 @@
 				<td style="vertical-align: top;">X<br></td>
 				<td style="vertical-align: top;">X<br></td>
 				<td style="vertical-align: top;">X<br></td>
-				<td style="vertical-align: top;">X<br></td>
+				<td style="vertical-align: top;"><br></td>
 				<td style="vertical-align: top;">X<br>
 				</td>
 				<td style="vertical-align: top;">X<br>
@@ -4217,19 +4215,19 @@
 
 				<td style="vertical-align: top;">X<br>
 				</td>
-				<td style="vertical-align: top;">X<br>
+				<td style="vertical-align: top;"><br>
 				</td>
-				<td style="vertical-align: top;">X<br>
+				<td style="vertical-align: top;"><br>
 				</td>
-				<td style="vertical-align: top;">X<br>
+				<td style="vertical-align: top;"><br>
 				</td>
 				<td style="vertical-align: top;"><br></td>
 				<td style="vertical-align: top;"><br></td>
-				<td style="vertical-align: top;">X<br>
+				<td style="vertical-align: top;"><br>
 				</td>
-				<td style="vertical-align: top;">X<br>
+				<td style="vertical-align: top;"><br>
 				</td>
-                 <td style="vertical-align: top;"><br>
+                 <td style="vertical-align: top;">X<br>
                 </td>
                 <td style="vertical-align: top;"><br>
                 </td>
@@ -4256,7 +4254,7 @@
                 </td>
                 <td style="vertical-align: top;">X<br>
                 </td>
-                <td style="vertical-align: top;"><br></td>
+                <td style="vertical-align: top;">X<br></td>
                 <td style="vertical-align: top;"><br></td>
                 <td style="vertical-align: top;">X<br>
                 </td>
@@ -4409,7 +4407,7 @@
 				</td>
 				<td style="vertical-align: top;"><br></td>
 				<td style="vertical-align: top;"><br></td>
-				<td style="vertical-align: top;">X<br>
+				<td style="vertical-align: top;"><br>
 				</td>
 				<td style="vertical-align: top;">X<br>
 				</td>
@@ -4420,17 +4418,17 @@
 				</td>
                  <td style="vertical-align: top;"><br>
                 </td>
-                <td style="vertical-align: top;"><br>
-                </td>
-                <td style="vertical-align: top;"><br>
-                </td>
-                <td style="vertical-align: top;"><br>
-                </td>
                 <td style="vertical-align: top;">X<br>
                 </td>
                 <td style="vertical-align: top;"><br>
                 </td>
-                <td style="vertical-align: top;">X<br>
+                <td style="vertical-align: top;"><br>
+                </td>
+                <td style="vertical-align: top;"><br>
+                </td>
+                <td style="vertical-align: top;"><br>
+                </td>
+                <td style="vertical-align: top;"><br>
                 </td>
 			</tr>
             <tr>
