@@ -1,0 +1,73 @@
+
+Simulator Parameters:
+Command line = -pf proj7acceptance1.pass -b 200 -fs 5.0
+RandomSeed = 1386540485270
+CanNetworkBitTime = 5000 ns
+Effective Can Bitrate = 199999.99999999997
+Run Time = null
+Real time rate = null
+Acceptance Test File = proj7acceptance1.pass
+
+STATISTICS FOR ELEVATOR SIMULATION PASSENGER DELIVERY
+-----------------------------------------------------
+
+
+These passengers were delivered:
+Passenger 0: INJECTED AT 600.0s and DELIVERED in 31.074s
+  Satisfaction score: 100.0
+Passenger 1: INJECTED AT 905.7s and DELIVERED in 26.549s
+  Satisfaction score: 100.0
+Passenger 2: INJECTED AT 974.6s and DELIVERED in 29.572s
+  Satisfaction score: 100.0
+Passenger 3: INJECTED AT 1531.4s and DELIVERED in 10.278s
+  Satisfaction score: 100.0
+Passenger 4: INJECTED AT 2082.0s and DELIVERED in 23.333s
+  Satisfaction score: 100.0
+Passenger 5: INJECTED AT 2217.5s and DELIVERED in 29.808s
+  Satisfaction score: 100.0
+Passenger 6: INJECTED AT 2805.4s and DELIVERED in 17.441s
+  Satisfaction score: 100.0
+Passenger 7: INJECTED AT 3269.2s and DELIVERED in 27.755s
+  Satisfaction score: 100.0
+Passenger 8: INJECTED AT 3705.3s and DELIVERED in 31.742s
+  Satisfaction score: 100.0
+Passenger 9: INJECTED AT 4204.2s and DELIVERED in 15.235s
+  Satisfaction score: 100.0
+Passenger 10: INJECTED AT 4487.2s and DELIVERED in 27.17s
+  Satisfaction score: 100.0
+Passenger 11: INJECTED AT 4917.5s and DELIVERED in 30.333s
+  Satisfaction score: 100.0
+Passenger 12: INJECTED AT 5104.0s and DELIVERED in 28.378s
+  Satisfaction score: 100.0
+Passenger 13: INJECTED AT 5553.4s and DELIVERED in 29.055s
+  Satisfaction score: 100.0
+Passenger 14: INJECTED AT 5713.7s and DELIVERED in 17.997s
+  Satisfaction score: 100.0
+Passenger 15: INJECTED AT 6184.5s and DELIVERED in 32.576s
+  Satisfaction score: 100.0
+Passenger 16: INJECTED AT 6407.5s and DELIVERED in 33.375s
+  Satisfaction score: 100.0
+Passenger 17: INJECTED AT 6866.1s and DELIVERED in 23.213s
+  Satisfaction score: 100.0
+
+Passenger Delivery Summary
+Delivered: 18
+Stranded: 0
+Total: 18
+
+Deliver Stats (lower is better):
+Average_delivery_time: 25.827
+Maximum_delivery_time:  33.375
+Delivery_performance_score:  136.683
+
+Satisfaction Stats (higher is better):
+Average_satisfaction_score: 100.000
+Min_satisfaction_score:  100.000
+Satisfaction_performance_score:  500.000
+
+
+
+
+Network Utilization Summary:
+Recent: 91.20 % Max: 91.20 %  Overall:  91.20 %
+
