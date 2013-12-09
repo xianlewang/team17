@@ -1,203 +1,54 @@
-; 18649 Fall 2013
-; Group 17
-; Qiang Zhang(qiangz), Shen Yu(sheny), Jiang He(jiangh), Xianle Wang(xianlew)
 
 Simulator Parameters:
-Command line = -pf proj7acceptance1.pass -seed 8675309 -monitor Proj7RuntimeMonitor
-RandomSeed = 8675309
-CanNetworkBitTime = 0 ns
-Effective Can Bitrate = Infinity
+Command line = -pf proj7acceptance1.pass -b 200 -fs 5.0
+RandomSeed = 1386549420058
+CanNetworkBitTime = 5000 ns
+Effective Can Bitrate = 199999.99999999997
 Run Time = null
 Real time rate = null
 Acceptance Test File = proj7acceptance1.pass
-Monitors: Proj7RuntimeMonitor  
-
-
-[Elevator] @0.000000000: Starting Simulation
-[RuntimeMonitor] @43.650000000: No Call At Front
-[RuntimeMonitor] @43.650000000: No Hall Call At Back
-[Elevator] @60.000000000: Progress indicator
-[RuntimeMonitor] @87.540000000: No Hall Call At Back
-[Elevator] @120.000000000: Progress indicator
-[RuntimeMonitor] @131.330000000: No Call At Front
-[RuntimeMonitor] @175.240000000: No Call At Front
-[Elevator] @180.000000000: Progress indicator
-[RuntimeMonitor] @219.240000000: No Call At Front
-[Elevator] @240.000000000: Progress indicator
-[RuntimeMonitor] @263.140000000: No Call At Front
-[Elevator] @300.000000000: Progress indicator
-[RuntimeMonitor] @307.040000000: No Call At Front
-[RuntimeMonitor] @307.040000000: No Hall Call At Back
-[Elevator] @360.000000000: Progress indicator
-[Elevator] @420.000000000: Progress indicator
-[RuntimeMonitor] @471.160000000: No Call At Front
-[Elevator] @480.000000000: Progress indicator
-[RuntimeMonitor] @515.160000000: No Call At Front
-[RuntimeMonitor] @515.160000000: No Hall Call At Back
-[Elevator] @540.000000000: Progress indicator
-[RuntimeMonitor] @558.940000000: No Hall Call At Back
-[Elevator] @600.000000000: Progress indicator
-[RuntimeMonitor] @602.840000000: No Call At Front
-[RuntimeMonitor] @646.840000000: No Call At Front
-[Elevator] @660.000000000: Progress indicator
-[Elevator] @720.000000000: Progress indicator
-[RuntimeMonitor] @734.630000000: No Call At Front
-[RuntimeMonitor] @778.550000000: No Call At Front
-[RuntimeMonitor] @778.550000000: No Hall Call At Back
-[Elevator] @780.000000000: Progress indicator
-[Elevator] @840.000000000: Progress indicator
-[Elevator] @900.000000000: Progress indicator
-[RuntimeMonitor] @942.460000000: No Call At Front
-[Elevator] @960.000000000: Progress indicator
-[RuntimeMonitor] @986.610000000: No Call At Front
-[RuntimeMonitor] @986.610000000: No Hall Call At Back
-[Elevator] @1020.000000000: Progress indicator
-[RuntimeMonitor] @1073.840000000: No Call At Front
-[Elevator] @1080.000000000: Progress indicator
-[RuntimeMonitor] @1117.790000000: No Call At Front
-[Elevator] @1140.000000000: Progress indicator
-[Elevator] @1200.000000000: Progress indicator
-[RuntimeMonitor] @1205.540000000: No Call At Front
-[RuntimeMonitor] @1249.440000000: No Call At Front
-[Elevator] @1260.000000000: Progress indicator
-[Elevator] @1320.000000000: Progress indicator
-[Elevator] @1380.000000000: Progress indicator
-[RuntimeMonitor] @1413.570000000: No Call At Front
-[Elevator] @1440.000000000: Progress indicator
-[RuntimeMonitor] @1457.460000000: No Call At Front
-[RuntimeMonitor] @1457.460000000: No Hall Call At Back
-[Elevator] @1500.000000000: Progress indicator
-[RuntimeMonitor] @1545.390000000: No Call At Front
-[Elevator] @1560.000000000: Progress indicator
-[Elevator] @1620.000000000: Progress indicator
-[RuntimeMonitor] @1677.040000000: No Call At Front
-[Elevator] @1680.000000000: Progress indicator
-[RuntimeMonitor] @1721.000000000: No Call At Front
-[Elevator] @1740.000000000: Progress indicator
-[Elevator] @1800.000000000: Progress indicator
-[Elevator] @1860.000000000: Progress indicator
-[RuntimeMonitor] @1885.060000000: No Call At Front
-[Elevator] @1920.000000000: Progress indicator
-[RuntimeMonitor] @1929.170000000: No Call At Front
-[RuntimeMonitor] @1929.170000000: No Hall Call At Back
-[Elevator] @1980.000000000: Progress indicator
-[Elevator] @2040.000000000: Progress indicator
-[Elevator] @2100.000000000: Progress indicator
-[RuntimeMonitor] @2148.840000000: No Call At Front
-[Elevator] @2160.000000000: Progress indicator
-[RuntimeMonitor] @2192.890000000: No Call At Front
-[Elevator] @2220.000000000: Progress indicator
-[Elevator] @2280.000000000: Progress indicator
-[Elevator] @2340.000000000: Progress indicator
-[RuntimeMonitor] @2356.960000000: No Call At Front
-[Elevator] @2400.000000000: Progress indicator
-[RuntimeMonitor] @2400.960000000: No Call At Front
-[RuntimeMonitor] @2400.960000000: No Hall Call At Back
-[Elevator] @2460.000000000: Progress indicator
-[Elevator] @2520.000000000: Progress indicator
-[Elevator] @2580.000000000: Progress indicator
-[RuntimeMonitor] @2620.340000000: No Call At Front
-[Elevator] @2640.000000000: Progress indicator
-[Elevator] @2700.000000000: Progress indicator
-[Elevator] @2760.000000000: Progress indicator
-[Elevator] @2820.000000000: Progress indicator
-[RuntimeMonitor] @2828.350000000: No Call At Front
-[RuntimeMonitor] @2872.250000000: No Hall Call At Back
-[Elevator] @2880.000000000: Progress indicator
-[Elevator] @2940.000000000: Progress indicator
-[Elevator] @3000.000000000: Progress indicator
-[Elevator] @3060.000000000: Progress indicator
-[RuntimeMonitor] @3092.140000000: No Call At Front
-[Elevator] @3120.000000000: Progress indicator
-[Elevator] @3180.000000000: Progress indicator
-[Elevator] @3240.000000000: Progress indicator
-[Elevator] @3300.000000000: Progress indicator
-[RuntimeMonitor] @3300.060000000: No Call At Front
-[RuntimeMonitor] @3344.070000000: No Hall Call At Back
-[Elevator] @3360.000000000: Progress indicator
-[Elevator] @3420.000000000: Progress indicator
-[Elevator] @3480.000000000: Progress indicator
-[Elevator] @3540.000000000: Progress indicator
-[Elevator] @3600.000000000: Progress indicator
-[Elevator] @3660.000000000: Progress indicator
-[Elevator] @3720.000000000: Progress indicator
-[RuntimeMonitor] @3770.270000000: No Call At Front
-[Elevator] @3780.000000000: Progress indicator
-[Elevator] @3840.000000000: Progress indicator
-[Elevator] @3900.000000000: Progress indicator
-[Elevator] @3960.000000000: Progress indicator
-[Elevator] @4020.000000000: Progress indicator
-[Elevator] @4080.000000000: Progress indicator
-[Elevator] @4140.000000000: Progress indicator
-[Elevator] @4200.000000000: Progress indicator
-[RuntimeMonitor] @4240.210000000: No Call At Front
-[Elevator] @4260.000000000: Progress indicator
-[Elevator] @4320.000000000: Progress indicator
-[Elevator] @4380.000000000: Progress indicator
-[Elevator] @4440.000000000: Progress indicator
-[Elevator] @4500.000000000: Progress indicator
-[Elevator] @4560.000000000: Progress indicator
-[Elevator] @4620.000000000: Progress indicator
-[Elevator] @4680.000000000: Progress indicator
-[RuntimeMonitor] @4711.260000000: No Call At Front
-[Elevator] @4740.000000000: Progress indicator
-[Elevator] @4800.000000000: Progress indicator
-[Elevator] @4860.000000000: Progress indicator
-[Elevator] @4920.000000000: Progress indicator
-[Elevator] @4980.000000000: Progress indicator
-[Elevator] @5040.000000000: Progress indicator
-[Elevator] @5100.000000000: Progress indicator
-[Elevator] @5160.000000000: Progress indicator
-[RuntimeMonitor] @5181.960000000: No Call At Front
-[Elevator] @5220.000000000: Progress indicator
-[Elevator] @5280.000000000: Progress indicator
-[Elevator] @5340.000000000: Progress indicator
-[Elevator] @5400.000000000: Progress indicator
-[Elevator] @5460.000000000: Progress indicator
-[Elevator] @5520.000000000: Progress indicator
-[Elevator] @5580.000000000: Progress indicator
-[Elevator] @5640.000000000: Progress indicator
-[RuntimeMonitor] @5653.260000000: No Call At Front
-[Elevator] @5700.000000000: Progress indicator
-[Elevator] @5760.000000000: Progress indicator
-[Elevator] @5820.000000000: Progress indicator
-[Elevator] @5880.000000000: Progress indicator
-[Elevator] @5940.000000000: Progress indicator
-[Elevator] @6000.000000000: Progress indicator
-[Elevator] @6060.000000000: Progress indicator
-[Elevator] @6120.000000000: Progress indicator
-[RuntimeMonitor] @6125.110000000: No Call At Front
-[Elevator] @6180.000000000: Progress indicator
-[Elevator] @6240.000000000: Progress indicator
-[Elevator] @6300.000000000: Progress indicator
-[Elevator] @6360.000000000: Progress indicator
-[Elevator] @6420.000000000: Progress indicator
-[Elevator] @6480.000000000: Progress indicator
-[Elevator] @6540.000000000: Progress indicator
-[RuntimeMonitor] @6596.460000000: No Call At Front
-[Elevator] @6600.000000000: Progress indicator
-[Elevator] @6660.000000000: Progress indicator
-[Elevator] @6720.000000000: Progress indicator
-[Elevator] @6780.000000000: Progress indicator
-[Elevator] @6840.000000000: Progress indicator
-[Elevator] @6900.000000000: Progress indicator
-[Elevator] @6960.000000000: Progress indicator
-[Elevator] @7020.000000000: Progress indicator
-[Elevator] @7080.000000000: Progress indicator
-[Elevator] @7140.000000000: Progress indicator
-[Elevator] @7157.836000000: Simulation Finished
-
-Monitors Warning Results: 
-RuntimeMonitor generated 0 warnings.
-
-Monitors Summmary Results: 
-Overweight Count = 0
-NoCall Count = 52
-Reversal Count = 0
 
 STATISTICS FOR ELEVATOR SIMULATION PASSENGER DELIVERY
 -----------------------------------------------------
 
+
+These passengers were delivered:
+Passenger 0: INJECTED AT 600.0s and DELIVERED in 30.579s
+  Satisfaction score: 100.0
+Passenger 1: INJECTED AT 905.7s and DELIVERED in 27.172s
+  Satisfaction score: 100.0
+Passenger 2: INJECTED AT 974.6s and DELIVERED in 29.966s
+  Satisfaction score: 100.0
+Passenger 3: INJECTED AT 1531.4s and DELIVERED in 11.708s
+  Satisfaction score: 100.0
+Passenger 4: INJECTED AT 2082.0s and DELIVERED in 24.052s
+  Satisfaction score: 100.0
+Passenger 5: INJECTED AT 2217.5s and DELIVERED in 30.236s
+  Satisfaction score: 100.0
+Passenger 6: INJECTED AT 2805.4s and DELIVERED in 17.867s
+  Satisfaction score: 100.0
+Passenger 7: INJECTED AT 3269.2s and DELIVERED in 28.398s
+  Satisfaction score: 100.0
+Passenger 8: INJECTED AT 3705.3s and DELIVERED in 31.925s
+  Satisfaction score: 100.0
+Passenger 9: INJECTED AT 4204.2s and DELIVERED in 16.488s
+  Satisfaction score: 100.0
+Passenger 10: INJECTED AT 4487.2s and DELIVERED in 27.039s
+  Satisfaction score: 100.0
+Passenger 11: INJECTED AT 4917.5s and DELIVERED in 30.959s
+  Satisfaction score: 100.0
+Passenger 12: INJECTED AT 5104.0s and DELIVERED in 27.582s
+  Satisfaction score: 100.0
+Passenger 13: INJECTED AT 5553.4s and DELIVERED in 28.012s
+  Satisfaction score: 100.0
+Passenger 14: INJECTED AT 5713.7s and DELIVERED in 16.784s
+  Satisfaction score: 100.0
+Passenger 15: INJECTED AT 6184.5s and DELIVERED in 32.805s
+  Satisfaction score: 100.0
+Passenger 16: INJECTED AT 6407.5s and DELIVERED in 33.751s
+  Satisfaction score: 100.0
+Passenger 17: INJECTED AT 6866.1s and DELIVERED in 22.675s
+  Satisfaction score: 100.0
 
 Passenger Delivery Summary
 Delivered: 18
@@ -205,17 +56,18 @@ Stranded: 0
 Total: 18
 
 Deliver Stats (lower is better):
-Average_delivery_time: 497.564
-Maximum_delivery_time:  785.269
-Delivery_performance_score:  2775.525
+Average_delivery_time: 26.000
+Maximum_delivery_time:  33.751
+Delivery_performance_score:  137.751
 
 Satisfaction Stats (higher is better):
-Average_satisfaction_score: 75.000
-Min_satisfaction_score:  50.000
-Satisfaction_performance_score:  350.000
+Average_satisfaction_score: 100.000
+Min_satisfaction_score:  100.000
+Satisfaction_performance_score:  500.000
 
 
 
-7157.836s simulation seconds
- 61.197 real seconds
- effective rate 116.96
+
+Network Utilization Summary:
+Recent: 91.20 % Max: 91.20 %  Overall:  91.20 %
+

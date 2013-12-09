@@ -139,7 +139,7 @@ public class CarButtonControl extends Controller{
     		mCarLight.set(true);
     		mCarCall.set(true);
 //#transition 'T9.2'
-    		if (mAtFloor.getValue() == true && DoorClosedArray.getBothClosed() == false && CarCall.pressed() == false) {
+    		if (mAtFloor.getValue() == true && DoorClosedArray.getBothClosed() == false /*&& CarCall.pressed() == false*/) {
     			nextstate = State.STATE_LIGHT_OFF;
     		} else {
     			nextstate = state;
