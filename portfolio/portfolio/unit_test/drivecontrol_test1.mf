@@ -1,6 +1,6 @@
 ;18649 Fall 2013
 ;Group 17 
-;Member Name: Jiang He  Andrew ID: jiangh
+;Jiang He(jiangh)
 ;drivecontrol_test1.mf
 
 #INCLUDE drive_defines.mf ;include CAN ID and Period Definations
@@ -8,8 +8,6 @@
 0s I MESSAGE_PERIOD N AT_FLOOR_[2][BACK]_CAN_ID AtFloor 2 BACK = false
 0s I MESSAGE_PERIOD N AT_FLOOR_[3][FRONT]_CAN_ID AtFloor 3 FRONT = true
 0s I MESSAGE_PERIOD N AT_FLOOR_[4][FRONT]_CAN_ID AtFloor 4 FRONT = false
-;0s I MESSAGE_PERIOD N AT_FLOOR_[5][FRONT]_CAN_ID AtFloor 5 FRONT = false
-
 
 0s I MESSAGE_PERIOD N LEVEL_SENSOR_[UP]_CAN_ID Leveling UP = true
 0s I MESSAGE_PERIOD N LEVEL_SENSOR_[DOWN]_CAN_ID Leveling DOWN = true

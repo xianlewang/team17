@@ -1,6 +1,6 @@
-; 18649 Fall 2013
-; Group 17 
-; Shen Yu (sheny)
-; carpositioncontrol.cf
+;18649 Fall 2013
+;Group 17 
+;Shen Yu (sheny)
+;carpositioncontrol.cf
 
 CarPositionControl 50ms TRUE

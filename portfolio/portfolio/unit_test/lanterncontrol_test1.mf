@@ -1,7 +1,8 @@
-;18649 fall 2013
-;Zhang Qiang
-;qiangz
+;18649 Fall 2013
+;Group 17
+;Zhang Qiang(qiangz)
 ;lanterncontrol_test1.mf
+
 #INCLUDE lantern_define.mf ;include CAN_ID and Period Definations
 ;initialize
 0s I MESSAGE_PERIOD N ATFLOOR_1F_FRONT_CAN_ID AtFloor 1 FRONT = false

@@ -1,6 +1,6 @@
 ;18649 Fall 2013
 ;Group 17 
-;Member Name: Shen Yu  Andrew ID: sheny
+;Shen Yu(sheny)
 ;carbutton_defines.mf
 
 ;can id used

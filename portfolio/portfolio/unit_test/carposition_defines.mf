@@ -1,7 +1,7 @@
-; 18649 Fall 2013
-; Group 17 
-; Shen Yu (sheny)
-; carposition_defines.mf
+;18649 Fall 2013
+;Group 17 
+;Shen Yu(sheny)
+;carposition_defines.mf
 
 ;can id used
 #DEFINE CAR_LEVEL_POSITION_CAN_ID              0x0C517200

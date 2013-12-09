@@ -1,6 +1,6 @@
 ;18649 Fall 2013
 ;Group 17 
-;Member Name: Jiang He  Andrew ID: jiangh
+;Jiang He(jiangh)
 ;drive_defines.mf
 
 ;can ID's used:

@@ -2,6 +2,7 @@
 ; group 17
 ; Qiang Zhang(qiangz)
 ; lanterncontrol_test1.stats
+
 Simulator Parameters:
 Command line = -cf lanterncontrol.cf -mf lanterncontrol_test1.mf
 RandomSeed = 1382053553033
