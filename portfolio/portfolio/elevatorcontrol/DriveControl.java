@@ -2,7 +2,6 @@
 18649 Fall 2013
 Group 17
 Jiang He(jiangh)
-(other names would go here)
  */
 package simulator.elevatorcontrol;
 
@@ -330,11 +329,10 @@ public class DriveControl extends Controller {
 				 mDrive.set(commandSpeed, desiredDirection);
 				 mDriveSpeed.set(localDriveSpeed.speed(), localDriveSpeed.direction());
 				 
-
+//#transition 'T6.9'
 				 if (currentFloor == desiredFloor && levelFlag == false) {
 					  newState = State.STOP;
 				 }
-//#transition 'T6.9'
 				 else if(mHoistwayLimitDown.getValue()==true || mHoistwayLimitUp.getValue()==true || mEmergencyBrake.getValue()==true) {
 					  newState = State.STOP;
 				 }
