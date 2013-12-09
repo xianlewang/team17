@@ -46,6 +46,7 @@
 #DEFINE LEVEL_SENSOR_[DOWN]_CAN_ID 0x09F40A01
 
 #DEFINE HALLCALL_1FU_CAN_ID 0x0CB17800
+#DEFINE HALLCALL_3FU_CAN_ID 0x0CB17808
 
 ;intialize 
 0s I MESSAGE_PERIOD N DOOR_CLOSED_FL_CAN_ID DoorClosed FRONT LEFT = true
@@ -54,7 +55,7 @@
 0s I MESSAGE_PERIOD N DOOR_CLOSED_BR_CAN_ID DoorClosed BACK RIGHT = true
 
 0s I MESSAGE_PERIOD N HALLCALL_1FU_CAN_ID HallCall 1 FRONT UP = true
-
+0s I MESSAGE_PERIOD N HALLCALL_3FU_CAN_ID HallCall 3 FRONT UP = false
 0s I MESSAGE_PERIOD N AT_FLOOR_[1][FRONT]_CAN_ID AtFloor 1 FRONT = true
 0s I MESSAGE_PERIOD N AT_FLOOR_[2][BACK]_CAN_ID AtFloor 2 BACK = false
 0s I MESSAGE_PERIOD N AT_FLOOR_[3][FRONT]_CAN_ID AtFloor 3 FRONT = false
@@ -81,9 +82,12 @@
 
 ;#arc '9A/1b'
 1.2s A F DoorMotor FRONT LEFT : command == OPEN
+1.2s A S DoorControl[FRONT][LEFT] : STATE == BEFORE_OPEN
 
 ;#arc '9A/2'
-1.5s A N DESIRED_FLOOR_CAN_ID DesiredFloor : getFloor == 1
+1.2s I MESSAGE_PERIOD N HALLCALL_1FU_CAN_ID HallCall 1 FRONT UP = false
+1.2s I MESSAGE_PERIOD N HALLCALL_3FU_CAN_ID HallCall 3 FRONT UP = true
+1.5s A N DESIRED_FLOOR_CAN_ID DesiredFloor : getFloor == 3
 1.5s A N DESIRED_FLOOR_CAN_ID DesiredFloor : getDirection == UP
 
 
@@ -106,13 +110,13 @@
 18.2s A F DoorMotor FRONT LEFT : command == STOP
 
 ;#arc '9A/7a'
-18.5s A N DESIRED_FLOOR_CAN_ID DesiredFloor : getFloor == 1
+18.5s A N DESIRED_FLOOR_CAN_ID DesiredFloor : getFloor == 3
 18.5s A N DESIRED_FLOOR_CAN_ID DesiredFloor : getDirection == UP
 
 ;#arc '9A/7b'
-19s A F Drive : speed == STOP
+19s A F Drive : speed == SLOW
 
 ;****verify postcondition
 20s A N DOOR_CLOSED_FL_CAN_ID DoorClosed FRONT LEFT : getValue == true
-20.5s A F DoorMotor FRONT LEFT : command == OPEN
-20.5s A F Drive : direction == STOP
+20.5s A F DoorMotor FRONT LEFT : command == STOP
+20.5s A F Drive : direction == UP
