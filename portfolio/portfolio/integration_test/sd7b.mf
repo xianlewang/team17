@@ -1,7 +1,7 @@
-;18649 Fall 2013
-;Group: #17
-;Qiang Zhang (qiangz) Shen Yu (sheny)
-;sd7b.mf
+; 18649 Fall 2013
+; Group 17
+; Qiang Zhang (qiangz)
+; sd7b.mf
 
 ;network message period
 #DEFINE MESSAGE_PERIOD 0.01s

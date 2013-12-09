@@ -1,7 +1,7 @@
 ; 18649 Fall 2013
-; group 17
+; Group 17
 ; Xianle Wang(xianlew)
-; 3a.cf
+; 3A.cf
 
 DoorControl FRONT LEFT 10ms false
 DoorControl BACK LEFT 10ms false

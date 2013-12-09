@@ -1,7 +1,7 @@
 ; 18649 Fall 2013
-; group 17
+; Group 17
 ; Jiang He (jiangh)
-; sd6a.cf
+; 6A.cf
 
 DriveControl 10ms false
 CarPositionControl 50ms false

@@ -1,5 +1,6 @@
-;18649 Fall 2013
-;Group: #17
-;Qiang Zhang (qiangz) Shen Yu (sheny)
-;sd7b.cf
+; 18649 Fall 2013
+; Group 17
+; Qiang Zhang (qiangz)
+; 7B.cf
+
 DoorControl FRONT RIGHT 10ms FALSE
