@@ -26,6 +26,9 @@
 #DEFINE LEVEL_SENSOR_[UP]_CAN_ID   0x09F40A00
 #DEFINE LEVEL_SENSOR_[DOWN]_CAN_ID 0x09F40A01
 
+;mHallCall
+#DEFINE HALL_CALL_4_UP_CAN_ID 0x0CB1780C
+
 ;mDesiredFloor
 ;ID = 0x0C4E7000
 #DEFINE DESIRED_FLOOR_CAN_ID 0x0C4E7000 
@@ -78,8 +81,11 @@
 2s I MESSAGE_PERIOD N LEVEL_SENSOR_[DOWN]_CAN_ID Leveling DOWN = true
 2s I MESSAGE_PERIOD N DRIVE_COMMAND_CAN_ID DriveSpeed = 0 STOP
 ;#arc '3A/1b'
-4s A F HallLight 4 FRONT UP : lighted == false ;
+2.8s I MESSAGE_PERIOD N DOOR_CLOSED_FL_CAN_ID DoorClosed FRONT LEFT = false
+3s A F HallLight 4 FRONT UP : lighted == false;
 
+;#arc '3A/1c'
+3s I MESSAGE_PERIOD F HallCall 4 FRONT UP = true;
 
 ;#arc '3A/2a'
 3s A N AT_FLOOR_[4][FRONT]_CAN_ID AtFloor 4 FRONT : getValue == true
@@ -87,30 +93,33 @@
 3s A F DoorMotor FRONT LEFT : command == OPEN
 3.2s I MESSAGE_PERIOD N DOOR_CLOSED_FL_CAN_ID DoorClosed FRONT LEFT = false
 3.2s I MESSAGE_PERIOD N DOOR_CLOSED_FR_CAN_ID DoorClosed FRONT RIGHT = false
+;#arc '3A/2c'
 3.2s I MESSAGE_PERIOD N DESIRED_FLOOR_CAN_ID DesiredFloor = 5 FRONT UP
+3.2s I MESSAGE_PERIOD F HallCall 4 FRONT UP = false
 
 ;#arc '3A/3a'
 5s I MESSAGE_PERIOD N DOOR_OPEN_SENSOR_[FRONT][LEFT]_CAN_ID DoorOpened FRONT LEFT = true
 5s I MESSAGE_PERIOD N DOOR_OPEN_SENSOR_[FRONT][RIGHT]_CAN_ID DoorOpened FRONT RIGHT = true
 ;#arc '3A/3b'
-5.10s A F DoorMotor FRONT LEFT : command == STOP
+5.1s A F DoorMotor FRONT LEFT : command == STOP
 
 ;#arc '3A/4'
-6.1s A F DoorMotor FRONT LEFT : command == STOP
-6.25s I MESSAGE_PERIOD N DOOR_OPEN_SENSOR_[FRONT][LEFT]_CAN_ID DoorOpened FRONT LEFT = false
-6.25s I MESSAGE_PERIOD N DOOR_OPEN_SENSOR_[FRONT][RIGHT]_CAN_ID DoorOpened FRONT RIGHT = false
+10.1s A F DoorMotor FRONT LEFT : command == CLOSE
+10.1s A S DoorControl[FRONT][LEFT] : STATE == CLOSING
+10.25s I MESSAGE_PERIOD N DOOR_OPEN_SENSOR_[FRONT][LEFT]_CAN_ID DoorOpened FRONT LEFT = false
+10.25s I MESSAGE_PERIOD N DOOR_OPEN_SENSOR_[FRONT][RIGHT]_CAN_ID DoorOpened FRONT RIGHT = false
 ;#arc '3A/5a'
-6.4s I MESSAGE_PERIOD N DOOR_CLOSED_FL_CAN_ID DoorClosed FRONT LEFT = true
-6.4s I MESSAGE_PERIOD N DOOR_CLOSED_FR_CAN_ID DoorClosed FRONT RIGHT = true
+11.4s I MESSAGE_PERIOD N DOOR_CLOSED_FL_CAN_ID DoorClosed FRONT LEFT = true
+11.4s I MESSAGE_PERIOD N DOOR_CLOSED_FR_CAN_ID DoorClosed FRONT RIGHT = true
 
 ;#arc '3A/5b'
-6.5s A F DoorMotor FRONT LEFT : command == STOP
-
+13.5s A F DoorMotor FRONT LEFT : command == STOP
+13.5s A S DoorControl[FRONT][LEFT] : STATE == CLOSED
 
 ;****verify postcondition
-7s A N DOOR_CLOSED_FL_CAN_ID DoorClosed FRONT LEFT : getValue == true
-7s A N DOOR_CLOSED_FR_CAN_ID DoorClosed FRONT RIGHT : getValue == true
-7s A N DOOR_CLOSED_BL_CAN_ID DoorClosed BACK LEFT : getValue == true
-7s A N DOOR_CLOSED_BR_CAN_ID DoorClosed BACK RIGHT : getValue == true
-7s A N AT_FLOOR_[4][FRONT]_CAN_ID AtFloor 4 FRONT : getValue == true
-7s A F HallLight 4 FRONT UP : lighted == false ;
+14s A N DOOR_CLOSED_FL_CAN_ID DoorClosed FRONT LEFT : getValue == true
+14s A N DOOR_CLOSED_FR_CAN_ID DoorClosed FRONT RIGHT : getValue == true
+14s A N DOOR_CLOSED_BL_CAN_ID DoorClosed BACK LEFT : getValue == true
+14s A N DOOR_CLOSED_BR_CAN_ID DoorClosed BACK RIGHT : getValue == true
+14s A N AT_FLOOR_[4][FRONT]_CAN_ID AtFloor 4 FRONT : getValue == true
+14s A F HallLight 4 FRONT UP : lighted == false ;

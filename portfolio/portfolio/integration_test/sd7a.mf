@@ -66,6 +66,9 @@
 1.8s A S LanternControl[UP] : STATE == Lantern_On
 1.8s A F CarLantern UP : lighted == true
 
+;#arc '7A/1c'
+1.8s A N DESIRED_FLOOR_CAN_ID DesiredFloor : getDirection == UP
+
 
 ;#arc '7A/3a'
 2.0s I MESSAGE_PERIOD N DOOR_OPENED_FRONT_LEFT_CAN_ID DoorOpened FRONT LEFT = true
@@ -83,8 +86,8 @@
 15.0s I MESSAGE_PERIOD N DOOR_CLOSED_FRONT_LEFT_CAN_ID DoorClosed FRONT LEFT = true
 
 ;#arc '7A/5b'
-15.2s A S DoorControl[FRONT][LEFT] : STATE == WAIT_DISPATCHER
-15.2s A F DoorMotor FRONT LEFT : command == STOP
+16.2s A S DoorControl[FRONT][LEFT] : STATE == CLOSED
+16.2s A F DoorMotor FRONT LEFT : command == STOP
 
 ;#arc '7A/6b'
 16.4s A S LanternControl[UP] : STATE == Lantern_Off

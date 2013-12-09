@@ -37,42 +37,44 @@
 0.4s I MESSAGE_PERIOD N DOOR_OPEN_SENSOR_F_L_CAN_ID DoorOpened FRONT LEFT = true
 
 ;#arc '2B/1'
-1.6s A F DoorMotor FRONT LEFT : command == STOP
-1.6s A S DoorControl[FRONT][LEFT] : STATE == CLOSED
-1.8s I MESSAGE_PERIOD N DOOR_OPEN_SENSOR_F_L_CAN_ID DoorOpened FRONT LEFT = false
+5.0s I MESSAGE_PERIOD N DOOR_OPEN_SENSOR_F_L_CAN_ID DoorOpened FRONT LEFT = false
+5.6s A F DoorMotor FRONT LEFT : command == CLOSE
+5.6s A S DoorControl[FRONT][LEFT] : STATE == CLOSING
 
 ;#arc '2B/2'
-
 ;#arc '2B/3A'
-2s I MESSAGE_PERIOD F CarCall 4 FRONT = true
+7s I MESSAGE_PERIOD N DOOR_CLOSED_SENSOR_F_L_CAN_ID DoorClosed FRONT LEFT = true
+7s I MESSAGE_PERIOD N DOOR_CLOSED_SENSOR_F_R_CAN_ID DoorClosed FRONT RIGHT = true
+7s I MESSAGE_PERIOD F CarCall 4 FRONT = true
 
 ;#arc '2B/3B'
-2.4s A F CarLight 4 FRONT : isLighted == true
+7.4s A F CarLight 4 FRONT : isLighted == true
 
 ;#arc '2B/4A'
-2.4s A N CAR_CALL_4F_CAN_ID CarCall 4 FRONT : getValue == true
-2.4s A S CarButtonControl[4][FRONT] : STATE == STATE_LIGHT_ON
+7.4s A N CAR_CALL_4F_CAN_ID CarCall 4 FRONT : getValue == true
+7.4s A S CarButtonControl[4][FRONT] : STATE == STATE_LIGHT_ON
 
-2.8s I MESSAGE_PERIOD F CarCall 4 FRONT = false
-2.8s I MESSAGE_PERIOD N DOOR_REVERSAL_SENSOR_F_L_CAN_ID DoorReversal FRONT LEFT = true
+7.8s I MESSAGE_PERIOD F CarCall 4 FRONT = false
 
 ;#arc '2B/4B'
-3s A F DoorMotor FRONT LEFT : command == OPEN
-3s A S DoorControl[FRONT][LEFT] : STATE == REVERSE_OPEN
+10.0s I MESSAGE_PERIOD N DOOR_CLOSED_SENSOR_F_L_CAN_ID DoorClosed FRONT LEFT = false
+10.0s I MESSAGE_PERIOD N DOOR_CLOSED_SENSOR_F_R_CAN_ID DoorClosed FRONT RIGHT = false
+10.0s A F DoorMotor FRONT LEFT : command == OPEN
+10.0s A S DoorControl[FRONT][LEFT] : STATE == BEFORE_OPEN
 
 ;#arc '2B/5A'
-3.2s I MESSAGE_PERIOD N ATFLOOR_4F_CAN_ID AtFloor 4 FRONT = true
+11.2s I MESSAGE_PERIOD N ATFLOOR_4F_CAN_ID AtFloor 4 FRONT = true
 
 ;#arc '2B/5B'
-3.4s A F CarLight 4 FRONT : isLighted == false
-3.4s A S CarButtonControl[4][FRONT] : STATE == STATE_LIGHT_OFF
+11.4s A F CarLight 4 FRONT : isLighted == false
+11.4s A S CarButtonControl[4][FRONT] : STATE == STATE_LIGHT_OFF
 
 ;#arc '2B/6A'
-3.2s I MESSAGE_PERIOD N DOOR_OPEN_SENSOR_F_L_CAN_ID DoorOpened FRONT LEFT = true
+11.4s I MESSAGE_PERIOD N DOOR_OPEN_SENSOR_F_L_CAN_ID DoorOpened FRONT LEFT = true
 
 ;#arc '2B/6B'
-3.4s A F DoorMotor FRONT LEFT : command == STOP
-3.4s A S DoorControl[FRONT][LEFT] : STATE == REVERSE_OPENED
+11.6s A F DoorMotor FRONT LEFT : command == STOP
+11.6s A S DoorControl[FRONT][LEFT] : STATE == OPENED
 
 
 
