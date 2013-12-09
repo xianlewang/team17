@@ -1040,8 +1040,6 @@
 	commanded to Open.
 	<br> &nbsp;&nbsp;&nbsp; 5.7.3&nbsp; CountDown shall be set to
 	Dwell.
-	<br> &nbsp;&nbsp;&nbsp; 5.7.4&nbsp; Reversal shall be set to
-	False.
 	<br> 5.8 &nbsp;&nbsp; If mDoorOpened[b, r] is True, then:
 	<br> &nbsp;&nbsp;&nbsp; 5.8.1&nbsp; DoorMotor[b, r] shall be
 	commanded to Stop.
@@ -1077,8 +1075,6 @@
 	commanded to Open.
 	<br> &nbsp;&nbsp;&nbsp; 5.12.3&nbsp; CountDown shall be set to
 	Dwell.
-	<br> &nbsp;&nbsp;&nbsp; 5.12.4&nbsp; Reversal shall be set to
-	True.
 	<br> 5.13 &nbsp;&nbsp; If CountDown &lt; 0 AND Reversal is True
 	then:
 	<br> &nbsp;&nbsp;&nbsp; 5.13.1&nbsp; DoorMotor[b, r] shall be
@@ -1096,7 +1092,7 @@
 	<div style="text-align: left; width: 300">
 		<a href="5_door_control.jpg"><img alt="5_door_control.jpg"
 			src="5_door_control.jpg"
-			style="border: 0px solid; width: 1129px; height: 764px;"></a><br>
+			style="border: 0px solid; width: 1099px; height: 698px;"></a><br>
 	</div>
 	<!--Insert table for Door Control -->
 	<table style="text-align: left; width: 850;" border="1" cellpadding="2"
@@ -1121,25 +1117,22 @@
 				<td style="vertical-align: top;">T5.2<br>
 				</td>
 				<td style="vertical-align: top;">
-					mAtFloor[f, b]&nbsp;&larr;&nbsp;True&nbsp;
-					AND&nbsp;mCarWeight&nbsp;&gt;=&nbsp;MaxCarCapacity<br>
+					mDoorOpened[b, r] &nbsp;&larr;&nbsp;True<br>
 				</td>
 			</tr>
 			<tr>
 				<td style="vertical-align: top;">T5.3<br>
 				</td>
 				<td style="vertical-align: top;">
-					mDoorClosed[b, r']&nbsp;&larr;&nbsp;True <br>
+				    CountDown&nbsp;&lt;=&nbsp;0&nbsp;
+					AND&nbsp;mCarWeight&nbsp;&lt;&nbsp;MaxCarCapacity <br>
 				</td>
 			</tr>
 			<tr>
 				<td style="vertical-align: top;">T5.4<br>
 				</td>
 				<td style="vertical-align: top;">
-					mAtFloor[f, b]&nbsp;&larr;&nbsp;True&nbsp;
-					AND&nbsp;Call[f, b]&nbsp;&larr;&nbsp;True&nbsp;
-					AND&nbsp;f&nbsp;==&nbsp;mDesiredFloor.f&nbsp;
-					AND&nbsp;mDriveSpeed&nbsp;==&nbsp;(0, STOP) <br>
+					mDoorClosed[b, r]&nbsp;&larr;&nbsp;True <br>
 				</td>
 			</tr>
 			<tr>
@@ -1154,44 +1147,46 @@
 				<td style="vertical-align: top;">T5.6<br>
 				</td>
 				<td style="vertical-align: top;">
-					mDoorClosed[b, r']&nbsp;&larr;&nbsp;False<br>
+					mDoorReversal[b, r]&nbsp;&larr;&nbsp;True
+					AND&nbsp;mAtFloor[f, b]&nbsp;&larr;&nbsp;True<br>
 				</td>
 			</tr>
 			<tr>
 				<td style="vertical-align: top;">T5.7<br>
 				</td>
 				<td style="vertical-align: top;">
-					mDoorOpened[b, r]&nbsp;&larr;&nbsp;True <br>
+					mDoorReversal[b, r]&nbsp;&larr;&nbsp;True
+					AND&nbsp;mAtFloor[f, b]&nbsp;&larr;&nbsp;True<br>
 				</td>
 			</tr>
 			<tr>
 				<td style="vertical-align: top;">T5.8<br>
 				</td>
 				<td style="vertical-align: top;">
-					CountDown&nbsp;&lt;&nbsp;0 &nbsp;
-					mCarWeight&nbsp;&lt;&nbsp;MaxCarCapacity<br>
+					mDoorOpened[b, r]&nbsp;&larr;&nbsp;True<br>
 				</td>
 			</tr>
 			<tr>
 				<td style="vertical-align: top;">T5.9<br>
 				</td>
 				<td style="vertical-align: top;">
-					mDoorOpened[b, r']&nbsp;&larr;&nbsp;True <br>
+					CountDown&nbsp;&lt;=&nbsp;0
+					AND&nbsp;mCarWeight&nbsp;&lt;&nbsp;MaxCarCapacity <br>
 				</td>
 			</tr>
 			<tr>
 				<td style="vertical-align: top;">T5.10<br>
 				</td>
 				<td style="vertical-align: top;">
-					mDoorOpened[b, r']&nbsp;&larr;&nbsp;False <br>
+					mDoorClosed[b, r]&nbsp;&larr;&nbsp;True <br>
 				</td>
 			</tr>
 			<tr>
 				<td style="vertical-align: top;">T5.11<br>
 				</td>
 				<td style="vertical-align: top;">
-					CountDown&nbsp;&lt;&nbsp;0&nbsp;
-					AND&nbsp;CarWeight&nbsp;&lt;&nbsp;MaxCarCapacity <br>
+					mDoorReversal[b, r]&nbsp;&larr;&nbsp;True
+					AND&nbsp;mAtFloor[f, b]&nbsp;&larr;&nbsp;True<br>
 				</td>
 			</tr>
 			<tr>
@@ -1206,79 +1201,27 @@
 				<td style="vertical-align: top;">T5.13<br>
 				</td>
 				<td style="vertical-align: top;">
-					mDoorClosed[b, r]&nbsp;&larr;&nbsp;True <br>
+					WaitTime&nbsp;&lt;=&nbsp;0 <br>
 				</td>
 			</tr>
 			<tr>
 				<td style="vertical-align: top;">T5.14<br>
 				</td>
 				<td style="vertical-align: top;">
-					mDoorReversal[b, r]&nbsp;&larr;&nbsp;True&nbsp;
-					AND&nbsp;mAtFloor[f, b]&nbsp;&larr;&nbsp;True <br>
+					mAtFloor[f, b]&nbsp;&larr;&nbsp;True&nbsp;
+					AND&nbsp;Call[f, b]&nbsp;&larr;&nbsp;True&nbsp;
+					AND&nbsp;f&nbsp;==&nbsp;mDesiredFloor.f&nbsp;
+					AND&nbsp;mDriveSpeed&nbsp;==&nbsp;(0, STOP) <br>
 				</td>
 			</tr>
 			<tr>
 				<td style="vertical-align: top;">T5.15<br>
 				</td>
 				<td style="vertical-align: top;">
-					mDoorOpenend[b, r]&nbsp;&larr;&nbsp;True <br>
-				</td>
-			</tr>
-			<tr>
-				<td style="vertical-align: top;">T5.16<br>
-				</td>
-				<td style="vertical-align: top;">
-					CountDown&nbsp;&lt;=&nbsp;0<br>
-				</td>
-			</tr>
-			<tr>
-				<td style="vertical-align: top;">T5.17<br>
-				</td>
-				<td style="vertical-align: top;">
-					mDoorOpened[b, r']&nbsp;&larr;&nbsp;True <br>
-				</td>
-			</tr>
-			<tr>
-				<td style="vertical-align: top;">T5.18<br>
-				</td>
-				<td style="vertical-align: top;">
-					mDoorOpened[b, r']&nbsp;&larr;&nbsp;False <br>
-				</td>
-			</tr>
-			<tr>
-				<td style="vertical-align: top;">T5.19<br>
-				</td>
-				<td style="vertical-align: top;">
-					CountDown&nbsp;&lt;=&nbsp;0<br>
-				</td>
-			</tr>
-			<tr>
-				<td style="vertical-align: top;">T5.20<br>
-				</td>
-				<td style="vertical-align: top;">
-					mDoorClosed[b, r']&nbsp;&larr;&nbsp;True <br>
-				</td>
-			</tr>
-			<tr>
-				<td style="vertical-align: top;">T5.21<br>
-				</td>
-				<td style="vertical-align: top;">
-					mDoorClosed[b, r']&nbsp;&larr;&nbsp;True <br>
-				</td>
-			</tr>
-			<tr>
-				<td style="vertical-align: top;">T5.22<br>
-				</td>
-				<td style="vertical-align: top;">
-					WaitTime&nbsp;&lt;=&nbsp;0 <br>
-				</td>
-			</tr>
-			<tr>
-				<td style="vertical-align: top;">T5.23<br>
-				</td>
-				<td style="vertical-align: top;">
-					mCarWeight&nbsp;&gt;=&nbsp;MaxCarCapacity&nbsp;
-					AND&nbsp;mAtFloor[f, b]&nbsp;&larr;&nbsp;True<br>
+					mAtFloor[f, b]&nbsp;&larr;&nbsp;True&nbsp;
+					AND&nbsp;Call[f, b]&nbsp;&larr;&nbsp;True&nbsp;
+					AND&nbsp;f&nbsp;==&nbsp;mDesiredFloor.f&nbsp;
+					AND&nbsp;mDriveSpeed&nbsp;==&nbsp;(0, STOP) <br>
 				</td>
 			</tr>
 		</tbody>
@@ -1305,8 +1248,6 @@
 				</td>
 				<td style="vertical-align: top;">R5.7.3<br>
 				</td>
-				<td style="vertical-aligh: top;">R5.7.4<br>
-				</td>
 				<td style="vertical-align: top;">R5.8.1<br>
 				</td>
 				<td style="vertical-align: top;">R5.8.2<br>
@@ -1334,9 +1275,7 @@
 				<td style="vertical-align: top;">R5.12.2<br>
 				</td>
 				<td style="vertical-align: top;">R5.12.3<br>
-				</td>
-				<td style="vertical-align: top;">R5.12.4<br>
-				</td>
+				</td>\
 				<td style="vertical-align: top;">R5.13.1<br>
 				</td>
 				<td style="vertical-align: top;">R5.13.2<br>
@@ -1347,30 +1286,24 @@
 			<tr>
 				<td style="vertical-align: top;">S5.1 Closed<br>
 				</td>
-				<td style="vertical-align: top;">X<br> <!--5.6-->
-				</td>
+				<td style="vertical-align: top;">X<br> <!--5.6--></td>
 				<td style="vertical-align: top;"><br> <!--5.7.1--></td>
 				<td style="vertical-align: top;"><br> <!--5.7.2--></td>
 				<td style="vertical-align: top;"><br> <!--5.7.3--></td>
-				<td style="vertical-align: top;">X<br> <!--5.7.4-->
-				</td>
 				<td style="vertical-align: top;"><br> <!--5.8.1--></td>
 				<td style="vertical-align: top;"><br> <!--5.8.2--></td>
 				<td style="vertical-align: top;"><br> <!--5.8.3--></td>
 				<td style="vertical-align: top;"><br> <!--5.9.1--></td>
 				<td style="vertical-align: top;"><br> <!--5.9.2--></td>
 				<td style="vertical-align: top;"><br> <!--5.9.3--></td>
-				<td style="vertical-align: top;">X<br> <!--5.10.1-->
-				</td>
-				<td style="vertical-align: top;">X<br> <!--5.10.2-->
-				</td>
+				<td style="vertical-align: top;">X<br> <!--5.10.1--></td>
+				<td style="vertical-align: top;">X<br> <!--5.10.2--></td>
 				<td style="vertical-align: top;"><br> <!--5.11.1--></td>
 				<td style="vertical-align: top;"><br> <!--5.11.2--></td>
 				<td style="vertical-align: top;"><br> <!--5.11.3--></td>
 				<td style="vertical-align: top;"><br> <!--5.12.1--></td>
 				<td style="vertical-align: top;"><br> <!--5.12.2--></td>
 				<td style="vertical-align: top;"><br> <!--5.12.3--></td>
-				<td style="vertical-align: top;"><br> <!--5.12.4--></td>
 				<td style="vertical-align: top;"><br> <!--5.13.1--></td>
 				<td style="vertical-align: top;"><br> <!--5.13.2--></td>
 				<td style="vertical-align: top;"><br> <!--5.13.3--></td>
@@ -1379,49 +1312,12 @@
 				<td style="vertical-align: top;">S5.2 Before Open<br>
 				</td>
 				<td style="vertical-align: top;"><br> <!--5.6--></td>
-				<td style="vertical-align: top;">X<br> <!--5.7.1-->
-				</td>
-				<td style="vertical-align: top;">X<br> <!--5.7.2-->
-				</td>
-				<td style="vertical-align: top;">X<br> <!--5.7.3-->
-				</td>
-				<td style="vertical-align: top;"><br> <!--5.7.4--></td>
+				<td style="vertical-align: top;">X<br> <!--5.7.1--></td>
+				<td style="vertical-align: top;">X<br> <!--5.7.2--></td>
+				<td style="vertical-align: top;">X<br> <!--5.7.3--></td>
 				<td style="vertical-align: top;"><br> <!--5.8.1--></td>
 				<td style="vertical-align: top;"><br> <!--5.8.2--></td>
 				<td style="vertical-align: top;"><br> <!--5.8.3--></td>
-				<td style="vertical-align: top;"><br> <!--5.9.1--></td>
-				<td style="vertical-align: top;"><br> <!--5.9.2--></td>
-				<td style="vertical-align: top;"><br> <!--5.9.3--></td>
-				<td style="vertical-align: top;"><br> <!--5.10.1--></td>
-				<td style="vertical-align: top;"><br> <!--5.10.2--></td>
-				<td style="vertical-align: top;">X<br> <!--5.11.1-->
-				</td>
-				<td style="vertical-align: top;">X<br> <!--5.11.2-->
-				</td>
-				<td style="vertical-align: top;">X<br> <!--5.11.3-->
-				</td>
-				<td style="vertical-align: top;"><br> <!--5.12.1--></td>
-				<td style="vertical-align: top;"><br> <!--5.12.2--></td>
-				<td style="vertical-align: top;"><br> <!--5.12.3--></td>
-				<td style="vertical-align: top;"><br> <!--5.12.4--></td>
-				<td style="vertical-align: top;"><br> <!--5.13.1--></td>
-				<td style="vertical-align: top;"><br> <!--5.13.2--></td>
-				<td style="vertical-align: top;"><br> <!--5.13.3--></td>
-			</tr>
-			<tr>
-				<td style="vertical-align: top;">S5.3 Opened<br>
-				</td>
-				<td style="vertical-align: top;"><br> <!--5.6--></td>
-				<td style="vertical-align: top;"><br> <!--5.7.1--></td>
-				<td style="vertical-align: top;"><br> <!--5.7.2--></td>
-				<td style="vertical-align: top;"><br> <!--5.7.3--></td>
-				<td style="vertical-align: top;"><br> <!--5.7.4--></td>
-				<td style="vertical-align: top;">X<br> <!--5.8.1-->
-				</td>
-				<td style="vertical-align: top;">X<br> <!--5.8.2-->
-				</td>
-				<td style="vertical-align: top;">X<br> <!--5.8.3-->
-				</td>
 				<td style="vertical-align: top;"><br> <!--5.9.1--></td>
 				<td style="vertical-align: top;"><br> <!--5.9.2--></td>
 				<td style="vertical-align: top;"><br> <!--5.9.3--></td>
@@ -1433,7 +1329,31 @@
 				<td style="vertical-align: top;"><br> <!--5.12.1--></td>
 				<td style="vertical-align: top;"><br> <!--5.12.2--></td>
 				<td style="vertical-align: top;"><br> <!--5.12.3--></td>
-				<td style="vertical-align: top;"><br> <!--5.12.4--></td>
+				<td style="vertical-align: top;"><br> <!--5.13.1--></td>
+				<td style="vertical-align: top;"><br> <!--5.13.2--></td>
+				<td style="vertical-align: top;"><br> <!--5.13.3--></td>
+				</tr>
+			<tr>
+				<td style="vertical-align: top;">S5.3 Opened<br>
+				</td>
+				<td style="vertical-align: top;"><br> <!--5.6--></td>
+				<td style="vertical-align: top;"><br> <!--5.7.1--></td>
+				<td style="vertical-align: top;"><br> <!--5.7.2--></td>
+				<td style="vertical-align: top;"><br> <!--5.7.3--></td>
+				<td style="vertical-align: top;">X<br> <!--5.8.1--></td>
+				<td style="vertical-align: top;">X<br> <!--5.8.2--></td>
+				<td style="vertical-align: top;">X<br> <!--5.8.3--></td>
+				<td style="vertical-align: top;"><br> <!--5.9.1--></td>
+				<td style="vertical-align: top;"><br> <!--5.9.2--></td>
+				<td style="vertical-align: top;"><br> <!--5.9.3--></td>
+				<td style="vertical-align: top;"><br> <!--5.10.1--></td>
+				<td style="vertical-align: top;"><br> <!--5.10.2--></td>
+				<td style="vertical-align: top;"><br> <!--5.11.1--></td>
+				<td style="vertical-align: top;"><br> <!--5.11.2--></td>
+				<td style="vertical-align: top;"><br> <!--5.11.3--></td>
+				<td style="vertical-align: top;"><br> <!--5.12.1--></td>
+				<td style="vertical-align: top;"><br> <!--5.12.2--></td>
+				<td style="vertical-align: top;"><br> <!--5.12.3--></td>
 				<td style="vertical-align: top;"><br> <!--5.13.1--></td>
 				<td style="vertical-align: top;"><br> <!--5.13.2--></td>
 				<td style="vertical-align: top;"><br> <!--5.13.3--></td>
@@ -1445,25 +1365,20 @@
 				<td style="vertical-align: top;"><br> <!--5.7.1--></td>
 				<td style="vertical-align: top;"><br> <!--5.7.2--></td>
 				<td style="vertical-align: top;"><br> <!--5.7.3--></td>
-				<td style="vertical-align: top;"><br> <!--5.7.4--></td>
 				<td style="vertical-align: top;"><br> <!--5.8.1--></td>
 				<td style="vertical-align: top;"><br> <!--5.8.2--></td>
 				<td style="vertical-align: top;"><br> <!--5.8.3--></td>
-				<td style="vertical-align: top;">X<br> <!--5.9.1-->
-				</td>
-				<td style="vertical-align: top;">X<br> <!--5.9.2-->
-				</td>
-				<td style="vertical-align: top;">X<br> <!--5.9.3-->
-				</td>
+				<td style="vertical-align: top;">X<br> <!--5.9.1--></td>
+				<td style="vertical-align: top;">X<br> <!--5.9.2--></td>
+				<td style="vertical-align: top;">X<br> <!--5.9.3--></td>
 				<td style="vertical-align: top;"><br> <!--5.10.1--></td>
 				<td style="vertical-align: top;"><br> <!--5.10.2--></td>
-				<td style="vertical-align: top;"><br> <!--5.11.1--></td>
-				<td style="vertical-align: top;"><br> <!--5.11.2--></td>
-				<td style="vertical-align: top;"><br> <!--5.11.3--></td>
+				<td style="vertical-align: top;">X<br> <!--5.11.1--></td>
+				<td style="vertical-align: top;">X<br> <!--5.11.2--></td>
+				<td style="vertical-align: top;">X<br> <!--5.11.3--></td>
 				<td style="vertical-align: top;"><br> <!--5.12.1--></td>
 				<td style="vertical-align: top;"><br> <!--5.12.2--></td>
 				<td style="vertical-align: top;"><br> <!--5.12.3--></td>
-				<td style="vertical-align: top;"><br> <!--5.12.4--></td>
 				<td style="vertical-align: top;"><br> <!--5.13.1--></td>
 				<td style="vertical-align: top;"><br> <!--5.13.2--></td>
 				<td style="vertical-align: top;"><br> <!--5.13.3--></td>
@@ -1475,453 +1390,6 @@
 				<td style="vertical-align: top;"><br> <!--5.7.1--></td>
 				<td style="vertical-align: top;"><br> <!--5.7.2--></td>
 				<td style="vertical-align: top;"><br> <!--5.7.3--></td>
-				<td style="vertical-align: top;"><br> <!--5.7.4--></td>
-				<td style="vertical-align: top;"><br> <!--5.8.1--></td>
-				<td style="vertical-align: top;"><br> <!--5.8.2--></td>
-				<td style="vertical-align: top;"><br> <!--5.8.3--></td>
-				<td style="vertical-align: top;"><br> <!--5.9.1--></td>
-				<td style="vertical-align: top;"><br> <!--5.9.2--></td>
-				<td style="vertical-align: top;"><br> <!--5.9.3--></td>
-				<td style="vertical-align: top;"><br> <!--5.10.1--></td>
-				<td style="vertical-align: top;"><br> <!--5.10.2--></td>
-				<td style="vertical-align: top;"><br> <!--5.11.1--></td>
-				<td style="vertical-align: top;"><br> <!--5.11.2--></td>
-				<td style="vertical-align: top;"><br> <!--5.11.3--></td>
-				<td style="vertical-align: top;">X<br> <!--5.12.1-->
-				</td>
-				<td style="vertical-align: top;">X<br> <!--5.12.2-->
-				</td>
-				<td style="vertical-align: top;">X<br> <!--5.12.3-->
-				</td>
-				<td style="vertical-align: top;">X<br> <!--5.12.4-->
-				</td>
-				<td style="vertical-align: top;"><br> <!--5.13.1--></td>
-				<td style="vertical-align: top;"><br> <!--5.13.2--></td>
-				<td style="vertical-align: top;"><br> <!--5.13.3--></td>
-			</tr>
-			<tr>
-				<td style="vertical-align: top;">S5.6 Reverse Opened<br>
-				</td>
-				<td style="vertical-align: top;"><br> <!--5.6--></td>
-				<td style="vertical-align: top;"><br> <!--5.7.1--></td>
-				<td style="vertical-align: top;"><br> <!--5.7.2--></td>
-				<td style="vertical-align: top;"><br> <!--5.7.3--></td>
-				<td style="vertical-align: top;"><br> <!--5.7.4--></td>
-				<td style="vertical-align: top;">X<br> <!--5.8.1-->
-				</td>
-				<td style="vertical-align: top;">X<br> <!--5.8.2-->
-				</td>
-				<td style="vertical-align: top;">X<br> <!--5.8.3-->
-				</td>
-				<td style="vertical-align: top;"><br> <!--5.9.1--></td>
-				<td style="vertical-align: top;"><br> <!--5.9.2--></td>
-				<td style="vertical-align: top;"><br> <!--5.9.3--></td>
-				<td style="vertical-align: top;"><br> <!--5.10.1--></td>
-				<td style="vertical-align: top;"><br> <!--5.10.2--></td>
-				<td style="vertical-align: top;"><br> <!--5.11.1--></td>
-				<td style="vertical-align: top;"><br> <!--5.11.2--></td>
-				<td style="vertical-align: top;"><br> <!--5.11.3--></td>
-				<td style="vertical-align: top;"><br> <!--5.12.1--></td>
-				<td style="vertical-align: top;"><br> <!--5.12.2--></td>
-				<td style="vertical-align: top;"><br> <!--5.12.3--></td>
-				<td style="vertical-align: top;"><br> <!--5.12.4--></td>
-				<td style="vertical-align: top;"><br> <!--5.13.1--></td>
-				<td style="vertical-align: top;"><br> <!--5.13.2--></td>
-				<td style="vertical-align: top;"><br> <!--5.13.3--></td>
-			</tr>
-			<tr>
-				<td style="vertical-align: top;">S5.7 Reverse Closing<br>
-				</td>
-				<td style="vertical-align: top;"><br> <!--5.6--></td>
-				<td style="vertical-align: top;"><br> <!--5.7.1--></td>
-				<td style="vertical-align: top;"><br> <!--5.7.2--></td>
-				<td style="vertical-align: top;"><br> <!--5.7.3--></td>
-				<td style="vertical-align: top;"><br> <!--5.7.4--></td>
-				<td style="vertical-align: top;"><br> <!--5.8.1--></td>
-				<td style="vertical-align: top;"><br> <!--5.8.2--></td>
-				<td style="vertical-align: top;"><br> <!--5.8.3--></td>
-				<td style="vertical-align: top;"><br> <!--5.9.1--></td>
-				<td style="vertical-align: top;"><br> <!--5.9.2--></td>
-				<td style="vertical-align: top;"><br> <!--5.9.3--></td>
-				<td style="vertical-align: top;"><br> <!--5.10.1--></td>
-				<td style="vertical-align: top;"><br> <!--5.10.2--></td>
-				<td style="vertical-align: top;"><br> <!--5.11.1--></td>
-				<td style="vertical-align: top;"><br> <!--5.11.2--></td>
-				<td style="vertical-align: top;"><br> <!--5.11.3--></td>
-				<td style="vertical-align: top;"><br> <!--5.12.1--></td>
-				<td style="vertical-align: top;"><br> <!--5.12.2--></td>
-				<td style="vertical-align: top;"><br> <!--5.12.3--></td>
-				<td style="vertical-align: top;"><br> <!--5.12.4--></td>
-				<td style="vertical-align: top;">X<br> <!--5.13.1-->
-				</td>
-				<td style="vertical-align: top;">X<br> <!--5.13.2-->
-				</td>
-				<td style="vertical-align: top;">X<br> <!--5.13.3-->
-				</td>
-			</tr>
-			<tr>
-				<td style="vertical-align: top;">Transitions<br>
-				</td>
-				<td style="vertical-align: top;">R5.6<br>
-				</td>
-				<td style="vertical-align: top;">R5.7.1<br>
-				</td>
-				<td style="vertical-align: top;">R5.7.2<br>
-				</td>
-				<td style="vertical-align: top;">R5.7.3<br>
-				</td>
-				<td style="vertical-aligh: top;">R5.7.4<br>
-				</td>
-				<td style="vertical-align: top;">R5.8.1<br>
-				</td>
-				<td style="vertical-align: top;">R5.8.2<br>
-				</td>
-				<td style="vertical-align: top;">R5.8.3<br>
-				</td>
-				<td style="vertical-align: top;">R5.9.1<br>
-				</td>
-				<td style="vertical-align: top;">R5.9.2<br>
-				</td>
-				<td style="vertical-align: top;">R5.9.3<br>
-				</td>
-				<td style="vertical-align: top;">R5.10.1<br>
-				</td>
-				<td style="vertical-align: top;">R5.10.2<br>
-				</td>
-				<td style="vertical-align: top;">R5.11.1<br>
-				</td>
-				<td style="vertical-align: top;">R5.11.2<br>
-				</td>
-				<td style="vertical-align: top;">R5.11.3<br>
-				</td>
-				<td style="vertical-align: top;">R5.12.1<br>
-				</td>
-				<td style="vertical-align: top;">R5.12.2<br>
-				</td>
-				<td style="vertical-align: top;">R5.12.3<br>
-				</td>
-				<td style="vertical-align: top;">R5.12.4<br>
-				</td>
-				<td style="vertical-align: top;">R5.13.1<br>
-				</td>
-				<td style="vertical-align: top;">R5.13.2<br>
-				</td>
-				<td style="vertical-align: top;">R5.13.3<br>
-				</td>
-
-			</tr>
-			<tr>
-				<td style="vertical-align: top;">T5.1<br>
-				</td>
-				<td style="vertical-align: top;">X<br> <!--5.6-->
-				</td>
-				<td style="vertical-align: top;">X<br> <!--5.7.1-->
-				</td>
-				<td style="vertical-align: top;">X<br> <!--5.7.2-->
-				</td>
-				<td style="vertical-align: top;">X<br> <!--5.7.3-->
-				</td>
-				<td style="vertical-align: top;">X<br> <!--5.7.4-->
-				</td>
-				<td style="vertical-align: top;"><br> <!--5.8.1--></td>
-				<td style="vertical-align: top;"><br> <!--5.8.2--></td>
-				<td style="vertical-align: top;"><br> <!--5.8.3--></td>
-				<td style="vertical-align: top;"><br> <!--5.9.1--></td>
-				<td style="vertical-align: top;"><br> <!--5.9.2--></td>
-				<td style="vertical-align: top;"><br> <!--5.9.3--></td>
-				<td style="vertical-align: top;"><br> <!--5.10.1--></td>
-				<td style="vertical-align: top;"><br> <!--5.10.2--></td>
-				<td style="vertical-align: top;"><br> <!--5.11.1--></td>
-				<td style="vertical-align: top;"><br> <!--5.11.2--></td>
-				<td style="vertical-align: top;"><br> <!--5.11.3--></td>
-				<td style="vertical-align: top;"><br> <!--5.12.1--></td>
-				<td style="vertical-align: top;"><br> <!--5.12.2--></td>
-				<td style="vertical-align: top;"><br> <!--5.12.3--></td>
-				<td style="vertical-align: top;"><br> <!--5.12.4--></td>
-				<td style="vertical-align: top;"><br> <!--5.13.1--></td>
-				<td style="vertical-align: top;"><br> <!--5.13.2--></td>
-				<td style="vertical-align: top;"><br> <!--5.13.3--></td>
-			</tr>
-			<tr>
-				<td style="vertical-align: top;">T5.2<br>
-				</td>
-				<td style="vertical-align: top;"><br> <!--5.6--></td>
-				<td style="vertical-align: top;">X<br> <!--5.7.1-->
-				</td>
-				<td style="vertical-align: top;">X<br> <!--5.7.2-->
-				</td>
-				<td style="vertical-align: top;">X<br> <!--5.7.3-->
-				</td>
-				<td style="vertical-align: top;"><br> <!--5.7.4--></td>
-				<td style="vertical-align: top;"><br> <!--5.8.1--></td>
-				<td style="vertical-align: top;"><br> <!--5.8.2--></td>
-				<td style="vertical-align: top;"><br> <!--5.8.3--></td>
-				<td style="vertical-align: top;"><br> <!--5.9.1--></td>
-				<td style="vertical-align: top;"><br> <!--5.9.2--></td>
-				<td style="vertical-align: top;"><br> <!--5.9.3--></td>
-				<td style="vertical-align: top;"><br> <!--5.10.1--></td>
-				<td style="vertical-align: top;"><br> <!--5.10.2--></td>
-				<td style="vertical-align: top;"><br> <!--5.11.1--></td>
-				<td style="vertical-align: top;"><br> <!--5.11.2--></td>
-				<td style="vertical-align: top;"><br> <!--5.11.3--></td>
-				<td style="vertical-align: top;"><br> <!--5.12.1--></td>
-				<td style="vertical-align: top;"><br> <!--5.12.2--></td>
-				<td style="vertical-align: top;"><br> <!--5.12.3--></td>
-				<td style="vertical-align: top;"><br> <!--5.12.4--></td>
-				<td style="vertical-align: top;"><br> <!--5.13.1--></td>
-				<td style="vertical-align: top;"><br> <!--5.13.2--></td>
-				<td style="vertical-align: top;"><br> <!--5.13.3--></td>
-			</tr>
-			<tr>
-				<td style="vertical-align: top;">T5.3<br>
-				</td>
-				<td style="vertical-align: top;"><br> <!--5.6--></td>
-				<td style="vertical-align: top;"><br> <!--5.7.1--></td>
-				<td style="vertical-align: top;"><br> <!--5.7.2--></td>
-				<td style="vertical-align: top;"><br> <!--5.7.3--></td>
-				<td style="vertical-align: top;"><br> <!--5.7.4--></td>
-				<td style="vertical-align: top;">X<br> <!--5.8.1-->
-				</td>
-				<td style="vertical-align: top;">X<br> <!--5.8.2-->
-				</td>
-				<td style="vertical-align: top;">X<br> <!--5.8.3-->
-				</td>
-				<td style="vertical-align: top;">X<br> <!--5.9.1-->
-				</td>
-				<td style="vertical-align: top;">X<br> <!--5.9.2-->
-				</td>
-				<td style="vertical-align: top;">X<br> <!--5.9.3-->
-				</td>
-				<td style="vertical-align: top;"><br> <!--5.10.1--></td>
-				<td style="vertical-align: top;"><br> <!--5.10.2--></td>
-				<td style="vertical-align: top;"><br> <!--5.11.1--></td>
-				<td style="vertical-align: top;"><br> <!--5.11.2--></td>
-				<td style="vertical-align: top;"><br> <!--5.11.3--></td>
-				<td style="vertical-align: top;"><br> <!--5.12.1--></td>
-				<td style="vertical-align: top;"><br> <!--5.12.2--></td>
-				<td style="vertical-align: top;"><br> <!--5.12.3--></td>
-				<td style="vertical-align: top;"><br> <!--5.12.4--></td>
-				<td style="vertical-align: top;"><br> <!--5.13.1--></td>
-				<td style="vertical-align: top;"><br> <!--5.13.2--></td>
-				<td style="vertical-align: top;"><br> <!--5.13.3--></td>
-			</tr>
-			<tr>
-				<td style="vertical-align: top;">T5.4<br>
-				</td>
-				<td style="vertical-align: top;"><br> <!--5.6--></td>
-				<td style="vertical-align: top;"><br> <!--5.7.1--></td>
-				<td style="vertical-align: top;"><br> <!--5.7.2--></td>
-				<td style="vertical-align: top;"><br> <!--5.7.3--></td>
-				<td style="vertical-align: top;"><br> <!--5.7.4--></td>
-				<td style="vertical-align: top;"><br> <!--5.8.1--></td>
-				<td style="vertical-align: top;"><br> <!--5.8.2--></td>
-				<td style="vertical-align: top;"><br> <!--5.8.3--></td>
-				<td style="vertical-align: top;"><br> <!--5.9.1--></td>
-				<td style="vertical-align: top;"><br> <!--5.9.2--></td>
-				<td style="vertical-align: top;"><br> <!--5.9.3--></td>
-				<td style="vertical-align: top;">X<br> <!--5.10.1-->
-				</td>
-				<td style="vertical-align: top;">X<br> <!--5.10.2-->
-				</td>
-				<td style="vertical-align: top;"><br> <!--5.11.1--></td>
-				<td style="vertical-align: top;"><br> <!--5.11.2--></td>
-				<td style="vertical-align: top;"><br> <!--5.11.3--></td>
-				<td style="vertical-align: top;"><br> <!--5.12.1--></td>
-				<td style="vertical-align: top;"><br> <!--5.12.2--></td>
-				<td style="vertical-align: top;"><br> <!--5.12.3--></td>
-				<td style="vertical-align: top;"><br> <!--5.12.4--></td>
-				<td style="vertical-align: top;"><br> <!--5.13.1--></td>
-				<td style="vertical-align: top;"><br> <!--5.13.2--></td>
-				<td style="vertical-align: top;"><br> <!--5.13.3--></td>
-			</tr>
-			<tr>
-				<td style="vertical-align: top;">T5.5<br>
-				</td>
-				<td style="vertical-align: top;"><br> <!--5.6--></td>
-				<td style="vertical-align: top;"><br> <!--5.7.1--></td>
-				<td style="vertical-align: top;"><br> <!--5.7.2--></td>
-				<td style="vertical-align: top;"><br> <!--5.7.3--></td>
-				<td style="vertical-align: top;"><br> <!--5.7.4--></td>
-				<td style="vertical-align: top;"><br> <!--5.8.1--></td>
-				<td style="vertical-align: top;"><br> <!--5.8.2--></td>
-				<td style="vertical-align: top;"><br> <!--5.8.3--></td>
-				<td style="vertical-align: top;"><br> <!--5.9.1--></td>
-				<td style="vertical-align: top;"><br> <!--5.9.2--></td>
-				<td style="vertical-align: top;"><br> <!--5.9.3--></td>
-				<td style="vertical-align: top;"><br> <!--5.10.1--></td>
-				<td style="vertical-align: top;"><br> <!--5.10.2--></td>
-				<td style="vertical-align: top;">X<br> <!--5.11.1-->
-				</td>
-				<td style="vertical-align: top;">X<br> <!--5.11.2-->
-				</td>
-				<td style="vertical-align: top;">X<br> <!--5.11.3-->
-				</td>
-				<td style="vertical-align: top;"><br> <!--5.12.1--></td>
-				<td style="vertical-align: top;"><br> <!--5.12.2--></td>
-				<td style="vertical-align: top;"><br> <!--5.12.3--></td>
-				<td style="vertical-align: top;"><br> <!--5.12.4--></td>
-				<td style="vertical-align: top;"><br> <!--5.13.1--></td>
-				<td style="vertical-align: top;"><br> <!--5.13.2--></td>
-				<td style="vertical-align: top;"><br> <!--5.13.3--></td>
-			</tr>
-			<tr>
-				<td style="vertical-align: top;">T5.6<br>
-				</td>
-				<td style="vertical-align: top;"><br> <!--5.6--></td>
-				<td style="vertical-align: top;"><br> <!--5.7.1--></td>
-				<td style="vertical-align: top;"><br> <!--5.7.2--></td>
-				<td style="vertical-align: top;"><br> <!--5.7.3--></td>
-				<td style="vertical-align: top;"><br> <!--5.7.4--></td>
-				<td style="vertical-align: top;"><br> <!--5.8.1--></td>
-				<td style="vertical-align: top;"><br> <!--5.8.2--></td>
-				<td style="vertical-align: top;"><br> <!--5.8.3--></td>
-				<td style="vertical-align: top;"><br> <!--5.9.1--></td>
-				<td style="vertical-align: top;"><br> <!--5.9.2--></td>
-				<td style="vertical-align: top;"><br> <!--5.9.3--></td>
-				<td style="vertical-align: top;"><br> <!--5.10.1--></td>
-				<td style="vertical-align: top;"><br> <!--5.10.2--></td>
-				<td style="vertical-align: top;">X<br> <!--5.11.1-->
-				</td>
-				<td style="vertical-align: top;">X<br> <!--5.11.2-->
-				</td>
-				<td style="vertical-align: top;">X<br> <!--5.11.3-->
-				</td>
-				<td style="vertical-align: top;"><br> <!--5.12.1--></td>
-				<td style="vertical-align: top;"><br> <!--5.12.2--></td>
-				<td style="vertical-align: top;"><br> <!--5.12.3--></td>
-				<td style="vertical-align: top;"><br> <!--5.12.4--></td>
-				<td style="vertical-align: top;"><br> <!--5.13.1--></td>
-				<td style="vertical-align: top;"><br> <!--5.13.2--></td>
-				<td style="vertical-align: top;"><br> <!--5.13.3--></td>
-			</tr>
-			<tr>
-				<td style="vertical-align: top;">T5.7<br>
-				</td>
-				<td style="vertical-align: top;"><br> <!--5.6--></td>
-				<td style="vertical-align: top;"><br> <!--5.7.1--></td>
-				<td style="vertical-align: top;"><br> <!--5.7.2--></td>
-				<td style="vertical-align: top;"><br> <!--5.7.3--></td>
-				<td style="vertical-align: top;"><br> <!--5.7.4--></td>
-				<td style="vertical-align: top;"><br> <!--5.8.1--></td>
-				<td style="vertical-align: top;"><br> <!--5.8.2--></td>
-				<td style="vertical-align: top;"><br> <!--5.8.3--></td>
-				<td style="vertical-align: top;"><br> <!--5.9.1--></td>
-				<td style="vertical-align: top;"><br> <!--5.9.2--></td>
-				<td style="vertical-align: top;"><br> <!--5.9.3--></td>
-				<td style="vertical-align: top;"><br> <!--5.10.1--></td>
-				<td style="vertical-align: top;"><br> <!--5.10.2--></td>
-				<td style="vertical-align: top;"><br> <!--5.11.1--></td>
-				<td style="vertical-align: top;"><br> <!--5.11.2--></td>
-				<td style="vertical-align: top;"><br> <!--5.11.3--></td>
-				<td style="vertical-align: top;">X<br> <!--5.12.1-->
-				</td>
-				<td style="vertical-align: top;">X<br> <!--5.12.2-->
-				</td>
-				<td style="vertical-align: top;">X<br> <!--5.12.3-->
-				</td>
-				<td style="vertical-align: top;">X<br> <!--5.12.4-->
-				</td>
-				<td style="vertical-align: top;"><br> <!--5.13.1--></td>
-				<td style="vertical-align: top;"><br> <!--5.13.2--></td>
-				<td style="vertical-align: top;"><br> <!--5.13.3--></td>
-			</tr>
-			<tr>
-				<td style="vertical-align: top;">T5.8<br>
-				</td>
-				<td style="vertical-align: top;"><br> <!--5.6--></td>
-				<td style="vertical-align: top;">X<br> <!--5.7.1-->
-				</td>
-				<td style="vertical-align: top;">X<br> <!--5.7.2-->
-				</td>
-				<td style="vertical-align: top;">X<br> <!--5.7.3-->
-				</td>
-				<td style="vertical-align: top;"><br> <!--5.7.4--></td>
-				<td style="vertical-align: top;"><br> <!--5.8.1--></td>
-				<td style="vertical-align: top;"><br> <!--5.8.2--></td>
-				<td style="vertical-align: top;"><br> <!--5.8.3--></td>
-				<td style="vertical-align: top;"><br> <!--5.9.1--></td>
-				<td style="vertical-align: top;"><br> <!--5.9.2--></td>
-				<td style="vertical-align: top;"><br> <!--5.9.3--></td>
-				<td style="vertical-align: top;"><br> <!--5.10.1--></td>
-				<td style="vertical-align: top;"><br> <!--5.10.2--></td>
-				<td style="vertical-align: top;"><br> <!--5.11.1--></td>
-				<td style="vertical-align: top;"><br> <!--5.11.2--></td>
-				<td style="vertical-align: top;"><br> <!--5.11.3--></td>
-				<td style="vertical-align: top;"><br> <!--5.12.1--></td>
-				<td style="vertical-align: top;"><br> <!--5.12.2--></td>
-				<td style="vertical-align: top;"><br> <!--5.12.3--></td>
-				<td style="vertical-align: top;"><br> <!--5.12.4--></td>
-				<td style="vertical-align: top;"><br> <!--5.13.1--></td>
-				<td style="vertical-align: top;"><br> <!--5.13.2--></td>
-				<td style="vertical-align: top;"><br> <!--5.13.3--></td>
-			</tr>
-			<tr>
-				<td style="vertical-align: top;">T5.9<br>
-				</td>
-				<td style="vertical-align: top;"><br> <!--5.6--></td>
-				<td style="vertical-align: top;"><br> <!--5.7.1--></td>
-				<td style="vertical-align: top;"><br> <!--5.7.2--></td>
-				<td style="vertical-align: top;"><br> <!--5.7.3--></td>
-				<td style="vertical-align: top;"><br> <!--5.7.4--></td>
-				<td style="vertical-align: top;"><br> <!--5.8.1--></td>
-				<td style="vertical-align: top;"><br> <!--5.8.2--></td>
-				<td style="vertical-align: top;"><br> <!--5.8.3--></td>
-				<td style="vertical-align: top;"><br> <!--5.9.1--></td>
-				<td style="vertical-align: top;"><br> <!--5.9.2--></td>
-				<td style="vertical-align: top;"><br> <!--5.9.3--></td>
-				<td style="vertical-align: top;"><br> <!--5.10.1--></td>
-				<td style="vertical-align: top;"><br> <!--5.10.2--></td>
-				<td style="vertical-align: top;"><br> <!--5.11.1--></td>
-				<td style="vertical-align: top;"><br> <!--5.11.2--></td>
-				<td style="vertical-align: top;"><br> <!--5.11.3--></td>
-				<td style="vertical-align: top;"><br> <!--5.12.1--></td>
-				<td style="vertical-align: top;"><br> <!--5.12.2--></td>
-				<td style="vertical-align: top;"><br> <!--5.12.3--></td>
-				<td style="vertical-align: top;"><br> <!--5.12.4--></td>
-				<td style="vertical-align: top;">X<br> <!--5.13.1-->
-				</td>
-				<td style="vertical-align: top;">X<br> <!--5.13.2-->
-				</td>
-				<td style="vertical-align: top;">X<br> <!--5.13.3-->
-				</td>
-			</tr>
-			<tr>
-				<td style="vertical-align: top;">T5.10<br>
-				</td>
-				<td style="vertical-align: top;"><br> <!--5.6--></td>
-				<td style="vertical-align: top;"><br> <!--5.7.1--></td>
-				<td style="vertical-align: top;"><br> <!--5.7.2--></td>
-				<td style="vertical-align: top;"><br> <!--5.7.3--></td>
-				<td style="vertical-align: top;"><br> <!--5.7.4--></td>
-				<td style="vertical-align: top;"><br> <!--5.8.1--></td>
-				<td style="vertical-align: top;"><br> <!--5.8.2--></td>
-				<td style="vertical-align: top;"><br> <!--5.8.3--></td>
-				<td style="vertical-align: top;"><br> <!--5.9.1--></td>
-				<td style="vertical-align: top;"><br> <!--5.9.2--></td>
-				<td style="vertical-align: top;"><br> <!--5.9.3--></td>
-				<td style="vertical-align: top;">X<br> <!--5.10.1-->
-				</td>
-				<td style="vertical-align: top;">X<br> <!--5.10.2-->
-				</td>
-				<td style="vertical-align: top;"><br> <!--5.11.1--></td>
-				<td style="vertical-align: top;"><br> <!--5.11.2--></td>
-				<td style="vertical-align: top;"><br> <!--5.11.3--></td>
-				<td style="vertical-align: top;"><br> <!--5.12.1--></td>
-				<td style="vertical-align: top;"><br> <!--5.12.2--></td>
-				<td style="vertical-align: top;"><br> <!--5.12.3--></td>
-				<td style="vertical-align: top;"><br> <!--5.12.4--></td>
-				<td style="vertical-align: top;"><br> <!--5.13.1--></td>
-				<td style="vertical-align: top;"><br> <!--5.13.2--></td>
-				<td style="vertical-align: top;"><br> <!--5.13.3--></td>
-			</tr>
-			<tr>
-				<td style="vertical-align: top;">T5.11<br>
-				</td>
-				<td style="vertical-align: top;"><br> <!--5.6--></td>
-				<td style="vertical-align: top;"><br> <!--5.7.1--></td>
-				<td style="vertical-align: top;"><br> <!--5.7.2--></td>
-				<td style="vertical-align: top;"><br> <!--5.7.3--></td>
-				<td style="vertical-align: top;"><br> <!--5.7.4--></td>
 				<td style="vertical-align: top;"><br> <!--5.8.1--></td>
 				<td style="vertical-align: top;"><br> <!--5.8.2--></td>
 				<td style="vertical-align: top;"><br> <!--5.8.3--></td>
@@ -1936,19 +1404,239 @@
 				<td style="vertical-align: top;">X<br> <!--5.12.1--></td>
 				<td style="vertical-align: top;">X<br> <!--5.12.2--></td>
 				<td style="vertical-align: top;">X<br> <!--5.12.3--></td>
-				<td style="vertical-align: top;">X<br> <!--5.12.4--></td>
 				<td style="vertical-align: top;"><br> <!--5.13.1--></td>
 				<td style="vertical-align: top;"><br> <!--5.13.2--></td>
 				<td style="vertical-align: top;"><br> <!--5.13.3--></td>
 			</tr>
 			<tr>
-				<td style="vertical-align: top;">T5.12<br>
+				<td style="vertical-align: top;">S5.6 Reverse Opened<br>
 				</td>
 				<td style="vertical-align: top;"><br> <!--5.6--></td>
 				<td style="vertical-align: top;"><br> <!--5.7.1--></td>
 				<td style="vertical-align: top;"><br> <!--5.7.2--></td>
 				<td style="vertical-align: top;"><br> <!--5.7.3--></td>
-				<td style="vertical-align: top;"><br> <!--5.7.4--></td>
+				<td style="vertical-align: top;">X<br> <!--5.8.1--></td>
+				<td style="vertical-align: top;">X<br> <!--5.8.2--></td>
+				<td style="vertical-align: top;">X<br> <!--5.8.3--></td>
+				<td style="vertical-align: top;"><br> <!--5.9.1--></td>
+				<td style="vertical-align: top;"><br> <!--5.9.2--></td>
+				<td style="vertical-align: top;"><br> <!--5.9.3--></td>
+				<td style="vertical-align: top;"><br> <!--5.10.1--></td>
+				<td style="vertical-align: top;"><br> <!--5.10.2--></td>
+				<td style="vertical-align: top;"><br> <!--5.11.1--></td>
+				<td style="vertical-align: top;"><br> <!--5.11.2--></td>
+				<td style="vertical-align: top;"><br> <!--5.11.3--></td>
+				<td style="vertical-align: top;"><br> <!--5.12.1--></td>
+				<td style="vertical-align: top;"><br> <!--5.12.2--></td>
+				<td style="vertical-align: top;"><br> <!--5.12.3--></td>
+				<td style="vertical-align: top;"><br> <!--5.13.1--></td>
+				<td style="vertical-align: top;"><br> <!--5.13.2--></td>
+				<td style="vertical-align: top;"><br> <!--5.13.3--></td>
+			</tr>
+			<tr>
+				<td style="vertical-align: top;">S5.7 Reverse Closing<br>
+				</td>
+				<td style="vertical-align: top;"><br> <!--5.6--></td>
+				<td style="vertical-align: top;"><br> <!--5.7.1--></td>
+				<td style="vertical-align: top;"><br> <!--5.7.2--></td>
+				<td style="vertical-align: top;"><br> <!--5.7.3--></td>
+				<td style="vertical-align: top;"><br> <!--5.8.1--></td>
+				<td style="vertical-align: top;"><br> <!--5.8.2--></td>
+				<td style="vertical-align: top;"><br> <!--5.8.3--></td>
+				<td style="vertical-align: top;"><br> <!--5.9.1--></td>
+				<td style="vertical-align: top;"><br> <!--5.9.2--></td>
+				<td style="vertical-align: top;"><br> <!--5.9.3--></td>
+				<td style="vertical-align: top;"><br> <!--5.10.1--></td>
+				<td style="vertical-align: top;"><br> <!--5.10.2--></td>
+				<td style="vertical-align: top;"><br> <!--5.11.1--></td>
+				<td style="vertical-align: top;"><br> <!--5.11.2--></td>
+				<td style="vertical-align: top;"><br> <!--5.11.3--></td>
+				<td style="vertical-align: top;"><br> <!--5.12.1--></td>
+				<td style="vertical-align: top;"><br> <!--5.12.2--></td>
+				<td style="vertical-align: top;"><br> <!--5.12.3--></td>
+				<td style="vertical-align: top;">X<br> <!--5.13.1--></td>
+				<td style="vertical-align: top;">X<br> <!--5.13.2--></td>
+				<td style="vertical-align: top;">X<br> <!--5.13.3--></td>
+			</tr>
+			<tr>
+				<td style="vertical-align: top;">S5.8 Wait Dispatcher<br>
+				</td>
+				<td style="vertical-align: top;"><br> <!--5.6--></td>
+				<td style="vertical-align: top;"><br> <!--5.7.1--></td>
+				<td style="vertical-align: top;"><br> <!--5.7.2--></td>
+				<td style="vertical-align: top;"><br> <!--5.7.3--></td>
+				<td style="vertical-align: top;"><br> <!--5.8.1--></td>
+				<td style="vertical-align: top;"><br> <!--5.8.2--></td>
+				<td style="vertical-align: top;"><br> <!--5.8.3--></td>
+				<td style="vertical-align: top;"><br> <!--5.9.1--></td>
+				<td style="vertical-align: top;"><br> <!--5.9.2--></td>
+				<td style="vertical-align: top;"><br> <!--5.9.3--></td>
+				<td style="vertical-align: top;">X<br> <!--5.10.1--></td>
+				<td style="vertical-align: top;">X<br> <!--5.10.2--></td>
+				<td style="vertical-align: top;"><br> <!--5.11.1--></td>
+				<td style="vertical-align: top;"><br> <!--5.11.2--></td>
+				<td style="vertical-align: top;"><br> <!--5.11.3--></td>
+				<td style="vertical-align: top;"><br> <!--5.12.1--></td>
+				<td style="vertical-align: top;"><br> <!--5.12.2--></td>
+				<td style="vertical-align: top;"><br> <!--5.12.3--></td>
+				<td style="vertical-align: top;"><br> <!--5.13.1--></td>
+				<td style="vertical-align: top;"><br> <!--5.13.2--></td>
+				<td style="vertical-align: top;"><br> <!--5.13.3--></td>
+			</tr>
+			<tr>
+				<td style="vertical-align: top;">Transitions<br>
+				</td>
+				<td style="vertical-align: top;">R5.6<br>
+				</td>
+				<td style="vertical-align: top;">R5.7.1<br>
+				</td>
+				<td style="vertical-align: top;">R5.7.2<br>
+				</td>
+				<td style="vertical-align: top;">R5.7.3<br>
+				</td>
+				<td style="vertical-align: top;">R5.8.1<br>
+				</td>
+				<td style="vertical-align: top;">R5.8.2<br>
+				</td>
+				<td style="vertical-align: top;">R5.8.3<br>
+				</td>
+				<td style="vertical-align: top;">R5.9.1<br>
+				</td>
+				<td style="vertical-align: top;">R5.9.2<br>
+				</td>
+				<td style="vertical-align: top;">R5.9.3<br>
+				</td>
+				<td style="vertical-align: top;">R5.10.1<br>
+				</td>
+				<td style="vertical-align: top;">R5.10.2<br>
+				</td>
+				<td style="vertical-align: top;">R5.11.1<br>
+				</td>
+				<td style="vertical-align: top;">R5.11.2<br>
+				</td>
+				<td style="vertical-align: top;">R5.11.3<br>
+				</td>
+				<td style="vertical-align: top;">R5.12.1<br>
+				</td>
+				<td style="vertical-align: top;">R5.12.2<br>
+				</td>
+				<td style="vertical-align: top;">R5.12.3<br>
+				</td>
+				<td style="vertical-align: top;">R5.13.1<br>
+				</td>
+				<td style="vertical-align: top;">R5.13.2<br>
+				</td>
+				<td style="vertical-align: top;">R5.13.3<br>
+				</td>
+
+			</tr>
+			<tr>
+				<td style="vertical-align: top;">T5.1<br>
+				</td>
+				<td style="vertical-align: top;"><br> <!--5.6--></td>
+				<td style="vertical-align: top;">X<br> <!--5.7.1--></td>
+				<td style="vertical-align: top;">X<br> <!--5.7.2--></td>
+				<td style="vertical-align: top;">X<br> <!--5.7.3--></td>
+				<td style="vertical-align: top;"><br> <!--5.8.1--></td>
+				<td style="vertical-align: top;"><br> <!--5.8.2--></td>
+				<td style="vertical-align: top;"><br> <!--5.8.3--></td>
+				<td style="vertical-align: top;"><br> <!--5.9.1--></td>
+				<td style="vertical-align: top;"><br> <!--5.9.2--></td>
+				<td style="vertical-align: top;"><br> <!--5.9.3--></td>
+				<td style="vertical-align: top;"><br> <!--5.10.1--></td>
+				<td style="vertical-align: top;"><br> <!--5.10.2--></td>
+				<td style="vertical-align: top;"><br> <!--5.11.1--></td>
+				<td style="vertical-align: top;"><br> <!--5.11.2--></td>
+				<td style="vertical-align: top;"><br> <!--5.11.3--></td>
+				<td style="vertical-align: top;"><br> <!--5.12.1--></td>
+				<td style="vertical-align: top;"><br> <!--5.12.2--></td>
+				<td style="vertical-align: top;"><br> <!--5.12.3--></td>
+				<td style="vertical-align: top;"><br> <!--5.13.1--></td>
+				<td style="vertical-align: top;"><br> <!--5.13.2--></td>
+				<td style="vertical-align: top;"><br> <!--5.13.3--></td>
+			</tr>
+			<tr>
+				<td style="vertical-align: top;">T5.2<br>
+				</td>
+				<td style="vertical-align: top;"><br> <!--5.6--></td>
+				<td style="vertical-align: top;"><br> <!--5.7.1--></td>
+				<td style="vertical-align: top;"><br> <!--5.7.2--></td>
+				<td style="vertical-align: top;"><br> <!--5.7.3--></td>
+				<td style="vertical-align: top;">X<br> <!--5.8.1--></td>
+				<td style="vertical-align: top;">X<br> <!--5.8.2--></td>
+				<td style="vertical-align: top;">X<br> <!--5.8.3--></td>
+				<td style="vertical-align: top;"><br> <!--5.9.1--></td>
+				<td style="vertical-align: top;"><br> <!--5.9.2--></td>
+				<td style="vertical-align: top;"><br> <!--5.9.3--></td>
+				<td style="vertical-align: top;"><br> <!--5.10.1--></td>
+				<td style="vertical-align: top;"><br> <!--5.10.2--></td>
+				<td style="vertical-align: top;"><br> <!--5.11.1--></td>
+				<td style="vertical-align: top;"><br> <!--5.11.2--></td>
+				<td style="vertical-align: top;"><br> <!--5.11.3--></td>
+				<td style="vertical-align: top;"><br> <!--5.12.1--></td>
+				<td style="vertical-align: top;"><br> <!--5.12.2--></td>
+				<td style="vertical-align: top;"><br> <!--5.12.3--></td>
+				<td style="vertical-align: top;"><br> <!--5.13.1--></td>
+				<td style="vertical-align: top;"><br> <!--5.13.2--></td>
+				<td style="vertical-align: top;"><br> <!--5.13.3--></td>
+			</tr>
+			<tr>
+				<td style="vertical-align: top;">T5.3<br>
+				</td>
+				<td style="vertical-align: top;"><br> <!--5.6--></td>
+				<td style="vertical-align: top;"><br> <!--5.7.1--></td>
+				<td style="vertical-align: top;"><br> <!--5.7.2--></td>
+				<td style="vertical-align: top;"><br> <!--5.7.3--></td>
+				<td style="vertical-align: top;"><br> <!--5.8.1--></td>
+				<td style="vertical-align: top;"><br> <!--5.8.2--></td>
+				<td style="vertical-align: top;"><br> <!--5.8.3--></td>
+				<td style="vertical-align: top;">X<br> <!--5.9.1--></td>
+				<td style="vertical-align: top;">X<br> <!--5.9.2--></td>
+				<td style="vertical-align: top;">X<br> <!--5.9.3--></td>
+				<td style="vertical-align: top;"><br> <!--5.10.1--></td>
+				<td style="vertical-align: top;"><br> <!--5.10.2--></td>
+				<td style="vertical-align: top;"><br> <!--5.11.1--></td>
+				<td style="vertical-align: top;"><br> <!--5.11.2--></td>
+				<td style="vertical-align: top;"><br> <!--5.11.3--></td>
+				<td style="vertical-align: top;"><br> <!--5.12.1--></td>
+				<td style="vertical-align: top;"><br> <!--5.12.2--></td>
+				<td style="vertical-align: top;"><br> <!--5.12.3--></td>
+				<td style="vertical-align: top;"><br> <!--5.13.1--></td>
+				<td style="vertical-align: top;"><br> <!--5.13.2--></td>
+				<td style="vertical-align: top;"><br> <!--5.13.3--></td>
+			</tr>
+			<tr>
+				<td style="vertical-align: top;">T5.4<br>
+				</td>
+				<td style="vertical-align: top;"><br> <!--5.6--></td>
+				<td style="vertical-align: top;"><br> <!--5.7.1--></td>
+				<td style="vertical-align: top;"><br> <!--5.7.2--></td>
+				<td style="vertical-align: top;"><br> <!--5.7.3--></td>
+				<td style="vertical-align: top;"><br> <!--5.8.1--></td>
+				<td style="vertical-align: top;"><br> <!--5.8.2--></td>
+				<td style="vertical-align: top;"><br> <!--5.8.3--></td>
+				<td style="vertical-align: top;"><br> <!--5.9.1--></td>
+				<td style="vertical-align: top;"><br> <!--5.9.2--></td>
+				<td style="vertical-align: top;"><br> <!--5.9.3--></td>
+				<td style="vertical-align: top;">X<br> <!--5.10.1--></td>
+				<td style="vertical-align: top;">X<br> <!--5.10.2--></td>
+				<td style="vertical-align: top;"><br> <!--5.11.1--></td>
+				<td style="vertical-align: top;"><br> <!--5.11.2--></td>
+				<td style="vertical-align: top;"><br> <!--5.11.3--></td>
+				<td style="vertical-align: top;"><br> <!--5.12.1--></td>
+				<td style="vertical-align: top;"><br> <!--5.12.2--></td>
+				<td style="vertical-align: top;"><br> <!--5.12.3--></td>
+				<td style="vertical-align: top;"><br> <!--5.13.1--></td>
+				<td style="vertical-align: top;"><br> <!--5.13.2--></td>
+				<td style="vertical-align: top;"><br> <!--5.13.3--></td>
+			</tr>
+			<tr>
+				<td style="vertical-align: top;">T5.5<br>
+				</td>
+				<td style="vertical-align: top;"><br> <!--5.6--></td>
+				<td style="vertical-align: top;"><br> <!--5.7.1--></td>
+				<td style="vertical-align: top;"><br> <!--5.7.2--></td>
+				<td style="vertical-align: top;"><br> <!--5.7.3--></td>
 				<td style="vertical-align: top;"><br> <!--5.8.1--></td>
 				<td style="vertical-align: top;"><br> <!--5.8.2--></td>
 				<td style="vertical-align: top;"><br> <!--5.8.3--></td>
@@ -1963,7 +1651,181 @@
 				<td style="vertical-align: top;"><br> <!--5.12.1--></td>
 				<td style="vertical-align: top;"><br> <!--5.12.2--></td>
 				<td style="vertical-align: top;"><br> <!--5.12.3--></td>
-				<td style="vertical-align: top;"><br> <!--5.12.4--></td>
+				<td style="vertical-align: top;"><br> <!--5.13.1--></td>
+				<td style="vertical-align: top;"><br> <!--5.13.2--></td>
+				<td style="vertical-align: top;"><br> <!--5.13.3--></td>
+			</tr>
+			<tr>
+				<td style="vertical-align: top;">T5.6<br>
+				</td>
+				<td style="vertical-align: top;"><br> <!--5.6--></td>
+				<td style="vertical-align: top;"><br> <!--5.7.1--></td>
+				<td style="vertical-align: top;"><br> <!--5.7.2--></td>
+				<td style="vertical-align: top;"><br> <!--5.7.3--></td>
+				<td style="vertical-align: top;"><br> <!--5.8.1--></td>
+				<td style="vertical-align: top;"><br> <!--5.8.2--></td>
+				<td style="vertical-align: top;"><br> <!--5.8.3--></td>
+				<td style="vertical-align: top;"><br> <!--5.9.1--></td>
+				<td style="vertical-align: top;"><br> <!--5.9.2--></td>
+				<td style="vertical-align: top;"><br> <!--5.9.3--></td>
+				<td style="vertical-align: top;"><br> <!--5.10.1--></td>
+				<td style="vertical-align: top;"><br> <!--5.10.2--></td>
+				<td style="vertical-align: top;"><br> <!--5.11.1--></td>
+				<td style="vertical-align: top;"><br> <!--5.11.2--></td>
+				<td style="vertical-align: top;"><br> <!--5.11.3--></td>
+				<td style="vertical-align: top;">X<br> <!--5.12.1--></td>
+				<td style="vertical-align: top;">X<br> <!--5.12.2--></td>
+				<td style="vertical-align: top;">X<br> <!--5.12.3--></td>
+				<td style="vertical-align: top;"><br> <!--5.13.1--></td>
+				<td style="vertical-align: top;"><br> <!--5.13.2--></td>
+				<td style="vertical-align: top;"><br> <!--5.13.3--></td>
+			</tr>
+			<tr>
+				<td style="vertical-align: top;">T5.7<br>
+				</td>
+				<td style="vertical-align: top;"><br> <!--5.6--></td>
+				<td style="vertical-align: top;"><br> <!--5.7.1--></td>
+				<td style="vertical-align: top;"><br> <!--5.7.2--></td>
+				<td style="vertical-align: top;"><br> <!--5.7.3--></td>
+				<td style="vertical-align: top;"><br> <!--5.8.1--></td>
+				<td style="vertical-align: top;"><br> <!--5.8.2--></td>
+				<td style="vertical-align: top;"><br> <!--5.8.3--></td>
+				<td style="vertical-align: top;"><br> <!--5.9.1--></td>
+				<td style="vertical-align: top;"><br> <!--5.9.2--></td>
+				<td style="vertical-align: top;"><br> <!--5.9.3--></td>
+				<td style="vertical-align: top;"><br> <!--5.10.1--></td>
+				<td style="vertical-align: top;"><br> <!--5.10.2--></td>
+				<td style="vertical-align: top;"><br> <!--5.11.1--></td>
+				<td style="vertical-align: top;"><br> <!--5.11.2--></td>
+				<td style="vertical-align: top;"><br> <!--5.11.3--></td>
+				<td style="vertical-align: top;">X<br> <!--5.12.1--></td>
+				<td style="vertical-align: top;">X<br> <!--5.12.2--></td>
+				<td style="vertical-align: top;">X<br> <!--5.12.3--></td>
+				<td style="vertical-align: top;"><br> <!--5.13.1--></td>
+				<td style="vertical-align: top;"><br> <!--5.13.2--></td>
+				<td style="vertical-align: top;"><br> <!--5.13.3--></td>
+			</tr>
+			<tr>
+				<td style="vertical-align: top;">T5.8<br>
+				</td>
+				<td style="vertical-align: top;"><br> <!--5.6--></td>
+				<td style="vertical-align: top;"><br> <!--5.7.1--></td>
+				<td style="vertical-align: top;"><br> <!--5.7.2--></td>
+				<td style="vertical-align: top;"><br> <!--5.7.3--></td>
+				<td style="vertical-align: top;">X<br> <!--5.8.1--></td>
+				<td style="vertical-align: top;">X<br> <!--5.8.2--></td>
+				<td style="vertical-align: top;">X<br> <!--5.8.3--></td>
+				<td style="vertical-align: top;"><br> <!--5.9.1--></td>
+				<td style="vertical-align: top;"><br> <!--5.9.2--></td>
+				<td style="vertical-align: top;"><br> <!--5.9.3--></td>
+				<td style="vertical-align: top;"><br> <!--5.10.1--></td>
+				<td style="vertical-align: top;"><br> <!--5.10.2--></td>
+				<td style="vertical-align: top;"><br> <!--5.11.1--></td>
+				<td style="vertical-align: top;"><br> <!--5.11.2--></td>
+				<td style="vertical-align: top;"><br> <!--5.11.3--></td>
+				<td style="vertical-align: top;"><br> <!--5.12.1--></td>
+				<td style="vertical-align: top;"><br> <!--5.12.2--></td>
+				<td style="vertical-align: top;"><br> <!--5.12.3--></td>
+				<td style="vertical-align: top;"><br> <!--5.13.1--></td>
+				<td style="vertical-align: top;"><br> <!--5.13.2--></td>
+				<td style="vertical-align: top;"><br> <!--5.13.3--></td>
+			</tr>
+			<tr>
+				<td style="vertical-align: top;">T5.9<br>
+				</td>
+				<td style="vertical-align: top;"><br> <!--5.6--></td>
+				<td style="vertical-align: top;"><br> <!--5.7.1--></td>
+				<td style="vertical-align: top;"><br> <!--5.7.2--></td>
+				<td style="vertical-align: top;"><br> <!--5.7.3--></td>
+				<td style="vertical-align: top;"><br> <!--5.8.1--></td>
+				<td style="vertical-align: top;"><br> <!--5.8.2--></td>
+				<td style="vertical-align: top;"><br> <!--5.8.3--></td>
+				<td style="vertical-align: top;"><br> <!--5.9.1--></td>
+				<td style="vertical-align: top;"><br> <!--5.9.2--></td>
+				<td style="vertical-align: top;"><br> <!--5.9.3--></td>
+				<td style="vertical-align: top;"><br> <!--5.10.1--></td>
+				<td style="vertical-align: top;"><br> <!--5.10.2--></td>
+				<td style="vertical-align: top;"><br> <!--5.11.1--></td>
+				<td style="vertical-align: top;"><br> <!--5.11.2--></td>
+				<td style="vertical-align: top;"><br> <!--5.11.3--></td>
+				<td style="vertical-align: top;"><br> <!--5.12.1--></td>
+				<td style="vertical-align: top;"><br> <!--5.12.2--></td>
+				<td style="vertical-align: top;"><br> <!--5.12.3--></td>
+				<td style="vertical-align: top;">X<br> <!--5.13.1--></td>
+				<td style="vertical-align: top;">X<br> <!--5.13.2--></td>
+				<td style="vertical-align: top;">X<br> <!--5.13.3--></td>
+			</tr>
+			<tr>
+				<td style="vertical-align: top;">T5.10<br>
+				</td>
+				<td style="vertical-align: top;"><br> <!--5.6--></td>
+				<td style="vertical-align: top;"><br> <!--5.7.1--></td>
+				<td style="vertical-align: top;"><br> <!--5.7.2--></td>
+				<td style="vertical-align: top;"><br> <!--5.7.3--></td>
+				<td style="vertical-align: top;"><br> <!--5.8.1--></td>
+				<td style="vertical-align: top;"><br> <!--5.8.2--></td>
+				<td style="vertical-align: top;"><br> <!--5.8.3--></td>
+				<td style="vertical-align: top;"><br> <!--5.9.1--></td>
+				<td style="vertical-align: top;"><br> <!--5.9.2--></td>
+				<td style="vertical-align: top;"><br> <!--5.9.3--></td>
+				<td style="vertical-align: top;">X<br> <!--5.10.1--></td>
+				<td style="vertical-align: top;">X<br> <!--5.10.2--></td>
+				<td style="vertical-align: top;"><br> <!--5.11.1--></td>
+				<td style="vertical-align: top;"><br> <!--5.11.2--></td>
+				<td style="vertical-align: top;"><br> <!--5.11.3--></td>
+				<td style="vertical-align: top;"><br> <!--5.12.1--></td>
+				<td style="vertical-align: top;"><br> <!--5.12.2--></td>
+				<td style="vertical-align: top;"><br> <!--5.12.3--></td>
+				<td style="vertical-align: top;"><br> <!--5.13.1--></td>
+				<td style="vertical-align: top;"><br> <!--5.13.2--></td>
+				<td style="vertical-align: top;"><br> <!--5.13.3--></td>
+			</tr>
+			<tr>
+				<td style="vertical-align: top;">T5.11<br>
+				</td>
+                <td style="vertical-align: top;"><br> <!--5.6--></td>
+				<td style="vertical-align: top;"><br> <!--5.7.1--></td>
+				<td style="vertical-align: top;"><br> <!--5.7.2--></td>
+				<td style="vertical-align: top;"><br> <!--5.7.3--></td>
+				<td style="vertical-align: top;"><br> <!--5.8.1--></td>
+				<td style="vertical-align: top;"><br> <!--5.8.2--></td>
+				<td style="vertical-align: top;"><br> <!--5.8.3--></td>
+				<td style="vertical-align: top;"><br> <!--5.9.1--></td>
+				<td style="vertical-align: top;"><br> <!--5.9.2--></td>
+				<td style="vertical-align: top;"><br> <!--5.9.3--></td>
+				<td style="vertical-align: top;"><br> <!--5.10.1--></td>
+				<td style="vertical-align: top;"><br> <!--5.10.2--></td>
+				<td style="vertical-align: top;"><br> <!--5.11.1--></td>
+				<td style="vertical-align: top;"><br> <!--5.11.2--></td>
+				<td style="vertical-align: top;"><br> <!--5.11.3--></td>
+				<td style="vertical-align: top;">X<br> <!--5.12.1--></td>
+				<td style="vertical-align: top;">X<br> <!--5.12.2--></td>
+				<td style="vertical-align: top;">X<br> <!--5.12.3--></td>
+				<td style="vertical-align: top;"><br> <!--5.13.1--></td>
+				<td style="vertical-align: top;"><br> <!--5.13.2--></td>
+				<td style="vertical-align: top;"><br> <!--5.13.3--></td>
+			</tr>
+			<tr>
+				<td style="vertical-align: top;">T5.12<br>
+				</td>
+				<td style="vertical-align: top;"><br> <!--5.6--></td>
+				<td style="vertical-align: top;"><br> <!--5.7.1--></td>
+				<td style="vertical-align: top;"><br> <!--5.7.2--></td>
+				<td style="vertical-align: top;"><br> <!--5.7.3--></td>
+				<td style="vertical-align: top;"><br> <!--5.8.1--></td>
+				<td style="vertical-align: top;"><br> <!--5.8.2--></td>
+				<td style="vertical-align: top;"><br> <!--5.8.3--></td>
+				<td style="vertical-align: top;"><br> <!--5.9.1--></td>
+				<td style="vertical-align: top;"><br> <!--5.9.2--></td>
+				<td style="vertical-align: top;"><br> <!--5.9.3--></td>
+				<td style="vertical-align: top;"><br> <!--5.10.1--></td>
+				<td style="vertical-align: top;"><br> <!--5.10.2--></td>
+				<td style="vertical-align: top;">X<br> <!--5.11.1--></td>
+				<td style="vertical-align: top;">X<br> <!--5.11.2--></td>
+				<td style="vertical-align: top;">X<br> <!--5.11.3--></td>
+				<td style="vertical-align: top;"><br> <!--5.12.1--></td>
+				<td style="vertical-align: top;"><br> <!--5.12.2--></td>
+				<td style="vertical-align: top;"><br> <!--5.12.3--></td>
 				<td style="vertical-align: top;"><br> <!--5.13.1--></td>
 				<td style="vertical-align: top;"><br> <!--5.13.2--></td>
 				<td style="vertical-align: top;"><br> <!--5.13.3--></td>
@@ -1971,31 +1833,24 @@
 			<tr>
 				<td style="vertical-align: top;">T5.13<br>
 				</td>
-				<td style="vertical-align: top;">X<br> <!--5.6-->
-				</td>
-				<td style="vertical-align: top;">X<br> <!--5.7.1-->
-				</td>
-				<td style="vertical-align: top;">X<br> <!--5.7.2-->
-				</td>
-				<td style="vertical-align: top;">X<br> <!--5.7.3-->
-				</td>
-				<td style="vertical-align: top;">X<br> <!--5.7.4-->
-				</td>
+				<td style="vertical-align: top;"><br> <!--5.6--></td>
+				<td style="vertical-align: top;"><br> <!--5.7.1--></td>
+				<td style="vertical-align: top;"><br> <!--5.7.2--></td>
+				<td style="vertical-align: top;"><br> <!--5.7.3--></td>
 				<td style="vertical-align: top;"><br> <!--5.8.1--></td>
 				<td style="vertical-align: top;"><br> <!--5.8.2--></td>
 				<td style="vertical-align: top;"><br> <!--5.8.3--></td>
 				<td style="vertical-align: top;"><br> <!--5.9.1--></td>
 				<td style="vertical-align: top;"><br> <!--5.9.2--></td>
 				<td style="vertical-align: top;"><br> <!--5.9.3--></td>
-				<td style="vertical-align: top;"><br> <!--5.10.1--></td>
-				<td style="vertical-align: top;"><br> <!--5.10.2--></td>
+				<td style="vertical-align: top;">X<br> <!--5.10.1--></td>
+				<td style="vertical-align: top;">X<br> <!--5.10.2--></td>
 				<td style="vertical-align: top;"><br> <!--5.11.1--></td>
 				<td style="vertical-align: top;"><br> <!--5.11.2--></td>
 				<td style="vertical-align: top;"><br> <!--5.11.3--></td>
 				<td style="vertical-align: top;"><br> <!--5.12.1--></td>
 				<td style="vertical-align: top;"><br> <!--5.12.2--></td>
 				<td style="vertical-align: top;"><br> <!--5.12.3--></td>
-				<td style="vertical-align: top;"><br> <!--5.12.4--></td>
 				<td style="vertical-align: top;"><br> <!--5.13.1--></td>
 				<td style="vertical-align: top;"><br> <!--5.13.2--></td>
 				<td style="vertical-align: top;"><br> <!--5.13.3--></td>
@@ -2003,16 +1858,10 @@
 			<tr>
 				<td style="vertical-align: top;">T5.14<br>
 				</td>
-				<td style="vertical-align: top;">X<br> <!--5.6-->
-				</td>
-				<td style="vertical-align: top;">X<br> <!--5.7.1-->
-				</td>
-				<td style="vertical-align: top;">X<br> <!--5.7.2-->
-				</td>
-				<td style="vertical-align: top;">X<br> <!--5.7.3-->
-				</td>
-				<td style="vertical-align: top;">X<br> <!--5.7.4-->
-				</td>
+				<td style="vertical-align: top;"><br> <!--5.6--></td>
+				<td style="vertical-align: top;">X<br> <!--5.7.1--></td>
+				<td style="vertical-align: top;">X<br> <!--5.7.2--></td>
+				<td style="vertical-align: top;">X<br> <!--5.7.3--></td>
 				<td style="vertical-align: top;"><br> <!--5.8.1--></td>
 				<td style="vertical-align: top;"><br> <!--5.8.2--></td>
 				<td style="vertical-align: top;"><br> <!--5.8.3--></td>
@@ -2027,7 +1876,31 @@
 				<td style="vertical-align: top;"><br> <!--5.12.1--></td>
 				<td style="vertical-align: top;"><br> <!--5.12.2--></td>
 				<td style="vertical-align: top;"><br> <!--5.12.3--></td>
-				<td style="vertical-align: top;"><br> <!--5.12.4--></td>
+				<td style="vertical-align: top;"><br> <!--5.13.1--></td>
+				<td style="vertical-align: top;"><br> <!--5.13.2--></td>
+				<td style="vertical-align: top;"><br> <!--5.13.3--></td>
+			</tr>
+			<tr>
+				<td style="vertical-align: top;">T5.15<br>
+				</td>
+				<td style="vertical-align: top;"><br> <!--5.6--></td>
+				<td style="vertical-align: top;">X<br> <!--5.7.1--></td>
+				<td style="vertical-align: top;">X<br> <!--5.7.2--></td>
+				<td style="vertical-align: top;">X<br> <!--5.7.3--></td>
+				<td style="vertical-align: top;"><br> <!--5.8.1--></td>
+				<td style="vertical-align: top;"><br> <!--5.8.2--></td>
+				<td style="vertical-align: top;"><br> <!--5.8.3--></td>
+				<td style="vertical-align: top;"><br> <!--5.9.1--></td>
+				<td style="vertical-align: top;"><br> <!--5.9.2--></td>
+				<td style="vertical-align: top;"><br> <!--5.9.3--></td>
+				<td style="vertical-align: top;"><br> <!--5.10.1--></td>
+				<td style="vertical-align: top;"><br> <!--5.10.2--></td>
+				<td style="vertical-align: top;"><br> <!--5.11.1--></td>
+				<td style="vertical-align: top;"><br> <!--5.11.2--></td>
+				<td style="vertical-align: top;"><br> <!--5.11.3--></td>
+				<td style="vertical-align: top;"><br> <!--5.12.1--></td>
+				<td style="vertical-align: top;"><br> <!--5.12.2--></td>
+				<td style="vertical-align: top;"><br> <!--5.12.3--></td>
 				<td style="vertical-align: top;"><br> <!--5.13.1--></td>
 				<td style="vertical-align: top;"><br> <!--5.13.2--></td>
 				<td style="vertical-align: top;"><br> <!--5.13.3--></td>
@@ -4122,7 +3995,7 @@
 	<div style="text-align: center;">
 		<a href="dispatcher_state_diagram.png"><img
 			alt="dispatcher_state_diagram.png" src="dispatcher_state_diagram.png"
-			style="border: 0px solid; width: 800px; height: 600px;"></a><br>
+			style="border: 0px solid; width: 700px; height: 500px;"></a><br>
 	</div>
 	<table style="text-align: left; width: 800px;" border="1"
 		cellpadding="2" cellspacing="2">
@@ -4148,7 +4021,7 @@
 				<td style="vertical-align: top;">T11.3<br>
 				</td>
 				<td style="vertical-align: top;">mDoorClosed [b, r]&larr; False
-					AND currentFloor != mDesiredFloor<br>
+					AND currentFloor &larr; -1<br>
 				</td>
 			</tr>
             <tr>
@@ -4161,15 +4034,13 @@
             <tr>
                 <td style="vertical-align: top;">T11.5<br>
                 </td>
-                <td style="vertical-align: top;">mDoorClosed [b, r]&larr; False
-                    AND currentFloor &larr;mDesiredFloor<br>
+                <td style="vertical-align: top;">mCarLevelPosition - floorPos > 200<br>
                 </td>
             </tr>
             <tr>
                 <td style="vertical-align: top;">T11.6<br>
                 </td>
-                <td style="vertical-align: top;">mDoorClosed [b, r]&larr; True
-                    AND currentFloor != mDesiredFloor<br>
+                <td style="vertical-align: top;">mDriveSpeed>0.05||(target!=currentFloor&& doorAllClosed)<br>
                 </td>
             </tr>
 		</tbody>
@@ -4224,9 +4095,9 @@
 				</td>
 				<td style="vertical-align: top;">X<br>
 				</td>
-				<td style="vertical-align: top;">X<br>
+				<td style="vertical-align: top;"><br>
 				</td>
-				<td style="vertical-align: top;">X<br>
+				<td style="vertical-align: top;"><br>
 				</td>
 				<td style="vertical-align: top;">X<br>
 				</td>
@@ -4260,7 +4131,7 @@
 				<td style="vertical-align: top;">X<br></td>
 				<td style="vertical-align: top;">X<br></td>
 				<td style="vertical-align: top;">X<br></td>
-				<td style="vertical-align: top;">X<br></td>
+				<td style="vertical-align: top;"><br></td>
 				<td style="vertical-align: top;">X<br>
 				</td>
 				<td style="vertical-align: top;">X<br>
@@ -4289,19 +4160,19 @@
 
 				<td style="vertical-align: top;">X<br>
 				</td>
-				<td style="vertical-align: top;">X<br>
+				<td style="vertical-align: top;"><br>
 				</td>
-				<td style="vertical-align: top;">X<br>
+				<td style="vertical-align: top;"><br>
 				</td>
-				<td style="vertical-align: top;">X<br>
+				<td style="vertical-align: top;"><br>
 				</td>
 				<td style="vertical-align: top;"><br></td>
 				<td style="vertical-align: top;"><br></td>
-				<td style="vertical-align: top;">X<br>
+				<td style="vertical-align: top;"><br>
 				</td>
-				<td style="vertical-align: top;">X<br>
+				<td style="vertical-align: top;"><br>
 				</td>
-                 <td style="vertical-align: top;"><br>
+                 <td style="vertical-align: top;">X<br>
                 </td>
                 <td style="vertical-align: top;"><br>
                 </td>
@@ -4328,7 +4199,7 @@
                 </td>
                 <td style="vertical-align: top;">X<br>
                 </td>
-                <td style="vertical-align: top;"><br></td>
+                <td style="vertical-align: top;">X<br></td>
                 <td style="vertical-align: top;"><br></td>
                 <td style="vertical-align: top;">X<br>
                 </td>
@@ -4481,7 +4352,7 @@
 				</td>
 				<td style="vertical-align: top;"><br></td>
 				<td style="vertical-align: top;"><br></td>
-				<td style="vertical-align: top;">X<br>
+				<td style="vertical-align: top;"><br>
 				</td>
 				<td style="vertical-align: top;">X<br>
 				</td>
@@ -4492,17 +4363,17 @@
 				</td>
                  <td style="vertical-align: top;"><br>
                 </td>
-                <td style="vertical-align: top;"><br>
-                </td>
-                <td style="vertical-align: top;"><br>
-                </td>
-                <td style="vertical-align: top;"><br>
-                </td>
                 <td style="vertical-align: top;">X<br>
                 </td>
                 <td style="vertical-align: top;"><br>
                 </td>
-                <td style="vertical-align: top;">X<br>
+                <td style="vertical-align: top;"><br>
+                </td>
+                <td style="vertical-align: top;"><br>
+                </td>
+                <td style="vertical-align: top;"><br>
+                </td>
+                <td style="vertical-align: top;"><br>
                 </td>
 			</tr>
             <tr>

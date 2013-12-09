@@ -1,11 +1,7 @@
-;18649 Fall 2013
-;Group: #17
-;Qiang Zhang (qiangz) Shen Yu (sheny)
-;sd7b.stats
 
 Simulator Parameters:
 Command line = -cf sd7b.cf -mf sd7b.mf
-RandomSeed = 1382057157357
+RandomSeed = 1385426778357
 CanNetworkBitTime = 0 ns
 Effective Can Bitrate = Infinity
 Run Time = null
@@ -13,42 +9,20 @@ Real time rate = null
 Message File = sd7b.mf
 Controller File = sd7b.cf
 
+Assertion Results:
+@0.41s:  PASSED simulator.payloads.DoorMotorPayload$ReadableDoorMotorPayload@d394424 :: command ?== STOP PASSED
+@0.41s:  PASSED DoorControl[FRONT][RIGHT]::checkState(STATE) ?== CLOSED PASSED
+@1.1s:  PASSED simulator.payloads.DoorMotorPayload$ReadableDoorMotorPayload@361b8504 :: command ?== OPEN PASSED
+@1.1s:  PASSED DoorControl[FRONT][RIGHT]::checkState(STATE) ?== BEFORE_OPEN PASSED
+@1.1s:  PASSED DoorControl[FRONT][RIGHT]::checkState(STATE) ?== BEFORE_OPEN PASSED
+@3.0s:  PASSED simulator.payloads.DoorMotorPayload$ReadableDoorMotorPayload@48a70acd :: command ?== STOP PASSED
+@3.0s:  PASSED DoorControl[FRONT][RIGHT]::checkState(STATE) ?== OPENED PASSED
+@15.0s:  PASSED simulator.payloads.DoorMotorPayload$ReadableDoorMotorPayload@797dfcf1 :: command ?== CLOSE PASSED
+@15.0s:  PASSED DoorControl[FRONT][RIGHT]::checkState(STATE) ?== CLOSING PASSED
+@17.0s:  PASSED simulator.payloads.DoorMotorPayload$ReadableDoorMotorPayload@2dd1282d :: command ?== STOP PASSED
+@17.0s:  PASSED DoorControl[FRONT][RIGHT]::checkState(STATE) ?== WAIT_DISPATCHER PASSED
 
-[Elevator] @0.000000000: Starting Simulation ***
-[AssertionMonitor] @0.410000000: ******************************************************************************************************
-[AssertionMonitor] @0.410000000: PASSED simulator.payloads.DoorMotorPayload$ReadableDoorMotorPayload@eb64435 :: command ?== STOP PASSED
-[AssertionMonitor] @0.410000000: ******************************************************************************************************
-[AssertionMonitor] @0.410000000: *********************************************************************
-[AssertionMonitor] @0.410000000: PASSED DoorControl[FRONT][RIGHT]::checkState(STATE) ?== CLOSED PASSED
-[AssertionMonitor] @0.410000000: *********************************************************************
-[AssertionMonitor] @1.100000000: *******************************************************************************************************
-[AssertionMonitor] @1.100000000: PASSED simulator.payloads.DoorMotorPayload$ReadableDoorMotorPayload@1b543c88 :: command ?== OPEN PASSED
-[AssertionMonitor] @1.100000000: *******************************************************************************************************
-[AssertionMonitor] @1.100000000: **************************************************************************
-[AssertionMonitor] @1.100000000: PASSED DoorControl[FRONT][RIGHT]::checkState(STATE) ?== BEFORE_OPEN PASSED
-[AssertionMonitor] @1.100000000: **************************************************************************
-[AssertionMonitor] @1.100000000: **************************************************************************
-[AssertionMonitor] @1.100000000: PASSED DoorControl[FRONT][RIGHT]::checkState(STATE) ?== BEFORE_OPEN PASSED
-[AssertionMonitor] @1.100000000: **************************************************************************
-[AssertionMonitor] @3.000000000: *******************************************************************************************************
-[AssertionMonitor] @3.000000000: PASSED simulator.payloads.DoorMotorPayload$ReadableDoorMotorPayload@7bea5671 :: command ?== STOP PASSED
-[AssertionMonitor] @3.000000000: *******************************************************************************************************
-[AssertionMonitor] @3.000000000: *********************************************************************
-[AssertionMonitor] @3.000000000: PASSED DoorControl[FRONT][RIGHT]::checkState(STATE) ?== OPENED PASSED
-[AssertionMonitor] @3.000000000: *********************************************************************
-[AssertionMonitor] @5.000000000: ********************************************************************************************************
-[AssertionMonitor] @5.000000000: PASSED simulator.payloads.DoorMotorPayload$ReadableDoorMotorPayload@485329c5 :: command ?== NUDGE PASSED
-[AssertionMonitor] @5.000000000: ********************************************************************************************************
-[AssertionMonitor] @5.000000000: **********************************************************************
-[AssertionMonitor] @5.000000000: PASSED DoorControl[FRONT][RIGHT]::checkState(STATE) ?== CLOSING PASSED
-[AssertionMonitor] @5.000000000: **********************************************************************
-[AssertionMonitor] @7.000000000: *******************************************************************************************************
-[AssertionMonitor] @7.000000000: PASSED simulator.payloads.DoorMotorPayload$ReadableDoorMotorPayload@4a4e79f1 :: command ?== STOP PASSED
-[AssertionMonitor] @7.000000000: *******************************************************************************************************
-[AssertionMonitor] @7.000000000: *********************************************************************
-[AssertionMonitor] @7.000000000: PASSED DoorControl[FRONT][RIGHT]::checkState(STATE) ?== CLOSED PASSED
-[AssertionMonitor] @7.000000000: *********************************************************************
-[Elevator] @12.000000000: Simulation Finished ***
+
 ******************Summary******************
 Passed:  11
 Failed:  0

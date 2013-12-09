@@ -62,45 +62,51 @@
 0.21s A N DESIRED_FLOOR_CAN_ID DesiredFloor : getDirection == STOP
 0.21s A N DESIRED_FLOOR_CAN_ID DesiredFloor : getHallway == NONE
 0.21s A S DispatcherControl : STATE == IDLE
-0.21s A N DESIRED_DWELL_[FRONT]_CAN_ID Integer : getValue == 1000
 
 ;set condition to T11.1
 0.4s I MESSAGE_PERIOD N HALL_CALL_[3][FRONT][DOWN]_CAN_ID HallCall 3 FRONT DOWN = true
 ;check
-;#state S11.2 OPERATING
+;#state S11.4 REACH
 0.6s A N DESIRED_FLOOR_CAN_ID DesiredFloor : getFloor == 3
 0.6s A N DESIRED_FLOOR_CAN_ID DesiredFloor : getDirection == DOWN
 0.6s A N DESIRED_FLOOR_CAN_ID DesiredFloor : getHallway == FRONT
+;set condition to T11.6
+;check
+;#state S11.5 LEAVE
 0.6s A S DispatcherControl : STATE == LEAVE
 0.6s I MESSAGE_PERIOD N DRIVE_SPEED_CAN_ID DriveSpeed = 0.7 UP
+;set condition to T11.5
 0.65s I MESSAGE_PERIOD N AT_FLOOR_[1][FRONT]_CAN_ID AtFloor 1 FRONT = false
 0.65s I MESSAGE_PERIOD N CAR_LEVEL_POSITION_CAN_ID CarLevelPosition = 3000
-0.7s I MESSAGE_PERIOD N HALL_CALL_[2][BACK][UP]_CAN_ID HallCall 2 BACK UP = true
-0.8s I MESSAGE_PERIOD N AT_FLOOR_[2][BACK]_CAN_ID AtFloor 2 BACK = true
+;check
+;#state S11.2 OPERATING
+0.8s A S DispatcherControl : STATE == OPERATING
+;set condition to T11.4
 0.8s I MESSAGE_PERIOD N DRIVE_SPEED_CAN_ID DriveSpeed = 0 STOP
-0.8s I MESSAGE_PERIOD N CAR_LEVEL_POSITION_CAN_ID CarLevelPosition = 5000
-0.9s I MESSAGE_PERIOD N HALL_CALL_[2][BACK][UP]_CAN_ID HallCall 2 BACK UP = false
-0.9s I MESSAGE_PERIOD N HALL_CALL_[2][BACK][DOWN]_CAN_ID HallCall 2 BACK DOWN = true
-
+0.8s I MESSAGE_PERIOD N CAR_LEVEL_POSITION_CAN_ID CarLevelPosition = 10000
+0.8s I MESSAGE_PERIOD N AT_FLOOR_[3][FRONT]_CAN_ID AtFloor 3 FRONT = true
+0.8s I MESSAGE_PERIOD N DOOR_CLOSED_SENSOR_[FRONT][LEFT]_CAN_ID DoorClosed FRONT LEFT = false
+;check
+;#state S11.4 REACH
+0.9s A S DispatcherControl : STATE == REACH
 ;set to condition T11.2 
+1.0s I MESSAGE_PERIOD N HALL_CALL_[3][FRONT][DOWN]_CAN_ID HallCall 3 FRONT DOWN = false
 1.0s I MESSAGE_PERIOD N HALL_CALL_[2][BACK][UP]_CAN_ID HallCall 2 BACK UP = false
 1.0s I MESSAGE_PERIOD N HALL_CALL_[2][BACK][DOWN]_CAN_ID HallCall 2 BACK DOWN = false
 1.0s I MESSAGE_PERIOD N HALL_CALL_[3][FRONT][DOWN]_CAN_ID HallCall 3 FRONT DOWN = false
+1s I MESSAGE_PERIOD N DOOR_CLOSED_SENSOR_[FRONT][LEFT]_CAN_ID DoorClosed FRONT LEFT = true
+1s I MESSAGE_PERIOD N DOOR_CLOSED_SENSOR_[FRONT][RIGHT]_CAN_ID DoorClosed FRONT RIGHT = true
+1s I MESSAGE_PERIOD N DOOR_CLOSED_SENSOR_[BACK][LEFT]_CAN_ID DoorClosed BACK LEFT = true
+1s I MESSAGE_PERIOD N DOOR_CLOSED_SENSOR_[BACK][RIGHT]_CAN_ID DoorClosed BACK RIGHT = true
 ;check
-;#state S11.2 OPERATING
-1.2s A N DESIRED_FLOOR_CAN_ID DesiredFloor : getFloor == 3
-1.2s A N DESIRED_FLOOR_CAN_ID DesiredFloor : getDirection == DOWN
-1.2s A N DESIRED_FLOOR_CAN_ID DesiredFloor : getHallway == FRONT
-1.2s A S DispatcherControl : STATE == OPERATING
-
-;set to condition T11.4
+;#state S11.1 IDLE
+2.2s A S DispatcherControl : STATE == IDLE
 ;set to condition T11.3
-1.5s I MESSAGE_PERIOD N AT_FLOOR_[2][BACK]_CAN_ID AtFloor 2 BACK = false
-1.5s I MESSAGE_PERIOD N DOOR_CLOSED_SENSOR_[FRONT][LEFT]_CAN_ID DoorClosed FRONT LEFT = false
-
+2.5s I MESSAGE_PERIOD N AT_FLOOR_[3][FRONT]_CAN_ID AtFloor 3 FRONT = false
+2.5s I MESSAGE_PERIOD N DOOR_CLOSED_SENSOR_[FRONT][LEFT]_CAN_ID DoorClosed FRONT LEFT = false
 ;check
 ;#state S11.3 EMERGENCY
-2s A N DESIRED_FLOOR_CAN_ID DesiredFloor : getFloor == 1
-2s A N DESIRED_FLOOR_CAN_ID DesiredFloor : getDirection == STOP
-2s A N DESIRED_FLOOR_CAN_ID DesiredFloor : getHallway == NONE
-2s A S DispatcherControl : STATE == EMERGENCY
+3s A N DESIRED_FLOOR_CAN_ID DesiredFloor : getFloor == 1
+3s A N DESIRED_FLOOR_CAN_ID DesiredFloor : getDirection == STOP
+3s A N DESIRED_FLOOR_CAN_ID DesiredFloor : getHallway == NONE
+3s A S DispatcherControl : STATE == EMERGENCY
