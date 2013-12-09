@@ -53,20 +53,31 @@ public class DoorControl extends Controller {
     private DoorOpenedCanPayloadTranslator mDoorOpened;
     private DoorOpenedCanPayloadTranslator mDoorOpened_left;
     private DoorOpenedCanPayloadTranslator mDoorOpened_right;
+    private DoorOpenedCanPayloadTranslator mOtherSideOpened;
     private ReadableCanMailbox networkDoorClosed_left;
     private ReadableCanMailbox networkDoorClosed_right;
     private DoorClosedCanPayloadTranslator mDoorClosed;
     private DoorClosedCanPayloadTranslator mDoorClosed_left;
     private DoorClosedCanPayloadTranslator mDoorClosed_right;
+    private DoorClosedCanPayloadTranslator mOtherSideClosed;
     private ReadableCanMailbox networkCarWeight;
     private CarWeightCanPayloadTranslator mCarWeight;
     private ReadableCanMailbox networkDoorReversal_left;                // reversal
     private ReadableCanMailbox networkDoorReversal_right;
     private DoorReversalCanPayloadTranslator mDoorReversal_left;        // reversal
     private DoorReversalCanPayloadTranslator mDoorReversal_right;
-    private int mDesiredDwell = 1000;
+    private int mDesiredDwell = 400;
     private int MAX_Weight = 15000;
     private CallArray callArray;
+    // For Car Call
+    private CarCallCanPayloadTranslator mCarCall_1_F;
+    private CarCallCanPayloadTranslator mCarCall_1_B;
+    private CarCallCanPayloadTranslator mCarCall_7_F;
+    private CarCallCanPayloadTranslator mCarCall_7_B;
+    private ReadableCanMailbox networkCarCall_1_F;
+    private ReadableCanMailbox networkCarCall_1_B;
+    private ReadableCanMailbox networkCarCall_7_F;
+    private ReadableCanMailbox networkCarCall_7_B;
     
     // output network
     private WriteableCanMailbox networkDoorMotor;
@@ -76,6 +87,10 @@ public class DoorControl extends Controller {
     private int countdown = 0;
     private int waitDispatcher = 0;
     private int Dwell = mDesiredDwell;
+    private boolean otherSideOpened = false;
+    private boolean otherSideClosed = false;
+    
+    
     public DoorControl(Hallway hallway, Side side, SimTime period, boolean verbose) {
         super ("DoorControl" + ReplicationComputer.makeReplicationString(hallway, side), verbose);
         
@@ -143,11 +158,61 @@ public class DoorControl extends Controller {
         // instantiate an array of AtFloor class 
         mAtFloor_array = new AtFloorArray(canInterface);
         callArray = new CallArray(canInterface);
+        // set the other side
+        if (side.equals(Side.LEFT)) {
+        	mOtherSideOpened = mDoorOpened_right;
+        	mOtherSideClosed = mDoorClosed_right;
+        } else {
+        	mOtherSideOpened = mDoorOpened_left;
+        	mOtherSideClosed = mDoorClosed_left;
+        }
+        // register Car Call for floor 1 and 7
+        networkCarCall_1_F = CanMailbox.getReadableCanMailbox(MessageDictionary.CAR_CALL_BASE_CAN_ID + ReplicationComputer.computeReplicationId(1, Hallway.FRONT));
+        networkCarCall_1_B = CanMailbox.getReadableCanMailbox(MessageDictionary.CAR_CALL_BASE_CAN_ID + ReplicationComputer.computeReplicationId(1, Hallway.BACK));
+        networkCarCall_7_F = CanMailbox.getReadableCanMailbox(MessageDictionary.CAR_CALL_BASE_CAN_ID + ReplicationComputer.computeReplicationId(7, Hallway.FRONT));
+        networkCarCall_7_B = CanMailbox.getReadableCanMailbox(MessageDictionary.CAR_CALL_BASE_CAN_ID + ReplicationComputer.computeReplicationId(7, Hallway.BACK));
+        mCarCall_1_F = new CarCallCanPayloadTranslator(networkCarCall_1_F, 1, Hallway.FRONT);
+        mCarCall_1_B = new CarCallCanPayloadTranslator(networkCarCall_1_B, 1, Hallway.BACK);
+        mCarCall_7_F = new CarCallCanPayloadTranslator(networkCarCall_7_F, 7, Hallway.FRONT);
+        mCarCall_7_B = new CarCallCanPayloadTranslator(networkCarCall_7_B, 7, Hallway.BACK);
+        canInterface.registerTimeTriggered(networkCarCall_1_F);
+        canInterface.registerTimeTriggered(networkCarCall_1_B);
+        canInterface.registerTimeTriggered(networkCarCall_7_F);
+        canInterface.registerTimeTriggered(networkCarCall_7_B);
+        
         // ready now
         timer.start(period);
     }
     private boolean haveCall(int cur) {
-    	return (callArray.isCalled(cur, Direction.STOP) || callArray.isCalled(cur, Direction.UP, hallway) || callArray.isCalled(cur, Direction.DOWN, hallway));
+    	// Hall Call
+    	if (mDesiredFloor.getDirection().equals(Direction.UP)) {
+			if (callArray.isCalled(cur, Direction.UP, hallway)) {
+				return true;
+			}
+		}
+		if (mDesiredFloor.getDirection().equals(Direction.DOWN)) {
+			if (callArray.isCalled(cur, Direction.DOWN, hallway)) {
+				return true;
+			}
+		}
+		// Car Call
+    	if (cur != 1 && cur != 7) {
+    		if (callArray.isCalled(cur, Direction.STOP, hallway)) {
+    			return true;
+    		}
+    	} else {
+    		if (cur == 1 && hallway.equals(Hallway.FRONT)) {
+    			return mCarCall_1_F.getValue();
+    		} else if (cur == 1 && hallway.equals(Hallway.BACK)) {
+    			return mCarCall_1_B.getValue();
+    		} else if (cur == 7 && hallway.equals(Hallway.FRONT)) {
+    			return mCarCall_7_F.getValue();
+    		} else if (cur == 7 && hallway.equals(Hallway.BACK)) {
+    			return mCarCall_7_B.getValue();
+    		}
+    	}
+    	//System.out.println("Never come here is haveCall function");
+    	return false;
     }
     private boolean eitherDoorClosed() {
     	return (mDoorClosed_left.getValue() || mDoorClosed_right.getValue());
@@ -165,25 +230,33 @@ public class DoorControl extends Controller {
 				mDoorMotor.setDoorCommand(DoorCommand.STOP);
 				int desFloor = mDesiredFloor.getFloor(); 
 				int curFloor = mAtFloor_array.getCurrentFloor();
+				/**
+				 * if other side is closed (to be changed to state)
+				 */
+				if (mOtherSideClosed.getValue() == true) {
+					otherSideClosed = true;
+				}
+				
 //#transition 'T 5.1'
-				if (curFloor == desFloor && mAtFloor_array.isAtFloor(curFloor, hallway) && haveCall(curFloor) && eitherDoorClosed()) {
+				if (curFloor == desFloor && mAtFloor_array.isAtFloor(curFloor, hallway) && haveCall(curFloor)) {
 					if (mDriveSpeed.getSpeed() == 0 && mDriveSpeed.getDirection() == Direction.STOP) {
 						//System.out.println("To BEFORE_OPEN From CLOSED");
 						nextState = State.BEFORE_OPEN;
 					}
+				} else if (otherSideClosed == true && mOtherSideClosed.getValue() == false) {
+					nextState = State.BEFORE_OPEN;
 				}
-//#transition 'T 5.11'
+//#transition 'T 5.6'
 				else if ((mDoorReversal_left.getValue() || mDoorReversal_right.getValue()) && mAtFloor_array.isAtFloor(mAtFloor_array.getCurrentFloor(), hallway)) {
 					nextState = State.REVERSE_OPEN;
 				}
-//#transition 'T 5.6'
-				else if (mCarWeight.getWeight() >= MAX_Weight && mAtFloor_array.isAtFloor(curFloor, hallway)) {
-					nextState = State.BEFORE_OPEN;
-				} else {
+                                else {
 					nextState = currentState;
 				}
 				break;
 			case BEFORE_OPEN:
+				// set other side
+				otherSideClosed = false;
 				door_motor.set(DoorCommand.OPEN);
 				mDoorMotor.setDoorCommand(DoorCommand.OPEN);
 				countdown = Dwell;
@@ -197,16 +270,28 @@ public class DoorControl extends Controller {
 			case OPENED:
 				door_motor.set(DoorCommand.STOP);
 				mDoorMotor.setDoorCommand(DoorCommand.STOP);
-				if (countdown > 0) {
+				/**
+				 * if other side is opened (to be changed to state)
+				 */
+				if (mOtherSideOpened.getValue() == true) {
+					otherSideOpened = true;
+				}
+				if (otherSideOpened == true && mOtherSideOpened.getValue() == false) {
+					nextState = State.CLOSING;
+				} else if (countdown > 0) {
 					nextState = currentState;
 					countdown -= 1;
 				}
 //#transition 'T 5.3'
-				else if (eitherDoorOpened()){
+				else if (mCarWeight.getWeight() < MAX_Weight) {
 					nextState = State.CLOSING;
+				} else {
+					nextState = currentState;
 				}
 				break;
 			case CLOSING:
+				// reset otherSideOpened
+				otherSideOpened = false;
 				desFloor = mDesiredFloor.getFloor(); 
 				curFloor = mAtFloor_array.getCurrentFloor();
 				door_motor.set(DoorCommand.CLOSE);
@@ -226,10 +311,6 @@ public class DoorControl extends Controller {
 				else if ((mDoorReversal_left.getValue() || mDoorReversal_right.getValue()) && mAtFloor_array.isAtFloor(mAtFloor_array.getCurrentFloor(), hallway)) {
 					nextState = State.REVERSE_OPEN;
 				}
-//#transition 'T 5.13'
-				//else if (curFloor == desFloor && mAtFloor_array.isAtFloor(curFloor, hallway)) {
-				//	nextState = State.BEFORE_OPEN;
-				//}
 				else {
 					nextState = currentState;
 				}
@@ -248,16 +329,27 @@ public class DoorControl extends Controller {
 			case REVERSE_OPENED:
 				door_motor.set(DoorCommand.STOP);
 				mDoorMotor.setDoorCommand(DoorCommand.STOP);
-				if (countdown > 0) {
+				/**
+				 * check the other side (should be another state)
+				 */
+				if (mOtherSideOpened.getValue() == true) {
+					otherSideOpened = true;
+				}
+				if (otherSideOpened == true && mOtherSideOpened.getValue() == false) {
+					nextState = State.REVERSE_CLOSING;
+				}
+				else if (countdown > 0) {
 					nextState = currentState;
 					countdown -= 1;
 				}
 //#transition 'T 5.9'
 				else {
 					nextState = State.REVERSE_CLOSING;
-				}
+				} 
 				break;
 			case REVERSE_CLOSING:
+				// reset other side opened
+				otherSideOpened = false;
 				desFloor = mDesiredFloor.getFloor(); 
 				curFloor = mAtFloor_array.getCurrentFloor();
 				countdown = 0;
@@ -291,7 +383,13 @@ public class DoorControl extends Controller {
 			case WAIT_DISPATCHER:
 				door_motor.set(DoorCommand.STOP);
 				mDoorMotor.setDoorCommand(DoorCommand.STOP);
-				if (waitDispatcher > 0) {
+				if (mOtherSideClosed.getValue() == true) {
+					otherSideClosed = true;
+				}
+				if (otherSideClosed == true && mOtherSideClosed.getValue() == false) {
+					nextState = State.BEFORE_OPEN;
+				}
+				else if (waitDispatcher > 0) {
 					nextState = currentState;
 					waitDispatcher -= 1;
 				} else {
