@@ -260,7 +260,6 @@ public class DriveControl extends Controller {
 				 else if (allDoorClosed == false && (mLevelDown.getValue() == false)) {
 						newState = State.LEVEL_DOWN;
 				 }
-//#transition 'T6.7'
 				 else if (allDoorClosed && allDoorMotorStop  == true && (currentFloor != desiredFloor) && desiredDirection == Direction.DOWN) {
 					 newState = State.WAIT;
 				 } 
@@ -274,11 +273,15 @@ public class DriveControl extends Controller {
 				if (countdown > 0) {
 					countdown -= 1;
 					newState = state;
+//#transition 'T6.7'
 				} else if (desiredDirection == Direction.UP) { 
 					newState = State.SLOW_UP;
+//#transition 'T6.8'
 				} else if (desiredDirection == Direction.DOWN) {
 					newState = State.SLOW_DOWN;
+//#transition 'T6.4'
 				} else {
+					//count down <= 0 AND desiredDirection == null
 					newState = State.STOP;
 				}
 				break;
@@ -313,7 +316,7 @@ public class DriveControl extends Controller {
 				 break;
 			case SLOW_UP:
                 //System.out.println("SLOW_UP");
-                slowdownDistance = ((localDriveSpeed.speed() * 1000) * (localDriveSpeed.speed() * 1000))/2000.0 + 1000; 
+                slowdownDistance = ((localDriveSpeed.speed() * 1000) * (localDriveSpeed.speed() * 1000))/2000.0 + 800;
 				 currentFloor = AtFloor_array.getCurrentFloor();
 			    allDoorClosed = DoorClosed_front_array.getBothClosed() && DoorClosed_back_array.getBothClosed();
 				 allDoorMotorStop = checkAllDoorMotorStop();
@@ -327,7 +330,7 @@ public class DriveControl extends Controller {
 				 mDrive.set(commandSpeed, desiredDirection);
 				 mDriveSpeed.set(localDriveSpeed.speed(), localDriveSpeed.direction());
 				 
-//#transition 'T6.4'
+
 				 if (currentFloor == desiredFloor && levelFlag == false) {
 					  newState = State.STOP;
 				 }
@@ -345,7 +348,7 @@ public class DriveControl extends Controller {
 				 break;
 			case SLOW_DOWN:
                 //System.out.println("SLOW_DOWN");
-                slowdownDistance = ((localDriveSpeed.speed() * 1000) * (localDriveSpeed.speed() * 1000))/2000.0 + 1000; 
+                slowdownDistance = ((localDriveSpeed.speed() * 1000) * (localDriveSpeed.speed() * 1000))/2000.0 + 800;
 				 currentFloor = AtFloor_array.getCurrentFloor();
 				 allDoorClosed = DoorClosed_front_array.getBothClosed() && DoorClosed_back_array.getBothClosed();
 				 allDoorMotorStop = checkAllDoorMotorStop();
@@ -359,11 +362,10 @@ public class DriveControl extends Controller {
 				 mDrive.set(commandSpeed, desiredDirection);
 				 mDriveSpeed.set(localDriveSpeed.speed(), localDriveSpeed.direction());
 				 
-//#transition 'T6.8'
+//#transition 'T6.10'
 				 if (mHoistwayLimitDown.getValue()==true || mHoistwayLimitUp.getValue()==true || mEmergencyBrake.getValue()==true || (currentFloor == desiredFloor && levelFlag == false)) {
 					  newState = State.STOP;
 				 }
-//#transition 'T6.10'
 				 else if(mHoistwayLimitDown.getValue()==true || mHoistwayLimitUp.getValue()==true || mEmergencyBrake.getValue()==true) {
 					  newState = State.STOP;
 				 }
@@ -376,7 +378,7 @@ public class DriveControl extends Controller {
 				 }
 				 break;
 			case FAST_UP:
-			   	 slowdownDistance = ((localDriveSpeed.speed() * 1000) * (localDriveSpeed.speed() * 1000))/2000.0 + 1000; 
+			   	 slowdownDistance = ((localDriveSpeed.speed() * 1000) * (localDriveSpeed.speed() * 1000))/2000.0 + 800;
                  //System.out.println("FAST_UP ");
 				 currentFloor = AtFloor_array.getCurrentFloor();
 			     allDoorClosed = DoorClosed_front_array.getBothClosed() && DoorClosed_back_array.getBothClosed();
@@ -401,7 +403,7 @@ public class DriveControl extends Controller {
 				 break;
 			case FAST_DOWN:
                 //System.out.println("FAST_DOWN");
-				 slowdownDistance = ((localDriveSpeed.speed() * 1000) * (localDriveSpeed.speed() * 1000))/2000.0 + 1000;
+				 slowdownDistance = ((localDriveSpeed.speed() * 1000) * (localDriveSpeed.speed() * 1000))/2000.0 + 800;
 				 currentFloor = AtFloor_array.getCurrentFloor();
 			     allDoorClosed = DoorClosed_front_array.getBothClosed() && DoorClosed_back_array.getBothClosed();
 				 allDoorMotorStop = checkAllDoorMotorStop();

@@ -2017,6 +2017,9 @@
 			on car's acceleration profile, current speed, and distance from the
 			floor f, to determine whether or not the car can still stop at the
 			next floor.</li>
+		<li>SlowDownDistance; The distance that the elevator needs to slow down 
+			from current speed to zero. It's calculated based on current speed and
+			acceleration.</li>
 	</ul>
 	<h3>CONSTRAINTS:</h3>
 	6.1&nbsp;&nbsp;&nbsp; Drive shall have been commanded to Stop whenever
@@ -2266,13 +2269,13 @@
 	<br> 6.12&nbsp;&nbsp;&nbsp; mDrive[s,d] shall be set to
 	Drive[s,d].
 	<br> 6.13&nbsp;&nbsp;&nbsp; If Drive.s is not STOP AND distance
-	between CarLevelPosition AND DesiredFloor is more than 1 meter, then:
+	between CarLevelPosition AND DesiredFloor is more than SlowDownDistance, then:
 	<br> &nbsp;&nbsp;&nbsp; 6.13.1&nbsp; Drive[s,d] shall be set to
 	[FAST, desiredDirection].
 	<br> &nbsp;&nbsp;&nbsp; 6.13.2&nbsp; mDriveSpeed[s,d] shall be set
 	to [v, desiredDirection].
 	<br> 6.14&nbsp;&nbsp;&nbsp; If Drive.s is not STOP AND distance
-	between CarLevelPosition AND DesiredFloor is less than 1 meter, then:
+	between CarLevelPosition AND DesiredFloor is less than SlowDownDistance, then:
 	<br> &nbsp;&nbsp;&nbsp; 6.14.1&nbsp; Drive[s,d] shall be set to
 	[SLOW, desiredDirection].
 	<br> &nbsp;&nbsp;&nbsp; 6.14.2&nbsp; mDriveSpeed[s,d] shall be set
@@ -2316,7 +2319,7 @@
 	<div style="text-align: Left; width: 300">
 		<a href="6_drive_control.jpg"><img alt="6_drive_control.jpg"
 			src="6_drive_control.jpg"
-			style="border: 0px solid; width: 1027px; height: 541px;"></a><br>
+			style="border: 0px solid; width: 988px; height: 599px;"></a><br>
 	</div>
 	<br>
 	<!--Drive Control Jiang-->
@@ -2353,15 +2356,13 @@
 				</td>
 				<td style="vertical-align: top;">mDoorClosed &nbsp;&larr;&nbsp;
 					True&nbsp; AND mDoorMotor &nbsp;&larr;&nbsp; Stop&nbsp; AND
-					mDesiredFloor[f] != currentFloor &nbsp; AND desiredDirection
-					&nbsp;&larr;&nbsp; Up&nbsp; <br>
+					mDesiredFloor[f] != currentFloor &nbsp;<br>
 				</td>
 			</tr>
 			<tr>
 				<td style="vertical-align: top;">T6.4<br>
 				</td>
-				<td style="vertical-align: top;">currentFloor ==
-					mDesiredFloor[f]&nbsp; AND mLevel&nbsp;&larr;&nbsp;False <br>
+				<td style="vertical-align: top;">CountDown &lt;= 0&nbsp; AND desiredDirection&nbsp;&larr;&nbsp;Stop <br>
 				</td>
 			</tr>
 			<tr>
@@ -2385,17 +2386,15 @@
 			<tr>
 				<td style="vertical-align: top;">T6.7<br>
 				</td>
-				<td style="vertical-align: top;">mDoorClosed &nbsp;&larr;&nbsp;
-					True&nbsp; AND mDoorMotor &nbsp;&larr;&nbsp; Stop&nbsp; AND
-					mDesiredFloor[f] != currentFloor &nbsp; AND desiredDirection
-					&nbsp;&larr;&nbsp; Down&nbsp; <br>
+				<td style="vertical-align: top;">CountDown &lt;= 0&nbsp; AND
+					 desiredDirection &nbsp;&larr;&nbsp; Up &nbsp; <br>
 				</td>
 			</tr>
 			<tr>
 				<td style="vertical-align: top;">T6.8<br>
 				</td>
-				<td style="vertical-align: top;">currentFloor ==
-					mDesiredFloor[f]&nbsp; AND mLevel&nbsp;&larr;&nbsp;False <br>
+				<td style="vertical-align: top;">CountDown &lt;= 0&nbsp; AND
+					 desiredDirection &nbsp;&larr;&nbsp; Down &nbsp; <br>
 				</td>
 			</tr>
 			<tr>
@@ -2420,15 +2419,13 @@
 			<tr>
 				<td style="vertical-align: top;">T6.11<br>
 				</td>
-				<td style="vertical-align: top;">Drive.s != STOP AND
-					DesiredFloor height - mCarLevelPosition >= 1m <br>
+				<td style="vertical-align: top;">DesiredFloor height - mCarLevelPosition >= SlowDownDistance AND mDesiredFloor[f] > 0 AND DriveSpeed > 0.25<br>
 				</td>
 			</tr>
 			<tr>
 				<td style="vertical-align: top;">T6.12<br>
 				</td>
-				<td style="vertical-align: top;">(Drive.s != STOP AND
-					DesiredFloor height - mCarLevelPosition is less than 1m)&nbsp; OR
+				<td style="vertical-align: top;">(DesiredFloor height - mCarLevelPosition &lt; SlowDownDistance&nbsp; AND mDesiredFloor[f] > 0)OR
 					mEmergencyBrake&nbsp;&larr;&nbsp;True&nbsp; OR
 					mHoistwayLimitUp&nbsp;&larr;&nbsp;True&nbsp; OR
 					mHoistwayLimitDown&nbsp;&larr;&nbsp;True&nbsp; <br>
@@ -2437,15 +2434,13 @@
 			<tr>
 				<td style="vertical-align: top;">T6.13<br>
 				</td>
-				<td style="vertical-align: top;">Drive.s != STOP AND
-					mCarLevelPosition - DesiredFloor height >= 1m &nbsp; <br>
+				<td style="vertical-align: top;">DesiredFloor height - mCarLevelPosition >= SlowDownDistance AND mDesiredFloor[f] > 0 AND DriveSpeed > 0.25 <br>
 				</td>
 			</tr>
 			<tr>
 				<td style="vertical-align: top;">T6.14<br>
 				</td>
-				<td style="vertical-align: top;">(Drive.s != STOP AND
-					mCarLevelPosition - DesiredFloor height is less than 1m)&nbsp; OR
+				<td style="vertical-align: top;">(DesiredFloor height - mCarLevelPosition &lt; SlowDownDistance&nbsp; AND mDesiredFloor[f] > 0)OR
 					mEmergencyBrake&nbsp;&larr;&nbsp;True&nbsp; OR
 					mHoistwayLimitUp&nbsp;&larr;&nbsp;True&nbsp; OR
 					mHoistwayLimitDown&nbsp;&larr;&nbsp;True&nbsp; <br>
@@ -2691,6 +2686,34 @@
 				<td style="vertical-align: top;"><br></td>
 			</tr>
 			<tr>
+				<td style="vertical-align: top;">S6.8 Wait<br>
+				</td>
+				<td style="vertical-align: top;">X<br>
+				</td>
+				<td style="vertical-align: top;">X<br>
+				</td>
+				<td style="vertical-align: top;">X<br>
+				</td>
+				<td style="vertical-align: top;">X<br>
+				</td>
+				<td style="vertical-align: top;"><br></td>
+				<td style="vertical-align: top;"><br></td>
+				<td style="vertical-align: top;">X<br>
+				</td>
+				<td style="vertical-align: top;">X<br>
+				</td>
+				<td style="vertical-align: top;"><br></td>
+				<td style="vertical-align: top;"><br></td>
+				<td style="vertical-align: top;"><br></td>
+				<td style="vertical-align: top;"><br></td>
+				<td style="vertical-align: top;">X<br>
+				</td>
+				<td style="vertical-align: top;"><br></td>
+				<td style="vertical-align: top;"><br></td>
+				<td style="vertical-align: top;"><br></td>
+				<td style="vertical-align: top;"><br></td>
+			</tr>
+			<tr>
 				<td style="vertical-align: top;">Transitions<br>
 				</td>
 				<td style="vertical-align: top;">6.6.1<br>
@@ -2827,9 +2850,9 @@
 				<td style="vertical-align: top;"><br></td>
 				<td style="vertical-align: top;"><br></td>
 				<td style="vertical-align: top;"><br></td>
-				<td style="vertical-align: top;">X<br>
+				<td style="vertical-align: top;"><br>
 				</td>
-				<td style="vertical-align: top;">X<br>
+				<td style="vertical-align: top;"><br>
 				</td>
 				<td style="vertical-align: top;">X<br>
 				</td>
@@ -3839,6 +3862,7 @@
 			on car's acceleration profile, current speed, and distance from the
 			floor f, to determine whether or not the car can still stop at the
 			next floor.</li>
+		
 	</ul>
 	<h3>CONSTRAINTS:</h3>
 	10.1&nbsp;&nbsp;&nbsp; The Car can be at only one position at a time.
