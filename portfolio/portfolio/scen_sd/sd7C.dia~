@@ -957,7 +957,7 @@
         <dia:point val="39.1894,16.1322"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="38.4518,15.0772;46.0068,16.5223"/>
+        <dia:rectangle val="39.1393,15.0772;45.32,16.5223"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -973,7 +973,7 @@
         <dia:color val="#0000ff"/>
       </dia:attribute>
       <dia:attribute name="text">
-        <dia:string>#5b. Drive(f,d)=STOP STOP#</dia:string>
+        <dia:string>#5b. Drive(f,d)#</dia:string>
       </dia:attribute>
       <dia:attribute name="type">
         <dia:enum val="0"/>
