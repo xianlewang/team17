@@ -1,6 +1,6 @@
 ; 18649 Fall 2013
 ; Group 17
-; Qiang Zhang(qiangz)/Shen Yu(sheny)/Jiang He(jiangh)/Xianle Wang(xianlew)
+; Xianle Wang(xianlew)
 ; sd7c.mf
 
 
@@ -22,6 +22,9 @@
 #DEFINE DOOR_MOTOR_COMMAND_[FRONT][RIGHT]_CAN_ID 0x0BEA6501
 #DEFINE DOOR_MOTOR_COMMAND_[BACK][LEFT]_CAN_ID 0x0BEA6502
 #DEFINE DOOR_MOTOR_COMMAND_[BACK][RIGHT]_CAN_ID 0x0BEA6503
+
+;mHoistWayLimit
+#DEFINE HOISTWAY_LIMIT_CAN_ID 0x0D147B00
 
 ;mDesiredFloor
 ;ID = 0x0C4E7000
@@ -71,6 +74,7 @@
 
 0s I MESSAGE_PERIOD N LEVEL_SENSOR_[UP]_CAN_ID Leveling UP = true
 0s I MESSAGE_PERIOD N LEVEL_SENSOR_[DOWN]_CAN_ID Leveling DOWN = true
+0s I MESSAGE_PERIOD N HOISTWAY_LIMIT_CAN_ID HoistwayLimitSensor UP = false
 0.4s A F DoorMotor FRONT LEFT : command == OPEN
 0.5s I MESSAGE_PERIOD N DOOR_CLOSED_FL_CAN_ID DoorClosed FRONT LEFT = false
 0.5s I MESSAGE_PERIOD N DOOR_CLOSED_FR_CAN_ID DoorClosed FRONT RIGHT = false
@@ -118,3 +122,12 @@
 
 ;#arc '7C/4b'
 16s A F Drive : speed == SLOW
+16s I MESSAGE_PERIOD N AT_FLOOR_[1][FRONT]_CAN_ID AtFloor 1 FRONT = false
+
+;#arc '7C/5a'
+17.0s I MESSAGE_PERIOD N HOISTWAY_LIMIT_CAN_ID HoistwayLimitSensor UP = true
+
+;#arc '7C/5b'
+17.3s I MESSAGE_PERIOD N AT_FLOOR_[7][FRONT]_CAN_ID AtFloor 7 FRONT = true
+17.5s A F Drive : speed == STOP
+17.5s A S DriveControl : STATE == STOP

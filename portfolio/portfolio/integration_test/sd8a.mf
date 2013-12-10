@@ -1,6 +1,6 @@
 ; 18649 Fall 2013
 ; Group 17
-; Qiang Zhang(qiangz)/Shen Yu(sheny)/Jiang He(jiangh)/Xianle Wang(xianlew)
+; Jiang He (jiangh)
 ; sd8a.mf
 
 
@@ -59,6 +59,7 @@
 
 #DEFINE HALLCALL_1FU_CAN_ID 0x0CB17800
 #DEFINE HALLCALL_7FU_CAN_ID 0x0CB17818
+#DEFINE HALLCALL_8FD_CAN_ID 0x0CB1781D
 
 
 ;Car Level Position
@@ -119,42 +120,79 @@
 8.2s A F DoorMotor BACK LEFT : command == STOP
 8.2s A F DoorMotor BACK RIGHT : command == STOP
 
+;#arc '8A/7a'
+8.5s I MESSAGE_PERIOD N CAR_LEVEL_CAN_ID CarLevelPosition = 0
+
 ;#arc '8A/4a'
 9.0s I MESSAGE_PERIOD N HALLCALL_7FU_CAN_ID HallCall 7 FRONT UP = true
 9.3s A N DESIRED_FLOOR_CAN_ID DesiredFloor : getDirection == UP
 9.3s A N DESIRED_FLOOR_CAN_ID DesiredFloor : getFloor == 7
 
 ;#arc '8A/4b'
-9.5s I MESSAGE_PERIOD F DriveSpeed = UP 0.3
+9.4s A F Drive : speed == SLOW
+9.4s A F Drive : direction == UP
+
+;#arc '8A/7b'
 9.5s I MESSAGE_PERIOD N CAR_LEVEL_CAN_ID CarLevelPosition = 100
+
+;#arc '8A/4c'
+9.5s I MESSAGE_PERIOD F DriveSpeed = UP 0.3
 10s A F Drive : speed == FAST
 10s A F Drive : direction == UP
 
-;#arc '8A/4c'
-14s I MESSAGE_PERIOD F DriveSpeed = UP 0.15
+;#arc '8A/7c'
 14s I MESSAGE_PERIOD N CAR_LEVEL_CAN_ID CarLevelPosition = 29500
+
+;#arc '8A/4d'
+14s I MESSAGE_PERIOD F DriveSpeed = UP 0.15
 14.5s A F Drive : speed == SLOW
 14.5s A F Drive : direction == UP
 
 
-;#arc '8A/5'
+;#arc '8A/5a'
 15s I MESSAGE_PERIOD N AT_FLOOR_[1][FRONT]_CAN_ID AtFloor 1 FRONT = false
 15s I MESSAGE_PERIOD N AT_FLOOR_[7][FRONT]_CAN_ID AtFloor 7 FRONT = true
 15s I MESSAGE_PERIOD N LEVEL_SENSOR_[UP]_CAN_ID Leveling UP = false
 15s I MESSAGE_PERIOD N LEVEL_SENSOR_[DOWN]_CAN_ID Leveling DOWN = false
 
+;#arc '8A/5b'
+15s I MESSAGE_PERIOD N LEVEL_SENSOR_[UP]_CAN_ID Leveling UP = false
+15s I MESSAGE_PERIOD N LEVEL_SENSOR_[DOWN]_CAN_ID Leveling DOWN = false
+15s I MESSAGE_PERIOD N HALLCALL_7FU_CAN_ID HallCall 7 FRONT UP = false
+15.2s I MESSAGE_PERIOD N DOOR_CLOSED_SENSOR_[FRONT][LEFT]_CAN_ID DoorClosed FRONT LEFT = false
+
+;#arc '8A/5c'
+16s A F Drive : speed == LEVEL
+16s A S DriveControl : STATE == LEVEL_UP
+
+;#arc '8A/5d'
+17s I MESSAGE_PERIOD N LEVEL_SENSOR_[UP]_CAN_ID Leveling UP = true
+17s I MESSAGE_PERIOD N LEVEL_SENSOR_[DOWN]_CAN_ID Leveling DOWN = true
+
+;#arc '8A/5e'
+17.5s A F Drive : speed == STOP
+
 ;#arc '8A/6a'
-16s I MESSAGE_PERIOD N EMERGENCY_BRAKE_CAN_ID Boolean = true
+18s I MESSAGE_PERIOD N HALLCALL_8FD_CAN_ID HallCall 8 FRONT DOWN = true
+18s I MESSAGE_PERIOD N DOOR_CLOSED_SENSOR_[FRONT][LEFT]_CAN_ID DoorClosed FRONT LEFT = true
+18s I MESSAGE_PERIOD N AT_FLOOR_[7][FRONT]_CAN_ID AtFloor 7 FRONT = false
+18.5s A N DESIRED_FLOOR_CAN_ID DesiredFloor : getFloor == 8
+18.5s A N DESIRED_FLOOR_CAN_ID DesiredFloor : getDirection == DOWN
+20s A S DriveControl : STATE == SLOW_UP
+20s A F Drive : speed == SLOW
+20s A F Drive : direction == UP
+
 
 ;#arc '8A/6b'
-17s A F Drive : speed == STOP
-17s A F Drive : direction == STOP
+20s I MESSAGE_PERIOD N EMERGENCY_BRAKE_CAN_ID Boolean = true
 
-;#arc '8A/7a' #arc '8A/7b' #arc '8A/7c'
-17s A N CAR_LEVEL_CAN_ID CarLevelPosition : getPosition == 29500
+;#arc '8A/6c'
+20s I MESSAGE_PERIOD N AT_FLOOR_[8][FRONT]_CAN_ID AtFloor 8 FRONT = true
+21s A F Drive : speed == STOP
+21s A F Drive : direction == STOP
 
 ;****verify postcondition
-20s A N DOOR_CLOSED_SENSOR_[FRONT][LEFT]_CAN_ID DoorClosed FRONT LEFT : getValue == true
-20s A F DoorMotor FRONT LEFT : command == STOP
+25s A N DOOR_CLOSED_SENSOR_[FRONT][LEFT]_CAN_ID DoorClosed FRONT LEFT : getValue == true
+25s A F DoorMotor FRONT LEFT : command == STOP
 
 
