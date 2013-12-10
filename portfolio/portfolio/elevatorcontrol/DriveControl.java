@@ -259,6 +259,7 @@ public class DriveControl extends Controller {
 				 else if (allDoorClosed == false && (mLevelDown.getValue() == false)) {
 						newState = State.LEVEL_DOWN;
 				 }
+//#transition 'T6.7'
 				 else if (allDoorClosed && allDoorMotorStop  == true && (currentFloor != desiredFloor) && desiredDirection == Direction.DOWN) {
 					 newState = State.WAIT;
 				 } 
@@ -272,15 +273,11 @@ public class DriveControl extends Controller {
 				if (countdown > 0) {
 					countdown -= 1;
 					newState = state;
-//#transition 'T6.7'
 				} else if (desiredDirection == Direction.UP) { 
 					newState = State.SLOW_UP;
-//#transition 'T6.8'
 				} else if (desiredDirection == Direction.DOWN) {
 					newState = State.SLOW_DOWN;
-//#transition 'T6.4'
 				} else {
-					//count down <= 0 AND desiredDirection == null
 					newState = State.STOP;
 				}
 				break;
@@ -329,7 +326,11 @@ public class DriveControl extends Controller {
 				 mDrive.set(commandSpeed, desiredDirection);
 				 mDriveSpeed.set(localDriveSpeed.speed(), localDriveSpeed.direction());
 				 
+<<<<<<< HEAD
+//#transition 'T6.4'
+=======
 //#transition 'T6.9'
+>>>>>>> 15445e9abc3d0ba428a93ebe012213ce27619037
 				 if (currentFloor == desiredFloor && levelFlag == false) {
 					  newState = State.STOP;
 				 }
@@ -360,10 +361,11 @@ public class DriveControl extends Controller {
 				 mDrive.set(commandSpeed, desiredDirection);
 				 mDriveSpeed.set(localDriveSpeed.speed(), localDriveSpeed.direction());
 				 
-//#transition 'T6.10'
+//#transition 'T6.8'
 				 if (mHoistwayLimitDown.getValue()==true || mHoistwayLimitUp.getValue()==true || mEmergencyBrake.getValue()==true || (currentFloor == desiredFloor && levelFlag == false)) {
 					  newState = State.STOP;
 				 }
+//#transition 'T6.10'
 				 else if(mHoistwayLimitDown.getValue()==true || mHoistwayLimitUp.getValue()==true || mEmergencyBrake.getValue()==true) {
 					  newState = State.STOP;
 				 }
