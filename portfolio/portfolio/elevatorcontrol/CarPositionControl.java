@@ -2,7 +2,7 @@
  18649 Fall 2013
  Group 17
  Shen Yu(sheny)
-Qiang Zhang(qiangz), Shen Yu(sheny), Jiang He(jiangh), Xianle Wang(xianlew)
+ Qiang Zhang(qiangz), Shen Yu(sheny), Jiang He(jiangh), Xianle Wang(xianlew)
  */
 package simulator.elevatorcontrol;
 

@@ -2,8 +2,8 @@
  * Course and Semester: 18649-Fall-2013
  *	Name: Jiang He
  *	Andrew ID: jiangh
+ *  Qiang Zhang(qiangz), Shen Yu(sheny), Jiang He(jiangh), Xianle Wang(xianlew)
  */
-
 /*
  * To change this template, choose Tools | Templates
  * and open the template in the editor.

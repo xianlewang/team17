@@ -1,9 +1,9 @@
 /*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
+ * 18649 Fall 2013
+ * Group 17
+ * Qiang Zhang(qiangz), Shen Yu(sheny), Jiang He(jiangh), Xianle Wang(xianlew)
+ */ 
 package simulator.elevatorcontrol;
-
 import java.util.BitSet;
 import simulator.payloads.CanMailbox.ReadableCanMailbox;
 import simulator.payloads.CanMailbox.WriteableCanMailbox;
