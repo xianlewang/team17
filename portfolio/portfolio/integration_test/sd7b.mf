@@ -1,6 +1,6 @@
 ; 18649 Fall 2013
 ; Group 17
-; Qiang Zhang (qiangz)
+; Qiang Zhang(qiangz)/Shen Yu(sheny)/Jiang He(jiangh)/Xianle Wang(xianlew)
 ; sd7b.mf
 
 ;network message period

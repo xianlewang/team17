@@ -1,0 +1,28 @@
+;Project8 
+;Many passengers arrive at the back hallway of 2nd floor at 200.0s
+;Passengers that board on the car will leave the car at different hallways.
+;Time    Start Floor     Start Hallway    End Floor     End Hallway
+200.0s        2               BACK            3            FRONT
+200.0s        2               BACK            4            FRONT
+200.0s        2               BACK            5            FRONT
+200.0s        2               BACK            6            FRONT
+200.0s        2               BACK            7            FRONT
+200.0s        2               BACK            8            FRONT
+200.0s        2               BACK            7            BACK
+200.0s        2               BACK            1            FRONT
+200.0s        2               BACK            1            BACK
+200.0s        2               BACK            5            FRONT
+200.0s        2               BACK            5            FRONT
+300.0s        7               BACK            5            FRONT
+300.0s        7              FRONT            1            FRONT
+300.0s        7              FRONT            5            FRONT
+300.0s        7              FRONT            2            BACK
+300.0s        7               BACK            3            FRONT
+490.0s        2               BACK            4            FRONT
+590.0s        4              FRONT            5            FRONT
+610.0s        3              FRONT            5            FRONT
+620.0s        8              FRONT            5            FRONT
+690.0s        5              FRONT            5            FRONT
+790.0s        6              FRONT            5            FRONT
+800.0s        1              FRONT            3            FRONT
+810.0s        1               BACK            4            FRONT

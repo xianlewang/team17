@@ -1,0 +1,32 @@
+; 18649 Fall 2013
+; Group 17
+; Xianle Wang(xianlew)
+; sd1c.stats
+
+Simulator Parameters:
+Command line = -cf sd1c.cf -mf sd1c.mf
+RandomSeed = 1386601224640
+CanNetworkBitTime = 0 ns
+Effective Can Bitrate = Infinity
+Run Time = null
+Real time rate = null
+Message File = sd1c.mf
+Controller File = sd1c.cf
+
+Assertion Results:
+@4.0s:  PASSED simulator.payloads.CanMailbox$ReadableCanMailbox@652bce43 :: getValue ?== true PASSED
+@4.0s:  PASSED simulator.payloads.CanMailbox$ReadableCanMailbox@544928ae :: getValue ?== false PASSED
+@4.0s:  PASSED simulator.payloads.HallLightPayload$ReadableHallLightPayload@58a0ee03 :: lighted ?== false PASSED
+@4.099999999s:  PASSED simulator.payloads.DoorMotorPayload$ReadableDoorMotorPayload@17973271 :: command ?== STOP PASSED
+@5.0s:  PASSED simulator.payloads.HallLightPayload$ReadableHallLightPayload@34547854 :: lighted ?== true PASSED
+@7.0s:  PASSED simulator.payloads.DoorMotorPayload$ReadableDoorMotorPayload@43e27370 :: command ?== STOP PASSED
+@8.0s:  PASSED simulator.payloads.CanMailbox$ReadableCanMailbox@3ee3f8b9 :: getValue ?== true PASSED
+@8.0s:  PASSED simulator.payloads.CanMailbox$ReadableCanMailbox@5de2d159 :: getValue ?== true PASSED
+@8.0s:  PASSED simulator.payloads.HallLightPayload$ReadableHallLightPayload@62b4bb65 :: lighted ?== true PASSED
+
+
+******************Summary******************
+Passed:  9
+Failed:  0
+Total :  9
+

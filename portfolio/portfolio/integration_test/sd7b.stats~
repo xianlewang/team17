@@ -1,0 +1,34 @@
+; 18649 Fall 2013
+; Group 17
+; Qiang Zhang (qiangz)
+; sd7b.stats
+
+Simulator Parameters:
+Command line = -cf sd7b.cf -mf sd7b.mf
+RandomSeed = 1386601231852
+CanNetworkBitTime = 0 ns
+Effective Can Bitrate = Infinity
+Run Time = null
+Real time rate = null
+Message File = sd7b.mf
+Controller File = sd7b.cf
+
+Assertion Results:
+@0.41s:  PASSED simulator.payloads.DoorMotorPayload$ReadableDoorMotorPayload@797dfcf1 :: command ?== STOP PASSED
+@0.41s:  PASSED DoorControl[FRONT][RIGHT]::checkState(STATE) ?== CLOSED PASSED
+@1.1s:  PASSED simulator.payloads.DoorMotorPayload$ReadableDoorMotorPayload@2dd1282d :: command ?== OPEN PASSED
+@1.1s:  PASSED DoorControl[FRONT][RIGHT]::checkState(STATE) ?== BEFORE_OPEN PASSED
+@1.1s:  PASSED DoorControl[FRONT][RIGHT]::checkState(STATE) ?== BEFORE_OPEN PASSED
+@3.0s:  PASSED simulator.payloads.DoorMotorPayload$ReadableDoorMotorPayload@4f47af3 :: command ?== STOP PASSED
+@3.0s:  PASSED DoorControl[FRONT][RIGHT]::checkState(STATE) ?== OPENED PASSED
+@15.0s:  PASSED simulator.payloads.DoorMotorPayload$ReadableDoorMotorPayload@7d4af469 :: command ?== CLOSE PASSED
+@15.0s:  PASSED DoorControl[FRONT][RIGHT]::checkState(STATE) ?== CLOSING PASSED
+@18.0s:  PASSED simulator.payloads.DoorMotorPayload$ReadableDoorMotorPayload@67abaab :: command ?== STOP PASSED
+@18.0s:  PASSED DoorControl[FRONT][RIGHT]::checkState(STATE) ?== CLOSED PASSED
+
+
+******************Summary******************
+Passed:  11
+Failed:  0
+Total :  11
+

@@ -1,0 +1,50 @@
+; 18649 Fall 2013
+; group 17
+; Qiang Zhang(qiangz)
+; lanterncontrol_test1.stats
+
+Simulator Parameters:
+Command line = -cf lanterncontrol.cf -mf lanterncontrol_test1.mf
+RandomSeed = 1382053553033
+CanNetworkBitTime = 0 ns
+Effective Can Bitrate = Infinity
+Run Time = null
+Real time rate = null
+Message File = lanterncontrol_test1.mf
+Controller File = lanterncontrol.cf
+
+
+[Elevator] @0.000000000: Starting Simulation ***
+[AssertionMonitor] @1.200000000: **********************************************************************************************************
+[AssertionMonitor] @1.200000000: PASSED simulator.payloads.CarLanternPayload$ReadableCarLanternPayload@1f292d26 :: lighted ?== false PASSED
+[AssertionMonitor] @1.200000000: **********************************************************************************************************
+[AssertionMonitor] @2.600000000: **********************************************************************************************************
+[AssertionMonitor] @2.600000000: PASSED simulator.payloads.CarLanternPayload$ReadableCarLanternPayload@57bcc0bc :: lighted ?== false PASSED
+[AssertionMonitor] @2.600000000: **********************************************************************************************************
+[AssertionMonitor] @2.600000000: *************************************************************
+[AssertionMonitor] @2.600000000: PASSED LanternControl[UP]::checkState(STATE) ?== No_On PASSED
+[AssertionMonitor] @2.600000000: *************************************************************
+[AssertionMonitor] @4.400000000: **********************************************************************************************************
+[AssertionMonitor] @4.400000000: PASSED simulator.payloads.CarLanternPayload$ReadableCarLanternPayload@2fdb7df8 :: lighted ?== false PASSED
+[AssertionMonitor] @4.400000000: **********************************************************************************************************
+[AssertionMonitor] @4.400000000: *******************************************************************
+[AssertionMonitor] @4.400000000: PASSED LanternControl[UP]::checkState(STATE) ?== Lantern_Off PASSED
+[AssertionMonitor] @4.400000000: *******************************************************************
+[AssertionMonitor] @5.800000000: **********************************************************************************************************
+[AssertionMonitor] @5.800000000: PASSED simulator.payloads.CarLanternPayload$ReadableCarLanternPayload@6262937c :: lighted ?== false PASSED
+[AssertionMonitor] @5.800000000: **********************************************************************************************************
+[AssertionMonitor] @5.800000000: ******************************************************************
+[AssertionMonitor] @5.800000000: PASSED LanternControl[UP]::checkState(STATE) ?== Lantern_On PASSED
+[AssertionMonitor] @5.800000000: ******************************************************************
+[AssertionMonitor] @8.400000000: **********************************************************************************************************
+[AssertionMonitor] @8.400000000: PASSED simulator.payloads.CarLanternPayload$ReadableCarLanternPayload@4ca31e1b :: lighted ?== false PASSED
+[AssertionMonitor] @8.400000000: **********************************************************************************************************
+[AssertionMonitor] @8.400000000: *******************************************************************
+[AssertionMonitor] @8.400000000: PASSED LanternControl[UP]::checkState(STATE) ?== Lantern_Off PASSED
+[AssertionMonitor] @8.400000000: *******************************************************************
+[Elevator] @13.400000000: Simulation Finished ***
+******************Summary******************
+Passed:  9
+Failed:  0
+Total :  9
+
