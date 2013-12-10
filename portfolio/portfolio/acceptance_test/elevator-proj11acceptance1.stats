@@ -1,3 +1,6 @@
+; 18649 Fall 2013
+; Group 17
+; Qiang Zhang(qiangz), Shen Yu(sheny), Jiang He(jiangh), Xianle Wang(xianlew)
 
 Simulator Parameters:
 Command line = -pf proj11acceptance1.pass -b 200 -fs 5.0
