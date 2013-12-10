@@ -79,6 +79,14 @@ public class DoorControl extends Controller {
     private ReadableCanMailbox networkCarCall_7_F;
     private ReadableCanMailbox networkCarCall_7_B;
     
+    // For Floor 2
+    private CarCallCanPayloadTranslator mCarCall_2_B;
+    private ReadableCanMailbox networkCarCall_2_B;
+    private HallCallCanPayloadTranslator mHallCall_2BU;
+    private HallCallCanPayloadTranslator mHallCall_2BD;
+    private ReadableCanMailbox networkHallCall_2BU;
+    private ReadableCanMailbox networkHallCall_2BD;
+    
     // output network
     private WriteableCanMailbox networkDoorMotor;
     private DoorMotorCanPayloadTranslator mDoorMotor;
@@ -180,23 +188,49 @@ public class DoorControl extends Controller {
         canInterface.registerTimeTriggered(networkCarCall_7_F);
         canInterface.registerTimeTriggered(networkCarCall_7_B);
         
+        // register Calls for floor 2
+        networkHallCall_2BU = CanMailbox.getReadableCanMailbox(MessageDictionary.HALL_CALL_BASE_CAN_ID + ReplicationComputer.computeReplicationId(2, Hallway.BACK, Direction.UP));
+        networkHallCall_2BD = CanMailbox.getReadableCanMailbox(MessageDictionary.HALL_CALL_BASE_CAN_ID + ReplicationComputer.computeReplicationId(2, Hallway.BACK, Direction.DOWN));
+        networkCarCall_2_B = CanMailbox.getReadableCanMailbox(MessageDictionary.CAR_CALL_BASE_CAN_ID + ReplicationComputer.computeReplicationId(2, Hallway.BACK));
+        mCarCall_2_B = new CarCallCanPayloadTranslator(networkCarCall_2_B, 2, Hallway.BACK);
+        mHallCall_2BU = new HallCallCanPayloadTranslator(networkHallCall_2BU, 2, Hallway.BACK, Direction.UP);
+        mHallCall_2BD = new HallCallCanPayloadTranslator(networkHallCall_2BD, 2, Hallway.BACK, Direction.DOWN);
+        canInterface.registerTimeTriggered(networkCarCall_2_B);
+        canInterface.registerTimeTriggered(networkHallCall_2BU);
+        canInterface.registerTimeTriggered(networkHallCall_2BD);
+
+
         // ready now
         timer.start(period);
     }
     private boolean haveCall(int cur) {
     	// Hall Call
-    	if (mDesiredFloor.getDirection().equals(Direction.UP)) {
-			if (callArray.isCalled(cur, Direction.UP, hallway)) {
-				return true;
+    	if (cur != 2) {
+    		if (mDesiredFloor.getDirection().equals(Direction.UP)) {
+    			if (callArray.isCalled(cur, Direction.UP, hallway)) {
+					return true;
+				}
 			}
-		}
-		if (mDesiredFloor.getDirection().equals(Direction.DOWN)) {
-			if (callArray.isCalled(cur, Direction.DOWN, hallway)) {
-				return true;
+			if (mDesiredFloor.getDirection().equals(Direction.DOWN)) {
+				if (callArray.isCalled(cur, Direction.DOWN, hallway)) {
+					return true;
+				}
 			}
-		}
+    	}
+    	if (cur == 2) {
+    		if (mDesiredFloor.getDirection().equals(Direction.UP)) {
+    			if (mHallCall_2BU.getValue()) {
+    				return true;
+    			}
+    		}
+    		if (mDesiredFloor.getDirection().equals(Direction.DOWN)) {
+    			if (mHallCall_2BD.getValue()) {
+    				return true;
+    			}
+    		}
+    	}
 		// Car Call
-    	if (cur != 1 && cur != 7) {
+    	if (cur != 1 && cur != 7 && cur != 2) {
     		if (callArray.isCalled(cur, Direction.STOP, hallway)) {
     			return true;
     		}
@@ -209,6 +243,8 @@ public class DoorControl extends Controller {
     			return mCarCall_7_F.getValue();
     		} else if (cur == 7 && hallway.equals(Hallway.BACK)) {
     			return mCarCall_7_B.getValue();
+    		} else if (cur == 2 && hallway.equals(Hallway.BACK)) {
+    			return mCarCall_2_B.getValue();
     		}
     	}
     	//System.out.println("Never come here is haveCall function");
@@ -386,13 +422,16 @@ public class DoorControl extends Controller {
 				if (mOtherSideClosed.getValue() == true) {
 					otherSideClosed = true;
 				}
+//#transition 'T 5.15'
 				if (otherSideClosed == true && mOtherSideClosed.getValue() == false) {
 					nextState = State.BEFORE_OPEN;
 				}
 				else if (waitDispatcher > 0) {
 					nextState = currentState;
 					waitDispatcher -= 1;
-				} else {
+				}
+//#transition 'T 5.13'
+                else {
 					nextState = State.CLOSED;
 				}
 				break;

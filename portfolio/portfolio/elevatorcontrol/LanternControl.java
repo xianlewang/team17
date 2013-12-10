@@ -68,20 +68,22 @@ public class LanternControl extends Controller{
 		State nextState = currentState;
 		boolean allClose;
 		switch (nextState) {
-			case Lantern_Off:
-				car_lantern.set(false);
-				// code for desired direction for this simple design
-                //wxl
-                if(mDesiredFloor.getFloor()==mAtFloor_array.getCurrentFloor()){
-                    DesiredDirection = mDesiredFloor.getDirection();
-                }else if(mDesiredFloor.getFloor()>mAtFloor_array.getCurrentFloor()){
-                    DesiredDirection=Direction.UP;
-                }else{
-                    DesiredDirection=Direction.DOWN;
-                }
+		case Lantern_Off:
+			car_lantern.set(false);
+			allClose = mDoorClosed_front_array.getBothClosed() && mDoorClosed_back_array.getBothClosed();
+			// code for desired direction for this simple design
+                	//wxl
+                	if(mDesiredFloor.getFloor()==mAtFloor_array.getCurrentFloor()){
+                    	    if (allClose) {
+                                DesiredDirection = mDesiredFloor.getDirection();
+                            }
+                	}else if(mDesiredFloor.getFloor()>mAtFloor_array.getCurrentFloor()){
+                    		DesiredDirection=Direction.UP;
+                	}else{
+                    		DesiredDirection=Direction.DOWN;
+                	}
 				
 				// should be DesiredDirection = mDesiredFloor.getDirection();
-				allClose = mDoorClosed_front_array.getBothClosed() && mDoorClosed_back_array.getBothClosed();
 //#transition 'T 7.1'
 					if (allClose == false && DesiredDirection == Direction.STOP) {
 						nextState = State.No_On;
