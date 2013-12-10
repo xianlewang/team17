@@ -2,7 +2,7 @@
  18649 Fall 2013
  Group 17
  Qiang Zhang(qiangz)
-Qiang Zhang(qiangz), Shen Yu(sheny), Jiang He(jiangh), Xianle Wang(xianlew)
+ (other names would go here)
  */
 package simulator.elevatorcontrol;
 
