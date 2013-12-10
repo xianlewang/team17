@@ -3689,8 +3689,8 @@
 				<td style="vertical-align: top;">T9.2<br>
 				</td>
 				<td style="vertical-align: top;">
-					mAtFloor[f,b]&nbsp;==&nbsp;true&nbsp;&&&nbsp;
-					mDoorClosed[b,*]&nbsp;==&nbsp;false&nbsp;&&
+					mAtFloor[f,b]&nbsp;==&nbsp;true&nbsp;AND&nbsp;
+					mDoorClosed[b,*]&nbsp;==&nbsp;false&nbsp;AND
 					&nbsp;CarCall[f,b]&nbsp;==&nbsp;false<br>
 				</td>
 			</tr>
@@ -4019,7 +4019,7 @@
 	<div style="text-align: center;">
 		<a href="dispatcher_state_diagram.png"><img
 			alt="dispatcher_state_diagram.png" src="dispatcher_state_diagram.png"
-			style="border: 0px solid; width: 700px; height: 500px;"></a><br>
+			style="border: 0px solid; width: 500px; height: 400px;"></a><br>
 	</div>
 	<table style="text-align: left; width: 800px;" border="1"
 		cellpadding="2" cellspacing="2">
@@ -4064,7 +4064,7 @@
             <tr>
                 <td style="vertical-align: top;">T11.6<br>
                 </td>
-                <td style="vertical-align: top;">mDriveSpeed>0.05||(target!=currentFloor&& doorAllClosed)<br>
+                <td style="vertical-align: top;">mDriveSpeed>0.05 OR (target!=currentFloor AND doorAllClosed)<br>
                 </td>
             </tr>
 		</tbody>
