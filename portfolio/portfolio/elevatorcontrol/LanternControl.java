@@ -1,8 +1,8 @@
 /*
-18649 Fall 2013
-Group 17
-Qiang Zhang(qiangz)
-(other names would go here)
+ 18649 Fall 2013
+ Group 17
+ Qiang Zhang(qiangz)
+ (other names would go here)
  */
 package simulator.elevatorcontrol;
 
@@ -68,35 +68,39 @@ public class LanternControl extends Controller{
 		State nextState = currentState;
 		boolean allClose;
 		switch (nextState) {
-		case Lantern_Off:
-			car_lantern.set(false);
-			allClose = mDoorClosed_front_array.getBothClosed() && mDoorClosed_back_array.getBothClosed();
-			// code for desired direction for this simple design
-                	//wxl
-                	if(mDesiredFloor.getFloor()==mAtFloor_array.getCurrentFloor()){
-                        if (allClose) {
-                            DesiredDirection = mDesiredFloor.getDirection();
-                        }
-                	} else if(mDesiredFloor.getFloor()>mAtFloor_array.getCurrentFloor()){
-                    		DesiredDirection=Direction.UP;
-                	} else {
-                    		DesiredDirection=Direction.DOWN;
-                	}
+            case Lantern_Off:
+                car_lantern.set(false);
+                allClose = mDoorClosed_front_array.getBothClosed() && mDoorClosed_back_array.getBothClosed();
+                // code for desired direction for this simple design
+                //wxl
+                if(mDesiredFloor.getFloor()==mAtFloor_array.getCurrentFloor()) {
+                    if (allClose) {
+                        DesiredDirection = mDesiredFloor.getDirection();
+                    }
+                } else if(mDesiredFloor.getFloor()>mAtFloor_array.getCurrentFloor()) {
+                    if (allClose) {
+                        DesiredDirection=Direction.UP;
+                    }
+                } else {
+                    if (allClose) {
+                        DesiredDirection=Direction.DOWN;
+                    }
+                }
 				
 				// should be DesiredDirection = mDesiredFloor.getDirection();
 //#transition 'T 7.1'
-					if (allClose == false && DesiredDirection == Direction.STOP) {
-						nextState = State.No_On;
-						break;
-					}
+                if (allClose == false && DesiredDirection != direction) {
+                    nextState = State.No_On;
+                    break;
+                }
 //#transition 'T 7.2'
-					else if (allClose == false && DesiredDirection == direction) {//wxl && mDesiredFloor.getFloor() != mAtFloor_array.getCurrentFloor()) {
-						nextState = State.Lantern_On;
-						break;
-					}
-					else {
-						nextState = State.Lantern_Off;
-					}
+                else if (allClose == false && DesiredDirection == direction) {//wxl && mDesiredFloor.getFloor() != mAtFloor_array.getCurrentFloor()) {
+                    nextState = State.Lantern_On;
+                    break;
+                }
+                else {
+                    nextState = State.Lantern_Off;
+                }
 				break;
 			case No_On:
 				car_lantern.set(false);
