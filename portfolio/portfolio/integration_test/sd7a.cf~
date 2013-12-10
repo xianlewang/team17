@@ -1,7 +1,0 @@
-; 18649 Fall 2013
-; Group 17
-; Qiang Zhang (qiangz)
-; 7A.cf
-
-DoorControl FRONT LEFT 10ms FALSE
-LanternControl UP 200ms FALSE

@@ -1,7 +1,0 @@
-; 18649 Fall 2013
-; Group 17
-; Shen Yu (sheny)
-; 1B.cf
-
-HallButtonControl 4 FRONT UP 100ms false
-DoorControl FRONT LEFT 10ms false
