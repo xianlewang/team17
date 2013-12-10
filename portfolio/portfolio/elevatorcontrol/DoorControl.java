@@ -334,7 +334,7 @@ public class DoorControl extends Controller {
 				mDoorMotor.setDoorCommand(DoorCommand.CLOSE);
 				countdown = 0;
 				waitDispatcher = 100;
-                //#transition 'T 5.4'
+//#transition 'T 5.4'
 				if (mDoorClosed.getValue()) {
 					nextState = State.WAIT_DISPATCHER;
 					//nextState = State.CLOSED;
