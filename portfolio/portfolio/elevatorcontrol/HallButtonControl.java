@@ -244,7 +244,7 @@ public class HallButtonControl extends Controller {
 			currentDirection = getCurrentDirection();
 			// transitions -- note that transition conditions are mutually
 			// exclusive
-			// #transition 'T8.1'
+// #transition 'T8.1'
 			if (localHallCall.pressed()) {
 				newState = State.LIGHT_ON;
 			}
@@ -259,7 +259,7 @@ public class HallButtonControl extends Controller {
 			currentDirection = getCurrentDirection();
 			// transitions -- note that transition conditions are mutually
 			// exclusive
-			// #transition 'T8.2'
+// #transition 'T8.2'
 			if (//wxl currentFloor != mDesiredFloor.getFloor()
 					!mDoorClosed.getValue()
 					&& this.floor == currentFloor
