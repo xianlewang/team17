@@ -444,13 +444,13 @@
                     </td>
                     <td style="vertical-align: top;">~<br>
                     </td>
-                    <td style="vertical-align: top;">X<br>
+                    <td style="vertical-align: top;">~<br>
                     </td>
                     <td style="vertical-align: top;">~<br>
                     </td>
                 </tr>
 					 <tr>
-                    <td style="vertical-align: top;">6.7.2 mHoistwayLimit is true --> mDriveSpeed Stop<br>
+                    <td style="vertical-align: top;">6.7.2 mHoistwayLimit is true--> mDriveSpeed Stop<br>
                     </td>
                     <td style="vertical-align: top;">~<br>
                     </td>
@@ -458,7 +458,7 @@
                     </td>
                     <td style="vertical-align: top;">~<br>
                     </td>
-                    <td style="vertical-align: top;">X<br>
+                    <td style="vertical-align: top;">~<br>
                     </td>
                     <td style="vertical-align: top;">~<br>
                     </td>
@@ -472,7 +472,7 @@
 						 </td>
 						 <td style="vertical-align: top;">~<br>
 						 </td>
-						 <td style="vertical-align: top;">X<br>
+						 <td style="vertical-align: top;">~<br>
 						 </td>
 						 <td style="vertical-align: top;">~<br>
 						 </td>
@@ -481,13 +481,13 @@
                 </tr>
                 <tr>
                     <td style="vertical-align: top;">6.8.2 At Floor f and mLevel is False and mDoorClosed is False -->
-						  mDriveSpeed[s,d]=[v,d]<br>
+						  mDriveSpeed[s,d]=[0,d]<br>
                     </td>
                     <td style="vertical-align: top;">~<br>
                     </td>
                     <td style="vertical-align: top;">~<br>
                     </td>
-                    <td style="vertical-align: top;">X<br>
+                    <td style="vertical-align: top;">~<br>
                     </td>
                     <td style="vertical-align: top;">~<br>
                     </td>
@@ -499,9 +499,9 @@
                     <td style="vertical-align: top;">6.9.1 At Floor f and mLevel is True --> 
 						  Drive Stop<br>
                     </td>
-                    <td style="vertical-align: top;">X<br>
+                    <td style="vertical-align: top;">~<br>
                     </td>
-                    <td style="vertical-align: top;">X<br>
+                    <td style="vertical-align: top;">~<br>
                     </td>
                     <td style="vertical-align: top;">~<br>
                     </td>
@@ -514,9 +514,9 @@
                     <td style="vertical-align: top;">6.9.2 At Floor f and mLevel is True --> 
 						  mDriveSpeed Stop<br>
                     </td>
-                    <td style="vertical-align: top;">X<br>
+                    <td style="vertical-align: top;">~<br>
                     </td>
-                    <td style="vertical-align: top;">X<br>
+                    <td style="vertical-align: top;">~<br>
                     </td>
                     <td style="vertical-align: top;">~<br>
                     </td>
@@ -534,7 +534,7 @@
                     </td>
                     <td style="vertical-align: top;">~<br>
                     </td>
-                    <td style="vertical-align: top;">X<br>
+                    <td style="vertical-align: top;">~<br>
                     </td>
                     <td style="vertical-align: top;">~<br>
                     </td>
@@ -549,7 +549,7 @@
                     </td>
                     <td style="vertical-align: top;">~<br>
                     </td>
-                    <td style="vertical-align: top;">X<br>
+                    <td style="vertical-align: top;">~<br>
                     </td>
                     <td style="vertical-align: top;">~<br>
                     </td>
@@ -565,7 +565,7 @@
                     </td>
                     <td style="vertical-align: top;">~<br>
                     </td>
-                    <td style="vertical-align: top;">X<br>
+                    <td style="vertical-align: top;">~<br>
                     </td>
                     <td style="vertical-align: top;">~<br>
                     </td>
@@ -580,7 +580,7 @@
                     </td>
                     <td style="vertical-align: top;">~<br>
                     </td>
-                    <td style="vertical-align: top;">X<br>
+                    <td style="vertical-align: top;">~<br>
                     </td>
                     <td style="vertical-align: top;">~<br>
                     </td>
@@ -610,7 +610,7 @@
                     </td>
                     <td style="vertical-align: top;">~<br>
                     </td>
-                    <td style="vertical-align: top;">X<br>
+                    <td style="vertical-align: top;">~<br>
                     </td>
                     <td style="vertical-align: top;">~<br>
                     </td>
@@ -624,7 +624,7 @@
                     </td>
                     <td style="vertical-align: top;">~<br>
                     </td>
-                    <td style="vertical-align: top;">X<br>
+                    <td style="vertical-align: top;">~<br>
                     </td>
                     <td style="vertical-align: top;">~<br>
                     </td>
@@ -638,7 +638,7 @@
                     </td>
                     <td style="vertical-align: top;">~<br>
                     </td>
-                    <td style="vertical-align: top;">X<br>
+                    <td style="vertical-align: top;">~<br>
                     </td>
                     <td style="vertical-align: top;">~<br>
                     </td>
@@ -652,7 +652,7 @@
                     </td>
                     <td style="vertical-align: top;">~<br>
                     </td>
-                    <td style="vertical-align: top;">X<br>
+                    <td style="vertical-align: top;">~<br>
                     </td>
                     <td style="vertical-align: top;">~<br>
                     </td>
