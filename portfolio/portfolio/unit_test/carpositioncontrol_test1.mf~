@@ -1,0 +1,29 @@
+;18649 Fall 2013
+;Group 17 
+;Shen Yu(sheny)
+;carpositioncontrol_test1.mf
+
+;include CAN id and period definitions
+#INCLUDE carposition_defines.mf
+
+;initialize
+0s I MESSAGE_PERIOD N CAR_LEVEL_POSITION_CAN_ID CarLevelPosition = 0;
+
+;#state 'State 10.1: Initial'
+0.21s A F CarPositionIndicator : floor == 1
+0.21s A S CarPositionControl : STATE == STATE_INITIAL
+
+;#transition 'T10.1'
+0.4s I MESSAGE_PERIOD N CAR_LEVEL_POSITION_CAN_ID CarLevelPosition = 8000;
+
+;#state 'State 10.2: Floor'
+0.8s A F CarPositionIndicator : floor == 3
+0.8s A S CarPositionControl : STATE == STATE_FLOOR
+
+;#transition 'T10.2'
+1.0s I MESSAGE_PERIOD N CAR_LEVEL_POSITION_CAN_ID CarLevelPosition = 1000;
+
+;#state 'State 10.1: Initial'
+1.4s A F CarPositionIndicator : floor == 1
+1.4s A S CarPositionControl : STATE == STATE_INITIAL
+

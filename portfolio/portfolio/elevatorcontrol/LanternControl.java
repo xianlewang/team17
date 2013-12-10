@@ -74,12 +74,12 @@ public class LanternControl extends Controller{
 			// code for desired direction for this simple design
                 	//wxl
                 	if(mDesiredFloor.getFloor()==mAtFloor_array.getCurrentFloor()){
-                    	    if (allClose) {
-                                DesiredDirection = mDesiredFloor.getDirection();
-                            }
-                	}else if(mDesiredFloor.getFloor()>mAtFloor_array.getCurrentFloor()){
+                        if (allClose) {
+                            DesiredDirection = mDesiredFloor.getDirection();
+                        }
+                	} else if(mDesiredFloor.getFloor()>mAtFloor_array.getCurrentFloor()){
                     		DesiredDirection=Direction.UP;
-                	}else{
+                	} else {
                     		DesiredDirection=Direction.DOWN;
                 	}
 				

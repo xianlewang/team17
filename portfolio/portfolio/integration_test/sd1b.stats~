@@ -1,0 +1,38 @@
+; 18649 Fall 2013
+; Group 17
+; Shen Yu (sheny)
+; sd1b.stats
+
+Simulator Parameters:
+Command line = -cf sd1b.cf -mf sd1b.mf
+RandomSeed = 1386601223671
+CanNetworkBitTime = 0 ns
+Effective Can Bitrate = Infinity
+Run Time = null
+Real time rate = null
+Message File = sd1b.mf
+Controller File = sd1b.cf
+
+Assertion Results:
+@4.0s:  PASSED simulator.payloads.CanMailbox$ReadableCanMailbox@477b1683 :: getValue ?== true PASSED
+@4.0s:  PASSED simulator.payloads.HallLightPayload$ReadableHallLightPayload@38e2e4d7 :: lighted ?== false PASSED
+@4.0s:  PASSED simulator.payloads.CanMailbox$ReadableCanMailbox@38a7b68a :: getValue ?== false PASSED
+@4.0s:  PASSED simulator.payloads.CanMailbox$ReadableCanMailbox@140de537 :: getValue ?== false PASSED
+@4.0s:  PASSED HallButtonControl[4][FRONT][UP]::checkState(STATE) ?== LIGHT_OFF PASSED
+@4.0s:  PASSED simulator.payloads.DoorMotorPayload$ReadableDoorMotorPayload@5f40727a :: command ?== STOP PASSED
+@6.0s:  PASSED simulator.payloads.DoorMotorPayload$ReadableDoorMotorPayload@67ba0609 :: command ?== STOP PASSED
+@10.0s:  PASSED simulator.payloads.HallLightPayload$ReadableHallLightPayload@74a893ff :: lighted ?== true PASSED
+@10.0s:  PASSED simulator.payloads.CanMailbox$ReadableCanMailbox@3abd6b1e :: getValue ?== true PASSED
+@10.0s:  PASSED simulator.payloads.CanMailbox$ReadableCanMailbox@2964a05d :: getValue ?== true PASSED
+@14.0s:  PASSED simulator.payloads.DoorMotorPayload$ReadableDoorMotorPayload@273fe4e4 :: command ?== STOP PASSED
+@15.0s:  PASSED simulator.payloads.CanMailbox$ReadableCanMailbox@8c3d026 :: getValue ?== true PASSED
+@15.0s:  PASSED simulator.payloads.CanMailbox$ReadableCanMailbox@7e6ab533 :: getValue ?== true PASSED
+@15.0s:  PASSED simulator.payloads.HallLightPayload$ReadableHallLightPayload@68c50e46 :: lighted ?== true PASSED
+@15.0s:  PASSED simulator.payloads.CanMailbox$ReadableCanMailbox@230a4761 :: getValue ?== true PASSED
+
+
+******************Summary******************
+Passed:  15
+Failed:  0
+Total :  15
+

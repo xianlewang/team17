@@ -1,0 +1,83 @@
+;18649 Fall 2013
+;Group 17
+;Xianle Wang(xianlew)
+;disp-define.mf
+
+;network message period
+#DEFINE MESSAGE_PERIOD 50ms
+
+;definitions for inputs' ID
+
+;mAtFloor
+#DEFINE AT_FLOOR_[1][FRONT]_CAN_ID                     0xC4D6F00
+#DEFINE AT_FLOOR_[1][BACK]_CAN_ID                      0xC4D6F01
+#DEFINE AT_FLOOR_[2][BACK]_CAN_ID                      0xC4D6F03
+#DEFINE AT_FLOOR_[3][FRONT]_CAN_ID                     0xC4D6F04
+#DEFINE AT_FLOOR_[4][FRONT]_CAN_ID                     0xC4D6F06
+#DEFINE AT_FLOOR_[5][FRONT]_CAN_ID                     0xC4D6F08
+#DEFINE AT_FLOOR_[6][FRONT]_CAN_ID                     0xC4D6F0A
+#DEFINE AT_FLOOR_[7][FRONT]_CAN_ID                     0xC4D6F0C
+#DEFINE AT_FLOOR_[7][BACK]_CAN_ID                      0xC4D6F0D
+#DEFINE AT_FLOOR_[8][FRONT]_CAN_ID                     0xC4D6F0E
+
+;mDoorClosed
+#DEFINE DOOR_CLOSED_SENSOR_[FRONT][LEFT]_CAN_ID        0xCB27900
+#DEFINE DOOR_CLOSED_SENSOR_[FRONT][RIGHT]_CAN_ID       0xCB27901
+#DEFINE DOOR_CLOSED_SENSOR_[BACK][LEFT]_CAN_ID         0xCB27902
+#DEFINE DOOR_CLOSED_SENSOR_[BACK][RIGHT]_CAN_ID        0xCB27903
+
+;mCarWeight
+#DEFINE CAR_WEIGHT_CAN_ID                              0x0D187E00
+
+;mDriveSpeed
+#DEFINE DRIVE_SPEED_CAN_ID                             0x0BE86400
+
+;mCarLevelPosition
+#DEFINE CAR_LEVEL_POSITION_CAN_ID                      0x0C517200
+
+;mHallCall
+#DEFINE HALL_CALL_[1][FRONT][UP]_CAN_ID                0xCB17800
+#DEFINE HALL_CALL_[1][BACK][UP]_CAN_ID                 0xCB17802
+#DEFINE HALL_CALL_[2][BACK][UP]_CAN_ID                 0xCB17806
+#DEFINE HALL_CALL_[2][BACK][DOWN]_CAN_ID               0xCB17807
+#DEFINE HALL_CALL_[3][FRONT][UP]_CAN_ID                0xCB17808
+#DEFINE HALL_CALL_[3][FRONT][DOWN]_CAN_ID              0xCB17809
+#DEFINE HALL_CALL_[4][FRONT][UP]_CAN_ID                0xCB1780C
+#DEFINE HALL_CALL_[4][FRONT][DOWN]_CAN_ID              0xCB1780D
+#DEFINE HALL_CALL_[5][FRONT][UP]_CAN_ID                0xCB17810
+#DEFINE HALL_CALL_[5][FRONT][DOWN]_CAN_ID              0xCB17811
+#DEFINE HALL_CALL_[6][FRONT][UP]_CAN_ID                0xCB17814
+#DEFINE HALL_CALL_[6][FRONT][DOWN]_CAN_ID              0xCB17815
+#DEFINE HALL_CALL_[7][FRONT][UP]_CAN_ID                0xCB17818
+#DEFINE HALL_CALL_[7][FRONT][DOWN]_CAN_ID              0xCB17819
+#DEFINE HALL_CALL_[7][BACK][UP]_CAN_ID                 0xCB1781A
+#DEFINE HALL_CALL_[7][BACK][DOWN]_CAN_ID               0xCB1781B
+#DEFINE HALL_CALL_[8][FRONT][DOWN]_CAN_ID              0xCB1781D
+
+;mCarCall
+#DEFINE CAR_CALL_[1][FRONT]_CAN_ID                     0xCB47A00
+#DEFINE CAR_CALL_[1][BACK]_CAN_ID                      0xCB47A01
+#DEFINE CAR_CALL_[2][BACK]_CAN_ID                      0xCB47A03
+#DEFINE CAR_CALL_[3][FRONT]_CAN_ID                     0xCB47A04
+#DEFINE CAR_CALL_[4][FRONT]_CAN_ID                     0xCB47A06
+#DEFINE CAR_CALL_[5][FRONT]_CAN_ID                     0xCB47A08
+#DEFINE CAR_CALL_[6][FRONT]_CAN_ID                     0xCB47A0A
+#DEFINE CAR_CALL_[7][FRONT]_CAN_ID                     0xCB47A0C
+#DEFINE CAR_CALL_[7][BACK]_CAN_ID                      0xCB47A0D
+#DEFINE CAR_CALL_[8][FRONT]_CAN_ID                     0xCB47A0E
+
+
+;definitions for outputs's ID
+
+;mDesiredDwell
+#DEFINE DESIRED_DWELL_[FRONT]_CAN_ID                   0x0C4F7000
+#DEFINE DESIRED_DWELL_[BACK]_CAN_ID                    0x0C4F7001
+
+;mDesiredFloor
+#DEFINE DESIRED_FLOOR_CAN_ID 			       0x0C4E7000
+
+
+
+
+
+

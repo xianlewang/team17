@@ -1,0 +1,87 @@
+; 18649 Fall 2013
+; Group 17
+; Qiang Zhang (qiangz)
+; sd5b.mf
+
+;network message period
+#DEFINE MESSAGE_PERIOD 10ms
+
+;definitions for inputs' id
+
+;mAtFloor
+;mAtFloor 4 FRONT ID = 0x0C4D6F00 + (4 - 1) * 2 + 0 = 0x0C4D6F06
+#DEFINE AT_FLOOR_4F_FRONT_CAN_ID 0x0C4D6F06
+
+;mDesiredFloor
+;ID = 0x0C4E7000
+#DEFINE DESIRED_FLOOR_CAN_ID 0x0C4E7000
+
+;mDoorReversal
+;mDoorReversal Front Left ID = 0x0BEB6600 + 0 + 0 = 0x0BEB6600
+#DEFINE DOOR_REVERSAL_FRONT_LEFT_CAN_ID 0x0BEB6600
+
+;mDoorOpened
+;mDoorOpened Front Left ID = 0x0D157C00 + 0 + 0 = 0x0D157C00
+#DEFINE DOOR_OPENED_FRONT_LEFT_CAN_ID 0x0D157C00
+
+;mDoorClosed
+;mDoorClosed Front Left ID = 0x0CB27900 + 0 + 0 = 0x0CB27900
+#DEFINE DOOR_CLOSED_FRONT_LEFT_CAN_ID 0x0CB27900
+
+;mCarWeight
+;ID = 0x0D187E00
+#DEFINE CAR_WEIGHT_CAN_ID 0x0D187E00
+
+;mDriveSpeed = 0x0BE86400
+#DEFINE DRIVE_SPEED_CAN_ID 0x0BE86400
+
+;HallCall
+#DEFINE HALLCALL_4FU_CAN_ID 0x0CB1780C
+;------------------------------------------------------------------
+
+;initialize
+0s I MESSAGE_PERIOD N AT_FLOOR_4F_FRONT_CAN_ID AtFloor 4 FRONT = true
+0s I MESSAGE_PERIOD N DESIRED_FLOOR_CAN_ID DesiredFloor = 4 FRONT UP
+0s I MESSAGE_PERIOD N DRIVE_SPEED_CAN_ID DriveSpeed = 0 STOP
+0s I MESSAGE_PERIOD N DOOR_OPENED_FRONT_LEFT_CAN_ID DoorOpened FRONT LEFT = false
+0s I MESSAGE_PERIOD N DOOR_CLOSED_FRONT_LEFT_CAN_ID DoorClosed FRONT LEFT = true
+0s I MESSAGE_PERIOD N CAR_WEIGHT_CAN_ID CarWeight = 0
+0s I MESSAGE_PERIOD N HALLCALL_4FU_CAN_ID HallCall 4 FRONT UP = true
+
+;go to pre-conditions
+;arrive in BEFORE_OPEN state
+1.0s I MESSAGE_PERIOD N DOOR_CLOSED_FRONT_LEFT_CAN_ID DoorClosed FRONT LEFT = false
+1.0s I MESSAGE_PERIOD N DESIRED_FLOOR_CAN_ID DesiredFloor = 5 FRONT STOP
+
+;arrive in OPENED state
+2.0s I MESSAGE_PERIOD N DOOR_OPENED_FRONT_LEFT_CAN_ID DoorOpened FRONT LEFT = true
+
+;#arc '5B/1'
+7.5s I MESSAGE_PERIOD N DOOR_OPENED_FRONT_LEFT_CAN_ID DoorOpened FRONT LEFT = false
+7.5s A F DoorMotor FRONT LEFT : command == CLOSE
+7.5s A S DoorControl[FRONT][LEFT] : STATE == CLOSING
+
+;#arc '5B/2'
+;#arc '5B/3a'
+8.0s I MESSAGE_PERIOD N DOOR_REVERSAL_FRONT_LEFT_CAN_ID DoorReversal FRONT LEFT = true
+;#arc '5B/3b'
+8.4s A F DoorMotor FRONT LEFT : command == OPEN
+8.4s A S DoorControl[FRONT][LEFT] : STATE == REVERSE_OPEN
+
+;#arc '5B/4'
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

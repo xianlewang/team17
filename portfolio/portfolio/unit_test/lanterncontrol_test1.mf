@@ -1,6 +1,6 @@
 ;18649 Fall 2013
 ;Group 17
-;Zhang Qiang(qiangz)
+; Qiang Zhang(qiangz)/Shen Yu(sheny)/Jiang He(jiangh)/Xianle Wang(xianlew)
 ;lanterncontrol_test1.mf
 
 #INCLUDE lantern_define.mf ;include CAN_ID and Period Definations

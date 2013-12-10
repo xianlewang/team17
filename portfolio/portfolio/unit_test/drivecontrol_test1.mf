@@ -1,6 +1,6 @@
 ;18649 Fall 2013
 ;Group 17 
-;Jiang He(jiangh)
+; Qiang Zhang(qiangz)/Shen Yu(sheny)/Jiang He(jiangh)/Xianle Wang(xianlew)
 ;drivecontrol_test1.mf
 
 #INCLUDE drive_defines.mf ;include CAN ID and Period Definations

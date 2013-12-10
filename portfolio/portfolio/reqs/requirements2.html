@@ -3397,7 +3397,7 @@
 	HallLight[f,b,CurrentDirection] shall be set to off.
 	<br> &nbsp;&nbsp;&nbsp; 8.2.2&nbsp;
 	mHallCall[f,b,CurrentDirection] shall be set to False.
-	<br> 8.3&nbsp;&nbsp;&nbsp; mHallLight[f,b,d] always has the same
+	<br> 8.3&nbsp;&nbsp;&nbsp; mHallLight[f,b,d] shall always have the same
 	value as HallLights[f,b,d].
 	<h3>Statechart</h3>
 	Statechart for HallButtomControl
@@ -3689,8 +3689,8 @@
 				<td style="vertical-align: top;">T9.2<br>
 				</td>
 				<td style="vertical-align: top;">
-					mAtFloor[f,b]&nbsp;==&nbsp;true&nbsp;&&&nbsp;
-					mDoorClosed[b,*]&nbsp;==&nbsp;false&nbsp;&&
+					mAtFloor[f,b]&nbsp;==&nbsp;true&nbsp;AND&nbsp;
+					mDoorClosed[b,*]&nbsp;==&nbsp;false&nbsp;AND
 					&nbsp;CarCall[f,b]&nbsp;==&nbsp;false<br>
 				</td>
 			</tr>
@@ -3973,19 +3973,19 @@
 	<h3>TIME-TRIGGERED BEHAVIORS:</h3>
 	11.4&nbsp;&nbsp;&nbsp; mDesiredFloor.f shall always be set to Target.
 	<br> 11.5&nbsp;&nbsp;&nbsp; If mDesiredFloor.d is STOP, and has a
-	pending call at floor f, if f is higher than Target, mDesiredFloor.d
+	pending call at floor f, if f is higher than Target, then mDesiredFloor.d
 	shall be set to UP.
 	<br> 11.6&nbsp;&nbsp;&nbsp; If mDesiredFloor.d is STOP, and has a
-	pending call at floor f, if f is lower than Target, mDesiredFloor.d
+	pending call at floor f, if f is lower than Target, then mDesiredFloor.d
 	shall be set to DOWN.
 	<br> 11.7&nbsp;&nbsp;&nbsp; If currentFloor is Target and any
 	mDoorClosed is False, and mDesiredFloor.d is STOP, and any pending call
-	at floor f, Target shall be set to f.
+	at floor f, then Target shall be set to f.
 	<br> 11.8&nbsp;&nbsp;&nbsp; If currentFloor is Target and any
-	mDoorClosed is False, and mDesiredFloor.d is UP, Target shall be set to
+	mDoorClosed is False, and mDesiredFloor.d is UP, then Target shall be set to
 	upper called floor.
 	<br> 11.9&nbsp;&nbsp;&nbsp; If currentFloor is Target and any
-	mDoorClosed is False, and mDesiredFloor.d is DOWN, Target shall be set
+	mDoorClosed is False, and mDesiredFloor.d is DOWN, then Target shall be set
 	to lower called floor.
 	<br> 11.10&nbsp;&nbsp;&nbsp; If Target is lower than
 	mCarLevelPosition, then Target shall be set to closest lower floor
@@ -3994,7 +3994,7 @@
 	mCarLevelPosition, then Target shall be set to closest higher floor
 	among the CarCall and same direction HallCall.
 	<br> 11.12&nbsp;&nbsp;&nbsp; If there is no other floor hase
-	pending call besides Target, mDesiredFloor.d shall be set to STOP.
+	pending call besides Target, then mDesiredFloor.d shall be set to STOP.
 	<br> 11.13&nbsp;&nbsp;&nbsp; If currentFloor is not Target and
 	there are more calls with same direction, then mDesiredFloor.d shall be
 	set to same as current direction.
@@ -4011,7 +4011,7 @@
 	<br> 11.17 &nbsp;&nbsp; mDesiredDwell shall always be set to a
 	constant appropriate value for door open dwell.
 	<br> 11.18 &nbsp;&nbsp; if any floor is within the commit point,
-	it's call shall be ignored.
+	then it's call shall be ignored.
 	<br>
 
 	<h3>Statechart</h3>
@@ -4019,7 +4019,7 @@
 	<div style="text-align: center;">
 		<a href="dispatcher_state_diagram.png"><img
 			alt="dispatcher_state_diagram.png" src="dispatcher_state_diagram.png"
-			style="border: 0px solid; width: 700px; height: 500px;"></a><br>
+			style="border: 0px solid; width: 500px; height: 400px;"></a><br>
 	</div>
 	<table style="text-align: left; width: 800px;" border="1"
 		cellpadding="2" cellspacing="2">
@@ -4064,7 +4064,7 @@
             <tr>
                 <td style="vertical-align: top;">T11.6<br>
                 </td>
-                <td style="vertical-align: top;">mDriveSpeed>0.05||(target!=currentFloor&& doorAllClosed)<br>
+                <td style="vertical-align: top;">mDriveSpeed>0.05 OR (target!=currentFloor AND doorAllClosed)<br>
                 </td>
             </tr>
 		</tbody>
@@ -4143,7 +4143,7 @@
                 </td>
                 <td style="vertical-align: top;"><br>
                 </td>
-                <td style="vertical-align: top;">x<br>
+                <td style="vertical-align: top;">X<br>
                 </td>
                 <td style="vertical-align: top;">X<br>
                 </td>

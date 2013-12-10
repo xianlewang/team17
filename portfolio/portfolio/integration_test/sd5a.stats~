@@ -1,0 +1,29 @@
+; 18649 Fall 2013
+; Group 17
+; Shen Yu (sheny)
+; sd5a.stats
+
+Simulator Parameters:
+Command line = -cf sd5a.cf -mf sd5a.mf
+RandomSeed = 1386601228406
+CanNetworkBitTime = 0 ns
+Effective Can Bitrate = Infinity
+Run Time = null
+Real time rate = null
+Message File = sd5a.mf
+Controller File = sd5a.cf
+
+Assertion Results:
+@13.5s:  PASSED simulator.payloads.DoorMotorPayload$ReadableDoorMotorPayload@1812e72d :: command ?== CLOSE PASSED
+@13.5s:  PASSED DoorControl[FRONT][LEFT]::checkState(STATE) ?== CLOSING PASSED
+@14.4s:  PASSED simulator.payloads.DoorMotorPayload$ReadableDoorMotorPayload@4eb3ea0f :: command ?== OPEN PASSED
+@14.4s:  PASSED DoorControl[FRONT][LEFT]::checkState(STATE) ?== REVERSE_OPEN PASSED
+@22.0s:  PASSED simulator.payloads.DoorMotorPayload$ReadableDoorMotorPayload@43f459c2 :: command ?== NUDGE PASSED
+@22.0s:  PASSED DoorControl[FRONT][LEFT]::checkState(STATE) ?== REVERSE_CLOSING PASSED
+
+
+******************Summary******************
+Passed:  6
+Failed:  0
+Total :  6
+

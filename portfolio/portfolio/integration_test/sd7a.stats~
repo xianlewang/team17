@@ -1,0 +1,36 @@
+; 18649 Fall 2013
+; Group 17
+; Qiang Zhang (qiangz)
+; sd7a.stats
+
+Simulator Parameters:
+Command line = -cf sd7a.cf -mf sd7a.mf
+RandomSeed = 1386601230978
+CanNetworkBitTime = 0 ns
+Effective Can Bitrate = Infinity
+Run Time = null
+Real time rate = null
+Message File = sd7a.mf
+Controller File = sd7a.cf
+
+Assertion Results:
+@1.0s:  PASSED DoorControl[FRONT][LEFT]::checkState(STATE) ?== BEFORE_OPEN PASSED
+@1.0s:  PASSED simulator.payloads.DoorMotorPayload$ReadableDoorMotorPayload@12b3f93c :: command ?== OPEN PASSED
+@1.8s:  PASSED LanternControl[UP]::checkState(STATE) ?== Lantern_On PASSED
+@1.8s:  PASSED simulator.payloads.CarLanternPayload$ReadableCarLanternPayload@7e086558 :: lighted ?== true PASSED
+@1.8s:  PASSED simulator.payloads.CanMailbox$ReadableCanMailbox@55015495 :: getDirection ?== UP PASSED
+@2.2s:  PASSED simulator.payloads.DoorMotorPayload$ReadableDoorMotorPayload@6326d235 :: command ?== STOP PASSED
+@2.2s:  PASSED DoorControl[FRONT][LEFT]::checkState(STATE) ?== OPENED PASSED
+@14.0s:  PASSED simulator.payloads.DoorMotorPayload$ReadableDoorMotorPayload@1ef2c499 :: command ?== CLOSE PASSED
+@14.0s:  PASSED DoorControl[FRONT][LEFT]::checkState(STATE) ?== CLOSING PASSED
+@16.2s:  PASSED DoorControl[FRONT][LEFT]::checkState(STATE) ?== CLOSED PASSED
+@16.2s:  PASSED simulator.payloads.DoorMotorPayload$ReadableDoorMotorPayload@2d6a346a :: command ?== STOP PASSED
+@16.399999999s:  PASSED LanternControl[UP]::checkState(STATE) ?== Lantern_Off PASSED
+@16.399999999s:  PASSED simulator.payloads.CarLanternPayload$ReadableCarLanternPayload@34547854 :: lighted ?== false PASSED
+
+
+******************Summary******************
+Passed:  13
+Failed:  0
+Total :  13
+

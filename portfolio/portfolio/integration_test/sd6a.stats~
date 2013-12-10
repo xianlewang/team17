@@ -1,0 +1,32 @@
+; 18649 Fall 2013
+; Group 17
+; Jiang He (jiangh)
+; sd6a.stats
+
+Simulator Parameters:
+Command line = -cf sd6a.cf -mf sd6a.mf
+RandomSeed = 1386601229988
+CanNetworkBitTime = 0 ns
+Effective Can Bitrate = Infinity
+Run Time = null
+Real time rate = null
+Message File = sd6a.mf
+Controller File = sd6a.cf
+
+Assertion Results:
+@1.0s:  PASSED simulator.payloads.CarPositionIndicatorPayload$ReadableCarPositionIndicatorPayload@9b2c86e :: floor ?== 1 PASSED
+@2.3s:  PASSED simulator.payloads.DrivePayload$ReadableDrivePayload@ff22ffa :: speed ?== SLOW PASSED
+@2.3s:  PASSED simulator.payloads.DrivePayload$ReadableDrivePayload@1ef2c499 :: direction ?== UP PASSED
+@2.3s:  PASSED simulator.payloads.CanMailbox$ReadableCanMailbox@f0de2bd :: getSpeed ?== SLOW PASSED
+@2.3s:  PASSED simulator.payloads.CanMailbox$ReadableCanMailbox@2d6a346a :: getDirection ?== UP PASSED
+@2.3s:  PASSED DriveControl::checkState(STATE) ?== SLOW_UP PASSED
+@5.0s:  PASSED simulator.payloads.DrivePayload$ReadableDrivePayload@34547854 :: speed ?== STOP PASSED
+@5.0s:  PASSED simulator.payloads.CanMailbox$ReadableCanMailbox@43e27370 :: getSpeed ?== STOP PASSED
+@5.5s:  PASSED simulator.payloads.CarPositionIndicatorPayload$ReadableCarPositionIndicatorPayload@3ee3f8b9 :: floor ?== 2 PASSED
+
+
+******************Summary******************
+Passed:  9
+Failed:  0
+Total :  9
+
